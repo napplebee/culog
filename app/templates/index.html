@@ -1,5 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+{% endblock %}
+The icon declaration
+
 {% block title %}Flasky{% endblock %}
 
 {% block navbar %}
