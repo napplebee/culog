@@ -30,3 +30,5 @@ blinker==1.4
 html5lib==1.0b3
 six==1.4.1
 passlib==1.6.5
+bcrypt==2.0.0
+

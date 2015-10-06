@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
-    password_hash = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
     active = db.Column(db.Boolean())
     registered_at = db.Column(db.DateTime())
@@ -27,10 +27,6 @@ class User(UserMixin, db.Model):
 
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
-
-    def is_authenticated(self):
-        print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        return self.is_authenticated
 
     def __repr__(self):
         return '<User %r>' % self.email

@@ -6,6 +6,8 @@ class Config:
     # SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SECRET_KEY = "cazk$ze&e^935+0t@fi18l78m%t+y5#-%ch#z$^!np##(d^"
     BOOTSTRAP_SERVE_LOCAL = True
+    SECURITY_PASSWORD_HASH = "bcrypt"
+    SECURITY_PASSWORD_SALT = "$djU-ed!0_fR+#@@<PS[^@$clwiI("
 
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
