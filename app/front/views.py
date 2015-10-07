@@ -7,7 +7,7 @@ from app import db, User, Role
 
 @front_bp.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('front/index.html')
 
 
 @front_bp.route("/data")

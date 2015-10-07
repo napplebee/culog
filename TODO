@@ -1,0 +1,3 @@
+* change blueprint's templates lookup way (http://fewstreet.com/2015/01/16/flask-blueprint-templates.html):
+    1. local template folder
+    2. app's global template folder
