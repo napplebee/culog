@@ -2,9 +2,7 @@ from flask import Blueprint
 
 front = Blueprint(
     "front",
-    __name__,
-    static_folder="static",
-    template_folder="templates",
+    __name__
 )
 
 from . import forms, views
