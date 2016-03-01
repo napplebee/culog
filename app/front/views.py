@@ -9,9 +9,15 @@ from app import db, User, Role
 def index():
     return render_template('front/index.html')
 
+
 @front_bp.route("/landing")
 def landing():
     return render_template('front/landing.html')
+
+
+@front_bp.route("/details")
+def blogpost():
+    return render_template('front/blogpost.html')
 
 
 @front_bp.route("/data")
