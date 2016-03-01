@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect
 
 from . import front as front_bp
 from flask.ext.security import SQLAlchemyUserDatastore
@@ -19,6 +19,13 @@ def landing():
 def blogpost():
     return render_template('front/blogpost.html')
 
+@front_bp.route("/about")
+def about():
+    return redirect("/", code=302)
+
+@front_bp.route("/contact")
+def contact():
+    return redirect("/", code=302)
 
 @front_bp.route("/data")
 def data():
