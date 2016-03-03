@@ -4,7 +4,7 @@ Cook with love | Contacts
 {% endblock %}
 
 {% block styles_to_override %}
-
+{#
 <style>
 ._r43r5 {
     display: block;
@@ -74,23 +74,11 @@ font: inherit;
 vertical-align: baseline;
 }
 </style>
-
-<style>
-#left322 {
-    float:left;
-    width:330px;
-    height:500px;
-}
-
-#right322 {
-    margin-left: 300px;
-    height:500px;
-}
-</style>
+#}
 {% endblock %}
 {% block content %}
 <!-- Post -->
-<article class="box post post-excerpt">
+<p class="box post post-excerpt">
 <header>
     <!--
         Note: Titles and subtitles will wrap automatically when necessary, so don't worry
@@ -99,24 +87,23 @@ vertical-align: baseline;
     -->
     <h2 style="color:#444;">Kate crazy cook</h2>
 </header>
-    <div id="right322">
-        <p>
-            <strong>Hi there!</strong> My name is Kate and I love cooking. If you can't cook with love ask someone to do that for you ;)
-            {# http://findicons.com/icon/75281/facebook #}
-        </p>
-        <p>
-            Don't forget to check me out on Facebook and Instagram too!
-        </p>
-    </div>
-    <div id="left322">
-        <div id="_o0ohn" class="_o0ohn" data-reactid=".0.1.0.0:0.0">
-            <img class="_8gpiy _r43r5" src="https://scontent-ams3-1.cdninstagram.com/t51.2885-19/s320x320/12728666_865681196877873_520209959_a.jpg">
-        </div>
-    </div>
+    <!--<p>-->
+<!--<div id="_o0ohn" class="_o0ohn" data-reactid=".0.1.0.0:0.0">-->
+    <!--<img class="_8gpiy _r43r5" src="
+    ">-->
+<!--</div>-->
+    <!--</p>-->
+
+<p>
+    <strong>Hi there!</strong> My name is Kate and I love cooking. If you can't cook with love ask someone to do that for you ;)
+    {# http://findicons.com/icon/75281/facebook #}
+</p>
+
+
 <!--
 <p>
     Don't forget to check me out on Facebook and Instagram too!
 </p>
--->
 </article>
+-->
 {% endblock %}
