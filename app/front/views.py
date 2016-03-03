@@ -25,7 +25,7 @@ def about():
 
 @front_bp.route("/contact")
 def contact():
-    return redirect("/", code=302)
+    return render_template("front/contact.html")
 
 @front_bp.route("/data")
 def data():
