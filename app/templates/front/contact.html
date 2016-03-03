@@ -1,0 +1,33 @@
+{% extends "front/basic.html" %}
+{% block title %}
+Cook with love | Contacts
+{% endblock %}
+{% block styles_to_override %}
+<style>
+#content {
+    padding: 3em 5em 8em 5em;
+    margin-left: 14.5em;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<!-- Post -->
+<article class="box post post-excerpt">
+<header>
+    <!--
+        Note: Titles and subtitles will wrap automatically when necessary, so don't worry
+        if they get too long. You can also remove the <p> entirely if you don't
+        need a subtitle.
+    -->
+    <h2 style="color:#444;">Kate crazy cook</h2>
+</header>
+<p>
+    <strong>Hi there!</strong> My name is Kate and I love cooking. If you can't cook with love ask someone to do that for you ;)
+    {# http://findicons.com/icon/75281/facebook #}
+</p>
+<p>
+    Don't forget to check me out on Facebook and Instagram too!
+</p>
+</article>
+{% endblock %}
