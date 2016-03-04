@@ -5,9 +5,14 @@ from flask.ext.security import SQLAlchemyUserDatastore
 from app import db, User, Role
 
 
+def get_fb_counters():
+    import time
+    add = (int(time.time())/3600 - 404750) / 3
+    return {"counter1": 14 + add, "counter2": 20 + add}
+
 @front_bp.route("/")
 def index():
-    return render_template('front/index.html')
+    return render_template('front/index.html', fb=get_fb_counters())
 
 
 @front_bp.route("/landing")
@@ -29,11 +34,11 @@ def contact():
 
 @front_bp.route("/en/baking/chocolate_chips_cookies")
 def details_post1():
-    return render_template("front/post1.html")
+    return render_template("front/post1.html", fb=get_fb_counters())
 
 @front_bp.route("/en/baking/apple_muffins")
 def details_post2():
-    return render_template("front/post2.html")
+    return render_template("front/post2.html", fb=get_fb_counters())
 
 @front_bp.route("/data")
 def data():
