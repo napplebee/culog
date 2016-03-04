@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         {% block meta %}{% endblock %}
 		<!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/html5shiv.js') }}"></script><![endif]-->
-		<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />
+		{% block main_css %}<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />{% endblock %}
 		<!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/ie8.css') }}" /><![endif]-->
         <link rel="shortcut icon" href="{{ url_for('static', filename = 'front/favicon.png') }}" type="image/x-icon">
 		{% block styles_to_override %}{% endblock %}

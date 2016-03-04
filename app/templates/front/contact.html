@@ -1,36 +1,72 @@
 {% set active_menu="contacts" %}
 {% extends "front/basic.html" %}
+{% block main_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.contacts.css') }}" />
+{% endblock %}
 {% block title %}
 Cook with love | Contacts
 {% endblock %}
 {% block styles_to_override %}
 <style>
-    @media screen and (min-width: 1201px) {
 #content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+@media screen and (min-width: 1201px) {
+    #content {
 				padding: 3em 5em 8em 5em;
 				margin-left: 14.5em;
 			}
-    }
+}
 
+@media screen and (min-width: 1001px){
+    div.circular {
+        float: left;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
+        -webkit-border-radius: 150px;
+        -moz-border-radius: 150px;
+        background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+
+
+@media screen and (max-width: 1000px){
+    div.circular {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+        background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
 </style>
 {% endblock %}
 {% block content %}
 <!-- Post -->
 <article class="box post post-excerpt">
-<header>
-    <!--
-        Note: Titles and subtitles will wrap automatically when necessary, so don't worry
-        if they get too long. You can also remove the <p> entirely if you don't
-        need a subtitle.
-    -->
+<div class="circular"></div>
+
+<div style="margin-left:15px;float:left;">
     <h2 style="color:#444;">Kate crazy cook</h2>
-</header>
-<p>
-    <strong>Hi there!</strong> My name is Kate and I love cooking. If you can't cook with love ask someone to do that for you ;)
-    {# http://findicons.com/icon/75281/facebook #}
-</p>
-<p>
+    <br/>
+    <p>
+        Love my family, cooking, sport, IT and my dog. If you can't cook with love ask someone to do that for you ;)
+        {# http://findicons.com/icon/75281/facebook #}
+    </p>
     Don't forget to check me out on Facebook and Instagram too!
-</p>
+</div>
+<!--<div class="_o0ohn">-->
+    <!--<img class="_8gpiy _r43r5" src="https://scontent-ams3-1.cdninstagram.com/t51.2885-19/s150x150/12728666_865681196877873_520209959_a.jpg" />-->
+<!--</div>-->
 </article>
 {% endblock %}
