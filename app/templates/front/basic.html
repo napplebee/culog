@@ -51,9 +51,9 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="{{ url_for('.index') }}">Latest Post</a></li>
+							<li {% if active_menu == "latest" %}class="current"{% endif %}><a href="{{ url_for('.index') }}">Latest Post</a></li>
 							<!--li><a href="{{ url_for('.about') }}">About Me</a></li-->
-							<li><a href="{{ url_for('.contact') }}">Contact Me</a></li>
+							<li {% if active_menu == "contacts" %}class="current"{% endif %}><a href="{{ url_for('.contact') }}">Contact Me</a></li>
 						</ul>
 					</nav>
                 {#
@@ -82,8 +82,8 @@
 						</header>
                         {% block recent_post %}
                         <ul>
-							<li><a href="#">Lorem ipsum dolor</a></li>
-							<li><a href="#">Feugiat nisl aliquam</a></li>
+							<li><a href="{{ url_for('.details_post1') }}">Chocolate Chip Cookies</a></li>
+							<li><a href="{{ url_for('.details_post2') }}">Cinnamon Apple Muffins</a></li>
 						</ul>
                         {% endblock %}
 					</section>

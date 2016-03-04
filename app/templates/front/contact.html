@@ -1,13 +1,16 @@
+{% set active_menu="contacts" %}
 {% extends "front/basic.html" %}
 {% block title %}
 Cook with love | Contacts
 {% endblock %}
 {% block styles_to_override %}
 <style>
+    @media screen and (min-width: 1201px) {
 #content {
-    padding: 3em 5em 8em 5em;
-    margin-left: 14.5em;
-}
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+    }
 
 </style>
 {% endblock %}

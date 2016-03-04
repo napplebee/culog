@@ -27,6 +27,14 @@ def about():
 def contact():
     return render_template("front/contact.html")
 
+@front_bp.route("/en/baking/chocolate_chips_cookies")
+def details_post1():
+    return render_template("front/post1.html")
+
+@front_bp.route("/en/baking/apple_muffins")
+def details_post2():
+    return render_template("front/post2.html")
+
 @front_bp.route("/data")
 def data():
     db.drop_all()
