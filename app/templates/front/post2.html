@@ -20,6 +20,14 @@
         margin-left: 2em;
         padding-bottom: -20em;
     }
+    img.steps {
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
     </style>
 {% endblock %}
 
@@ -30,7 +38,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Cinnamon Apple Muffins" />
 <meta property="og:description" content="Apple muffins are easy to make and they always stay moist for a few days… but usually disappear much faster!" />
-<!--<meta property="og:image" content="" />-->
+<meta property="og:image" content="http://cookwith.love/static/front/images/post2/result.jpg" />
 {% endblock %}
 
 {% block title %}Apple muffins | Cook With Love{% endblock %}
@@ -70,12 +78,10 @@
                 <li><a href="#" onclick="share2(); return false;" class="icon fa-facebook">{{ fb.counter2 }}</a></li>
             </ul>
         </div>
-{#
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename = 'front/images/pic01.jpg') }}" alt="" /></a>
-#}
         <p>
             And they always stay moist for a few days… but usually disappear much faster!
         </p>
+            <img class="steps" src="{{ url_for('static', filename = 'front/images/post2/result.jpg') }}" alt="Muffin"><br/>
     <p>
         <strong>Ingredients:</strong>
         <ul class="ingredients">
@@ -89,6 +95,7 @@
 <li>1/2 tsp salt</li>
 <li>1 big apple or even 2 apples for apple pie lovers :)</li>
         </ul>
+
         <strong>Process:</strong>
         <br/>
             Preparation:
@@ -104,13 +111,13 @@
             <li>whisk the egg until blended in a small bowl,</li>
             <li>whisk in the sour cream and oil until smooth.</li>
         </ul>
-
-
+        <img class="steps" src="{{ url_for('static', filename = 'front/images/post2/ingred3.jpg') }}" alt="Wet ingredients" /><br/>
     Dry ingredients:
     <br/>
     <ul class="preparation">
         <li>sift all dry ingredients ingredients into a large bowl.</li>
     </ul>
+        <img class="steps" src="{{ url_for('static', filename = 'front/images/post2/ingred2.jpg') }}" alt="Dry ingredients" /><br/>
 
     Apple:
     <br/>
@@ -118,6 +125,7 @@
         <li>wash and peel the apple,</li>
 <li>cut into cubes and set aside.</li>
     </ul>
+    <img class="steps" src="{{ url_for('static', filename = 'front/images/post2/ingred1.jpg') }}" alt="Ingredients" /><br/>
 
     Making the batter:
     <br/>
@@ -126,6 +134,7 @@
 <li>stir gently, until almost combined (some dry ingredients can still be present, but that’s ok since the batter will be mixed again when the apples are added). Keep in mind that over-mixing will result in tough muffins,</li>
 <li>add the apples and mix gently until just incorporated.</li>
     </ul>
+    <img class="steps" src="{{ url_for('static', filename = 'front/images/post2/baking.jpg') }}" alt="Baking" /><br/>
 
     Baking and serving:
     <br/>
