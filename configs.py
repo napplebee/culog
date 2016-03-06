@@ -31,7 +31,7 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(os.path.join(basedir, 'data.sqlite'))
+    SQLALCHEMY_DATABASE_URI = ""
 
 
 config = {
