@@ -1,7 +1,8 @@
-from flask.ext.security import SQLAlchemyUserDatastore, Security
+from flask.ext.security import SQLAlchemyUserDatastore
+
 from app import create_app
 from app.core import db
-from app.domain.users import User, Role
+from app.data.users import User, Role
 
 app = create_app("dev")
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
