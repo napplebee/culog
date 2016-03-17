@@ -3,7 +3,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    # SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    SUPPORTED_LANGS = ("en", "ru",)
+
     SECRET_KEY = "cazk$ze&e^935+0t@fi18l78m%t+y5#-%ch#z$^!np##(d^"
     BOOTSTRAP_SERVE_LOCAL = True
     SECURITY_PASSWORD_HASH = "sha512_crypt"

@@ -1,7 +1,8 @@
 from flask import Flask
 from flask.ext.security import SQLAlchemyUserDatastore
+
 from app.core import db, security, bootstrap
-from app.domain.users import User, Role
+from app.data.users import User, Role
 from configs import config
 
 
