@@ -32,6 +32,8 @@ class BlogPost(object):
         self.og_title = {item.lang: item for item in blog_header.translations if item.name == "og_title"}
         self.og_description = {item.lang: item for item in blog_header.translations if item.name == "og_description"}
 
+        self.blog_text = {item.lang: item for item in blog_header.translations if item.name == "blog_text"}
+
     def get_og_title(self, lang):
         return self.og_title[lang]
 
