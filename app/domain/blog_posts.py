@@ -3,6 +3,7 @@ class BlogPost(object):
     url = None
     created_at = None
     updated_at = None
+    visible = None
     fb_likes = None
 
     title = None
@@ -19,6 +20,7 @@ class BlogPost(object):
         self.url = blog_header.url
         self.created_at = blog_header.created_at
         self.updated_at = blog_header.updated_at
+        self.visible = blog_header.visible
         self.fb_likes = blog_header.fb_likes
 
         self.title = {item.lang: item for item in blog_header.translations if item.name == "title"}

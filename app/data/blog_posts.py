@@ -6,10 +6,13 @@ class BlogPostHeader(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-
-    url = db.Column(db.String, unique=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
+    visible = db.Column(db.Boolean)
+
+
+    url = db.Column(db.String, unique=True)
+
     fb_likes = db.Column(db.Integer)
     og_type = db.Column(db.String)
     og_image = db.Column(db.String)
