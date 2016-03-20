@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.wtf import Form
-from wtforms import StringField, SubmitField, SelectField, BooleanField
+from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField
 from wtforms.validators import Required
 
 from app.common.facebook import OG_TYPES
@@ -23,8 +23,8 @@ class BlogPostForm(Form):
     en_description = StringField("Description (meta):")
     en_og_title = StringField("FB og_title:")
     en_og_description = StringField("FB og_description:")
-    en_blog_text = StringField("Text:")
-
+    en_blog_cut = TextAreaField("Cut:")
+    en_blog_text = TextAreaField("Text:")
 
     # russian specific fields
     ru_title = StringField(u"Тайтл:")
@@ -32,6 +32,7 @@ class BlogPostForm(Form):
     ru_description = StringField(u"Дискрипшн (meta):")
     ru_og_title = StringField(u"FB ог_тайтл:")
     ru_og_description = StringField(u"FB ог_дискрипшн:")
-    ru_blog_text = StringField(u"Текст:")
+    ru_blog_cut = TextAreaField(u"Вступление:")
+    ru_blog_text = TextAreaField(u"Текст:")
 
     submit = SubmitField()
