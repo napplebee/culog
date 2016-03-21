@@ -1,10 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin/base.html" %}
+{% block title %}
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="row">
+<div class="col-sm-12 col-md-12 main">
+<h1 class="page-header">{{ v.title }}</h1>
+<form class="form-horizontal" method="POST" action="{{ v.action }}">
+
+      <div class="form-group">
+        {{ v.f.name.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.name(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ v.f.url.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.url(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              {{ v.f.visible() }}{{ v.f.visible.label.text }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ v.f.og_type.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.og_type(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ v.f.og_image.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.og_image(class="form-control") }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" id="enTab" class="active"><a href="#" id="enTabLink">English</a></li>
+          <li role="presentation" id="ruTab"><a href="#" id="ruTabLink">Russian</a></li>
+        </ul>
+        </div>
+      </div>
+
+    {# === ENGLISH GROUP OF FIELDS === #}
+      <div class="form-group" id="div{{ v.f.en_title.id }}">
+        {{ v.f.en_title.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_title(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_keywords.id }}">
+        {{ v.f.en_keywords.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_keywords(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_description.id }}">
+        {{ v.f.en_description.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_description(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_og_title.id }}">
+        {{ v.f.en_og_title.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_og_title(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_og_description.id }}">
+        {{ v.f.en_og_description.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_og_description(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_blog_text.id }}">
+        {{ v.f.en_blog_text.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_blog_text(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.en_blog_cut.id }}">
+        {{ v.f.en_blog_cut.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.en_blog_text(class="form-control") }}
+        </div>
+      </div>
+
+    {# == END OF ENGLISH GROUP OF FIELDS == #}
+
+    {# === RUSSIAN GROUP OF FIELDS === #}
+      <div class="form-group" id="div{{ v.f.ru_title.id }}" style="display: none">
+        {{ v.f.ru_title.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_title(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_keywords.id }}" style="display: none">
+        {{ v.f.ru_keywords.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_keywords(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_description.id }}" style="display: none">
+        {{ v.f.ru_description.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_description(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_og_title.id }}" style="display: none">
+        {{ v.f.ru_og_title.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_og_title(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_og_description.id }}" style="display: none">
+        {{ v.f.ru_og_description.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_og_description(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_blog_text.id }}" style="display: none">
+        {{ v.f.ru_blog_text.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_blog_text(class="form-control") }}
+        </div>
+      </div>
+
+      <div class="form-group" id="div{{ v.f.ru_blog_cut.id }}" style="display: none">
+        {{ v.f.ru_blog_cut.label(class="col-sm-2 control-label") }}
+        <div class="col-sm-10">
+          {{ v.f.ru_blog_cut(class="form-control") }}
+        </div>
+      </div>
+
+    {# == END OF RUSSIAN GROUP OF FIELDS == #}
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          {{ v.f.submit(class="btn btn-success", style="width:100%;") }}
+        </div>
+      </div>
+
+    </form>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+    $(document).ready(function(){
+        $("#ruTabLink").click(function(){
+            $("div[id^='diven_']").hide();
+            $("div[id^='divru_']").show();
+            $("#enTab").removeClass("active");
+            $("#ruTab").addClass("active");
+            return false;
+        });
+        $("#enTabLink").click(function(){
+            $("div[id^='divru_']").hide();
+            $("div[id^='diven_']").show();
+            $("#ruTab").removeClass("active");
+            $("#enTab").addClass("active");
+            return false;
+        });
+    });
+
+    </script>
+{% endblock %}

@@ -9,7 +9,7 @@ from flask import render_template
 @login_required
 @roles_required("root")
 def index():
-    return render_template("admin/index.html")
+    return render_template("admin/base.html")
 
 
 @admin.route("/blog/all")
@@ -26,7 +26,12 @@ def blog_post_list():
 @roles_required("root")
 def blog_post_new():
     f = BlogPostForm()
-    return render_template("admin/blog/detail.html", f=f)
+    title = "Create new post"
+    return render_template("admin/blog/detail.html", v={
+        "title": title,
+        "f": f,
+        "action": ""
+    })
 
 
 @admin.route("/blog/update", methods=["POST", "GET"])
