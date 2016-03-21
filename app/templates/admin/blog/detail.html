@@ -101,7 +101,7 @@
       <div class="form-group" id="div{{ v.f.en_blog_cut.id }}">
         {{ v.f.en_blog_cut.label(class="col-sm-2 control-label") }}
         <div class="col-sm-10">
-          {{ v.f.en_blog_text(class="form-control") }}
+          {{ v.f.en_blog_cut(class="form-control") }}
         </div>
       </div>
 
@@ -164,7 +164,8 @@
           {{ v.f.submit(class="btn btn-success", style="width:100%;") }}
         </div>
       </div>
-
+    {# Hidden fields #}
+      {{ v.f.id }}
     </form>
 </div>
 </div>

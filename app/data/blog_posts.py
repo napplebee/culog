@@ -1,6 +1,7 @@
 from app.core import db
 import datetime
 
+
 class BlogPostHeader(db.Model):
     __tablename__ = 'blog_posts'
 
@@ -9,7 +10,6 @@ class BlogPostHeader(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
     visible = db.Column(db.Boolean)
-
 
     url = db.Column(db.String, unique=True)
 

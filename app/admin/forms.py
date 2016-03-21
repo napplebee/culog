@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.wtf import Form
-from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField
-from wtforms.validators import Required
+from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField, HiddenField
 
 from app.common.facebook import OG_TYPES
 
 
 class BlogPostForm(Form):
     # common fields
+    id = HiddenField()
     name = StringField("Name (for internal purpose):")
     url = StringField("URL:")
 

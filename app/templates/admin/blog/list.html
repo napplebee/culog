@@ -42,27 +42,22 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Name</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Visibility</th>
                 </tr>
               </thead>
               <tbody>
+              {% for item in v.posts %}
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <td>{{ item.id }}</td>
+                  <td><a href="{{ url_for('.blog_post_update', post_id=item.id) }}">{{ item.name }}</a></td>
+                  <td>{{ item.created_at }}</td>
+                  <td>{{ item.updated_at }}</td>
+                  <td>{% if item.visible == "True"%}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
                 </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
+              {% endfor %}
               </tbody>
             </table>
           </div>

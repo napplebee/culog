@@ -1,7 +1,17 @@
+# -*- coding: utf-8 -*-
+
+import datetime as dt
+
+from app.data.blog_posts import BlogPostHeader
+from app.data.translations import Translation
 from configs import Config as cfg
+
+from app.core import db
 
 
 class BlogPost(object):
+    MULTI_LANG_FIELDS = ["title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"]
+    id = None
     name = None
     url = None
     created_at = None
@@ -18,9 +28,13 @@ class BlogPost(object):
     og_title = None
     og_description = None
 
+    blog_cut = None
+    blog_text = None
+
     @staticmethod
     def populate_from_db(blog_header):
         post = BlogPost()
+        post.id = blog_header.id
         post.name = blog_header.name
         post.url = blog_header.url
         post.created_at = blog_header.created_at
@@ -28,12 +42,13 @@ class BlogPost(object):
         post.visible = blog_header.visible
         post.fb_likes = blog_header.fb_likes
 
+        post.og_type = blog_header.og_type
+        post.og_image = blog_header.og_image
+
         post.title = {item.lang: item.value for item in blog_header.translations if item.name == "title"}
         post.keywords = {item.lang: item.value for item in blog_header.translations if item.name == "keywords"}
         post.description = {item.lang: item.value for item in blog_header.translations if item.name == "description"}
 
-        post.og_type = blog_header.og_type
-        post.og_image = blog_header.og_image
         post.og_title = {item.lang: item.value for item in blog_header.translations if item.name == "og_title"}
         post.og_description = {item.lang: item.value for item in blog_header.translations if item.name == "og_description"}
 
@@ -45,25 +60,75 @@ class BlogPost(object):
     @staticmethod
     def populate_from_ui(form):
         post = BlogPost()
-        post.name = form.name
-        post.url = form.url
-        post.visible = form.visible
-        post.og_type = form.og_type
-        post.og_image = form.og_image
+        post.id = form.id.data
+        post.name = form.name.data
+        post.url = form.url.data
+        post.visible = form.visible.data
+        post.og_type = form.og_type.data
+        post.og_image = form.og_image.data
 
-        for field in ["title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"]:
+        for field in BlogPost.MULTI_LANG_FIELDS:
             value = {}
             for lang in cfg.SUPPORTED_LANGS:
-                value[lang] = getattr(form, lang+field)
+                value[lang] = getattr(form, "{}_{}".format(lang, field)).data
 
             if len(value) > 0:
                 setattr(post, field, value)
 
-    def get_og_title(self, lang):
-        return self.og_title[lang]
+        return post
 
-    def save_to_db(self):
-        pass
+    def save(self):
+        header = BlogPostHeader()
+
+        header.name = self.name
+        header.url = self.url
+        header.created_at = dt.datetime.utcnow()
+        header.visible = self.visible
+        header.fb_likes = self.fb_likes
+
+        header.og_type = self.og_type
+        header.og_image = self.og_image
+
+        for field in BlogPost.MULTI_LANG_FIELDS:
+            for lang in cfg.SUPPORTED_LANGS:
+                t = Translation()
+                t.name = field
+                t.lang = lang
+                t.value = getattr(self, field)[lang]
+                t.created_at = dt.datetime.utcnow()
+                header.translations.append(t)
+
+        db.session.add(header)
+        db.session.commit()
+
+    def update(self):
+        header = BlogPostHeader.query.get(self.id)
+
+        header.name = self.name
+        header.url = self.url
+        header.visible = self.visible
+        header.fb_likes = self.fb_likes
+
+        header.og_type = self.og_type
+        header.og_image = self.og_image
+        header.updated_at = dt.datetime.utcnow()
+
+        for tr in header.translations:
+            tr.value = getattr(self, tr.name)[tr.lang]
+            tr.updated_at = dt.datetime.utcnow()
+
+        db.session.commit()
+
+    def __getattr__(self, item):
+        for lang in cfg.SUPPORTED_LANGS:
+            if item.startswith(lang):
+                field_name = item[len(lang)+1:]
+                if field_name in self.MULTI_LANG_FIELDS:
+                    return getattr(self, field_name)[lang]
+
+        raise AttributeError(item)
+
+
 
 
 

@@ -8,8 +8,8 @@ class Translation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    value = db.Column(db.String)
-    lang = db.Column(db.Enum(cfg.SUPPORTED_LANGS, name="langs", native_enum=False))
+    value = db.Column(db.Text)
+    lang = db.Column(db.Enum(*cfg.SUPPORTED_LANGS, name="langs", native_enum=False))
 
     post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
 

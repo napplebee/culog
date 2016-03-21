@@ -10,6 +10,7 @@ class Config:
     SECURITY_PASSWORD_HASH = "sha512_crypt"
     # SECURITY_PASSWORD_HASH = "bcrypt"
     SECURITY_PASSWORD_SALT = "$djU-ed!0_fR+#@@<PS[^@$clwiI("
+    WTF_CSRF_ENABLED = False
 
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
@@ -28,7 +29,7 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(os.path.join(basedir, 'data-dev.sqlite'))
+    SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(os.path.join(basedir, 'data-dev1.sqlite'))
 
 class ProductionConfig(Config):
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
