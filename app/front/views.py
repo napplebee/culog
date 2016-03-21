@@ -24,24 +24,31 @@ def landing():
 def blogpost():
     return render_template('front/blogpost.html')
 
+
 @front_bp.route("/about")
 def about():
     return redirect("/", code=302)
+
 
 @front_bp.route("/contact")
 def contact():
     return render_template("front/contact.html")
 
+
+
 @front_bp.route("/en/baking/chocolate_chips_cookies")
 def details_post1():
     return render_template("front/post1.html", fb=get_fb_counters())
+
 
 @front_bp.route("/en/baking/apple_muffins")
 def details_post2():
     return render_template("front/post2.html", fb=get_fb_counters())
 
+
 @front_bp.route("/data")
 def data():
+    return "OK"
     db.drop_all()
     db.create_all()
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)

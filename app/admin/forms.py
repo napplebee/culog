@@ -35,4 +35,5 @@ class BlogPostForm(Form):
     ru_blog_cut = TextAreaField(u"Вступление:")
     ru_blog_text = TextAreaField(u"Текст:")
 
+    # util fields
     submit = SubmitField()

@@ -1,15 +1,16 @@
+from app.domain.blog_posts import BlogPost
 from . import admin
 from app.admin.forms import BlogPostForm
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
-from flask import render_template
+from flask import render_template, request, url_for, redirect
 
 
 @admin.route("/")
 @login_required
 @roles_required("root")
 def index():
-    return render_template("admin/index.html")
+    return render_template("admin/base.html")
 
 
 @admin.route("/blog/all")
@@ -25,8 +26,18 @@ def blog_post_list():
 @login_required
 @roles_required("root")
 def blog_post_new():
+    title = "Create new post"
     f = BlogPostForm()
-    return render_template("admin/blog/detail.html", f=f)
+    # if request.method == "POST" and f.validate():
+    if request.method == "POST":
+        post = BlogPost.populate_from_ui(f)
+        post.save_to_db()
+        return redirect(url_for('blog_post_list'))
+    return render_template("admin/blog/detail.html", v={
+        "title": title,
+        "f": f,
+        "action": ""
+    })
 
 
 @admin.route("/blog/update", methods=["POST", "GET"])
