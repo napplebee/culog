@@ -1,5 +1,6 @@
 from flask import render_template, redirect
 
+from app.data.blog_posts import BlogPostHeader
 from . import front as front_bp
 from flask.ext.security import SQLAlchemyUserDatastore
 from app import db, User, Role
@@ -45,6 +46,10 @@ def details_post1():
 def details_post2():
     return render_template("front/post2.html", fb=get_fb_counters())
 
+@front_bp.route("/test")
+def test():
+    posts = BlogPostHeader.query.all()
+    return render_template("front/sandbox.html", v={"posts": posts})
 
 @front_bp.route("/data")
 def data():
