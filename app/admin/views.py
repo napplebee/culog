@@ -41,7 +41,6 @@ def blog_post_new():
         post = BlogPost.populate_from_ui(f)
         post.save()
         return redirect(url_for('.blog_post_list'))
-
     title = "Create new post"
     return render_template("admin/blog/detail.html", v={
         "title": title,
