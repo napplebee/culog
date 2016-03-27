@@ -29,7 +29,8 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(os.path.join(basedir, 'data-dev1.sqlite'))
+    # SQLALCHEMY_DATABASE_URI = "sqlite:///{0}".format(os.path.join(basedir, 'data-dev1.sqlite'))
+    SQLALCHEMY_DATABASE_URI = "postgres://eoophqgigqvgyw:E0GzQehWuVAZ2rMF0ECRiYa_6I@ec2-54-217-202-109.eu-west-1.compute.amazonaws.com:5432/d371u3mkfb1tfo"
 
 class ProductionConfig(Config):
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True

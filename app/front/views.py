@@ -1,34 +1,44 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 
 from app.data.blog_posts import BlogPostHeader
+from app.services.language_service import langService
 from . import front as front_bp
 from flask.ext.security import SQLAlchemyUserDatastore
 from app import db, User, Role
-
+from app.domain.blog_posts import BlogPost
 
 def get_fb_counters():
     import time
     add = (int(time.time())/3600 - 404750) / 3
     return {"counter1": 14 + add, "counter2": 20 + add}
 
+
 @front_bp.route("/")
 def index():
     return render_template('front/index.html', fb=get_fb_counters())
 
 
-@front_bp.route("/landing")
-def landing():
-    return render_template('front/landing.html')
+@front_bp.route("/test_index")
+def test_index():
+    current_lang, lang_fallback = langService.get_user_settings()
+    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at).limit(10)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+
+    return render_template("front/test_index.html", v={
+        "posts": posts
+    })
 
 
-@front_bp.route("/details")
-def blogpost():
-    return render_template('front/blogpost.html')
-
-
-@front_bp.route("/about")
-def about():
-    return redirect("/", code=302)
+@front_bp.route("/<preferred_lang>/<path:post_url>")
+def test_detail(preferred_lang, post_url):
+    current_lang, lang_fallback = langService.get_user_settings(preferred_lang)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
+    post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
+    return render_template("front/test_blogpost.html", v={
+        "post": post
+    })
 
 
 @front_bp.route("/contact")
@@ -36,24 +46,18 @@ def contact():
     return render_template("front/contact.html")
 
 
-
-@front_bp.route("/en/baking/chocolate_chips_cookies")
+@front_bp.route("/en/baking/chocolate_chips_cookies1")
 def details_post1():
     return render_template("front/post1.html", fb=get_fb_counters())
 
 
-@front_bp.route("/en/baking/apple_muffins")
+@front_bp.route("/en/baking/apple_muffins1")
 def details_post2():
     return render_template("front/post2.html", fb=get_fb_counters())
 
-@front_bp.route("/test")
-def test():
-    posts = BlogPostHeader.query.all()
-    return render_template("front/sandbox.html", v={"posts": posts})
 
 @front_bp.route("/data")
 def data():
-    return "OK"
     db.drop_all()
     db.create_all()
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)

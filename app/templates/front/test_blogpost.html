@@ -1,0 +1,61 @@
+{% extends "front/basic.html" %}
+{% block custom_js %}
+<script language="JavaScript">
+    function share(url){
+        FB.ui({
+          method: 'share',
+          href: url,
+        }, function(response){});
+    }
+</script>
+{% endblock %}
+{% block styles_to_override %}
+<style>
+    ul.ingredients {
+        list-style-type:disc;
+        margin-left: 2em;
+    }
+    ul.preparation {
+        list-style-type:circle;
+        margin-left: 2em;
+        padding-bottom: -20em;
+    }
+    img.steps {
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+    </style>
+{% endblock %}
+
+{% block meta %}
+<meta name="keywords" content="{{ v.post.get_keywords() }}">
+
+<meta property="og:url" content="{{ v.post.get_url() }}" />
+<meta property="og:type" content="{{ v.post.og_type }}" />
+<meta property="og:title" content="{{ v.post.get_og_title() }}" />
+<meta property="og:description" content="{{ v.post.get_og_description() }}" />
+<meta property="og:image" content="{{ v.post.og_image }}" />
+{% endblock %}
+
+{% block title %}{{ v.post.get_title() }} | Cook With Love{% endblock %}
+
+{% block content %}
+<!-- Post -->
+<article class="box post post-excerpt">
+        <header>
+            <h2><a href="{{ v.post.get_url() }}">{{ v.post.get_title() }}</a></h2>
+            <p>Super chocolate and super delicious</p>
+        </header>
+        <div class="info">
+            <span class="date"><span class="month">{{ v.post.created_at.strftime('%b') }}</span> <span class="day">{{ v.post.created_at.day }}</span><span class="year">, {{ v.post.created_at.year }}</span></span>
+            <ul class="stats">
+                <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes }}</a></li>
+            </ul>
+        </div>
+        {{ v.post.get_text() }}
+    </article>
+{% endblock %}

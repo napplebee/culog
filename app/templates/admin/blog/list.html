@@ -55,7 +55,7 @@
                   <td><a href="{{ url_for('.blog_post_update', post_id=item.id) }}">{{ item.name }}</a></td>
                   <td>{{ item.created_at }}</td>
                   <td>{{ item.updated_at }}</td>
-                  <td>{% if item.visible == "True"%}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
+                  <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
                 </tr>
               {% endfor %}
               </tbody>

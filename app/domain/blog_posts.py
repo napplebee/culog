@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
-
 from app.data.blog_posts import BlogPostHeader
 from app.data.translations import Translation
 from configs import Config as cfg
@@ -31,9 +30,16 @@ class BlogPost(object):
     blog_cut = None
     blog_text = None
 
+    fallback_chain = None
+    base_url = None
+
+    def __init__(self, fallback_chain, base_url):
+        self.fallback_chain = fallback_chain
+        self.base_url = base_url
+
     @staticmethod
-    def populate_from_db(blog_header):
-        post = BlogPost()
+    def populate_from_db(blog_header, lang_fallback=None, base_url=None):
+        post = BlogPost(lang_fallback, base_url)
         post.id = blog_header.id
         post.name = blog_header.name
         post.url = blog_header.url
@@ -58,8 +64,8 @@ class BlogPost(object):
         return post
 
     @staticmethod
-    def populate_from_ui(form):
-        post = BlogPost()
+    def populate_from_ui(form, lang_fallback=None, base_url=None):
+        post = BlogPost(lang_fallback, base_url)
         post.id = form.id.data
         post.name = form.name.data
         post.url = form.url.data
@@ -76,6 +82,37 @@ class BlogPost(object):
                 setattr(post, field, value)
 
         return post
+
+    def get_title(self):
+        return self.__get_mlang_attr(self.title)
+
+    def get_keywords(self):
+        return self.__get_mlang_attr(self.keywords)
+
+    def get_description(self):
+        return self.__get_mlang_attr(self.description)
+
+    def get_og_title(self):
+        return self.__get_mlang_attr(self.og_title)
+
+    def get_og_description(self):
+        return self.__get_mlang_attr(self.og_description)
+
+    def get_cut(self):
+        return self.__get_mlang_attr(self.blog_cut)
+
+    def get_text(self):
+        return self.__get_mlang_attr(self.blog_text)
+
+    def get_url(self):
+        return "{0}/{1}".format(self.base_url, self.url)
+
+    def __get_mlang_attr(self, attr):
+        for lang in self.fallback_chain:
+            if lang in attr:
+                return attr[lang]
+
+        raise ValueError("Can't find value for supported fallback chain")
 
     def save(self):
         header = BlogPostHeader()
