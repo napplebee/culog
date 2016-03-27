@@ -1,9 +1,10 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 
 from app.data.blog_posts import BlogPostHeader
 from . import front as front_bp
 from flask.ext.security import SQLAlchemyUserDatastore
 from app import db, User, Role
+from app.domain.blog_posts import BlogPost
 
 
 def get_fb_counters():
@@ -14,21 +15,6 @@ def get_fb_counters():
 @front_bp.route("/")
 def index():
     return render_template('front/index.html', fb=get_fb_counters())
-
-
-@front_bp.route("/landing")
-def landing():
-    return render_template('front/landing.html')
-
-
-@front_bp.route("/details")
-def blogpost():
-    return render_template('front/blogpost.html')
-
-
-@front_bp.route("/about")
-def about():
-    return redirect("/", code=302)
 
 
 @front_bp.route("/contact")
@@ -48,8 +34,16 @@ def details_post2():
 
 @front_bp.route("/test")
 def test():
-    posts = BlogPostHeader.query.all()
-    return render_template("front/sandbox.html", v={"posts": posts})
+    # todo: get current language
+    lang_fallback = ["en"]
+    current_lang = "en"
+    db_data = BlogPostHeader.query.order_by(BlogPostHeader.created_at).limit(10)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    return render_template("front/sandbox.html", v={
+        "base_url": base_url,
+        "posts": posts
+    })
 
 @front_bp.route("/data")
 def data():
