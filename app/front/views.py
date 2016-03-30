@@ -30,7 +30,7 @@ def test_index():
     })
 
 
-@front_bp.route("/<preferred_lang>/<path:post_url>")
+@front_bp.route("/detail/<preferred_lang>/<path:post_url>")
 def test_detail(preferred_lang, post_url):
     current_lang, lang_fallback = langService.get_user_settings(preferred_lang)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
@@ -46,14 +46,28 @@ def contact():
     return render_template("front/contact.html")
 
 
-@front_bp.route("/en/baking/chocolate_chips_cookies1")
+@front_bp.route("/en/baking/chocolate_chips_cookies")
 def details_post1():
     return render_template("front/post1.html", fb=get_fb_counters())
 
 
-@front_bp.route("/en/baking/apple_muffins1")
+@front_bp.route("/en/baking/apple_muffins")
 def details_post2():
     return render_template("front/post2.html", fb=get_fb_counters())
+
+
+@front_bp.route("/test")
+def test():
+    # todo: get current language
+    lang_fallback = ["en"]
+    current_lang = "en"
+    db_data = BlogPostHeader.query.order_by(BlogPostHeader.created_at).limit(10)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    return render_template("front/sandbox.html", v={
+        "base_url": base_url,
+        "posts": posts
+    })
 
 
 @front_bp.route("/data")
