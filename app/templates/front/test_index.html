@@ -16,7 +16,7 @@
 <article class="box post post-excerpt">
 							<header>
 								<h2><a href="{{ p.get_url() }}">{{ p.get_title() }}</a></h2>
-								<p>Super chocolate and super delicious</p>
+								<p>{{ p.get_sub_title() }}</p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">{{ p.created_at.strftime('%b') }}</span> <span class="day">{{ p.created_at.day }}</span><span class="year">, {{ p.created_at.year }}</span></span>

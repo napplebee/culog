@@ -149,7 +149,7 @@ class BlogPost(object):
         header.name = self.name
         header.url = self.url
         header.visible = self.visible
-        header.fb_likes = self.fb_likes
+        # header.fb_likes = self.fb_likes
 
         header.og_type = self.og_type
         header.og_image = self.og_image
@@ -169,9 +169,3 @@ class BlogPost(object):
                     return getattr(self, field_name)[lang]
 
         raise AttributeError(item)
-
-
-
-
-
-

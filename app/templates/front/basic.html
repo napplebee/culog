@@ -76,17 +76,20 @@
 					</section>
 
 				<!-- Recent Posts -->
+                {% block recent_post %}
+                {% if v.recent_posts %}
 					<section class="box recent-posts">
 						<header>
 							<h2>Recent Posts</h2>
 						</header>
-                        {% block recent_post %}
                         <ul>
-							<li><a href="{{ url_for('.details_post1') }}">Chocolate Chip Cookies</a></li>
-							<li><a href="{{ url_for('.details_post2') }}">Cinnamon Apple Muffins</a></li>
+                        {% for p in v.recent_posts %}
+							<li><a href="{{ p.get_url() }}">{{ p.get_title() }}</a></li>
+                        {% endfor %}
 						</ul>
-                        {% endblock %}
 					</section>
+                {% endif %}
+                {% endblock %}
                 {#
 				<!-- Recent Comments -->
 				<!--
