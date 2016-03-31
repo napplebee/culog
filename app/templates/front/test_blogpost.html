@@ -33,7 +33,7 @@
 
 {% block meta %}
 <meta name="keywords" content="{{ v.post.get_keywords() }}">
-
+<meta name="description" content="{{ v.post.get_description() }}">
 <meta property="og:url" content="{{ v.post.get_url() }}" />
 <meta property="og:type" content="{{ v.post.og_type }}" />
 <meta property="og:title" content="{{ v.post.get_og_title() }}" />
@@ -56,6 +56,6 @@
                 <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes }}</a></li>
             </ul>
         </div>
-        {{ v.post.get_text() }}
+        {{ v.post.get_text()|safe }}
     </article>
 {% endblock %}

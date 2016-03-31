@@ -9,7 +9,7 @@ from app.core import db
 
 
 class BlogPost(object):
-    MULTI_LANG_FIELDS = ["title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"]
+    MULTI_LANG_FIELDS = ["title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"]
     id = None
     name = None
     url = None
@@ -19,6 +19,7 @@ class BlogPost(object):
     fb_likes = None
 
     title = None
+    sub_title = None
     keywords = None
     description = None
 
@@ -52,6 +53,7 @@ class BlogPost(object):
         post.og_image = blog_header.og_image
 
         post.title = {item.lang: item.value for item in blog_header.translations if item.name == "title"}
+        post.sub_title = {item.lang: item.value for item in blog_header.translations if item.name == "sub_title"}
         post.keywords = {item.lang: item.value for item in blog_header.translations if item.name == "keywords"}
         post.description = {item.lang: item.value for item in blog_header.translations if item.name == "description"}
 
@@ -85,6 +87,9 @@ class BlogPost(object):
 
     def get_title(self):
         return self.__get_mlang_attr(self.title)
+
+    def get_sub_title(self):
+        return self.__get_mlang_attr(self.sub_title)
 
     def get_keywords(self):
         return self.__get_mlang_attr(self.keywords)

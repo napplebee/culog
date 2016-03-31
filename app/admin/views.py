@@ -68,6 +68,16 @@ def blog_post_update(post_id):
             "action": ""
         })
 
+@login_required
+@roles_required("root")
+@admin.route("/post_preview/<int:post_id>")
+def blog_post_preview(post_id):
+    base_url = "en/{0}".format(request.url_root[:request.url_root.find("/", 8)])
+    db_data = BlogPostHeader.query.get(post_id)
+    post = BlogPost.populate_from_db(db_data, ["en"], base_url)
+    return render_template("admin/blog/preview.html", v={
+        "post": post
+    })
 
 @admin.route("/blog/delete", methods=["POST", "GET"])
 @login_required

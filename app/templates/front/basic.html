@@ -43,6 +43,7 @@
 			</div>
 
 		<!-- Sidebar -->
+        {% block sidebar %}
 			<div id="sidebar">
 
 				<!-- Logo -->
@@ -171,6 +172,7 @@
 					</ul>
 
 			</div>
+        {% endblock %}
 <!-- Scripts -->
 <script src="{{ url_for('static', filename = 'front/js/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/skel.min.js') }}"></script>

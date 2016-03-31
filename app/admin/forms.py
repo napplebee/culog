@@ -19,6 +19,7 @@ class BlogPostForm(Form):
 
     # english specific fields
     en_title = StringField("Title:")
+    en_sub_title = StringField("Subtitle:")
     en_keywords = StringField("Keywords (meta):")
     en_description = StringField("Description (meta):")
     en_og_title = StringField("FB og_title:")
@@ -28,6 +29,7 @@ class BlogPostForm(Form):
 
     # russian specific fields
     ru_title = StringField(u"Тайтл:")
+    ru_sub_title = StringField(u"Сабтайтл:")
     ru_keywords = StringField(u"Кивордсы (meta):")
     ru_description = StringField(u"Дискрипшн (meta):")
     ru_og_title = StringField(u"FB ог_тайтл:")

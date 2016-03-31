@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{% block title %}Cook with love{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% block meta %}{% endblock %}
+		<!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/html5shiv.js') }}"></script><![endif]-->
+		{% block main_css %}<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />{% endblock %}
+		<!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/ie8.css') }}" /><![endif]-->
+        <link rel="shortcut icon" href="{{ url_for('static', filename = 'front/fav.png') }}" type="image/x-icon">
+		<style>
+            ul.ingredients {
+                list-style-type:disc;
+                margin-left: 2em;
+            }
+            ul.preparation {
+                list-style-type:circle;
+                margin-left: 2em;
+                padding-bottom: -20em;
+            }
+            img.steps {
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+                -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+                -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            }
+            </style>
+	</head>
+	<body>
+
+		<!-- Content -->
+			<div id="content">
+				<div class="inner">
+					<article class="box post post-excerpt">
+                        <header>
+                            <h2><a href="{{ v.post.get_url() }}">{{ v.post.get_title() }}</a></h2>
+                            <p>Super chocolate and super delicious</p>
+                        </header>
+                        <div class="info">
+                            <span class="date"><span class="month">{{ v.post.created_at.strftime('%b') }}</span> <span class="day">{{ v.post.created_at.day }}</span><span class="year">, {{ v.post.created_at.year }}</span></span>
+                            <ul class="stats">
+                                <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes }}</a></li>
+                            </ul>
+                        </div>
+                        {{ v.post.get_text()|safe }}
+                    </article>
+				</div>
+			</div>
+
+		<!-- Sidebar -->
+			<div id="sidebar">
+
+				<!-- Logo -->
+					<h1 id="logo"><a href="/">Cook with ❤</a></h1>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#">Latest Post</a></li>
+							<li><a href="#">Contact Me</a></li>
+						</ul>
+					</nav>
+					<section class="box text-style1">
+						<div class="inner">
+							<p>
+								<strong>Cook with ❤</strong>. Even food deserves some love.
+							</p>
+						</div>
+					</section>
+
+				<!-- Recent Posts -->
+					<section class="box recent-posts">
+						<header>
+							<h2>Recent Posts</h2>
+						</header>
+                        <ul>
+							<li><a href="#">Chocolate Chip Cookies</a></li>
+							<li><a href="#">Cinnamon Apple Muffins</a></li>
+						</ul>
+					</section>
+				<!-- Copyright -->
+					<ul id="copyright">
+						<li>&copy; Cook with love.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+<!-- Scripts -->
+<script src="{{ url_for('static', filename = 'front/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/js/skel.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/js/util.js') }}"></script>
+<!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/respond.min.js') }}"></script><![endif]-->
+<script src="{{ url_for('static', filename = 'front/js/main.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/js/ga.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/js/fb.js') }}"></script>
+	</body>
+</html>

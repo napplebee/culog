@@ -43,6 +43,7 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
+                  <th>Preview</th>
                   <th>Created</th>
                   <th>Updated</th>
                   <th>Visibility</th>
@@ -53,6 +54,7 @@
                 <tr>
                   <td>{{ item.id }}</td>
                   <td><a href="{{ url_for('.blog_post_update', post_id=item.id) }}">{{ item.name }}</a></td>
+                  <td><a href="{{ url_for('.blog_post_preview', post_id=item.id) }}" target="_blank">####</a></td>
                   <td>{{ item.created_at }}</td>
                   <td>{{ item.updated_at }}</td>
                   <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
