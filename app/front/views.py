@@ -20,7 +20,7 @@ def index(preferred_lang):
     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
     recent_posts = posts[:2]
 
-    return render_template("front/test_index.html", v={
+    return render_template("front/index.html", v={
         "posts": posts,
         "recent_posts": recent_posts
     })
@@ -35,7 +35,7 @@ def test_detail(preferred_lang, post_url):
 
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    return render_template("front/test_blogpost.html", v={
+    return render_template("front/blogpost.html", v={
         "post": post,
         "recent_posts": recent_posts
     })
