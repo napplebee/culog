@@ -117,7 +117,7 @@ class BlogPost(object):
 
     def __get_mlang_attr(self, attr):
         for lang in self.fallback_chain:
-            if lang in attr:
+            if lang in attr and attr[lang]:
                 return attr[lang]
 
         raise ValueError("Can't find value for supported fallback chain")

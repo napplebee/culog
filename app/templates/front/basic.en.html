@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>{% block title %}Cook with love{% endblock %}</title>
+		<title>EN:{% block title %}Cook with love{% endblock %}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         {% block meta %}{% endblock %}
@@ -55,17 +55,15 @@
 							<li {% if active_menu == "latest" %}class="current"{% endif %}><a href="{{ url_for('.index') }}">Latest Post</a></li>
 							<li {% if active_menu == "contacts" %}class="current"{% endif %}><a href="{{ url_for('.contact') }}">Contact Me</a></li>
 
-                            {% block lang_switcher %}
-                            {% if v.current_lang == "en" %}
-                            <li><a href="#" onclick="l('ru', false); return false;">Русский</a></li>
+                            {% if v.cur_lang == "en" %}
                             <li class="current"><a>English</a></li>
+                            <li><a href="./ru">Russian</a></li>
                             {% endif %}
 
-                            {% if v.current_lang == "ru" %}
+                            {% if v.cur_lang == "ru" %}
+                            <li><a href="./en">Английский</a></li>
                             <li class="current"><a>Русский</a></li>
-                            <li><a href="#" onclick="l('en', false); return false;">English</a></li>
                             {% endif %}
-                            {% endblock %}
 						</ul>
 					</nav>
                 {#
@@ -198,18 +196,10 @@
 <script src="{{ url_for('static', filename = 'front/js/fb.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/js.cookie.js') }}"></script>
 <script>
-function l(v,loc)
+function l(v)
 {
-    Cookies.set("lang", v);
-    if(loc)
-    {
-        location.href = loc;
-    }
-    else
-    {
-     location.reload()
-    }
-
+    //Cookies.set("lang", v);
+    //location.reload()
     return false;
 }
 </script>

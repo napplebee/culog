@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from app.core import db
 
 from flask_security import UserMixin, RoleMixin
