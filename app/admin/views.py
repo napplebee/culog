@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from app.data.blog_posts import BlogPostHeader
 from app.domain.blog_posts import BlogPost
 from . import admin
@@ -59,7 +61,7 @@ def blog_post_update(post_id):
         return redirect(url_for('.blog_post_list'))
     else:
         post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
-        title = "Update {0}".format(post.name)
+        title = u"Update {0}".format(post.name)
         f = BlogPostForm(obj=post)
 
         return render_template("admin/blog/detail.html", v={
