@@ -21,9 +21,9 @@ class BlogPostForm(Form):
     en_title = StringField("Title:")
     en_sub_title = StringField("Subtitle:")
     en_keywords = StringField("Keywords (meta):")
-    en_description = StringField("Description (meta):")
+    en_description = TextAreaField("Description (meta):")
     en_og_title = StringField("FB og_title:")
-    en_og_description = StringField("FB og_description:")
+    en_og_description = TextAreaField("FB og_description:")
     en_blog_cut = TextAreaField("Cut:")
     en_blog_text = TextAreaField("Text:")
 
@@ -31,9 +31,9 @@ class BlogPostForm(Form):
     ru_title = StringField(u"Тайтл:")
     ru_sub_title = StringField(u"Сабтайтл:")
     ru_keywords = StringField(u"Кивордсы (meta):")
-    ru_description = StringField(u"Дискрипшн (meta):")
+    ru_description = TextAreaField(u"Дискрипшн (meta):")
     ru_og_title = StringField(u"FB ог_тайтл:")
-    ru_og_description = StringField(u"FB ог_дискрипшн:")
+    ru_og_description = TextAreaField(u"FB ог_дискрипшн:")
     ru_blog_cut = TextAreaField(u"Вступление:")
     ru_blog_text = TextAreaField(u"Текст:")
 

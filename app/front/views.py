@@ -16,7 +16,7 @@ from app.domain.blog_posts import BlogPost
 @front_bp.route("/<string:preferred_lang>")
 @front_bp.route("/", defaults={"preferred_lang": "en"})
 def index(preferred_lang):
-    current_lang, lang_fallback = langService.get_user_settings()
+    current_lang, lang_fallback = langService.get_user_settings(request)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(10)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
@@ -30,7 +30,7 @@ def index(preferred_lang):
 
 @front_bp.route("/<preferred_lang>/<path:post_url>")
 def test_detail(preferred_lang, post_url):
-    current_lang, lang_fallback = langService.get_user_settings(preferred_lang)
+    current_lang, lang_fallback = langService.get_user_settings(request, preferred_lang)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
     post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
@@ -45,7 +45,7 @@ def test_detail(preferred_lang, post_url):
 
 @front_bp.route("/contact")
 def contact():
-    current_lang, lang_fallback = langService.get_user_settings()
+    current_lang, lang_fallback = langService.get_user_settings(request)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
