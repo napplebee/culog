@@ -7,6 +7,8 @@ from app.admin.forms import BlogPostForm
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from flask import render_template, request, url_for, redirect
+from app.services.language_service import langService
+from configs import Config as cfg
 
 
 @admin.route("/")
@@ -20,18 +22,20 @@ def index():
 @login_required
 @roles_required("root")
 def blog_post_list():
-    # todo: read all posts
     headers = BlogPostHeader.query.order_by(BlogPostHeader.updated_at.desc(), BlogPostHeader.created_at.desc()).all()
     posts = [
         {
             "id": h.id,
             "name": h.name,
-            "created_at": h.created_at.strftime('%d.%m.%y %H:%M') if h.created_at else "", # move to template filter
+            "created_at": h.created_at.strftime('%d.%m.%y %H:%M') if h.created_at else "", # move strftime call to template filter
             "updated_at": h.updated_at.strftime('%d.%m.%y %H:%M') if h.updated_at else "",
             "visible": h.visible
         } for h in headers
     ]
-    return render_template("admin/blog/list.html", v={"posts": posts})
+    return render_template("admin/blog/list.html", v={
+        "posts": posts,
+        "supported_langs": cfg.SUPPORTED_LANGS
+        })
 
 @admin.route("/blog/new", methods=["POST", "GET"])
 @login_required
@@ -72,11 +76,12 @@ def blog_post_update(post_id):
 
 @login_required
 @roles_required("root")
-@admin.route("/post_preview/<int:post_id>")
-def blog_post_preview(post_id):
-    base_url = "en/{0}".format(request.url_root[:request.url_root.find("/", 8)])
+@admin.route("/post_preview/<string:lang_override>/<int:post_id>")
+def blog_post_preview(lang_override, post_id):
+    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+    base_url = "{0}/{1}".format(lang_override, request.url_root[:request.url_root.find("/", 8)])
     db_data = BlogPostHeader.query.get(post_id)
-    post = BlogPost.populate_from_db(db_data, ["en"], base_url)
+    post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
     return render_template("admin/blog/preview.html", v={
         "post": post
     })
