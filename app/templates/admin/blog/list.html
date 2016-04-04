@@ -32,9 +32,11 @@
           <h2 class="sub-header">Section title</h2>
           #}
           <div class="row placeholders">
-            <div class="col-sm-1 placeholder">
+            <div class="col-sm-3 placeholder">
               {# buttons #}
               <a class="btn btn-success" href="{{ url_for('.blog_post_new') }}" role="button">New post</a>
+              <a class="btn btn-default" target="_blank" href="{{ url_for('.blog_list_preview', lang_override="ru") }}" role="button">Preview ru</a>
+              <a class="btn btn-default" target="_blank" href="{{ url_for('.blog_list_preview', lang_override="en") }}" role="button">Preview en</a>
             </div>
           </div>
           <div class="table-responsive">

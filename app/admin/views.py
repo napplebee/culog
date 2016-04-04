@@ -86,8 +86,14 @@ def blog_post_preview(lang_override, post_id):
         "post": post
     })
 
-@admin.route("/blog/delete", methods=["POST", "GET"])
+@admin.route("/post_list_preview/<string:lang_override>")
 @login_required
 @roles_required("root")
-def blog_post_delete():
-    pass
+def blog_list_preview(lang_override):
+    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+    db_data = BlogPostHeader.query.filter().order_by(BlogPostHeader.created_at.desc())
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    return render_template("admin/blog/list_preview.html", v={
+        "posts": posts
+    })
