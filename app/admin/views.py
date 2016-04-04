@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from app.data.blog_posts import BlogPostHeader
 from app.domain.blog_posts import BlogPost
 from . import admin

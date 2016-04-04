@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 OG_TYPES = [
     "article",
     "books.book",
