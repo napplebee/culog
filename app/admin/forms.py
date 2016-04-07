@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.wtf import Form
-from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField, HiddenField
+from wtforms import StringField, SubmitField, SelectField, BooleanField, TextAreaField, HiddenField, DateField
 
 from app.common.facebook import OG_TYPES
 
@@ -11,6 +11,7 @@ class BlogPostForm(Form):
     id = HiddenField()
     name = StringField("Name (for internal purpose):")
     url = StringField("URL:")
+    published_at = DateField("Published:")
 
     visible = BooleanField("Visible?")
     og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])

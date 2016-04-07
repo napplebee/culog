@@ -10,6 +10,7 @@ class BlogPostHeader(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    published_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
     visible = db.Column(db.Boolean)
 

@@ -86,9 +86,9 @@ def blog_post_preview(lang_override, post_id):
         "post": post
     })
 
-@admin.route("/post_list_preview/<string:lang_override>")
 @login_required
 @roles_required("root")
+@admin.route("/post_list_preview/<string:lang_override>")
 def blog_list_preview(lang_override):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
     db_data = BlogPostHeader.query.filter().order_by(BlogPostHeader.created_at.desc())

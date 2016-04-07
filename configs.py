@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SUPPORTED_LANGS = ("en", "ru",)
+    SUPPORTED_LANGS = ("ru", "en",)
 
     SECRET_KEY = "cazk$ze&e^935+0t@fi18l78m%t+y5#-%ch#z$^!np##(d^"
     BOOTSTRAP_SERVE_LOCAL = True

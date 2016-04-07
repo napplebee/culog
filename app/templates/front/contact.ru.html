@@ -1,0 +1,73 @@
+{% set active_menu="contacts" %}
+{% extends "front/basic.html" %}
+{% block main_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.contacts.css') }}" />
+{% endblock %}
+{% block title %}
+Cook with love | Contacts
+{% endblock %}
+{% block styles_to_override %}
+<style>
+#content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+@media screen and (min-width: 1201px) {
+    #content {
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+}
+
+@media screen and (min-width: 1001px){
+    div.circular {
+        float: left;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
+        -webkit-border-radius: 150px;
+        -moz-border-radius: 150px;
+        background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+
+
+@media screen and (max-width: 1000px){
+    div.circular {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+        background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+</style>
+{% endblock %}
+{% block content %}
+<!-- Post -->
+<article class="box post post-excerpt">
+<div class="circular"></div>
+
+<div style="margin-left:15px;float:left;">
+    <h2 style="color:#444;">Kate crazy cook</h2>
+    <br/>
+    <p>
+        Люблю свою семью, готовить, спорт, ИТ и свою собаку. Если вы не можете готовить с любовью, попросите кого-нибудь сделать это для вас ;)
+        Я всегда рада помочь любому благотворительному проекту или организации своими кулинарными способностями. Пишите на <a name="#">pogorelskaya.ekaterina [at] gmail [dot] com</a> в любое время.
+        {# http://findicons.com/icon/75281/facebook #}
+    </p>
+    И не забудьте заглянуть сюда <a href="https://www.facebook.com/CookWithLove-1300674489959301/" target="_blank">Facebook</a> и <a href="https://www.instagram.com/cookwith.love/" target="_blank">Instagram</a> сюда!
+</div>
+<!--<div class="_o0ohn">-->
+    <!--<img class="_8gpiy _r43r5" src="https://scontent-ams3-1.cdninstagram.com/t51.2885-19/s150x150/12728666_865681196877873_520209959_a.jpg" />-->
+<!--</div>-->
+</article>
+{% endblock %}

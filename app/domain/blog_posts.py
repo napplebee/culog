@@ -14,6 +14,7 @@ class BlogPost(object):
     name = None
     url = None
     created_at = None
+    published_at = None
     updated_at = None
     visible = None
     fb_likes = None
@@ -45,6 +46,7 @@ class BlogPost(object):
         post.name = blog_header.name
         post.url = blog_header.url
         post.created_at = blog_header.created_at
+        post.published_at = blog_header.published_at
         post.updated_at = blog_header.updated_at
         post.visible = blog_header.visible
         post.fb_likes = blog_header.fb_likes
@@ -70,6 +72,7 @@ class BlogPost(object):
         post = BlogPost(lang_fallback, base_url)
         post.id = form.id.data
         post.name = form.name.data
+        post.published_at = form.published_at.data
         post.url = form.url.data
         post.visible = form.visible.data
         post.og_type = form.og_type.data
@@ -114,7 +117,7 @@ class BlogPost(object):
 
     def __get_mlang_attr(self, attr):
         for lang in self.fallback_chain:
-            if lang in attr:
+            if lang in attr and attr[lang]:
                 return attr[lang]
 
         raise ValueError("Can't find value for supported fallback chain")
@@ -125,6 +128,7 @@ class BlogPost(object):
         header.name = self.name
         header.url = self.url
         header.created_at = dt.datetime.utcnow()
+        header.published_at = self.published_at
         header.visible = self.visible
         header.fb_likes = self.fb_likes
 
@@ -153,6 +157,7 @@ class BlogPost(object):
 
         header.og_type = self.og_type
         header.og_image = self.og_image
+        header.published_at = self.published_at
         header.updated_at = dt.datetime.utcnow()
 
         for tr in header.translations:
