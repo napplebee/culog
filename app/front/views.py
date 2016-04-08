@@ -28,7 +28,7 @@ def index():
 
 
 @front_bp.route("/<string:lang_override>/<path:post_url>")
-def test_detail(lang_override, post_url):
+def detail(lang_override, post_url):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
@@ -71,6 +71,7 @@ def contact():
 @roles_required("root")
 @front_bp.route("/data")
 def data():
+    return
     db.drop_all()
     db.create_all()
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
