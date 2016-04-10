@@ -62,7 +62,7 @@
 
 
 {% block lang_switcher %}
-    {% for lng in v.links %}
+    {% for lng in v.lang_dic %}
         {% if lng == v.current_lang %}
             <li class="current"><a>{{ v.lang_dic[lng] }}</a></li>
         {% else %}
