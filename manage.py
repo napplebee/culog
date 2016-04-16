@@ -2,7 +2,7 @@
 from flask.ext.script import Manager
 from app import create_app
 
-app = create_app("dev")
+app = create_app("culog")
 manager = Manager(app)
 
 if __name__ == "__main__":
