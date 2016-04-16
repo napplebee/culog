@@ -1,0 +1,2 @@
+class DeployConfig(object):
+    pass

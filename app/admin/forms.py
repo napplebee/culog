@@ -29,14 +29,14 @@ class BlogPostForm(Form):
     en_blog_text = TextAreaField("Text:")
 
     # russian specific fields
-    ru_title = StringField(u"Тайтл:")
-    ru_sub_title = StringField(u"Сабтайтл:")
-    ru_keywords = StringField(u"Кивордсы (meta):")
-    ru_description = TextAreaField(u"Дискрипшн (meta):")
-    ru_og_title = StringField(u"FB ог_тайтл:")
-    ru_og_description = TextAreaField(u"FB ог_дискрипшн:")
-    ru_blog_cut = TextAreaField(u"Вступление:")
-    ru_blog_text = TextAreaField(u"Текст:")
+    ru_title = StringField(u"Title:")
+    ru_sub_title = StringField(u"Subtitle:")
+    ru_keywords = StringField(u"Keywords (meta):")
+    ru_description = TextAreaField(u"Description (meta):")
+    ru_og_title = StringField(u"FB og_title:")
+    ru_og_description = TextAreaField(u"FB og_description:")
+    ru_blog_cut = TextAreaField(u"Cut:")
+    ru_blog_text = TextAreaField(u"Text:")
 
     # util fields
     submit = SubmitField()
