@@ -36,7 +36,6 @@ def run():
         post.fb_likes = total_shares
         report.append(log)
 
-        report += os.linesep
     send_report(json.dump(report, indent=3))
     db.commit()
 
