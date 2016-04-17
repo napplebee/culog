@@ -5,19 +5,21 @@ from configs import Config as cfg
 import requests as r
 import os
 import traceback
-
+import json
 
 def run():
-    report = ""
+    report = []
     posts = db.query(BlogPost).filter(BlogPost.visible and BlogPost.url != "").all()
     for post in posts:
-        report += "post_id: {0}, old_shares: {1}, ".format(post.id, post.fb_likes)
+        log = {}
+        log["post_id"] = post.id
+        log["old_shares"] = post.fb_likes
         total_shares = 0
         try:
             for lng in cfg.SUPPORTED_LANGS:
                 url = "{0}/{1}/{2}".format(cfg.BASE_EXTERNAL_URI, lng, post.url)
                 response = r.get("http://graph.facebook.com/?id={0}".format(url))
-                report += "{0}:req_status: {1}, ".format(lng, response.status_code)
+                log[lng] = response.status_code
                 if response.status_code != r.codes.ok:
                     continue
                     # todo: logging
@@ -25,17 +27,17 @@ def run():
                 if "shares" in data:
                     shares = int(data["shares"])
                     total_shares += shares
-                    report += "new_shares: {0}, ".format(shares)
+                    log["new_shares"] = shares
                 else:
-                    report += "new_shares: 0, "
+                    log["new_shares"] = 0
         except Exception as e:
-            report += "Exception occured: {0}".format(traceback.format_exc())
+            log["exception"] = traceback.format_exc()
 
-        if total_shares > 0:
-            post.fb_likes = total_shares
+        post.fb_likes = total_shares
+        report.append(log)
 
         report += os.linesep
-    send_report(report)
+    send_report(json.dump(report, indent=3))
     db.commit()
 
 
