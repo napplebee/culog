@@ -34,3 +34,4 @@ passlib==1.6.5
 bcrypt==2.0.0
 sendgrid==2.2.1
 psycopg2==2.5.1
+newrelic==2.62.0.47
