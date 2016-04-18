@@ -7,6 +7,7 @@ import os
 import traceback
 import json
 
+
 def run():
     report = []
     posts = db.query(BlogPost).filter(BlogPost.visible and BlogPost.url != "").all()
@@ -27,16 +28,16 @@ def run():
                 if "shares" in data:
                     shares = int(data["shares"])
                     total_shares += shares
-                    log["new_shares"] = shares
+                    log[lng+"_new_shares"] = shares
                 else:
-                    log["new_shares"] = 0
+                    log[lng+"_new_shares"] = 0
         except Exception as e:
             log["exception"] = traceback.format_exc()
 
         post.fb_likes = total_shares
         report.append(log)
 
-    send_report(json.dump(report, indent=3))
+    send_report(json.dumps(report, indent=3, sort_keys=True))
     db.commit()
 
 
