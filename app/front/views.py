@@ -3,6 +3,7 @@
 from flask import render_template, request, url_for, current_app
 
 from app.data.blog_posts import BlogPostHeader
+from app.domain.language import Language
 from app.services.language_service import langService
 from . import front as front_bp
 from flask.ext.security import SQLAlchemyUserDatastore
@@ -10,6 +11,8 @@ from app import db, User, Role
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from app.domain.blog_posts import BlogPost
+from configs import Config as cfg
+
 
 
 @front_bp.route("/")
@@ -21,6 +24,7 @@ def index():
     recent_posts = posts[:2]
 
     return render_template("front/index.html", v={
+        "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "posts": posts,
         "recent_posts": recent_posts
@@ -36,12 +40,12 @@ def detail(lang_override, post_url):
 
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    from configs import Config as cfg
     links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
     html = render_template("front/blogpost.html", v={
         "lang_dic": {u"ru": u"Русский", u"en": u"English"},
         "links": links,
         "current_lang": current_lang,
+        "meta_language": Language.meta_lang[current_lang],
         "post": post,
         "recent_posts": recent_posts
     })
@@ -63,6 +67,7 @@ def contact():
         tpl = "front/contact.en.html"
     return render_template(tpl, v={
         "current_lang": current_lang,
+        "meta_language": Language.meta_lang[current_lang],
         "recent_posts": posts
     })
 
