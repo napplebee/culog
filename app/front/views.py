@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+import os
 
-from flask import render_template, request, url_for, current_app
+from flask import render_template, request, url_for, current_app, send_from_directory
 
 from app.data.blog_posts import BlogPostHeader
 from app.domain.language import Language
@@ -70,6 +71,11 @@ def contact():
         "meta_language": Language.meta_lang[current_lang],
         "recent_posts": posts
     })
+
+
+@front_bp.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory(os.path.join(cfg.APP_BASE_DIR, "static", "front"), "sitemap.xml")
 
 
 @login_required
