@@ -38,5 +38,15 @@ class BlogPostForm(Form):
     ru_blog_cut = TextAreaField(u"Cut:")
     ru_blog_text = TextAreaField(u"Text:")
 
+    # swedish specific fields
+    sv_title = StringField(u"Title:")
+    sv_sub_title = StringField(u"Subtitle:")
+    sv_keywords = StringField(u"Keywords (meta):")
+    sv_description = TextAreaField(u"Description (meta):")
+    sv_og_title = StringField(u"FB og_title:")
+    sv_og_description = TextAreaField(u"FB og_description:")
+    sv_blog_cut = TextAreaField(u"Cut:")
+    sv_blog_text = TextAreaField(u"Text:")
+
     # util fields
     submit = SubmitField()

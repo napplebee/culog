@@ -67,7 +67,7 @@
         {% if lng == v.current_lang %}
             <li class="current"><a>{{ v.lang_dic[lng] }}</a></li>
         {% else %}
-            <li><a href="#" onclick="l('ru', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
+            <li><a href="#" onclick="l('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
         {% endif %}
     {% endfor %}
 {% endblock %}
