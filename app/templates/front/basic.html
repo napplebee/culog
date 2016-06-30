@@ -59,8 +59,10 @@
                                 <a href="{{ url_for('.index') }}">
                                 {% if v.current_lang == "ru" %}
                                 Недавние посты
-                                {% else %}
-                                Latest Post
+								{% elif v.current_lang == "en">%}
+								Latest Post
+								{% elif v.current_lang == "sv" %}
+								Läs senaste inlägget
                                 {% endif %}
                                 </a>
                             </li>
@@ -68,8 +70,10 @@
                                 <a href="{{ url_for('.contact') }}">
                                 {% if v.current_lang == "ru" %}
                                 Контакты
-                                {% else %}
-                                Contact Me
+                                {% elif v.current_lang =="en" %}
+								Contact Me
+                                {% elif v.current_lang =="sv" %}
+								Kontakta mig
                                 {% endif %}
                                 </a>
                             </li>
@@ -79,11 +83,19 @@
                             {% if v.current_lang == "en" %}
                                 <li><a href="#" onclick="l('ru', false); return false;">Русский</a></li>
                                 <li class="current"><a>English</a></li>
+                                <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>
                             {% endif %}
 
                             {% if v.current_lang == "ru" %}
-                            <li class="current"><a>Русский</a></li>
-                            <li><a href="#" onclick="l('en', false); return false;">English</a></li>
+                            	<li class="current"><a>Русский</a></li>
+                            	<li><a href="#" onclick="l('en', false); return false;">English</a></li>
+	                            <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>
+                            {% endif %}
+
+                            {% if v.current_lang == "sv" %}
+                            	<li><a href="#" onclick="l('ru', false); return false;">Русский</a></li>
+                            	<li><a href="#" onclick="l('en', false); return false;">English</a></li>
+								<li class="current"><a>Svenska</a></li>
                             {% endif %}
 
                             {% endblock %}
@@ -106,8 +118,10 @@
 								<strong>Cook with ❤</strong>.
                                 {% if v.current_lang == "ru" %}
                                 Даже еда заслуживает немного любви.
-                                {% else %}
+								{% elif v.current_lang =="en" %}
                                 Even food deserves some love.
+								{% elif v.current_lang =="sv" %}
+								Även mat förtjänar lite kärlek.
                                 {% endif %}
 							</p>
 						</div>
@@ -121,8 +135,10 @@
 							<h2>
                                 {% if v.current_lang == "ru" %}
                                 Недавние посты
-                                {% else %}
+                                {% elif v.current_lang == "en" %}
                                 Recent Posts
+                                {% elif v.current_lang == "sv" %}
+								Senaste inlägget
                                 {% endif %}
                             </h2>
 						</header>
@@ -239,7 +255,7 @@ function l(v,loc)
     }
     else
     {
-     location.reload()
+    	location.reload()
     }
 
     return false;
