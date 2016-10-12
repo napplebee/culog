@@ -3,12 +3,19 @@ from bin.data import db
 from bin.data.blog_post import BlogPost
 from configs import Config as cfg
 import requests as r
-import os
 import traceback
 import json
 
 
+def get_token():
+    payload = {'grant_type': 'client_credentials', 'client_id': '184999375275763', 'client_secret': '8113dfe7206356ec4177d748450adb66'}
+    file = r.post('https://graph.facebook.com/oauth/access_token?', params=payload)
+    return file.text.split("=")[1]
+
+
 def run():
+    token = get_token()
+
     report = []
     posts = db.query(BlogPost).filter(BlogPost.visible and BlogPost.url != "").all()
     for post in posts:
@@ -19,21 +26,22 @@ def run():
         try:
             for lng in cfg.SUPPORTED_LANGS:
                 url = "{0}/{1}/{2}".format(cfg.BASE_EXTERNAL_URI, lng, post.url)
-                response = r.get("http://graph.facebook.com/?id={0}".format(url))
+                fb_request_url = "https://graph.facebook.com/v2.8/?id={0}&access_token={1}".format(url, token)
+                response = r.get(fb_request_url)
                 log[lng] = response.status_code
                 if response.status_code != r.codes.ok:
                     continue
                     # todo: logging
                 data = response.json()
-                if "shares" in data:
-                    shares = int(data["shares"])
+                if "share" in data and "share_count" in data["share"]:
+                    shares = int(data["share"]["share_count"])
                     total_shares += shares
                     log[lng+"_new_shares"] = shares
                 else:
                     log[lng+"_new_shares"] = 0
         except Exception as e:
             log["exception"] = traceback.format_exc()
-
+        
         post.fb_likes = total_shares
         report.append(log)
 
