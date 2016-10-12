@@ -6,8 +6,8 @@ class LanguageService(object):
         preferred_lang = lang_override if lang_override is not None else request.cookies.get("lang", "en")
         if preferred_lang == "ru":
             return preferred_lang, ["ru", "en"]
-        elif preferred_lang == "sv":
-            return preferred_lang, ["sv", "en"]
+        # elif preferred_lang == "sv":
+            # return preferred_lang, ["sv", "en"]
         else:
             return preferred_lang, ["en"]
 

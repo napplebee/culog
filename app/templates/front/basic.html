@@ -59,10 +59,10 @@
                                 <a href="{{ url_for('.index') }}">
                                 {% if v.current_lang == "ru" %}
                                 Недавние посты
-								{% elif v.current_lang == "en">%}
+								{% elif v.current_lang == "en" %}
 								Latest Post
-								{% elif v.current_lang == "sv" %}
-								Läs senaste inlägget
+{#								{% elif v.current_lang == "sv" %}#}
+{#								Läs senaste inlägget#}
                                 {% endif %}
                                 </a>
                             </li>
@@ -72,8 +72,8 @@
                                 Контакты
                                 {% elif v.current_lang =="en" %}
 								Contact Me
-                                {% elif v.current_lang =="sv" %}
-								Kontakta mig
+{#                                {% elif v.current_lang =="sv" %}#}
+{#								Kontakta mig#}
                                 {% endif %}
                                 </a>
                             </li>
@@ -83,13 +83,13 @@
                             {% if v.current_lang == "en" %}
                                 <li><a href="#" onclick="l('ru', false); return false;">Русский</a></li>
                                 <li class="current"><a>English</a></li>
-                                <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>
+{#                                <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>#}
                             {% endif %}
 
                             {% if v.current_lang == "ru" %}
                             	<li class="current"><a>Русский</a></li>
                             	<li><a href="#" onclick="l('en', false); return false;">English</a></li>
-	                            <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>
+{#	                            <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>#}
                             {% endif %}
 
                             {% if v.current_lang == "sv" %}

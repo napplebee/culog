@@ -6,7 +6,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     BASE_EXTERNAL_URI = "http://cookwith.love"
-    SUPPORTED_LANGS = ("ru", "en", "sv",)
+    SUPPORTED_LANGS = ("ru", "en",)
+    # SUPPORTED_LANGS = ("ru", "en", "sv",)
     APP_BASE_DIR = os.path.join(basedir, "app")
 
     SECRET_KEY = "cazk$ze&e^935+0t@fi18l78m%t+y5#-%ch#z$^!np##(d^"
