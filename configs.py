@@ -18,7 +18,7 @@ class Config:
     WTF_CSRF_ENABLED = False
 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = "postgres://eoophqgigqvgyw:E0GzQehWuVAZ2rMF0ECRiYa_6I@ec2-54-217-202-109.eu-west-1.compute.amazonaws.com:5432/d371u3mkfb1tfo"
+    SQLALCHEMY_DATABASE_URI = "postgres://eiwomhqmathrom:c148670903243c1488e443d3d0f8fefc31bb431bdb0da33a38af984d9825e77f@ec2-54-75-247-119.eu-west-1.compute.amazonaws.com:5432/dbq545pe24d2um"
 
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
