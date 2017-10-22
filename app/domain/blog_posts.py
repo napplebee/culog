@@ -120,7 +120,8 @@ class BlogPost(object):
             if lang in attr and attr[lang]:
                 return attr[lang]
 
-        raise ValueError("Can't find value for supported fallback chain")
+        # raise ValueError("Can't find value for supported fallback chain")
+        return ""
 
     def save(self):
         header = BlogPostHeader()
