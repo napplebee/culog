@@ -32,6 +32,10 @@
         width: 100%;
         max-width: 500px;
     }
+    li.yum {
+        height: 20px;
+        vertical-align:middle;
+    }
     </style>
 {% endblock %}
 
@@ -58,7 +62,7 @@
             <span class="date"><span class="month">{{ v.post.published_at.strftime('%b') }}</span> <span class="day">{{ v.post.published_at.day }}</span><span class="year">, {{ v.post.published_at.year }}</span></span>
             <ul class="stats">
                 <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes|default("∞", true) }}</a></li>
-                <li><a href="//yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a></li>
+                <li class="yum"><a href="//yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a></li>
             </ul>
         </div>
         {{ v.post.get_text()|safe }}
