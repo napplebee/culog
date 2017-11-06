@@ -19,7 +19,8 @@ from configs import Config as cfg
 @front_bp.route("/")
 def index():
     current_lang, lang_fallback = langService.get_user_settings(request)
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc()).limit(10)
+    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
+    # .limit(10)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
     recent_posts = posts[:2]
