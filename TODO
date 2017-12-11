@@ -1,3 +1,4 @@
 Add new lang:
 * add lang-specific fields to BlogPostForm
 * add record in domain/language.py
+
