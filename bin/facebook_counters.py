@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from bin.data import db
 from bin.data.blog_post import BlogPost
 from configs import Config as cfg
@@ -10,7 +11,8 @@ import json
 def get_token():
     payload = {'grant_type': 'client_credentials', 'client_id': '184999375275763', 'client_secret': '8113dfe7206356ec4177d748450adb66'}
     file = r.post('https://graph.facebook.com/oauth/access_token?', params=payload)
-    return file.text.split("=")[1]
+    return file.json()['access_token']
+    # return file.text.split("=")[1]
 
 
 def run():
@@ -45,7 +47,8 @@ def run():
         post.fb_likes = total_shares
         report.append(log)
 
-    send_report(json.dumps(report, indent=3, sort_keys=True))
+    # send_report(json.dumps(report, indent=3, sort_keys=True))
+    print report
     db.commit()
 
 
