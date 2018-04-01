@@ -52,6 +52,13 @@
 		font-size:  95%;
 	}
 
+	li > i {
+                margin-left: 10px;
+                border-left: ridge 1px;
+		padding-left:5px;
+		display: block;
+	}
+
 
 /* Box Model */
 
