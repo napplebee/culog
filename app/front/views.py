@@ -44,7 +44,7 @@ def detail(lang_override, post_url):
     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
     links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
     html = render_template("front/blogpost.html", v={
-        "lang_dic": {u"ru": u"Русский", u"en": u"English", u"sv": u"Svenska"},
+        "lang_dic": {u"ru": u"Русский", u"en": u"English"},
         "links": links,
         "current_lang": current_lang,
         "meta_language": Language.meta_lang[current_lang],
