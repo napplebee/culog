@@ -88,6 +88,14 @@ class BlogPost(object):
 
         return post
 
+    def is_translated_for(self, lang):
+        for field in BlogPost.MULTI_LANG_FIELDS:
+            # print getattr(self, field)
+            values = getattr(self, field)
+            if lang not in values or values[lang] == "":
+                return False
+        return True
+
     def get_title(self):
         return self.__get_mlang_attr(self.title)
 
