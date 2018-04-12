@@ -23,7 +23,7 @@ def index():
     # .limit(10)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     posts = [ post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang) ]
-   
+
     recent_posts = posts[:2]
 
     return render_template("front/index.html", v={
@@ -44,8 +44,13 @@ def detail(lang_override, post_url):
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
     links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    filtered_lang_dic = {}
+    for lang in lang_dic.keys():
+        if post.is_translated_for(lang):
+            filtered_lang_dic[lang] = lang_dic[lang]
     html = render_template("front/blogpost.html", v={
-        "lang_dic": {u"ru": u"Русский", u"en": u"English"},
+        "lang_dic": filtered_lang_dic,
         "links": links,
         "current_lang": current_lang,
         "meta_language": Language.meta_lang[current_lang],
