@@ -10,8 +10,10 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="fb:app_id" content="522001701315044">
-        <meta name="author" content="CookWith.Love">
-        <meta name="language" content="{{ v.meta_language }}">
+        	<meta name="author" content="CookWith.Love">
+        	<meta name="language" content="{{ v.meta_language }}">
+		<!-- VK sharing -->
+		<script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
         {% block meta %}{% endblock %}
 		<!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/html5shiv.js') }}"></script><![endif]-->
 		{% block main_css %}<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />{% endblock %}
@@ -263,8 +265,6 @@ function l(v,loc)
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-<!-- VK sharing -->
-<script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
 {% block custom_js %}{% endblock %}
 	</body>
 </html>
