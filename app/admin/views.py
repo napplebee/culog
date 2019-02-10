@@ -45,8 +45,8 @@ def blog_post_new():
     # if request.method == "POST" and f.validate():
     if request.method == "POST":
         post = BlogPost.populate_from_ui(f)
-        post.save()
-        return redirect(url_for('.blog_post_list'))
+        post_id = post.save()
+        return redirect("/admin/blog/update/{0}?saved".format(post_id))
     title = "Create new post"
     return render_template("admin/blog/detail.html", v={
         "title": title,
@@ -62,7 +62,8 @@ def blog_post_update(post_id):
         f = BlogPostForm()
         post = BlogPost.populate_from_ui(f)
         post.update()
-        return redirect(url_for('.blog_post_list'))
+        return redirect("/admin/blog/update/{0}?saved".format(post_id))
+        # return redirect(url_for('.blog_post_list'))
     else:
         post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
         title = u"Update {0}".format(post.name)
@@ -71,7 +72,8 @@ def blog_post_update(post_id):
         return render_template("admin/blog/detail.html", v={
             "title": title,
             "f": f,
-            "action": ""
+            "action": "",
+            "saved": 1 if "saved" in request.args else 0
         })
 
 @login_required

@@ -155,6 +155,8 @@ class BlogPost(object):
 
         db.session.add(header)
         db.session.commit()
+        return header.id
+        # return header.id
 
     def update(self):
         header = BlogPostHeader.query.get(self.id)

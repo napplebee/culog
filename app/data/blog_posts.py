@@ -7,7 +7,7 @@ import datetime
 class BlogPostHeader(db.Model):
     __tablename__ = 'blog_posts'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, )
     name = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     published_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
