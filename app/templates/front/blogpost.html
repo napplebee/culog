@@ -63,7 +63,7 @@
             <ul class="stats">
                 <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes|default("∞", true) }}</a></li>
                 <li class="yum"><a href="//yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a></li>
-                <li><script type="text/javascript">document.write(VK.Share.button('{{ v.post.get_url() }}',{type: "round", text: "Share"}));</script><li>
+                <li class="yum"><script type="text/javascript">document.write(VK.Share.button('{{ v.post.get_url() }}',{type: "round", text: "Share"}));</script><li>
             </ul>
         </div>
         {{ v.post.get_text()|safe }}
