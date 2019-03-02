@@ -1,0 +1,40 @@
+{% set active_menu="cookie-policy" %}
+{% extends "front/basic.html" %}
+{% block main_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.contacts.css') }}" />
+{% endblock %}
+{% block title %}
+Cookie Policy | Cook with love
+{% endblock %}
+{% block styles_to_override %}
+<style>
+#content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+@media screen and (min-width: 1201px) {
+    #content {
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+}
+</style>
+{% endblock %}
+{% block content %}
+<!-- Post -->
+<article class="box post post-excerpt">
+<div style="margin-left:15px;float:left;">
+    <h2 style="color:#444;">Cookie Policy</h2>
+    <br/>
+    <p>
+         A number of our pages use cookies to remember your display preferences, such as selected language.
+         <br>
+         Enabling these cookies is strictly necessary for the website to work as it will provide you with a better browsing experience.
+         <br>
+         You can delete or block these cookies, but if you do that some features of this site may not work as intended.
+         <br>
+         The cookie-related information is not used to identify you personally and the pattern data is fully under our control. These cookies are not used for any purpose other than those described here.
+</p>
+</div>
+</article>
+{% endblock %}
