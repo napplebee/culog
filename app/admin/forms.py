@@ -14,6 +14,7 @@ class BlogPostForm(Form):
     published_at = DateField("Published:")
 
     visible = BooleanField("Visible?")
+    is_article = BooleanField("Is article?")
     og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])
     og_image = StringField("FB og_image:")
     # todo: fb_likes -- show as info with disabled field ??
