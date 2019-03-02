@@ -13,6 +13,7 @@ class BlogPostHeader(db.Model):
     published_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
     visible = db.Column(db.Boolean)
+    is_article = db.Column(db.Boolean)
 
     url = db.Column(db.String, unique=True)
 

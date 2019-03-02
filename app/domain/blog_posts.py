@@ -17,6 +17,7 @@ class BlogPost(object):
     published_at = None
     updated_at = None
     visible = None
+    is_article = None
     fb_likes = None
 
     title = None
@@ -49,6 +50,7 @@ class BlogPost(object):
         post.published_at = blog_header.published_at
         post.updated_at = blog_header.updated_at
         post.visible = blog_header.visible
+        post.is_article = blog_header.is_article
         post.fb_likes = blog_header.fb_likes
 
         post.og_type = blog_header.og_type
@@ -75,6 +77,7 @@ class BlogPost(object):
         post.published_at = form.published_at.data
         post.url = form.url.data
         post.visible = form.visible.data
+        post.is_article = form.is_article.data
         post.og_type = form.og_type.data
         post.og_image = form.og_image.data
 
@@ -139,6 +142,7 @@ class BlogPost(object):
         header.created_at = dt.datetime.utcnow()
         header.published_at = self.published_at
         header.visible = self.visible
+        header.is_article = self.is_article
         header.fb_likes = self.fb_likes
 
         header.og_type = self.og_type
@@ -164,6 +168,7 @@ class BlogPost(object):
         header.name = self.name
         header.url = self.url
         header.visible = self.visible
+        header.is_article = self.is_article
         # header.fb_likes = self.fb_likes
 
         header.og_type = self.og_type
