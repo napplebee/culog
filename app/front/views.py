@@ -80,7 +80,7 @@ def contact():
     })
 
 @front_bp.route("/cookie-policy/")
-def contact():
+def detail("/cookie-policy/"):
     current_lang, lang_fallback = langService.get_user_settings(request)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
