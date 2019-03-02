@@ -1,0 +1,40 @@
+{% set active_menu="cookie-policy" %}
+{% extends "front/basic.html" %}
+{% block main_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.contacts.css') }}" />
+{% endblock %}
+{% block title %}
+Cookie Policy | Cook with love
+{% endblock %}
+{% block styles_to_override %}
+<style>
+#content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+@media screen and (min-width: 1201px) {
+    #content {
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+}
+</style>
+{% endblock %}
+{% block content %}
+<!-- Post -->
+<article class="box post post-excerpt">
+<div style="margin-left:15px;float:left;">
+    <h2 style="color:#444;">Cookie Policy</h2>
+    <br/>
+    <p>
+         Некоторые страницы этого сайта используют куки-файлы для сохраненных настроек, например, выбранного языка.
+         <br>
+         Включение и использование куки-файлов необходимо для корректной работы сайта.
+         <br>
+         Вы можете заблокировать или удалить куки-файлы, это приведет к тому, что часть функционала сайта может перестать работать.
+         <br>
+         Все информация, хранящаяся в куки-файлах, не используется для определения вашей личности.
+</p>
+</div>
+</article>
+{% endblock %}
