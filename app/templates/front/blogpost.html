@@ -9,6 +9,28 @@
         }, function(response){});
     }
 </script>
+
+<!-- Google search https://developers.google.com/search/docs/data-types/recipe -->
+{% if v.post.og_image %}
+    <script type="application/ld+json">
+       {
+          "@context": "https://schema.org/",
+          "@type": "Recipe",
+          "name": "{{ v.post.get_og_title() }}",
+          "image": [
+            "{{ v.post.og_image }}"
+            ],
+          "author": {
+            "@type": "Person",
+            "name": "Kate Pogorelskaya"
+          },
+          "description": "{{ v.post.get_description() }}",
+          "keywords": "{{ v.post.get_keywords() }}"
+       }
+    </script>
+{% endif %}
+<!-- End Google search -->
+
 <script src="https://www.yummly.com/js/widget.js?general"></script>
 {% endblock %}
 {% block styles_to_override %}
