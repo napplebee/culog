@@ -79,6 +79,22 @@ def contact():
         "recent_posts": posts
     })
 
+@front_bp.route("/cookie-policy/")
+def contact():
+    current_lang, lang_fallback = langService.get_user_settings(request)
+    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    if current_lang == "ru":
+        tpl = "front/cookie-policy.ru.html"
+    else:
+        tpl = "front/cookie-policy.en.html"
+    return render_template(tpl, v={
+        "current_lang": current_lang,
+        "meta_language": Language.meta_lang[current_lang],
+        "recent_posts": posts
+    })
+
 
 @front_bp.route("/sitemap.xml")
 def sitemap():
