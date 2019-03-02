@@ -27,9 +27,7 @@
           "description": "{{ v.post.get_description() }}",
           "keywords": "{{ v.post.get_keywords() }}"
        }
-    </script>
-    <script>
-       console.log({{v.post.published_at}})
+       console.log("{{ v.post.published_at.strftime('%Y-%m-%d') }}")
     </script>
 {% endif %}
 <!-- End Google search -->
