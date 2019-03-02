@@ -100,6 +100,10 @@ def cookiepolicy():
 def sitemap():
     return send_from_directory(os.path.join(cfg.APP_BASE_DIR, "static", "front"), "sitemap.xml")
 
+@front_bp.route("/robots.txt")
+def sitemap():
+    return send_from_directory(os.path.join(cfg.APP_BASE_DIR, "static", "front"), "robots.txt")
+
 
 @login_required
 @roles_required("root")
