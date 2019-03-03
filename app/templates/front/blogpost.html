@@ -11,7 +11,7 @@
 </script>
 
 <!-- Google search https://developers.google.com/search/docs/data-types/recipe -->
-{% if v.post.og_image %}
+{% if !v.post.is_article %}
     <script type="application/ld+json">
        {
           "@context": "https://schema.org/",
@@ -25,9 +25,9 @@
             "name": "Kate CookWithLove"
           },
           "description": "{{ v.post.get_description() }}",
-          "keywords": "{{ v.post.get_keywords() }}"
+          "keywords": "{{ v.post.get_keywords() }}",
+          "datePublished:" "v.post.published_at.strftime('%Y-%m-%d')"
        }
-       console.log("{{ v.post.published_at.strftime('%Y-%m-%d') }}")
     </script>
 {% endif %}
 <!-- End Google search -->
