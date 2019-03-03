@@ -11,25 +11,43 @@
 </script>
 
 <!-- Google search https://developers.google.com/search/docs/data-types/recipe -->
-{% if !v.post.is_article %}
-    <script type="application/ld+json">
-       {
-          "@context": "https://schema.org/",
-          "@type": "Recipe",
-          "name": "{{ v.post.get_og_title() }}",
-          "image": [
-            "{{ v.post.og_image }}"
-            ],
-          "author": {
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        
+        {% if v.post.is_article %}
+            "@type": "NewsArticle",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ v.post.get_url() }}"
+            },
+            "headline": "{{ v.post.get_og_title() }}",
+            "publisher": {
+                "@type": "Organization",
+                "name": "CookWithLove",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "http://cookwith.love/static/front/logo.jpg"
+                }
+            }
+        {% else %}
+            "@type": "Recipe",
+            "name": "{{ v.post.get_og_title() }}",
+            "keywords": "{{ v.post.get_keywords() }}",
+        {% endif %}
+        
+        "dateModified": "{{ v.post.updated_at.isoformat() }}",
+        "datePublished": "{{ v.post.published_at.isoformat() }}",
+        "author": {
             "@type": "Person",
             "name": "Kate CookWithLove"
-          },
-          "description": "{{ v.post.get_description() }}",
-          "keywords": "{{ v.post.get_keywords() }}",
-          "datePublished:" "{{ v.post.published_at.strftime('%Y-%m-%d') }}"
-       }
-    </script>
-{% endif %}
+        }, 
+        "description": "{{ v.post.get_description() }}",
+        "image": [
+            "{{ v.post.og_image }}"
+        ],
+    }
+</script>
 <!-- End Google search -->
 
 <script src="https://www.yummly.com/js/widget.js?general"></script>
