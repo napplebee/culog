@@ -43,14 +43,10 @@
             "@type": "Person",
             "name": "Kate CookWithLove"
         }, 
-        "description": "{{ v.post.get_description() }}"
-        
-        {% if v.post.og_image %}
-            ,
-            "image": [
-                "{{ v.post.og_image }}"
-            ]
-        {% endif %}
+        "description": "{{ v.post.get_description() }}",
+        "image": [
+            "{{ v.post.og_image }}"
+        ]
     }
 </script>
 <!-- End Google search -->
