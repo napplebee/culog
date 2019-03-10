@@ -21,6 +21,9 @@ class BlogPostHeader(db.Model):
     og_type = db.Column(db.String)
     og_image = db.Column(db.String)
 
+    cook_time = db.Column(db.String)
+    prep_time = db.Column(db.String)
+
     #todo: tweak lazy value depends on use cases
     translations = db.relationship("Translation", backref="post", lazy="select")
 

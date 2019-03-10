@@ -4,6 +4,7 @@ import datetime as dt
 from app.data.blog_posts import BlogPostHeader
 from app.data.translations import Translation
 from configs import Config as cfg
+import duration as dr
 
 from app.core import db
 
@@ -19,6 +20,9 @@ class BlogPost(object):
     visible = None
     is_article = None
     fb_likes = None
+
+    cook_time = None
+    prep_time = None
 
     title = None
     sub_title = None
@@ -53,6 +57,9 @@ class BlogPost(object):
         post.is_article = blog_header.is_article
         post.fb_likes = blog_header.fb_likes
 
+        post.cook_time = blog_header.cook_time
+        post.prep_time = blog_header.prep_time
+
         post.og_type = blog_header.og_type
         post.og_image = blog_header.og_image
 
@@ -80,6 +87,9 @@ class BlogPost(object):
         post.is_article = form.is_article.data
         post.og_type = form.og_type.data
         post.og_image = form.og_image.data
+
+        post.cook_time = form.cook_time.data
+        post.prep_time = form.prep_time.data
 
         for field in BlogPost.MULTI_LANG_FIELDS:
             value = {}
@@ -126,6 +136,23 @@ class BlogPost(object):
     def get_url(self):
         return "{0}/{1}".format(self.base_url, self.url)
 
+    def get_cook_time_iso(self):
+        if self.cook_time is None:
+            return ""
+        return dr.to_iso8601(str(self.cook_time))
+
+    def get_prep_time_iso(self):
+        if self.prep_time is None:
+            return ""
+        return dr.to_iso8601(str(self.prep_time))
+
+    def get_total_time_iso(self):
+        if self.cook_time is None and self.prep_time is None:
+            return ""
+        cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"))
+        prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"))
+        return dr.to_iso8601(cook_delta + prep_delta)
+
     def __get_mlang_attr(self, attr):
         for lang in self.fallback_chain:
             if lang in attr and attr[lang]:
@@ -148,6 +175,9 @@ class BlogPost(object):
         header.og_type = self.og_type
         header.og_image = self.og_image
 
+        header.cook_time = self.cook_time
+        header.prep_time = self.prep_time
+
         for field in BlogPost.MULTI_LANG_FIELDS:
             for lang in cfg.SUPPORTED_LANGS:
                 t = Translation()
@@ -160,7 +190,6 @@ class BlogPost(object):
         db.session.add(header)
         db.session.commit()
         return header.id
-        # return header.id
 
     def update(self):
         header = BlogPostHeader.query.get(self.id)
@@ -170,6 +199,9 @@ class BlogPost(object):
         header.visible = self.visible
         header.is_article = self.is_article
         # header.fb_likes = self.fb_likes
+
+        header.cook_time = self.cook_time
+        header.prep_time = self.prep_time
 
         header.og_type = self.og_type
         header.og_image = self.og_image

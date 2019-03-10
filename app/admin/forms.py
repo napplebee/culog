@@ -19,6 +19,9 @@ class BlogPostForm(Form):
     og_image = StringField("FB og_image:")
     # todo: fb_likes -- show as info with disabled field ??
 
+    cook_time = StringField("Cooking time:")
+    prep_time = StringField("Preparation time:")
+
     # english specific fields
     en_title = StringField("Title:")
     en_sub_title = StringField("Subtitle:")
