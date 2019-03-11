@@ -37,7 +37,7 @@
                 "cookTime": "{{ v.post.get_cook_time_iso() }}",
                 "prepTime": "{{ v.post.get_prep_time_iso() }}",
                 "totalTime": "{{ v.post.get_total_time_iso() }}",
-            {% else %}
+            {% endif %}
             "@type": "Recipe",
             "name": "{{ v.post.get_og_title() }}",
             "keywords": "{{ v.post.get_keywords() }}",
