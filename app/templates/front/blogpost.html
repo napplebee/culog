@@ -33,7 +33,7 @@
                 }
             },
         {% else %}
-            {% if v.post.get_cook_time_iso() != "" %}
+            {% if v.post.get_cook_time_iso()|length %}
                 "cookTime": "{{ v.post.get_cook_time_iso() }}",
                 "prepTime": "{{ v.post.get_prep_time_iso() }}",
                 "totalTime": "{{ v.post.get_total_time_iso() }}",
