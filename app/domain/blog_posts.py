@@ -248,6 +248,15 @@ class BlogPost(object):
                     possible_translations.remove(tr.name)
 
         # now it's time to handle "new" translatable fields
+        for tr_name in possible_translations:
+            multilang_value = getattr(self, tr_name)
+            for lang in cfg.SUPPORTED_LANGS:
+                t = Translation()
+                t.name = tr_name
+                t.lang = lang
+                t.value = multilang_value[lang]
+                t.created_at = dt.datetime.utcnow()
+                header.translations.append(t)
         db.session.commit()
 
     def __getattr__(self, item):
