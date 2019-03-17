@@ -10,7 +10,10 @@ from app.core import db
 
 
 class BlogPost(object):
-    MULTI_LANG_FIELDS = ["title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"]
+    MULTI_LANG_FIELDS = [
+        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
+        "recipe_yield", "recipe_category", "recipe_cuisine"
+    ]
     id = None
     name = None
     url = None
@@ -40,6 +43,10 @@ class BlogPost(object):
     fallback_chain = None
     base_url = None
 
+    recipe_yield = None
+    recipe_category = None
+    recipe_cuisine = None
+
     def __init__(self, fallback_chain, base_url):
         self.fallback_chain = fallback_chain
         self.base_url = base_url
@@ -63,6 +70,7 @@ class BlogPost(object):
         post.og_type = blog_header.og_type
         post.og_image = blog_header.og_image
 
+        #add here a few lines for a new field
         post.title = {item.lang: item.value for item in blog_header.translations if item.name == "title"}
         post.sub_title = {item.lang: item.value for item in blog_header.translations if item.name == "sub_title"}
         post.keywords = {item.lang: item.value for item in blog_header.translations if item.name == "keywords"}
@@ -73,6 +81,10 @@ class BlogPost(object):
 
         post.blog_cut = {item.lang: item.value for item in blog_header.translations if item.name == "blog_cut"}
         post.blog_text = {item.lang: item.value for item in blog_header.translations if item.name == "blog_text"}
+
+        post.recipe_yield = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_yield"}
+        post.recipe_category = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_category"}
+        post.recipe_cuisine = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_cuisine"}
 
         return post
 
@@ -132,6 +144,15 @@ class BlogPost(object):
 
     def get_text(self):
         return self.__get_mlang_attr(self.blog_text)
+
+    def get_recipe_yield(self):
+        return self.__get_mlang_attr(self.recipe_yield)
+
+    def get_recipe_category(self):
+        return self.__get_mlang_attr(self.recipe_category)
+
+    def get_recipe_cuisine(self):
+        return self.__get_mlang_attr(self.recipe_cuisine)
 
     def get_url(self):
         return "{0}/{1}".format(self.base_url, self.url)
@@ -208,10 +229,25 @@ class BlogPost(object):
         header.published_at = self.published_at
         header.updated_at = dt.datetime.utcnow()
 
-        for tr in header.translations:
-            tr.value = getattr(self, tr.name)[tr.lang]
-            tr.updated_at = dt.datetime.utcnow()
+        # todo: add new translations
 
+        possible_translations = list(BlogPost.MULTI_LANG_FIELDS)
+
+        # at this point there are might be new translations we need to add
+        # For instance if we created a new post with 2 translatable fields (f1, f2) and set of translations A (t1, t2),
+        # then we added new translatable field (f3) but all existing posts are not aware
+        # about newly created f3. Then when we update any existing
+        # post we need to update t1, t2 and create t3
+        for tr in header.translations:
+            multilang_value = getattr(self, tr.name)
+            if multilang_value is not None:
+                tr.value = multilang_value[tr.lang]
+                tr.updated_at = dt.datetime.utcnow()
+                # there are two translations with the same name for RU & EN
+                if tr.name in possible_translations:
+                    possible_translations.remove(tr.name)
+
+        # now it's time to handle "new" translatable fields
         db.session.commit()
 
     def __getattr__(self, item):

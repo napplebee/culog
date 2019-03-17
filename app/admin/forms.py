@@ -32,6 +32,10 @@ class BlogPostForm(Form):
     en_blog_cut = TextAreaField("Cut:")
     en_blog_text = TextAreaField("Text:")
 
+    en_recipe_yield = StringField("Number of servings")
+    en_recipe_category = StringField("Recipe category")
+    en_recipe_cuisine = StringField("Recipe cuisine")
+
     # russian specific fields
     ru_title = StringField(u"Title:")
     ru_sub_title = StringField(u"Subtitle:")
@@ -42,15 +46,19 @@ class BlogPostForm(Form):
     ru_blog_cut = TextAreaField(u"Cut:")
     ru_blog_text = TextAreaField(u"Text:")
 
+    ru_recipe_yield = StringField(u"Number of servings")
+    ru_recipe_category = StringField(u"Recipe category")
+    ru_recipe_cuisine = StringField(u"Recipe cuisine")
+
     # swedish specific fields
-    sv_title = StringField(u"Title:")
-    sv_sub_title = StringField(u"Subtitle:")
-    sv_keywords = StringField(u"Keywords (meta):")
-    sv_description = TextAreaField(u"Description (meta):")
-    sv_og_title = StringField(u"FB og_title:")
-    sv_og_description = TextAreaField(u"FB og_description:")
-    sv_blog_cut = TextAreaField(u"Cut:")
-    sv_blog_text = TextAreaField(u"Text:")
+    # sv_title = StringField(u"Title:")
+    # sv_sub_title = StringField(u"Subtitle:")
+    # sv_keywords = StringField(u"Keywords (meta):")
+    # sv_description = TextAreaField(u"Description (meta):")
+    # sv_og_title = StringField(u"FB og_title:")
+    # sv_og_description = TextAreaField(u"FB og_description:")
+    # sv_blog_cut = TextAreaField(u"Cut:")
+    # sv_blog_text = TextAreaField(u"Text:")
 
     # util fields
     submit = SubmitField()
