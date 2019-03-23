@@ -38,6 +38,15 @@
                 "prepTime": "{{ v.post.get_prep_time_iso() }}",
                 "totalTime": "{{ v.post.get_total_time_iso() }}",
             {% endif %}
+            {% if v.post.get_recipe_yield()|length %}
+                "recipeYield": "{{ v.post.get_recipe_yield() }}",
+            {% endif %}
+            {% if v.post.get_recipe_category()|length %}
+                "recipeCategory": "{{ v.post.get_recipe_category() }}",
+            {% endif %}
+            {% if v.post.get_recipe_cuisine()|length %}
+                "recipeCuisine": "{{ v.post.get_recipe_cuisine() }}",
+            {% endif %}
             "@type": "Recipe",
             "name": "{{ v.post.get_og_title() }}",
             "keywords": "{{ v.post.get_keywords() }}",
