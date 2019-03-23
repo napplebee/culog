@@ -121,19 +121,25 @@
                 <li class="yum"><script type="text/javascript">document.write(VK.Share.button('{{ v.post.get_url() }}',{type: "round", text: "Share"}));</script><li>
             </ul>
         </div>
-        <div>
-            <ul style="columns: 3; -webkit-columns: 3; -moz-columns: 3;">
-                {% if v.post.get_prep_time_iso()|length %}
-                    <li style="border-right: 1px solid #ccc;"><div>Preparation time: <div style="font-weight: 600;">{{v.post.get_prep_time_ui(v.current_lang)}}</div></div></li>
-                {% endif %}
-                {% if v.post.get_cook_time_iso()|length %}
-                    <li style="border-right: 1px solid #ccc;"><div>Cooking time: <div style="font-weight: 600;">{{v.post.get_cook_time_ui(v.current_lang)}}</div></div></li>
-                {% endif %}
-                {% if v.post.get_recipe_yield()|length %}
-                    <li><div>Servings: <div style="font-weight: 600;">{{v.post.get_recipe_yield()}}</div></div></li>
-                {% endif %}
-            </ul>
+    {% if v.post.get_prep_time_iso()|length or v.post.get_cook_time_iso()|length or if v.post.get_recipe_yield()|length %}
+        <div style="display: table-cell; display: flex; width: 100%; margin: 10px 0 10px 0;">
+            {% if v.post.get_prep_time_iso()|length %}
+                <div style="display: table-cell; flex: 1; border-right: 1px solid #ccc; margin-right: 15px">
+                    Preparation time: <div style="font-weight: 600;">{{v.post.get_prep_time_ui(v.current_lang)}}</div>
+                </div>
+            {% endif %}
+            {% if v.post.get_cook_time_iso()|length %}
+                <div style="display: table-cell; flex: 1; border-right: 1px solid #ccc; margin-right: 15px">
+                    Cooking time: <div style="font-weight: 600;">{{v.post.get_cook_time_ui(v.current_lang)}}</div>
+                </div>
+            {% endif %}
+            {% if v.post.get_recipe_yield()|length %}
+                <div style="display: table-cell; flex: 1; margin-right: 15px">
+                    Servings: <div style="font-weight: 600;">{{v.post.get_recipe_yield()}}</div>
+                </div>
+            {% endif %}
         </div>
+    {% endif %}
         {{ v.post.get_text()|safe }}
     </article>
 {% endblock %}
