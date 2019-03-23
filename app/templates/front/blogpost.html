@@ -124,10 +124,10 @@
         <div>
             <ul style="columns: 3; -webkit-columns: 3; -moz-columns: 3;">
                 {% if v.post.get_prep_time_iso()|length %}
-                    <li style="border-right: 1px solid #ccc;"><div>Preparation time: <div style="font-weight: 600;">{{v.post.get_prep_time_iso()}}</div></div></li>
+                    <li style="border-right: 1px solid #ccc;"><div>Preparation time: <div style="font-weight: 600;">{{v.post.get_prep_time_ui(v.current_lang)}}</div></div></li>
                 {% endif %}
                 {% if v.post.get_cook_time_iso()|length %}
-                    <li style="border-right: 1px solid #ccc;"><div>Cooking time: <div style="font-weight: 600;">{{v.post.get_cook_time_iso()}}</div></div></li>
+                    <li style="border-right: 1px solid #ccc;"><div>Cooking time: <div style="font-weight: 600;">{{v.post.get_cook_time_ui(v.current_lang)}}</div></div></li>
                 {% endif %}
                 {% if v.post.get_recipe_yield()|length %}
                     <li><div>Servings: <div style="font-weight: 600;">{{v.post.get_recipe_yield()}}</div></div></li>

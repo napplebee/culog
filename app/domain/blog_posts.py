@@ -162,10 +162,20 @@ class BlogPost(object):
             return ""
         return dr.to_iso8601(str(self.cook_time))
 
+    def get_cook_time_ui(self, lang):
+        if self.cook_time is None:
+            return ""
+        return self._get_lang_aware_time(dr.to_tuple(str(self.cook_time)), lang)
+
     def get_prep_time_iso(self):
         if self.prep_time is None:
             return ""
         return dr.to_iso8601(str(self.prep_time))
+
+    def get_prep_time_ui(self, lang):
+        if self.prep_time is None:
+            return ""
+        return self._get_lang_aware_time(dr.to_tuple(str(self.prep_time)), lang)
 
     def get_total_time_iso(self):
         if self.cook_time is None and self.prep_time is None:
@@ -173,6 +183,25 @@ class BlogPost(object):
         cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"))
         prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"))
         return dr.to_iso8601(cook_delta + prep_delta)
+
+    def _get_lang_aware_time(self, time_tuple, lang):
+        if len(time_tuple) != 3: return "--"
+        hh, mm, ss = time_tuple
+        result = u""
+        delim = u""
+        if lang == u"ru":
+            if hh != 0:
+                result = u"{0} ч.".format(hh)
+                delim = u" "
+            if mm != 0:
+                result = u"{0}{1}{2} мин.".format(result, delim, mm)
+        elif lang == u"en":
+            if hh != 0:
+                result = u"{0} h.".format(hh)
+                delim = u" "
+            if mm != 0:
+                result = u"{0}{1}{2} min.".format(result, delim, mm)
+        return result
 
     def __get_mlang_attr(self, attr):
         for lang in self.fallback_chain:
