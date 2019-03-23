@@ -11,8 +11,8 @@ from app.core import db
 
 class BlogPost(object):
     MULTI_LANG_FIELDS = [
-        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
-        "recipe_yield", "recipe_category", "recipe_cuisine"
+        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"
+        # "recipe_yield", "recipe_category", "recipe_cuisine"
     ]
     id = None
     name = None
@@ -160,29 +160,29 @@ class BlogPost(object):
     def get_cook_time_iso(self):
         if self.cook_time is None:
             return ""
-        return dr.to_iso8601(str(self.cook_time))
+        return dr.to_iso8601(str(self.cook_time), strict=False)
 
     def get_cook_time_ui(self, lang):
         if self.cook_time is None:
             return ""
-        return self._get_lang_aware_time(dr.to_tuple(str(self.cook_time)), lang)
+        return self._get_lang_aware_time(dr.to_tuple(str(self.cook_time), strict=False), lang)
 
     def get_prep_time_iso(self):
         if self.prep_time is None:
             return ""
-        return dr.to_iso8601(str(self.prep_time))
+        return dr.to_iso8601(str(self.prep_time), strict=False)
 
     def get_prep_time_ui(self, lang):
         if self.prep_time is None:
             return ""
-        return self._get_lang_aware_time(dr.to_tuple(str(self.prep_time)), lang)
+        return self._get_lang_aware_time(dr.to_tuple(str(self.prep_time), strict=False), lang)
 
     def get_total_time_iso(self):
         if self.cook_time is None and self.prep_time is None:
             return ""
-        cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"))
-        prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"))
-        return dr.to_iso8601(cook_delta + prep_delta)
+        cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"), strict=False)
+        prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"), strict=False)
+        return dr.to_iso8601(cook_delta + prep_delta, strict=False)
 
     def _get_lang_aware_time(self, time_tuple, lang):
         if len(time_tuple) != 3: return "--"
