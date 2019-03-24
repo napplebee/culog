@@ -12,6 +12,10 @@ from app.core import db
 class BlogPost(object):
     MULTI_LANG_FIELDS = [
         "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"
+        "recipe_yield", "recipe_category", "recipe_cuisine"
+    ]
+    REQUIRED_TO_BE_TRANSLATED = [
+        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"
         # "recipe_yield", "recipe_category", "recipe_cuisine"
     ]
     id = None
@@ -114,7 +118,7 @@ class BlogPost(object):
         return post
 
     def is_translated_for(self, lang):
-        for field in BlogPost.MULTI_LANG_FIELDS:
+        for field in BlogPost.REQUIRED_TO_BE_TRANSLATED:
             # print getattr(self, field)
             values = getattr(self, field)
             if lang not in values or values[lang] == "":
