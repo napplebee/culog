@@ -11,11 +11,11 @@ from app.core import db
 
 class BlogPost(object):
     MULTI_LANG_FIELDS = [
-        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"
+        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
         "recipe_yield", "recipe_category", "recipe_cuisine"
     ]
     REQUIRED_TO_BE_TRANSLATED = [
-        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text"
+        "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
         # "recipe_yield", "recipe_category", "recipe_cuisine"
     ]
     id = None
