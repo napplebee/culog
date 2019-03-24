@@ -110,7 +110,7 @@
 <!-- Post -->
 <article class="box post post-excerpt">
         <header>
-            <h2><a href="{{ v.post.get_url() }}">{{ v.post.get_title() }}</a></h2>
+            <h2 itemprop="name">{{ v.post.get_title() }}</h2>
             <p>{{ v.post.get_sub_title() }}</p>
         </header>
         <div class="info">
@@ -135,7 +135,7 @@
             {% endif %}
             {% if v.post.get_recipe_yield()|length %}
                 <div style="display: table-cell; flex: 1; margin-right: 15px">
-                    Servings: <div style="font-weight: 600;">{{v.post.get_recipe_yield()}}</div>
+                    Servings: <div style="font-weight: 600;" itemprop="recipeYield">{{v.post.get_recipe_yield()}}</div>
                 </div>
             {% endif %}
         </div>
