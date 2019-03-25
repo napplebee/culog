@@ -162,27 +162,28 @@ class BlogPost(object):
         return "{0}/{1}".format(self.base_url, self.url)
 
     def get_cook_time_iso(self):
-        if self.cook_time is None:
+        if self.cook_time is None or self.cook_time == "":
             return ""
         return dr.to_iso8601(str(self.cook_time), strict=False)
 
     def get_cook_time_ui(self, lang):
-        if self.cook_time is None:
+        if self.cook_time is None or self.cook_time == "":
             return ""
         return self._get_lang_aware_time(dr.to_tuple(str(self.cook_time), strict=False), lang)
 
     def get_prep_time_iso(self):
-        if self.prep_time is None:
+        if self.prep_time is None or self.prep_time == "":
             return ""
         return dr.to_iso8601(str(self.prep_time), strict=False)
 
     def get_prep_time_ui(self, lang):
-        if self.prep_time is None:
+        if self.prep_time is None or self.prep_time == "":
             return ""
         return self._get_lang_aware_time(dr.to_tuple(str(self.prep_time), strict=False), lang)
 
     def get_total_time_iso(self):
-        if self.cook_time is None and self.prep_time is None:
+        if (self.cook_time is None and self.prep_time is None) or \
+                (self.cook_time == "" and self.prep_time == ""):
             return ""
         cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"), strict=False)
         prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"), strict=False)
