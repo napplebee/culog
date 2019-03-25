@@ -125,12 +125,12 @@
     
     {% if v.post.get_prep_time_iso()|length or v.post.get_cook_time_iso()|length or v.post.get_recipe_yield()|length %}
     <div style="display: table-cell; display: flex; width: 100%; margin: 10px 0 10px 0;">
-        {% if v.post.get_prep_time_iso()|length %}
+        {% if v.post.get_prep_time_iso() != "" %}
             <div style="display: table-cell; flex: 1; border-right: 1px solid #ccc; margin-right: 15px">
                 Preparation time: <div style="font-weight: 600;">{{v.post.get_prep_time_ui(v.current_lang)}}</div>
             </div>
         {% endif %}
-        {% if v.post.get_cook_time_iso()|length %}
+        {% if v.post.get_cook_time_iso() != "" %}
             <div style="display: table-cell; flex: 1; border-right: 1px solid #ccc; margin-right: 15px">
                 Cooking time: <div style="font-weight: 600;">{{v.post.get_cook_time_ui(v.current_lang)}}</div>
             </div>
