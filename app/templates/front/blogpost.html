@@ -108,9 +108,9 @@
 
 {% block content %}
 <!-- Post -->
-<article class="hrecipe box post post-excerpt" itemscope itemtype="http://schema.org/Recipe">
+<article class="box post post-excerpt">
     <header>
-        <h2 itemprop="name" class="fn">{{ v.post.get_title() }}</h2>
+        <h2 class="fn">{{ v.post.get_title() }}</h2>
         <p>{{ v.post.get_sub_title() }}</p>
     </header>
     
@@ -137,7 +137,7 @@
         {% endif %}
         {% if v.post.get_recipe_yield()|length %}
             <div style="display: table-cell; flex: 1; margin-right: 15px">
-                Servings: <div style="font-weight: 600;" itemprop="recipeYield">{{v.post.get_recipe_yield()}}</div>
+                Servings: <div style="font-weight: 600;">{{v.post.get_recipe_yield()}}</div>
             </div>
         {% endif %}
     </div>
