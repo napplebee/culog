@@ -27,3 +27,5 @@ class Post(db.Model):
 
     # todo: tweak lazy value depends on use cases
     # translations = db.relationship("Translation", backref="post", lazy="select")
+
+    post_header_ru = db.relationship("post_header_ru", backref="post", lazy="select")

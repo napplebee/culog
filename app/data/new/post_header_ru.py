@@ -36,3 +36,6 @@ class PostHeaderRu(db.Model):
 
     # todo: tweak lazy value depends on use cases
     # translations = db.relationship("Translation", backref="post", lazy="select")
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+
+    ingredient_types_ru = db.relationship("ingr_type_ru", backref="post_header_ru", lazy="select")

@@ -19,3 +19,6 @@ class IngredientRu(db.Model):
 
     # todo: tweak lazy value depends on use cases
     # translations = db.relationship("Translation", backref="post", lazy="select")
+
+    ingr_type_id = db.Column(db.Integer, db.ForeignKey('ingr_type_ru.id'), nullable=False)
+
