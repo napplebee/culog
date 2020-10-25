@@ -11,15 +11,15 @@ class Config:
     # SUPPORTED_LANGS = ("ru", "en", "sv",)
     APP_BASE_DIR = os.path.join(basedir, "app")
 
-    SECRET_KEY = "cazk$ze&e^935+0t@fi18l78m%t+y5#-%ch#z$^!np##(d^"
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     BOOTSTRAP_SERVE_LOCAL = True
     SECURITY_PASSWORD_HASH = "sha512_crypt"
     # SECURITY_PASSWORD_HASH = "bcrypt"
-    SECURITY_PASSWORD_SALT = "$djU-ed!0_fR+#@@<PS[^@$clwiI("
+    SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT')
     WTF_CSRF_ENABLED = False
 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = "postgres://eiwomhqmathrom:c148670903243c1488e443d3d0f8fefc31bb431bdb0da33a38af984d9825e77f@ec2-54-75-247-119.eu-west-1.compute.amazonaws.com:5432/dbq545pe24d2um"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') 
 
     # MAIL_SERVER = 'smtp.googlemail.com'
     # MAIL_PORT = 587
