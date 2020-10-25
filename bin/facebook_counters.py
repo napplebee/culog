@@ -6,10 +6,13 @@ from configs import Config as cfg
 import requests as r
 import traceback
 import json
+import os
 
 
 def get_token():
-    payload = {'grant_type': 'client_credentials', 'client_id': '184999375275763', 'client_secret': '8113dfe7206356ec4177d748450adb66'}
+    client_id = os.environ.get('FB_CLIENT_ID')
+    client_secret = os.environ.get('FB_CLIENT_SECRET')
+    payload = {'grant_type': 'client_credentials', 'client_id': client_id, 'client_secret': client_secret}
     file = r.post('https://graph.facebook.com/oauth/access_token?', params=payload)
     return file.json()['access_token']
     # return file.text.split("=")[1]
@@ -55,7 +58,9 @@ def run():
 def send_report(report):
     import sendgrid
 
-    sg = sendgrid.SendGridClient('culog_mailer', 'jx3ymlkbyysqgfhjkm')
+    sg_user = os.environ.get('SENDGRID_USER')
+    sg_pwd = os.environ.get('SENDGRID_PWD')
+    sg = sendgrid.SendGridClient(sg_user, sg_pwd)
 
     message = sendgrid.Mail()
     message.add_to('belikov.sergey@gmail.com')

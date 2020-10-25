@@ -14,12 +14,8 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 # db.drop_all()
 # db.create_all()
 role = user_datastore.create_role(name="root", description="Site administrator")
-user_datastore.create_user(email='root@site.com', password='pwd', roles=[role])
-user_datastore.create_user(email='user@site.com', password='pwd')
+user_datastore.create_user(email='root_email', password='admin_pwd', roles=[role])
+user_datastore.create_user(email='user_email', password='user_pwd')
 
 db.session.commit()
 
-class Test(object):
-    id = 1
-    en_title = "title"
-    ru_title = u"тайтл"
