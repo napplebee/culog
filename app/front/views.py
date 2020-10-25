@@ -32,10 +32,12 @@ def index():
     posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
 
     recent_posts = posts[:2]
+    env_dump = ";".join(["[%s:%s]" % (k,v) for k,v in env.items()])
 
     return render_template("front/index.html", v={
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
+        "env_dump": env_dump,
         "posts": posts,
         "recent_posts": recent_posts
     })
