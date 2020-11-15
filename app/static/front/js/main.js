@@ -41,7 +41,7 @@
 		// Off-Canvas Sidebar.
 
 			// Height hack.
-				var $sc = $('#content'), tid;
+				var $sc = $('#sidebar, #content'), tid;
 
 				$window
 					.on('resize', function() {
