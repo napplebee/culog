@@ -28,6 +28,13 @@
 		{% block styles_to_override %}{% endblock %}
 	</head>
 	<body>
+		<!-- Yandex.Metrika counter -->
+ 			<noscript>
+				 <div>
+					 <img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+				</div>
+			</noscript>
+        <!-- /Yandex.Metrika counter -->
 
 		<!-- Content -->
 			<div id="content">
@@ -236,6 +243,7 @@
 <!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/respond.min.js') }}"></script><![endif]-->
 <script src="{{ url_for('static', filename = 'front/js/main.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/ga.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/js/ya.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/gtag.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/fb.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/js/js.cookie.js') }}"></script>
