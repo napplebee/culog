@@ -14,7 +14,6 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     BOOTSTRAP_SERVE_LOCAL = True
     SECURITY_PASSWORD_HASH = "sha512_crypt"
-    # SECURITY_PASSWORD_HASH = "bcrypt"
     SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT')
     WTF_CSRF_ENABLED = False
 

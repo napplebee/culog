@@ -99,3 +99,9 @@ def blog_list_preview(lang_override):
     return render_template("admin/blog/list_preview.html", v={
         "posts": posts
     })
+
+@login_required
+@roles_required("root")
+@admin.route("/test/page")
+def blog_test_page():
+    return render_template("admin/blog/test.html")

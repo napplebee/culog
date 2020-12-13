@@ -25,7 +25,9 @@ class Post(db.Model):
     cook_time = db.Column(db.String)
     prep_time = db.Column(db.String)
 
-    # todo: tweak lazy value depends on use cases
-    # translations = db.relationship("Translation", backref="post", lazy="select")
+    total_fats = db.Column(db.Numeric)
+    total_carbs = db.Column(db.Numeric)
+    total_proteins = db.Column(db.Numeric)
 
     post_header_ru = db.relationship("post_header_ru", backref="post", lazy="select")
+    post_header_en = db.relationship("post_header_en", backref="post", lazy="select")

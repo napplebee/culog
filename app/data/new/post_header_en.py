@@ -4,8 +4,8 @@ from app.core import db
 import datetime
 
 
-class PostHeaderRu(db.Model):
-    __tablename__ = 'post_header_ru'
+class PostHeaderEn(db.Model):
+    __tablename__ = 'post_header_en'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -21,4 +21,4 @@ class PostHeaderRu(db.Model):
     image = db.Column(db.String)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
-    ingredient_types_ru = db.relationship("ingr_type_ru", backref="post_header_ru", lazy="select")
+    ingredient_types_en = db.relationship("ingr_type_en", backref="post_header_en", lazy="select")
