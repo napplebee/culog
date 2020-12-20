@@ -9,6 +9,7 @@ from flask.ext.security import roles_required
 from flask import render_template, request, url_for, redirect
 from app.services.language_service import langService
 from configs import Config as cfg
+from . import new_forms as nf
 
 
 @admin.route("/")
@@ -104,4 +105,18 @@ def blog_list_preview(lang_override):
 @roles_required("root")
 @admin.route("/test/page")
 def blog_test_page():
-    return render_template("admin/blog/test.html")
+    # post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
+    # title = u"Update {0}".format(post.name)
+    # f = BlogPostForm(obj=post)
+    #
+    # return render_template("admin/blog/detail.html", v={
+    #     "title": title,
+    #     "f": f,
+    #     "action": "",
+    #     "saved": 1 if "saved" in request.args else 0
+    # })
+
+    form = nf.BlogPostForm()
+    return render_template("admin/blog/test.html", v={
+        "f": form
+    })

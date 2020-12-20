@@ -3,5 +3,318 @@
 {% endblock %}
 
 {% block content %}
-<h2>Hi there!</h2>
+<form action="{{ v.action }}" class="form-horizontal" method="POST">
+    <div class="row">
+        <div class="col-sm col-md main">
+            <h1 class="page-header text-center">{{ v.title|default("Cook a new post 🍪", true) }}</h1>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.name.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.name(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.url.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.url(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.published_at.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.published_at(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>{{ v.f.visible() }}{{ v.f.visible.label.text }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.total_fats.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.total_fats(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.total_carbs.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.total_carbs(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.total_proteins.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.total_proteins(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.prep_time.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.prep_time(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.cook_time.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.cook_time(class="form-control") }}</div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="enTab" role="presentation"><a href="#" id="enTabLink">English</a></li>
+                        <li id="ruTab" role="presentation"><a href="#" id="ruTabLink">Russian</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row" id="en_group_fields">
+        <div class="col-sm col-md main">
+            {# === ENGLISH GROUP OF FIELDS === #}
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.title.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.title(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.sub_title.label(class="control-label") }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.sub_title(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.meta_description.label(class="control-label")
+                    }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.meta_description(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.meta_keywords.label(class="control-label")
+                    }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.meta_keywords(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.cut.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.cut(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.descrip.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.descrip(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_en.image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_en.image(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h3>Ingredient Types</h3>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10" id="engIngTypeContainer">
+                    {% for _ in v.f.blog_post_header_en.form.ingredients_type.entries %}
+                    {% set ingrTypeForm = _.form %}
+                    <div class="container-fluid border-top" id="enIngrType-{{ loop.index0 }}">
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group">
+                                    <button class="btn btn-success" id="enIngrTypeCp-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Copy</button>
+                                    <button class="btn btn-secondary" id="enIngrTypeRm-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.name.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.name(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.image.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.image(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.note.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.note(class="form-control") }}</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h5>Ingredients</h5>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10" id="engIngContainer-{{ loop.index0 }}">
+                                {% set outerIndex = loop.index0 %}
+                                {% for __ in ingrTypeForm.ingredients.entries %}
+                                {% set ingrForm = __.form %}
+                                <div class="container-fluid" id="enIng-{{ outerIndex }}-{{ loop.index0 }}">
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-sm btn-success" type="button" id="enIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
+                                            <button class="btn btn-sm btn-secondary" type="button" id="enIngrRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.name.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ ingrForm.name(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label") }}</div>
+                                        <div class="col-sm-4">{{ ingrForm.amount(class="form-control") }}</div>
+                                        <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2 control-label") }}</div>
+                                        <div class="col-sm-4">{{ ingrForm.amount_type(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.note.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ ingrForm.note(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>{{ ingrForm.is_optional() }}{{ ingrForm.is_optional.label.text }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {# === END of ENGLISH GROUP OF FIELDS === #}
+        </div>
+    </div>
+
+    <div class="row" style="display:none;" id="ru_group_fields">
+        <div class="col-sm col-md main">
+            {# === RUSSIAN GROUP OF FIELDS === #}
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.title.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.title(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.sub_title.label(class="control-label") }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.sub_title(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.meta_description.label(class="control-label")
+                    }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.meta_description(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.meta_keywords.label(class="control-label")
+                    }}
+                </div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.meta_keywords(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.cut.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.cut(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.descrip.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.descrip(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.blog_post_header_ru.image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.blog_post_header_ru.image(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h3>Ingredient Types</h3>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    {% for _ in v.f.blog_post_header_ru.form.ingredients_type.entries %}
+                    {% set ingrTypeForm = _.form %}
+                    <div class="container-fluid">
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group">
+                                    <button class="btn btn-success" type="button">Copy</button>
+                                    <button class="btn btn-secondary" type="button">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.name.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.name(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.image.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.image(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.note.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.note(class="form-control") }}</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h5>Ingredients</h5>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                {% for __ in ingrTypeForm.ingredients.entries %}
+                                {% set ingrForm = __.form %}
+                                <div class="container-fluid">
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-sm btn-success" type="button">Copy</button>
+                                            <button class="btn btn-sm btn-secondary" type="button">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.name.label(class="control-label")
+                                            }}
+                                        </div>
+                                        <div class="col-sm-10">{{ ingrForm.name(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label")
+                                            }}
+                                        </div>
+                                        <div class="col-sm-4">{{ ingrForm.amount(class="form-control") }}</div>
+
+                                        <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2
+                                            control-label") }}
+                                        </div>
+                                        <div class="col-sm-4">{{ ingrForm.amount_type(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.note.label(class="control-label")
+                                            }}
+                                        </div>
+                                        <div class="col-sm-10">{{ ingrForm.note(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>{{ ingrForm.is_optional() }}{{ ingrForm.is_optional.label.text }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {# === END of RUSSIAN GROUP OF FIELDS === #}
+        </div>
+    </div>
+
+    <div class="row form-group justify-content-start">
+        {# Hidden fields #} {{ v.f.id }}
+        <div class="col-sm-12">
+            {{ v.f.submit(class="btn btn-success btn-block btn-lg") }}
+        </div>
+    </div>
+</form>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename = 'admin/js/post.js') }}"></script>
 {% endblock %}

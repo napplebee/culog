@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
-import datetime
 
 
 class PostHeaderRu(db.Model):

@@ -12,7 +12,8 @@ class IngredientRu(db.Model):
 
     name = db.Column(db.String)
     amount_value = db.Column(db.Float)
-    amount_type = db.Column(db.Enum(*cfg.AMOUNT_TYPES, name="amount_type", native_enum=False)) # enum
+    # enum
+    amount_type = db.Column(db.Enum(*cfg.AMOUNT_TYPES, name="amount_type", native_enum=False))
 
     note = db.Column(db.String)
     optional = db.Column(db.Boolean) # boolean
