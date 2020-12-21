@@ -102,10 +102,11 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-offset-2 col-sm-10" id="engIngTypeContainer">
+                <div class="col-sm-offset-2 col-sm-10" id="enIngTypeContainer">
                     {% for _ in v.f.blog_post_header_en.form.ingredients_type.entries %}
                     {% set ingrTypeForm = _.form %}
                     <div class="container-fluid border-top" id="enIngrType-{{ loop.index0 }}">
+                        <hr/>
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="btn-group">
@@ -134,11 +135,12 @@
                         </div>
 
                         <div class="row form-group">
-                            <div class="col-sm-offset-2 col-sm-10" id="engIngContainer-{{ loop.index0 }}">
+                            <div class="col-sm-offset-2 col-sm-10" id="enIngContainer-{{ loop.index0 }}">
                                 {% set outerIndex = loop.index0 %}
                                 {% for __ in ingrTypeForm.ingredients.entries %}
                                 {% set ingrForm = __.form %}
                                 <div class="container-fluid" id="enIng-{{ outerIndex }}-{{ loop.index0 }}">
+                                    <hr/>
                                     <div class="row form-group">
                                         <div class="col-sm-12">
                                             <button class="btn btn-sm btn-success" type="button" id="enIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
@@ -221,15 +223,16 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-10" id="ruIngTypeContainer">
                     {% for _ in v.f.blog_post_header_ru.form.ingredients_type.entries %}
                     {% set ingrTypeForm = _.form %}
-                    <div class="container-fluid">
+                    <div class="container-fluid border-top" id="ruIngrType-{{ loop.index0 }}">
+                        <hr/>
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="btn-group">
-                                    <button class="btn btn-success" type="button">Copy</button>
-                                    <button class="btn btn-secondary" type="button">Remove</button>
+                                    <button class="btn btn-success" id="ruIngrTypeCp-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Copy</button>
+                                    <button class="btn btn-secondary" id="ruIngrTypeRm-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -253,37 +256,30 @@
                         </div>
 
                         <div class="row form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-2 col-sm-10" id="ruIngContainer-{{ loop.index0 }}">
+                                {% set outerIndex = loop.index0 %}
                                 {% for __ in ingrTypeForm.ingredients.entries %}
                                 {% set ingrForm = __.form %}
-                                <div class="container-fluid">
+                                <div class="container-fluid" id="ruIng-{{ outerIndex }}-{{ loop.index0 }}">
+                                    <hr/>
                                     <div class="row form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-sm btn-success" type="button">Copy</button>
-                                            <button class="btn btn-sm btn-secondary" type="button">Remove</button>
+                                            <button class="btn btn-sm btn-success" type="button" id="ruIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
+                                            <button class="btn btn-sm btn-secondary" type="button" id="ruIngrRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ ingrForm.name.label(class="control-label")
-                                            }}
-                                        </div>
+                                        <div class="col-sm-2">{{ ingrForm.name.label(class="control-label") }}</div>
                                         <div class="col-sm-10">{{ ingrForm.name(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label")
-                                            }}
-                                        </div>
+                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label") }}</div>
                                         <div class="col-sm-4">{{ ingrForm.amount(class="form-control") }}</div>
-
-                                        <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2
-                                            control-label") }}
-                                        </div>
+                                        <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2 control-label") }}</div>
                                         <div class="col-sm-4">{{ ingrForm.amount_type(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ ingrForm.note.label(class="control-label")
-                                            }}
-                                        </div>
+                                        <div class="col-sm-2">{{ ingrForm.note.label(class="control-label") }}</div>
                                         <div class="col-sm-10">{{ ingrForm.note(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">

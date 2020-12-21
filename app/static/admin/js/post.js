@@ -1,3 +1,140 @@
+
+var initIngrButtons = function(prefix) {
+    $("button[id^='"+prefix+"IngrTypeCp']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        var newIngrType = $("#"+prefix+"IngrType-" + idx).clone(true);
+
+        var nextIdx = -1;
+        $("div#"+prefix+"IngTypeContainer > div").each(function(){
+            var curIdx = parseInt($(this).attr("id").split("-")[1]);
+            nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
+        })
+        nextIdx = nextIdx + 1;
+
+        newIngrType.attr('id', prefix+"IngrType-" + nextIdx);
+
+        var _ = function(x){
+            x.each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+/g, "-"+nextIdx));
+                obj.attr('data-idx', nextIdx);
+            });
+        }
+        _(newIngrType.find("button[id^='"+prefix+"IngrTypeCp-']"));
+        _(newIngrType.find("button[id^='"+prefix+"IngrTypeRm-']"));
+
+        newIngrType.find("div[id^='"+prefix+"IngContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g,"-" + nextIdx));
+        });
+
+        newIngrType.find("button[id^='"+prefix+"IngrCp-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                obj.attr('data-outer', nextIdx);
+            });
+        newIngrType.find("button[id^='"+prefix+"IngrRm-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                $(this).attr('data-outer', nextIdx);
+            });
+        newIngrType.find("div[id^='"+prefix+"IngContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g, "-" + nextIdx));
+        });
+        newIngrType.find("div[id^='"+prefix+"Ing-" + idx + "-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            var r = new RegExp(prefix+"Ing-\\d+-", 'g')
+            obj.attr("id", id.replace(r, prefix+"Ing-" + nextIdx + "-"))
+        });
+
+
+        newIngrType.find("label")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('for');
+            if(!val) return;
+            obj.attr('for', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+        });
+
+        newIngrType.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+        });
+        $("#"+prefix+"IngTypeContainer").append(newIngrType);
+        return false;
+    });
+    $("button[id^='"+prefix+"IngrTypeRm']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        $("#"+prefix+"IngrType-" + idx).remove();
+        return false;
+    });
+
+    $("button[id^='"+prefix+"IngrCp']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        var outerIdx = $(this).attr("data-outer");
+        var newIngr = $("#"+prefix+"Ing-" + outerIdx + "-" + idx).clone(true);
+
+        var nextIdx = -1;
+
+        $("div#"+prefix+"IngContainer-" + outerIdx + "> div").each(function(){
+            var curIdx = parseInt($(this).attr("id").split("-")[2]);
+            nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
+        });
+
+        nextIdx = nextIdx + 1;
+
+        newIngr.attr("id", ""+prefix+"Ing-" + outerIdx + "-" + nextIdx);
+
+        var _ = function(x){
+            x.each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-\d+/g, "-" + outerIdx + "-" + nextIdx));
+                obj.attr('data-outer', outerIdx);
+                obj.attr('data-idx', nextIdx);
+            });
+        };
+
+        _(newIngr.find("button[id^='"+prefix+"IngrCp-']"));
+        _(newIngr.find("button[id^='"+prefix+"IngrRm-']"));
+
+        newIngr.find("label").each(function(){
+            var obj = $(this);
+            var val = obj.attr('for');
+            if (!val) return;
+            obj.attr('for', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+        });
+
+        newIngr.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+        });
+
+        $("#"+prefix+"IngContainer-" + outerIdx).append(newIngr);
+        return false;
+    });
+    $("button[id^='"+prefix+"IngrRm']").on('click', function(){
+        var idx = $(this).attr('data-idx');
+        var outerIdx = $(this).attr("data-outer");
+        $("#"+prefix+"Ing-" + outerIdx + "-" + idx).remove();
+    });
+};
+
 $(document).ready(function(){
     $("#ruTabLink").click(function(){
         $("div[id^='en_group_fields']").hide();
@@ -14,35 +151,20 @@ $(document).ready(function(){
         return false;
     });
 
+    initIngrButtons("en");
+    initIngrButtons("ru");
+    /*
     $("button[id^='enIngrTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var newIngrType = $("#enIngrType-" + idx).clone(true);
 
         var nextIdx = -1;
-        //iterate over list of
-        // div#enIngrType-(\d+)
-        $("div#engIngTypeContainer > div").each(function(){
+        $("div#enIngTypeContainer > div").each(function(){
             var curIdx = parseInt($(this).attr("id").split("-")[1]);
             nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
         })
         nextIdx = nextIdx + 1;
 
-        // now all the id & name attrs must be adjusted
-        // according with nextIdx
-        /*
-        button[id^='enIngrTypeCp-']
-        button[id^='enIngrTypeRm-']
-        label[
-            class="control-label",
-            for="blog_post_header_en-ingredients_type-0-name" ]
-        input[id^="blog_post_header_en-ingredients_type-0-name"
-              name="blog_post_header_en-ingredients_type-0-name"
-              type="text"]
-        but keep in mind nested elements, i.e. ingredients that
-        belong to an ingredient_type
-
-        #blog_post_header_en-ingredients_type-0-ingredients-0-name
-        */
         newIngrType.attr('id', "enIngrType-" + nextIdx);
 
         var _ = function(x){
@@ -56,7 +178,7 @@ $(document).ready(function(){
         _(newIngrType.find("button[id^='enIngrTypeCp-']"));
         _(newIngrType.find("button[id^='enIngrTypeRm-']"));
 
-        newIngrType.find("div[id^='engIngContainer-']").each(function(){
+        newIngrType.find("div[id^='enIngContainer-']").each(function(){
             var obj = $(this);
             var id = obj.attr('id');
             obj.attr('id', id.replace(/-\d+/g,"-" + nextIdx));
@@ -74,7 +196,7 @@ $(document).ready(function(){
                 obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
                 $(this).attr('data-outer', nextIdx);
             });
-        newIngrType.find("div[id^='engIngContainer-']").each(function(){
+        newIngrType.find("div[id^='enIngContainer-']").each(function(){
             var obj = $(this);
             var id = obj.attr('id');
             obj.attr('id', id.replace(/-\d+/g, "-" + nextIdx));
@@ -102,10 +224,9 @@ $(document).ready(function(){
             val = obj.attr('name');
             obj.attr('name', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
         });
-        $("#engIngTypeContainer").append(newIngrType);
+        $("#enIngTypeContainer").append(newIngrType);
         return false;
     });
-
     $("button[id^='enIngrTypeRm']").on('click', function(){
         var idx = $(this).attr("data-idx");
         $("#enIngrType-" + idx).remove();
@@ -119,7 +240,7 @@ $(document).ready(function(){
 
         var nextIdx = -1;
 
-        $("div#engIngContainer-" + outerIdx + "> div").each(function(){
+        $("div#enIngContainer-" + outerIdx + "> div").each(function(){
             var curIdx = parseInt($(this).attr("id").split("-")[2]);
             nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
         });
@@ -157,14 +278,13 @@ $(document).ready(function(){
             obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
         });
 
-        $("#engIngContainer-" + outerIdx).append(newIngr);
+        $("#enIngContainer-" + outerIdx).append(newIngr);
         return false;
     });
-
     $("button[id^='enIngrRm']").on('click', function(){
         var idx = $(this).attr('data-idx');
         var outerIdx = $(this).attr("data-outer");
         $("#enIng-" + outerIdx + "-" + idx).remove();
     });
-
+    */
 });
