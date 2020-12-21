@@ -14,7 +14,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $("button[id^='enIngrTypeCp']").click(function(){
+    $("button[id^='enIngrTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var newIngrType = $("#enIngrType-" + idx).clone(true);
 
@@ -43,7 +43,7 @@ $(document).ready(function(){
 
         #blog_post_header_en-ingredients_type-0-ingredients-0-name
         */
-        newIngrType.prop('id', "enIngrType-" + nextIdx)
+        newIngrType.attr('id', "enIngrType-" + nextIdx);
 
         var _ = function(x){
             x.each(function(){
@@ -53,8 +53,37 @@ $(document).ready(function(){
                 obj.attr('data-idx', nextIdx);
             });
         }
-        _(newIngrType.find("button[id^='enIngrTypeCp-']"))
-        _(newIngrType.find("button[id^='enIngrTypeRm-']"))
+        _(newIngrType.find("button[id^='enIngrTypeCp-']"));
+        _(newIngrType.find("button[id^='enIngrTypeRm-']"));
+
+        newIngrType.find("div[id^='engIngContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g,"-" + nextIdx));
+        });
+
+        newIngrType.find("button[id^='enIngrCp-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                obj.attr('data-outer', nextIdx);
+            });
+        newIngrType.find("button[id^='enIngrRm-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                $(this).attr('data-outer', nextIdx);
+            });
+        newIngrType.find("div[id^='engIngContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g, "-" + nextIdx));
+        });
+        newIngrType.find("div[id^='enIng-" + idx + "-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr("id", id.replace(/enIng-\d+-/g, "enIng-" + nextIdx + "-"))
+        });
 
 
         newIngrType.find("label")
@@ -77,20 +106,65 @@ $(document).ready(function(){
         return false;
     });
 
-    $("button[id^='enIngrTypeRm']").click(function(){
+    $("button[id^='enIngrTypeRm']").on('click', function(){
         var idx = $(this).attr("data-idx");
         $("#enIngrType-" + idx).remove();
+        return false;
     });
 
-    $("button[id^='enIngrCp']").click(function(){
+    $("button[id^='enIngrCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var outerIdx = $(this).attr("data-outer");
         var newIngr = $("#enIng-" + outerIdx + "-" + idx).clone(true);
+
+        var nextIdx = -1;
+
+        $("div#engIngContainer-" + outerIdx + "> div").each(function(){
+            var curIdx = parseInt($(this).attr("id").split("-")[2]);
+            nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
+        });
+
+        nextIdx = nextIdx + 1;
+
+        newIngr.attr("id", "enIng-" + outerIdx + "-" + nextIdx);
+
+        var _ = function(x){
+            x.each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-\d+/g, "-" + outerIdx + "-" + nextIdx));
+                obj.attr('data-outer', outerIdx);
+                obj.attr('data-idx', nextIdx);
+            });
+        };
+
+        _(newIngr.find("button[id^='enIngrCp-']"));
+        _(newIngr.find("button[id^='enIngrRm-']"));
+
+        newIngr.find("label").each(function(){
+            var obj = $(this);
+            var val = obj.attr('for');
+            if (!val) return;
+            obj.attr('for', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+        });
+
+        newIngr.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+        });
+
+        $("#engIngContainer-" + outerIdx).append(newIngr);
+        return false;
     });
 
-    $("button[id^='enIngrRm']").click(function(){
+    $("button[id^='enIngrRm']").on('click', function(){
         var idx = $(this).attr('data-idx');
         var outerIdx = $(this).attr("data-outer");
         $("#enIng-" + outerIdx + "-" + idx).remove();
     });
+
 });
