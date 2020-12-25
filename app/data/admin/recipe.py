@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
-import datetime
+import datetime as dt
 from app.data.admin.recipe_header_en import RecipeHeaderEn
 from app.data.admin.recipe_header_ru import RecipeHeaderRu
 
@@ -13,8 +13,8 @@ class Recipe(db.Model):
 
     name = db.Column(db.String)
 
-    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    published_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
+    published_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
 
     visible = db.Column(db.Boolean)
@@ -39,8 +39,10 @@ class Recipe(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        return self.id
 
     def update(self):
+        self.updated_at = dt.datetime.utcnow()
         pass
 
     @staticmethod
@@ -55,8 +57,13 @@ class Recipe(db.Model):
         post.published_at = form.published_at.data
         post.visible = form.visible.data
 
+        post.fb_likes = form.fb_likes.data
+        post.fb_og_type = form.og_type.data
+        post.fb_og_image = form.og_image.data
+
         post.cook_time = form.cook_time.data
         post.prep_time = form.prep_time.data
+
         post.total_fats = form.total_fats.data
         post.total_carbs = form.total_carbs.data
         post.total_proteins = form.total_proteins.data

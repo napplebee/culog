@@ -155,8 +155,50 @@ def recipe_update(recipe_id):
         return redirect("/admin/recipe/update/{0}?saved".format(recipe_id))
     else:
         recipe = Recipe.query.get(recipe_id)
+
         title = u"Update {0}".format(recipe.name)
-        form = nf.RecipeForm(obj=recipe)
+
+        ru_recipe_header_form = nf.RecipeHeaderForm(obj=recipe.recipe_header_ru)
+        en_recipe_header_form = nf.RecipeHeaderForm(obj=recipe.recipe_header_en)
+
+        l = list(recipe.recipe_header_ru.ingredient_types_ru)
+        l = [ _ for _ in recipe.recipe_header_ru.ingredient_types_ru ]
+        # ru_recipe_header_form.ingredients_type.process([])
+        # for ingr_type in recipe.recipe_header_ru.ingredient_types_ru:
+        #     ingr_type_form = nf.IngredientTypeForm(obj=ingr_type)
+        #
+        #     for ing in ingr_type.ingredients_ru:
+        #         ingr_form = nf.IngredientForm(obj=ing)
+        #         ingr_type_form.ingredients.append_entry(ing)
+        #     ru_recipe_header_form.ingredients_type.append_entry(ingr_type)
+
+        for ingr_type in recipe.recipe_header_en.ingredient_types_en:
+            ingr_type_form = nf.IngredientTypeForm(obj=ingr_type)
+
+            for ing in ingr_type.ingredients_en:
+                ingr_form = nf.IngredientForm(obj=ing)
+                ingr_type_form.ingredients.append_entry(ingr_form)
+
+            en_recipe_header_form.ingredients_type.append_entry(ingr_type_form)
+
+        form = nf.RecipeForm()
+        form.process(obj=recipe)
+        # for fuck's sake
+        form_recipe_header_ru = form.recipe_header_ru.form
+        form_recipe_header_en = form.recipe_header_en.form
+        form_recipe_header_ru.ingredients_type.pop_entry()
+        form_recipe_header_en.ingredients_type.pop_entry()
+
+        for ingr_type in recipe.recipe_header_ru.ingredient_types_ru:
+            len(ingr_type.ingredients_ru)
+            form_recipe_header_ru.ingredients_type.append_entry(ingr_type)
+
+            # form_recipe_header_ru.ingredients_type
+
+
+
+        # form.recipe_header_ru.form.process(obj=ru_recipe_header_form)
+        # form.recipe_header_en.form.process(obj=en_recipe_header_form)
 
         return render_template("admin/recipe/detail.html", v={
             "title": title,

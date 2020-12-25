@@ -12,15 +12,21 @@ class RecipeHeaderRu(db.Model):
     title = db.Column(db.String)
     sub_title = db.Column(db.String)
 
-    meta_description = db.Column(db.String)
+    recipe_yield = db.Column(db.String)
+    recipe_category = db.Column(db.String)
+    recipe_cuisine = db.Column(db.String)
+
+    cut = db.Column(db.Text)
     meta_keywords = db.Column(db.String)
+    meta_description = db.Column(db.String)
 
-    cut = db.Column(db.String)
-    description = db.Column(db.String)
-
-    image = db.Column(db.String)
+    fb_og_title = db.Column(db.String)
+    fb_og_description = db.Column(db.Text)
+    text = db.Column(db.Text)
 
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    # rename to ingredients_type so it will match
+    # the field's name from the form class
     ingredient_types_ru = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")
 
     @staticmethod
@@ -29,12 +35,21 @@ class RecipeHeaderRu(db.Model):
 
         if form.id.data.isdigit():
             head.id = form.id.data
+
+        head.title = form.title.data
         head.sub_title = form.sub_title.data
-        head.meta_description = form.meta_description.data
-        head.meta_keywords = form.meta_keywords.data
+
+        head.recipe_yield = form.recipe_yield.data
+        head.recipe_category = form.recipe_category.data
+        head.recipe_cuisine = form.recipe_cuisine.data
+
         head.cut = form.cut.data
-        head.description = form.descrip.data
-        head.image = form.image.data
+        head.meta_keywords = form.meta_keywords.data
+        head.meta_description = form.meta_description.data
+
+        head.fb_og_title = form.fb_og_title.data
+        head.fb_og_description = form.fb_og_description.data
+        head.text = form.text.data
 
         for ingr_type in form.ingredients_type.entries:
             ingredient_type_ru = IngredientTypeRu.populate_from_form(

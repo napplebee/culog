@@ -33,13 +33,17 @@ class RecipeHeaderForm(Form):
     title = StringField("Title:")
     sub_title = StringField("Subtitle:")
 
-    meta_description = StringField("Description (meta):")
-    meta_keywords = StringField("Keywords (meta):")
+    recipe_yield = StringField("Number of servings:")
+    recipe_category = StringField("Recipe category")
+    recipe_cuisine = StringField("Recipe cuisine")
 
     cut = TextAreaField("Cut:")
-    descrip = TextAreaField("Description:")
+    meta_keywords = StringField("Keywords (meta):")
+    meta_description = StringField("Description (meta):")
 
-    image = StringField("Image")
+    fb_og_title = StringField("FB og_title:")
+    fb_og_description = TextAreaField("FB og_description:")
+    text = TextAreaField("Text:")
 
     ingredients_type = FieldList(FormField(IngredientTypeForm), "Ingredient types:", min_entries=1)
 
