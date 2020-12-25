@@ -14,7 +14,7 @@
 <form action="{{ v.action }}" class="form-horizontal" method="POST">
     <div class="row">
         <div class="col-sm col-md main">
-            <h1 class="page-header text-center">{{ v.title|default("Cook a new post 🍪", true) }}</h1>
+            <h1 class="page-header text-center">{{ v.title|default("Cook a new recipe 🍪", true) }}</h1>
             <div class="row form-group">
                 <div class="col-sm-2">{{ v.f.name.label(class="control-label") }}</div>
                 <div class="col-sm-10">{{ v.f.name(class="form-control") }}</div>
@@ -54,6 +54,18 @@
                 <div class="col-sm-2">{{ v.f.cook_time.label(class="control-label") }}</div>
                 <div class="col-sm-10">{{ v.f.cook_time(class="form-control") }}</div>
             </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.fb_likes.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.fb_likes(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.og_type.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.og_type(class="form-control") }}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">{{ v.f.og_image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.og_image(class="form-control") }}</div>
+            </div>
 
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -71,39 +83,39 @@
     <div class="row" id="en_group_fields">
         <div class="col-sm col-md main">
             {# === ENGLISH GROUP OF FIELDS === #}
-            {{ v.f.blog_post_header_en.form.id }}
+            {{ v.f.recipe_header_en.form.id }}
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.title.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.title(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_en.title.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.title(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.sub_title.label(class="control-label") }}
+                <div class="col-sm-2">{{ v.f.recipe_header_en.sub_title.label(class="control-label") }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.sub_title(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.sub_title(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.meta_description.label(class="control-label")
+                <div class="col-sm-2">{{ v.f.recipe_header_en.meta_description.label(class="control-label")
                     }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.meta_description(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.meta_description(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.meta_keywords.label(class="control-label")
+                <div class="col-sm-2">{{ v.f.recipe_header_en.meta_keywords.label(class="control-label")
                     }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.meta_keywords(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.meta_keywords(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.cut.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.cut(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_en.cut.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.cut(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.descrip.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.descrip(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_en.descrip.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.descrip(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_en.image.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_en.image(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_en.image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_en.image(class="form-control") }}</div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -112,7 +124,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10" id="enIngTypeContainer">
-                    {% for _ in v.f.blog_post_header_en.form.ingredients_type.entries %}
+                    {% for _ in v.f.recipe_header_en.form.ingredients_type.entries %}
                     {% set ingrTypeForm = _.form %}
                     <div class="container-fluid border-top" id="enIngrType-{{ loop.index0 }}">
                         <hr/>
@@ -195,39 +207,39 @@
     <div class="row" style="display:none;" id="ru_group_fields">
         <div class="col-sm col-md main">
             {# === RUSSIAN GROUP OF FIELDS === #}
-            {{ v.f.blog_post_header_ru.form.id }}
+            {{ v.f.recipe_header_ru.form.id }}
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.title.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.title(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.title.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.title(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.sub_title.label(class="control-label") }}
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.sub_title.label(class="control-label") }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.sub_title(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.sub_title(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.meta_description.label(class="control-label")
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.meta_description.label(class="control-label")
                     }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.meta_description(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.meta_description(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.meta_keywords.label(class="control-label")
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.meta_keywords.label(class="control-label")
                     }}
                 </div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.meta_keywords(class="form-control") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.meta_keywords(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.cut.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.cut(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.cut.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.cut(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.descrip.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.descrip(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.descrip.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.descrip(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.blog_post_header_ru.image.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.blog_post_header_ru.image(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.recipe_header_ru.image(class="form-control") }}</div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -236,7 +248,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10" id="ruIngTypeContainer">
-                    {% for _ in v.f.blog_post_header_ru.form.ingredients_type.entries %}
+                    {% for _ in v.f.recipe_header_ru.form.ingredients_type.entries %}
                     {% set ingrTypeForm = _.form %}
                     <div class="container-fluid border-top" id="ruIngrType-{{ loop.index0 }}">
                         <hr/>

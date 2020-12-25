@@ -13,7 +13,7 @@ class IngredientTypeEn(db.Model):
     type = db.Column(db.String)
     image = db.Column(db.String)
 
-    post_header_en_id = db.Column(db.Integer, db.ForeignKey('post_header_en.id'), nullable=False)
+    post_header_en_id = db.Column(db.Integer, db.ForeignKey('recipe_header_en.id'), nullable=False)
     ingredients_en = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
 
     @staticmethod

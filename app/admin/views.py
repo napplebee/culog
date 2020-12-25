@@ -12,7 +12,7 @@ from configs import Config as cfg
 
 from app.admin.forms import BlogPostForm
 from app.admin import new_forms as nf
-from app.data.admin.post import Post
+from app.data.admin.recipe import Recipe
 
 
 @admin.route("/")
@@ -116,42 +116,67 @@ def fck():
 
 @login_required
 @roles_required("root")
+@admin.route("/recipe/all", methods=["GET", ])
+def recipe_all():
+
+    recipes = Recipe.query.order_by(Recipe.updated_at.desc(), Recipe.created_at.desc()).all()
+    return render_template("admin/recipe/list.html", v={
+        "recipes": recipes,
+        "supported_langs": cfg.SUPPORTED_LANGS
+    })
+
+@login_required
+@roles_required("root")
 @admin.route("/recipe/new", methods=["POST", "GET"])
-def nw_blog_post_new():
-    form = nf.BlogPostForm()
+def recipe_new():
+    form = nf.RecipeForm()
 
     if request.method == "POST":
-        post = Post.populate_from_ui(form)
+        post = Recipe.populate_from_ui(form)
         post_id = post.save()
         return redirect("/admin/recipe/update/{0}?saved".format(post_id))
     else:
         pass
 
-    return render_template("admin/blog/nw/detail.html", v={
+    return render_template("admin/recipe/detail.html", v={
         "f": form,
         "action": ""
     })
 
 
-@admin.route("/recipe/update/<int:post_id>", methods=["POST", "GET"])
+@admin.route("/recipe/update/<int:recipe_id>", methods=["POST", "GET"])
 @login_required
 @roles_required("root")
-def nw_blog_post_update(post_id):
+def recipe_update(recipe_id):
     if request.method == "POST":
-        form = nf.BlogPostForm()
-        post = Post.populate_from_ui(form)
+        form = nf.RecipeForm()
+        post = Recipe.populate_from_ui(form)
         post.update()
-        return redirect("/admin/nw/blog/update/{0}?saved".format(post_id))
+        return redirect("/admin/recipe/update/{0}?saved".format(recipe_id))
     else:
-        post = Post.query.get(post_id)
-        title = u"Update {0}".format(post.name)
-        form = nf.BlogPostForm(obj=post)
+        recipe = Recipe.query.get(recipe_id)
+        title = u"Update {0}".format(recipe.name)
+        form = nf.RecipeForm(obj=recipe)
 
-        return render_template("admin/blog/nw/detail.html", v={
+        return render_template("admin/recipe/detail.html", v={
             "title": title,
             "f": form,
             "action": "",
             "saved": 1 if "saved" in request.args else 0
         })
+
+
+@admin.route("/recipe/preview-list/<string:lang>", methods=["GET"])
+@login_required
+@roles_required("root")
+def recipe_list_preview(lang):
+    pass
+
+
+@admin.route("/recipe/preview/<int:recipe_id>>/<string:lang>", methods=["POST", "GET"])
+@login_required
+@roles_required("root")
+def single_recipe_preview(recipe_id, lang):
+    pass
 
 #endregion cookwithlove 2.0

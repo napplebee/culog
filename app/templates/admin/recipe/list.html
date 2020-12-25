@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12 col-md-12 main">
+          <h1 class="page-header">Recipes</h1>
+          <div class="row placeholders">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <a class="btn btn-success" href="{{ url_for('.recipe_new') }}" role="button">New recipe</a>
+              </div>
+              <div class="btn-group me-2" role="group" aria-label="Second group">
+                <a class="btn btn-default" target="_blank" href="{{ url_for('.recipe_list_preview', lang='ru') }}" role="button">Preview 🇷🇺</a>
+                <a class="btn btn-default" target="_blank" href="{{ url_for('.recipe_list_preview', lang='en') }}" role="button">Preview 🇺🇸</a>
+              </div>
+            </div>
+
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Preview</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Visibility</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in v.recipes %}
+                <tr>
+                  <td>{{ item.id }}</td>
+                  <td><a href="{{ url_for('.recipe_update', recipe_id=item.id) }}">{{ item.name }}</a></td>
+                  <td>
+                {% for lang in v.supported_langs %}
+                  <a href="{{ url_for('.single_recipe_preview', lang=lang, recipe_id=item.id) }}" target="_blank">{{ lang }}</a>
+                {% endfor %}
+                  </td>
+                  <td>{{ item.created_at }}</td>
+                  <td>{{ item.updated_at }}</td>
+                  <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+</div>
+{% endblock %}

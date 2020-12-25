@@ -28,7 +28,7 @@ class IngredientTypeForm(Form):
     ingredients = FieldList(FormField(IngredientForm), "Ingredients", min_entries=1)
 
 
-class BlogPostHeaderForm(Form):
+class RecipeHeaderForm(Form):
     id = HiddenField()
     title = StringField("Title:")
     sub_title = StringField("Subtitle:")
@@ -44,7 +44,7 @@ class BlogPostHeaderForm(Form):
     ingredients_type = FieldList(FormField(IngredientTypeForm), "Ingredient types:", min_entries=1)
 
 
-class BlogPostForm(Form):
+class RecipeForm(Form):
     id = HiddenField()
 
     name = StringField("Name")
@@ -53,9 +53,9 @@ class BlogPostForm(Form):
 
     visible = BooleanField("Visible?")
 
-    # fb_likes = db.Column(db.Integer)
-    # og_type = db.Column(db.String)
-    # og_image = db.Column(db.String)
+    fb_likes = StringField("FB likes:")
+    og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])
+    og_image = StringField("FB og_image")
 
     cook_time = StringField("Cook time:")
     prep_time = StringField("Preparation time:")
@@ -64,7 +64,7 @@ class BlogPostForm(Form):
     total_carbs = FloatField("Carbs:")
     total_proteins = FloatField("Proteins:")
 
-    blog_post_header_ru = FormField(BlogPostHeaderForm, "BlogPostHeader (ru)")
-    blog_post_header_en = FormField(BlogPostHeaderForm, "BlogPostHeader (en)")
+    recipe_header_ru = FormField(RecipeHeaderForm, "BlogPostHeader (ru)")
+    recipe_header_en = FormField(RecipeHeaderForm, "BlogPostHeader (en)")
 
     submit = SubmitField("Save")

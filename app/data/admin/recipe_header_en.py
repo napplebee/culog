@@ -4,8 +4,8 @@ from app.core import db
 from app.data.admin.ingredient_type_en import IngredientTypeEn
 
 
-class PostHeaderEn(db.Model):
-    __tablename__ = 'post_header_en'
+class RecipeHeaderEn(db.Model):
+    __tablename__ = 'recipe_header_en'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -20,12 +20,12 @@ class PostHeaderEn(db.Model):
 
     image = db.Column(db.String)
 
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
-    ingredient_types_en = db.relationship("IngredientTypeEn", backref="post_header_en", lazy="select")
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    ingredient_types_en = db.relationship("IngredientTypeEn", backref="recipe_header_en", lazy="select")
 
     @staticmethod
     def populate_from_ui(form):
-        head = PostHeaderEn()
+        head = RecipeHeaderEn()
 
         if form.id.data.isdigit():
             head.id = form.id.data
