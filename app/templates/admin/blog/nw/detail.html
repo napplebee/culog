@@ -3,6 +3,14 @@
 {% endblock %}
 
 {% block content %}
+{% if saved %}
+<div class="row alert alert-success text-center" role="alert">
+  Your changes were successfully saved.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 <form action="{{ v.action }}" class="form-horizontal" method="POST">
     <div class="row">
         <div class="col-sm col-md main">
@@ -63,6 +71,7 @@
     <div class="row" id="en_group_fields">
         <div class="col-sm col-md main">
             {# === ENGLISH GROUP OF FIELDS === #}
+            {{ v.f.blog_post_header_en.form.id }}
             <div class="row form-group">
                 <div class="col-sm-2">{{ v.f.blog_post_header_en.title.label(class="control-label") }}</div>
                 <div class="col-sm-10">{{ v.f.blog_post_header_en.title(class="form-control") }}</div>
@@ -107,6 +116,7 @@
                     {% set ingrTypeForm = _.form %}
                     <div class="container-fluid border-top" id="enIngrType-{{ loop.index0 }}">
                         <hr/>
+                        {{ ingrTypeForm.id }}
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="btn-group">
@@ -124,8 +134,8 @@
                             <div class="col-sm-10">{{ ingrTypeForm.image(class="form-control") }}</div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-2">{{ ingrTypeForm.note.label(class="control-label") }}</div>
-                            <div class="col-sm-10">{{ ingrTypeForm.note(class="form-control") }}</div>
+                            <div class="col-sm-2">{{ ingrTypeForm.type.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.type(class="form-control") }}</div>
                         </div>
 
                         <div class="row form-group">
@@ -141,6 +151,7 @@
                                 {% set ingrForm = __.form %}
                                 <div class="container-fluid" id="enIng-{{ outerIndex }}-{{ loop.index0 }}">
                                     <hr/>
+                                    {{ ingrForm.id }}
                                     <div class="row form-group">
                                         <div class="col-sm-12">
                                             <button class="btn btn-sm btn-success" type="button" id="enIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
@@ -184,6 +195,7 @@
     <div class="row" style="display:none;" id="ru_group_fields">
         <div class="col-sm col-md main">
             {# === RUSSIAN GROUP OF FIELDS === #}
+            {{ v.f.blog_post_header_ru.form.id }}
             <div class="row form-group">
                 <div class="col-sm-2">{{ v.f.blog_post_header_ru.title.label(class="control-label") }}</div>
                 <div class="col-sm-10">{{ v.f.blog_post_header_ru.title(class="form-control") }}</div>
@@ -245,8 +257,8 @@
                             <div class="col-sm-10">{{ ingrTypeForm.image(class="form-control") }}</div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-2">{{ ingrTypeForm.note.label(class="control-label") }}</div>
-                            <div class="col-sm-10">{{ ingrTypeForm.note(class="form-control") }}</div>
+                            <div class="col-sm-2">{{ ingrTypeForm.type.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.type(class="form-control") }}</div>
                         </div>
 
                         <div class="row form-group">

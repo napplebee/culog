@@ -4,13 +4,16 @@ from wtforms import StringField, SubmitField,\
     HiddenField, DateField, FieldList, FormField, FloatField
 
 from app.common.facebook import OG_TYPES
+from configs import Config as cfg
 
 
 class IngredientForm(Form):
     id = HiddenField()
     name = StringField("Ingredient&nbsp;name:")
     amount = StringField("Amount:")
-    amount_type = StringField("Amount&nbsp;type:")
+    amount_type = SelectField("Amount&nbsp;type:", choices=[
+        (_, _) for _ in cfg.AMOUNT_TYPES
+    ])
 
     note = StringField("Note:")
     is_optional = BooleanField("Optional?")
@@ -19,7 +22,7 @@ class IngredientForm(Form):
 class IngredientTypeForm(Form):
     id = HiddenField()
     name = StringField("Name:")
-    note = StringField("Note:")
+    type = StringField("Type:")
     image = StringField("Image:")
 
     ingredients = FieldList(FormField(IngredientForm), "Ingredients", min_entries=1)

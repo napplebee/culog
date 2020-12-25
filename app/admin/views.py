@@ -3,13 +3,16 @@
 from app.data.blog_posts import BlogPostHeader
 from app.domain.blog_posts import BlogPost
 from . import admin
-from app.admin.forms import BlogPostForm
+
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from flask import render_template, request, url_for, redirect
 from app.services.language_service import langService
 from configs import Config as cfg
-from . import new_forms as nf
+
+from app.admin.forms import BlogPostForm
+from app.admin import new_forms as nf
+from app.data.admin.post import Post
 
 
 @admin.route("/")
@@ -103,20 +106,52 @@ def blog_list_preview(lang_override):
 
 @login_required
 @roles_required("root")
-@admin.route("/test/page")
-def blog_test_page():
-    # post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
-    # title = u"Update {0}".format(post.name)
-    # f = BlogPostForm(obj=post)
-    #
-    # return render_template("admin/blog/detail.html", v={
-    #     "title": title,
-    #     "f": f,
-    #     "action": "",
-    #     "saved": 1 if "saved" in request.args else 0
-    # })
+@admin.route("/test/create", methods=["GET"])
+def fck():
+    from app.core import db
+    db.create_all()
+    print("Ok")
 
+#region cookwithlove 2.0
+
+@login_required
+@roles_required("root")
+@admin.route("/recipe/new", methods=["POST", "GET"])
+def nw_blog_post_new():
     form = nf.BlogPostForm()
-    return render_template("admin/blog/test.html", v={
-        "f": form
+
+    if request.method == "POST":
+        post = Post.populate_from_ui(form)
+        post_id = post.save()
+        return redirect("/admin/recipe/update/{0}?saved".format(post_id))
+    else:
+        pass
+
+    return render_template("admin/blog/nw/detail.html", v={
+        "f": form,
+        "action": ""
     })
+
+
+@admin.route("/recipe/update/<int:post_id>", methods=["POST", "GET"])
+@login_required
+@roles_required("root")
+def nw_blog_post_update(post_id):
+    if request.method == "POST":
+        form = nf.BlogPostForm()
+        post = Post.populate_from_ui(form)
+        post.update()
+        return redirect("/admin/nw/blog/update/{0}?saved".format(post_id))
+    else:
+        post = Post.query.get(post_id)
+        title = u"Update {0}".format(post.name)
+        form = nf.BlogPostForm(obj=post)
+
+        return render_template("admin/blog/nw/detail.html", v={
+            "title": title,
+            "f": form,
+            "action": "",
+            "saved": 1 if "saved" in request.args else 0
+        })
+
+#endregion cookwithlove 2.0
