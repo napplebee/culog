@@ -26,7 +26,7 @@ class RecipeHeaderEn(db.Model):
     text = db.Column(db.Text)
 
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-    ingredient_types_en = db.relationship("IngredientTypeEn", backref="recipe_header_en", lazy="select")
+    ingredients_type = db.relationship("IngredientTypeEn", backref="recipe_header_en", lazy="select")
 
     @staticmethod
     def populate_from_ui(form):
@@ -53,7 +53,7 @@ class RecipeHeaderEn(db.Model):
         for ingr_type in form.ingredients_type.entries:
             ingredient_type_en = IngredientTypeEn.populate_from_form(
                 ingr_type.form)
-            head.ingredient_types_en.append(ingredient_type_en)
+            head.ingredients_type.append(ingredient_type_en)
 
         return head
 

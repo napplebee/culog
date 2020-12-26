@@ -16,7 +16,7 @@ class IngredientForm(Form):
     ])
 
     note = StringField("Note:")
-    is_optional = BooleanField("Optional?")
+    optional = BooleanField("Optional?")
 
 
 class IngredientTypeForm(Form):

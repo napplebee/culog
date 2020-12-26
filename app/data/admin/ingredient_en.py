@@ -29,7 +29,7 @@ class IngredientEn(db.Model):
         ingr.amount_value = form.amount.data
         ingr.amount_type = form.amount_type.data
         ingr.note = form.note.data
-        ingr.optional = form.is_optional.data
+        ingr.optional = form.optional.data
 
         return ingr
 

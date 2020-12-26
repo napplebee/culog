@@ -72,6 +72,14 @@ var initIngrButtons = function(prefix) {
             obj.attr('name', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
             obj.val("");
         });
+        newIngrType.find("select")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+        });
         $("#"+prefix+"IngTypeContainer").append(newIngrType);
         return false;
     });
@@ -126,6 +134,16 @@ var initIngrButtons = function(prefix) {
             obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
             obj.val("");
         });
+        newIngr.find("select")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+        });
+
+        //newIngr.find("select").val("etc");
 
         $("#"+prefix+"IngContainer-" + outerIdx).append(newIngr);
         return false;
