@@ -12,6 +12,7 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True,)
 
     name = db.Column(db.String)
+    url = db.Column(db.String)
 
     created_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
     published_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
@@ -41,36 +42,64 @@ class Recipe(db.Model):
         db.session.commit()
         return self.id
 
-    def update(self):
+    def update(self, form):
+        if not form.id.data.isdigit():
+            raise ValueError("Can't update existing recipe based on form data with no recipe.Id")
+        if int(self.id) != int(form.id.data):
+            raise ValueError("recipe.id (%s) != form.id (%s)" % (self.id, form.id.data))
+
+        self.name = form.name.data
+        self.url = form.url.data
+        self.published_at = form.published_at.data
+        self.visible = form.visible.data
+
+        self.fb_likes = form.fb_likes.data
+        self.fb_og_type = form.fb_og_type.data
+        self.fb_og_image = form.fb_og_image.data
+
+        self.cook_time = form.cook_time.data
+        self.prep_time = form.prep_time.data
+
+        self.total_fats = form.total_fats.data
+        self.total_carbs = form.total_carbs.data
+        self.total_proteins = form.total_proteins.data
+
         self.updated_at = dt.datetime.utcnow()
-        pass
+
+        self.recipe_header_en.merge_with_form(form.recipe_header_en.form)
+        self.recipe_header_ru.merge_with_form(form.recipe_header_ru.form)
+
+        db.session.merge(self)
+        db.session.commit()
+
+        return self.id
 
     @staticmethod
     def populate_from_ui(form):
-        post = Recipe()
+        recipe = Recipe()
 
         if form.id.data.isdigit():
-            post.id = form.id.data
+            recipe.id = form.id.data
 
-        post.name = form.name.data
-        post.url = form.url.data
-        post.published_at = form.published_at.data
-        post.visible = form.visible.data
+        recipe.name = form.name.data
+        recipe.url = form.url.data
+        recipe.published_at = form.published_at.data
+        recipe.visible = form.visible.data
 
-        post.fb_likes = form.fb_likes.data
-        post.fb_og_type = form.og_type.data
-        post.fb_og_image = form.og_image.data
+        recipe.fb_likes = form.fb_likes.data
+        recipe.fb_og_type = form.fb_og_type.data
+        recipe.fb_og_image = form.fb_og_image.data
 
-        post.cook_time = form.cook_time.data
-        post.prep_time = form.prep_time.data
+        recipe.cook_time = form.cook_time.data
+        recipe.prep_time = form.prep_time.data
 
-        post.total_fats = form.total_fats.data
-        post.total_carbs = form.total_carbs.data
-        post.total_proteins = form.total_proteins.data
+        recipe.total_fats = form.total_fats.data
+        recipe.total_carbs = form.total_carbs.data
+        recipe.total_proteins = form.total_proteins.data
 
-        post.recipe_header_en = RecipeHeaderEn.populate_from_ui(
+        recipe.recipe_header_en = RecipeHeaderEn.populate_from_ui(
             form.recipe_header_en.form)
-        post.recipe_header_ru = RecipeHeaderRu.populate_from_ui(
+        recipe.recipe_header_ru = RecipeHeaderRu.populate_from_ui(
             form.recipe_header_ru.form)
 
-        return post
+        return recipe

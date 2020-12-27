@@ -16,6 +16,9 @@ class IngredientTypeRu(db.Model):
     recipe_header_ru_id = db.Column(db.Integer, db.ForeignKey('recipe_header_ru.id'), nullable=False)
     ingredients = db.relationship("IngredientRu", backref="ingr_type_ru", lazy="select")
 
+    def merge_with_form(self, form):
+        raise ValueError()
+
     @staticmethod
     def populate_from_form(form):
         ingr_type = IngredientTypeRu()

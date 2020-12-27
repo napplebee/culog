@@ -16,6 +16,44 @@ class IngredientTypeEn(db.Model):
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('recipe_header_en.id'), nullable=False)
     ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
 
+    def merge_with_form(self, form):
+        if not form.id.data.isdigit():
+            raise ValueError("Can't update existing ingredient type based on form data with no ingredient_type.Id")
+        if int(self.id) != int(form.id.data):
+            raise ValueError("ingredient_type.Id (%s) != form.id (%s)" % (self.id, form.id.data))
+
+        self.name = form.name.data
+        self.type = form.type.data
+        self.image = form.image.data
+
+        id2ingrs = {}
+        new_ingrs = []
+        for ingr in form.ingredients.entries:
+            if ingr.form.id.data.isdigit():
+                id2ingrs[int(ingr.form.id.data)] = ingr.form
+            else:
+                new_ingrs.append(ingr.form)
+
+        to_be_removed = []
+        for ingr in self.ingredients:
+            if ingr.id in id2ingrs:
+                ingr_form = id2ingrs[ingr.id]
+                ingr.merge_with_form(ingr_form)
+            else:
+                db.session.delete(ingr)
+                # to_be_removed.append(ingr)
+
+        for _ in to_be_removed:
+            self.ingredients.remove(_)
+
+        for ing_form in new_ingrs:
+            ingr_en = IngredientEn.populate_from_form(
+                ing_form
+            )
+            self.ingredients.append(ingr_en)
+
+        return self
+
     @staticmethod
     def populate_from_form(form):
         ingr_type = IngredientTypeEn()

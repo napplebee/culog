@@ -148,40 +148,15 @@ def recipe_new():
 @login_required
 @roles_required("root")
 def recipe_update(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
     if request.method == "POST":
         form = nf.RecipeForm()
-        post = Recipe.populate_from_ui(form)
-        post.update()
+        recipe.update(form)
         return redirect("/admin/recipe/update/{0}?saved".format(recipe_id))
     else:
-        recipe = Recipe.query.get(recipe_id)
-
-        title = u"Update {0}".format(recipe.name)
-
-        # ru_recipe_header_form = nf.RecipeHeaderForm(obj=recipe.recipe_header_ru)
-        # en_recipe_header_form = nf.RecipeHeaderForm(obj=recipe.recipe_header_en)
-        #
-        # for ingr_type in recipe.recipe_header_en.ingredients_type:
-        #     ingr_type_form = nf.IngredientTypeForm(obj=ingr_type)
-        #
-        #     for ing in ingr_type.ingredients:
-        #         ingr_form = nf.IngredientForm(obj=ing)
-        #         ingr_type_form.ingredients.append_entry(ingr_form)
-        #
-        #     en_recipe_header_form.ingredients_type.append_entry(ingr_type_form)
-
+        title = u"Updating {0}".format(recipe.name)
         form = nf.RecipeForm()
         form.process(obj=recipe)
-        # for fuck's sake
-        # form_recipe_header_ru = form.recipe_header_ru.form
-        # form_recipe_header_en = form.recipe_header_en.form
-        # form_recipe_header_ru.ingredients_type.pop_entry()
-        # form_recipe_header_en.ingredients_type.pop_entry()
-        #
-        # for ingr_type in recipe.recipe_header_ru.ingredients_type:
-        #     len(ingr_type.ingredients)
-        #     form_recipe_header_ru.ingredients_type.append_entry(ingr_type)
-        #
 
         return render_template("admin/recipe/detail.html", v={
             "title": title,
@@ -198,7 +173,7 @@ def recipe_list_preview(lang):
     pass
 
 
-@admin.route("/recipe/preview/<int:recipe_id>>/<string:lang>", methods=["POST", "GET"])
+@admin.route("/recipe/preview/<int:recipe_id>/<string:lang>", methods=["POST", "GET"])
 @login_required
 @roles_required("root")
 def single_recipe_preview(recipe_id, lang):

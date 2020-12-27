@@ -19,6 +19,20 @@ class IngredientEn(db.Model):
 
     ingr_type_id = db.Column(db.Integer, db.ForeignKey('ingr_type_en.id'), nullable=False)
 
+    def merge_with_form(self, form):
+        if not form.id.data.isdigit():
+            raise ValueError("Can't update existing ingredient based on form data with no ingredient.Id")
+        if int(self.id) != int(form.id.data):
+            raise ValueError("ingredient.Id (%s) != form.id (%s)" % (self.id, form.id.data))
+
+        self.name = form.name.data
+        self.amount_value = form.amount_value.data
+        self.amount_type = form.amount_type.data
+        self.note = form.note.data
+        self.optional = form.optional.data
+
+        return self
+
     @staticmethod
     def populate_from_form(form):
         ingr = IngredientEn()
@@ -26,7 +40,7 @@ class IngredientEn(db.Model):
         if form.id.data.isdigit():
             ingr.id = form.id.data
         ingr.name = form.name.data
-        ingr.amount_value = form.amount.data
+        ingr.amount_value = form.amount_value.data
         ingr.amount_type = form.amount_type.data
         ingr.note = form.note.data
         ingr.optional = form.optional.data

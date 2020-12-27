@@ -29,6 +29,9 @@ class RecipeHeaderRu(db.Model):
     # the field's name from the form class
     ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")
 
+    def merge_with_form(self, form):
+        raise ValueError()
+
     @staticmethod
     def populate_from_ui(form):
         head = RecipeHeaderRu()

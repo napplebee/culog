@@ -10,7 +10,7 @@ from configs import Config as cfg
 class IngredientForm(Form):
     id = HiddenField()
     name = StringField("Ingredient&nbsp;name:")
-    amount = StringField("Amount:")
+    amount_value = StringField("Amount:")
     amount_type = SelectField("Amount&nbsp;type:", choices=[
         (_, _) for _ in cfg.AMOUNT_TYPES
     ])
@@ -58,8 +58,8 @@ class RecipeForm(Form):
     visible = BooleanField("Visible?")
 
     fb_likes = StringField("FB likes:")
-    og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])
-    og_image = StringField("FB og_image")
+    fb_og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])
+    fb_og_image = StringField("FB og_image")
 
     cook_time = StringField("Cook time:")
     prep_time = StringField("Preparation time:")

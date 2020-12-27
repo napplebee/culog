@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block content %}
-{% if saved %}
+{% if v.saved %}
 <div class="row alert alert-success text-center" role="alert">
   Your changes were successfully saved.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -59,12 +59,12 @@
                 <div class="col-sm-10">{{ v.f.fb_likes(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.og_type.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.og_type(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.fb_og_type.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.fb_og_type(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.og_image.label(class="control-label") }}</div>
-                <div class="col-sm-10">{{ v.f.og_image(class="form-control") }}</div>
+                <div class="col-sm-2">{{ v.f.fb_og_image.label(class="control-label") }}</div>
+                <div class="col-sm-10">{{ v.f.fb_og_image(class="form-control") }}</div>
             </div>
 
             <div class="row form-group">
@@ -196,8 +196,8 @@
                                         <div class="col-sm-10">{{ ingrForm.name(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label") }}</div>
-                                        <div class="col-sm-4">{{ ingrForm.amount(class="form-control") }}</div>
+                                        <div class="col-sm-2">{{ ingrForm.amount_value.label(class="control-label") }}</div>
+                                        <div class="col-sm-4">{{ ingrForm.amount_value(class="form-control") }}</div>
                                         <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2 control-label") }}</div>
                                         <div class="col-sm-4">{{ ingrForm.amount_type(class="form-control") }}</div>
                                     </div>
@@ -339,8 +339,8 @@
                                         <div class="col-sm-10">{{ ingrForm.name(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ ingrForm.amount.label(class="control-label") }}</div>
-                                        <div class="col-sm-4">{{ ingrForm.amount(class="form-control") }}</div>
+                                        <div class="col-sm-2">{{ ingrForm.amount_value.label(class="control-label") }}</div>
+                                        <div class="col-sm-4">{{ ingrForm.amount_value(class="form-control") }}</div>
                                         <div class="col-sm-2">{{ ingrForm.amount_type.label(class="col-sm-2 control-label") }}</div>
                                         <div class="col-sm-4">{{ ingrForm.amount_type(class="form-control") }}</div>
                                     </div>
