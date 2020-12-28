@@ -34,17 +34,12 @@ class IngredientTypeEn(db.Model):
             else:
                 new_ingrs.append(ingr.form)
 
-        to_be_removed = []
         for ingr in self.ingredients:
             if ingr.id in id2ingrs:
                 ingr_form = id2ingrs[ingr.id]
                 ingr.merge_with_form(ingr_form)
             else:
                 db.session.delete(ingr)
-                # to_be_removed.append(ingr)
-
-        for _ in to_be_removed:
-            self.ingredients.remove(_)
 
         for ing_form in new_ingrs:
             ingr_en = IngredientEn.populate_from_form(

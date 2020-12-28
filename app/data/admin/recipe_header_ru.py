@@ -30,7 +30,47 @@ class RecipeHeaderRu(db.Model):
     ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")
 
     def merge_with_form(self, form):
-        raise ValueError()
+        if not form.id.data.isdigit():
+            raise ValueError("Can't update existing recipe header based on form data with no recipe.Id")
+        if int(self.id) != int(form.id.data):
+            raise ValueError("recipe_header.id (%s) != form.id (%s)" % (self.id, form.id.data))
+
+        self.title = form.title.data
+        self.sub_title = form.sub_title.data
+
+        self.recipe_yield = form.recipe_yield.data
+        self.recipe_category = form.recipe_category.data
+        self.recipe_cuisine = form.recipe_cuisine.data
+
+        self.cut = form.cut.data
+        self.meta_keywords = form.meta_keywords.data
+        self.meta_description = form.meta_description.data
+
+        self.fb_og_title = form.fb_og_title.data
+        self.fb_og_description = form.fb_og_description.data
+        self.text = form.text.data
+
+        id2ing_types = {}
+        new_ing_types = []
+        for it in form.ingredients_type.entries:
+            if it.form.id.data.isdigit():
+                id2ing_types[int(it.form.id.data)] = it.form
+            else:
+                new_ing_types.append(it.form)
+
+        for ingrType in self.ingredients_type:
+            if ingrType.id in id2ing_types:
+                # then updating
+                ingr_type_form = id2ing_types[ingrType.id]
+                ingrType.merge_with_form(ingr_type_form)
+            else:
+                db.session.delete(ingrType)
+
+        for ing_type_form in new_ing_types:
+            ingredient_type_ru = IngredientTypeRu.populate_from_form(ing_type_form)
+            self.ingredients_type.append(ingredient_type_ru)
+
+        return self
 
     @staticmethod
     def populate_from_ui(form):

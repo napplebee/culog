@@ -294,6 +294,7 @@
                     {% set ingrTypeForm = _.form %}
                     <div class="container-fluid border-top" id="ruIngrType-{{ loop.index0 }}">
                         <hr/>
+                        {{ ingrTypeForm.id }}
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="btn-group">
@@ -328,6 +329,7 @@
                                 {% set ingrForm = __.form %}
                                 <div class="container-fluid" id="ruIng-{{ outerIndex }}-{{ loop.index0 }}">
                                     <hr/>
+                                    {{ ingrForm.id }}
                                     <div class="row form-group">
                                         <div class="col-sm-12">
                                             <button class="btn btn-sm btn-success" type="button" id="ruIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>

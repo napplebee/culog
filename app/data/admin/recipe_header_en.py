@@ -57,7 +57,6 @@ class RecipeHeaderEn(db.Model):
             else:
                 new_ing_types.append(it.form)
 
-        to_be_removed = []
         for ingrType in self.ingredients_type:
             if ingrType.id in id2ing_types:
                 # then updating
@@ -65,10 +64,6 @@ class RecipeHeaderEn(db.Model):
                 ingrType.merge_with_form(ingr_type_form)
             else:
                 db.session.delete(ingrType)
-                # to_be_removed.append(ingrType)
-
-        for _ in to_be_removed:
-            self.ingredients_type.remove(_)
 
         for ing_type_form in new_ing_types:
             ingredient_type_en = IngredientTypeEn.populate_from_form(ing_type_form)

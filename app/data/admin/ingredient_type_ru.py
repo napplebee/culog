@@ -17,7 +17,37 @@ class IngredientTypeRu(db.Model):
     ingredients = db.relationship("IngredientRu", backref="ingr_type_ru", lazy="select")
 
     def merge_with_form(self, form):
-        raise ValueError()
+        if not form.id.data.isdigit():
+            raise ValueError("Can't update existing ingredient type based on form data with no ingredient_type.Id")
+        if int(self.id) != int(form.id.data):
+            raise ValueError("ingredient_type.Id (%s) != form.id (%s)" % (self.id, form.id.data))
+
+        self.name = form.name.data
+        self.type = form.type.data
+        self.image = form.image.data
+
+        id2ingrs = {}
+        new_ingrs = []
+        for ingr in form.ingredients.entries:
+            if ingr.form.id.data.isdigit():
+                id2ingrs[int(ingr.form.id.data)] = ingr.form
+            else:
+                new_ingrs.append(ingr.form)
+
+        for ingr in self.ingredients:
+            if ingr.id in id2ingrs:
+                ingr_form = id2ingrs[ingr.id]
+                ingr.merge_with_form(ingr_form)
+            else:
+                db.session.delete(ingr)
+
+        for ing_form in new_ingrs:
+            ingr_ru = IngredientRu.populate_from_form(
+                ing_form
+            )
+            self.ingredients.append(ingr_ru)
+
+        return self
 
     @staticmethod
     def populate_from_form(form):
