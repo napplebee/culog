@@ -53,7 +53,6 @@ class RecipeForm(Form):
 
     name = StringField("Name")
     url = StringField("URL:")
-    image = StringField("Title image:")
     published_at = DateField("Published:")
 
     visible = BooleanField("Visible?")

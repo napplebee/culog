@@ -125,7 +125,7 @@ def data():
 def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
     posts = Post.query.filter(Post.lang == current_lang)\
-        .order_by(Post.published_at.desc())
+        .order_by(Post.published_at.desc(), Post.id.asc()).all()
     # number of columns on landing page
     N_ROW = 3
     n = len(posts)

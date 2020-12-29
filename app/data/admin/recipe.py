@@ -13,7 +13,6 @@ class Recipe(db.Model):
 
     name = db.Column(db.String)
     url = db.Column(db.String)
-    image = db.Column(db.String)
 
     created_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
     published_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
@@ -51,7 +50,6 @@ class Recipe(db.Model):
 
         self.name = form.name.data
         self.url = form.url.data
-        self.image = form.image.data
         self.published_at = form.published_at.data
         self.visible = form.visible.data
 
