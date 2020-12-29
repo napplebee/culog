@@ -7,7 +7,7 @@ from app.data.admin.recipe_header_ru import RecipeHeaderRu
 
 
 class Recipe(db.Model):
-    __tablename__ = 'recipe'
+    __tablename__ = 'ng_recipe'
 
     id = db.Column(db.Integer, primary_key=True,)
 

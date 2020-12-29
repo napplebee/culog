@@ -5,7 +5,7 @@ from app.data.admin.ingredient_type_ru import IngredientTypeRu
 
 
 class RecipeHeaderRu(db.Model):
-    __tablename__ = 'recipe_header_ru'
+    __tablename__ = 'ng_recipe_header_ru'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -24,7 +24,7 @@ class RecipeHeaderRu(db.Model):
     fb_og_description = db.Column(db.Text)
     text = db.Column(db.Text)
 
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('ng_recipe.id'), nullable=False)
     # rename to ingredients_type so it will match
     # the field's name from the form class
     ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")

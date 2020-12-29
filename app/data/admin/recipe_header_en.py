@@ -6,7 +6,7 @@ from app.data.admin.ingredient_type_en import IngredientTypeEn
 
 
 class RecipeHeaderEn(db.Model):
-    __tablename__ = 'recipe_header_en'
+    __tablename__ = 'ng_recipe_header_en'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -25,7 +25,7 @@ class RecipeHeaderEn(db.Model):
     fb_og_description = db.Column(db.Text)
     text = db.Column(db.Text)
 
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('ng_recipe.id'), nullable=False)
     ingredients_type = db.relationship("IngredientTypeEn", backref="recipe_header_en", lazy="select")
 
     def merge_with_form(self, form):

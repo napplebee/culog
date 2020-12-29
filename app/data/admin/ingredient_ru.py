@@ -5,7 +5,7 @@ from configs import Config as cfg
 
 
 class IngredientRu(db.Model):
-    __tablename__ = 'ingr_ru'
+    __tablename__ = 'ng_ingr_ru'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -17,7 +17,7 @@ class IngredientRu(db.Model):
     note = db.Column(db.String)
     optional = db.Column(db.Boolean) # boolean
 
-    ingr_type_id = db.Column(db.Integer, db.ForeignKey('ingr_type_ru.id'), nullable=False)
+    ingr_type_id = db.Column(db.Integer, db.ForeignKey('ng_ingr_type_ru.id'), nullable=False)
 
     def merge_with_form(self, form):
         if not form.id.data.isdigit():

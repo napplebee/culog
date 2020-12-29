@@ -15,29 +15,19 @@ from app.domain.blog_posts import BlogPost
 from configs import Config as cfg
 
 
-
 @front_bp.route("/")
 def index():
     current_lang, lang_fallback = langService.get_user_settings(request)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
     # .limit(10)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-
-    # raw_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    # articles = [p for p in raw_posts if p.is_article]
-    # posts = [p for p in raw_posts if not p.is_article and p.is_translated_for(current_lang)]
-    # posts_to_show = articles + posts
-    # posts_to_show.sort(key=lambda _: _.published_at, reverse=True)
-
+    base_url = "{0}/{1}".format(request.url_root[:request.url_rootfind("/", 8)], current_lang)
     posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
 
     recent_posts = posts[:2]
-    env_dump = ";".join(["[%s:%s]" % (k,v) for k,v in os.environ.items()])
 
     return render_template("front/index.html", v={
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
-        "env_dump": env_dump,
         "posts": posts,
         "recent_posts": recent_posts
     })
@@ -126,3 +116,26 @@ def data():
     role = user_datastore.create_role(name="root", description="Site administrator")
     db.session.commit()
     return "OK"
+
+
+#region #### THE NEW WAY ####
+
+@front_bp.route("/recipe")
+def nw_index():
+    # current_lang, lang_fallback = langService.get_user_settings(request)
+    # db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
+    # base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    # posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
+    #          post.is_translated_for(current_lang)]
+    #
+    # recent_posts = posts[:2]
+
+    return render_template("front/recipe/index.html", v={
+        "meta_language": "ru",
+        "current_lang": "ru",
+        "posts": [],
+        "recent_posts": []
+    })
+
+
+#endregion

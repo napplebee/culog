@@ -5,7 +5,7 @@ from app.data.admin.ingredient_en import IngredientEn
 
 
 class IngredientTypeEn(db.Model):
-    __tablename__ = 'ingr_type_en'
+    __tablename__ = 'ng_ingr_type_en'
 
     id = db.Column(db.Integer, primary_key=True,)
 
@@ -13,7 +13,7 @@ class IngredientTypeEn(db.Model):
     type = db.Column(db.String)
     image = db.Column(db.String)
 
-    recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('recipe_header_en.id'), nullable=False)
+    recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_en.id'), nullable=False)
     ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
 
     def merge_with_form(self, form):
