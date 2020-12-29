@@ -12,6 +12,7 @@ from app import db, User, Role
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from app.domain.blog_posts import BlogPost
+from app.data.front.post import Post
 from configs import Config as cfg
 
 
@@ -122,19 +123,35 @@ def data():
 
 @front_bp.route("/recipe")
 def nw_index():
-    # current_lang, lang_fallback = langService.get_user_settings(request)
-    # db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
-    # base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    # posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
-    #          post.is_translated_for(current_lang)]
-    #
-    # recent_posts = posts[:2]
+    current_lang, lang_fallback = langService.get_user_settings(request)
+    posts = Post.query.filter(Post.lang == current_lang)\
+        .order_by(Post.published_at.desc())
+    # number of columns on landing page
+    N_ROW = 3
+    n = len(posts)
+    head = posts[:-(n % N_ROW)]
+    tail = posts[-(n % N_ROW):]
+    posts_left = []
+    posts_center = []
+    posts_right = []
+    post_refs = [posts_left, posts_center, posts_right]
+
+    while len(head) > 0:
+        posts_left.append(head.pop())
+        posts_center.append(head.pop())
+        posts_right.append(head.pop())
+
+    i = 0
+    while len(tail) > 0:
+        post_refs[i % N_ROW].append(tail.pop())
+        i += 1
 
     return render_template("front/recipe/index.html", v={
-        "meta_language": "ru",
-        "current_lang": "ru",
-        "posts": [],
-        "recent_posts": []
+        "meta_language": Language.meta_lang[current_lang],
+        "current_lang": current_lang,
+        "posts_left": posts_left,
+        "posts_center": posts_center,
+        "posts_right": posts_right
     })
 
 

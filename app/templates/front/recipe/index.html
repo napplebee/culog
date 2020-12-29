@@ -103,59 +103,38 @@
     <div class="container">
 
       <div class="row">
+        {# posts_left #}
         <div class="col-md-4">
-
+          {% for %}
           <article class="card mb-4">
             <header class="card-header">
               <div class="card-meta">
-                <a href="#"><time class="timeago" datetime="2019-10-26 20:00">26 october 2019</time></a> in <a href="page-category.html">Journey</a>
+                <a href="#">
+                  <time class="timeago" datetime="2019-10-26 20:00">2019-10-26</time>
+                </a>
+                in <a href="page-category.html">Journey</a>
               </div>
               <a href="post-image.html">
-                <h4 class="card-title">How can we sing about love?</h4>
+                <h4 class="card-title">
+                  How can we sing about love?
+                </h4>
+                <h6 class="card-title">
+                  How can we sing about love?
+                </h6>
               </a>
             </header>
             <a href="post-image.html">
               <img class="card-img" src="{{ url_for('static', filename = 'front/recipe/images/articles/18.jpg') }}" alt="" />
             </a>
             <div class="card-body">
-              <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
+              <p class="card-text">
+                Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              </p>
             </div>
           </article><!-- /.card -->
-
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                <a href="#"><time class="timeago" datetime="2019-10-03 20:00">3 october 2019</time></a> in <a href="page-category.html">Lifestyle</a>
-              </div>
-              <a href="post-image.html">
-                <h4 class="card-title">Oh, I guess they have the blues</h4>
-              </a>
-            </header>
-            <a href="post-image.html">
-              <img class="card-img" src="{{ url_for('static', filename = 'front/recipe/images/articles/22.jpg') }}" alt="" />
-            </a>
-            <div class="card-body">
-              <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-            </div>
-          </article><!-- /.card -->
-
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                <a href="#"><time class="timeago" datetime="2019-10-03 20:00">3 october 2019</time></a> in <a href="page-category.html">Lifestyle</a>
-              </div>
-              <a href="post-image.html">
-                <h4 class="card-title">Oh, I guess they have the blues</h4>
-              </a>
-            </header>
-            <a href="post-image.html">
-              <img class="card-img" src="{{ url_for('static', filename = 'front/recipe/images/articles/22.jpg') }}" alt="" />
-            </a>
-            <div class="card-body">
-              <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-            </div>
-          </article><!-- /.card -->
+          {% endfor %}
         </div>
+        {# posts_center #}
         <div class="col-md-4">
           <article class="card mb-4">
             <header class="card-header">
@@ -209,6 +188,7 @@
           </article><!-- /.card -->
 
         </div>
+        {# posts_right #}
         <div class="col-md-4">
           <article class="card mb-4">
             <header class="card-header">
