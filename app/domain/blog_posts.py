@@ -263,8 +263,6 @@ class BlogPost(object):
         header.published_at = self.published_at
         header.updated_at = dt.datetime.utcnow()
 
-        # todo: add new translations
-
         possible_translations = list(BlogPost.MULTI_LANG_FIELDS)
 
         # at this point there are might be new translations we need to add

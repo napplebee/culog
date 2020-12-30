@@ -17,12 +17,13 @@ class RecipeHeaderEn(db.Model):
     recipe_category = db.Column(db.String)
     recipe_cuisine = db.Column(db.String)
 
-    cut = db.Column(db.Text)
     meta_keywords = db.Column(db.String)
     meta_description = db.Column(db.String)
 
     fb_og_title = db.Column(db.String)
     fb_og_description = db.Column(db.Text)
+
+    cut = db.Column(db.Text)
     text = db.Column(db.Text)
 
     recipe_id = db.Column(db.Integer, db.ForeignKey('ng_recipe.id'), nullable=False)

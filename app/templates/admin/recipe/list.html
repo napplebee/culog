@@ -25,6 +25,7 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Preview</th>
+                  <th>Published</th>
                   <th>Created</th>
                   <th>Updated</th>
                   <th>Visibility</th>
@@ -40,8 +41,9 @@
                   <a href="{{ url_for('.single_recipe_preview', lang=lang, recipe_id=item.id) }}" target="_blank">{{ lang }}</a>
                 {% endfor %}
                   </td>
+                  <td>{{ item.published_at.strftime('%Y-%m-%d %H:%M') }}</td>
                   <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                  <td>{{ item.updated_at }}</td>
+                  <td>{{ item.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
                   <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
                 </tr>
               {% endfor %}

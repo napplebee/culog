@@ -13,6 +13,7 @@ from configs import Config as cfg
 from app.admin.forms import BlogPostForm
 from app.admin import new_forms as nf
 from app.data.admin.recipe import Recipe
+from app.data.front.post import Post
 
 
 @admin.route("/")
@@ -135,8 +136,6 @@ def recipe_new():
         post = Recipe.populate_from_ui(form)
         post_id = post.save()
         return redirect("/admin/recipe/update/{0}?saved".format(post_id))
-    else:
-        pass
 
     return render_template("admin/recipe/detail.html", v={
         "f": form,
@@ -162,8 +161,22 @@ def recipe_update(recipe_id):
             "title": title,
             "f": form,
             "action": "",
-            "saved": 1 if "saved" in request.args else 0
+            "saved": 1 if "saved" in request.args else 0,
+            "rendered": 1 if "rendered" in request.args else 0
         })
+
+
+@admin.route("/recipe/render/<int:recipe_id>", methods=["POST"])
+@login_required
+@roles_required("root")
+def recipe_render(recipe_id):
+    if request.method != "POST":
+        return redirect("/admin/recipe/update/{0}".format(recipe_id))
+
+    recipe = Recipe.query.get(recipe_id)
+    Post.cook_from(recipe).save()
+
+    return redirect("/admin/recipe/update/{0}?rendered".format(recipe_id))
 
 
 @admin.route("/recipe/preview-list/<string:lang>", methods=["GET"])

@@ -84,6 +84,7 @@ class Recipe(db.Model):
         recipe.name = form.name.data
         recipe.url = form.url.data
         recipe.published_at = form.published_at.data
+
         recipe.visible = form.visible.data
 
         recipe.fb_likes = form.fb_likes.data
