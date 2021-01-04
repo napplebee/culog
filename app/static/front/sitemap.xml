@@ -780,4 +780,26 @@
                hreflang="ru"
                href="http://cookwith.love/ru/salads/sauerkraut"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/other/basic_baking_ingredients_leaveners</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/basic_baking_ingredients_leaveners"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/basic_baking_ingredients_leaveners"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/other/basic_baking_ingredients_leaveners</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/basic_baking_ingredients_leaveners"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/basic_baking_ingredients_leaveners"/>
+  </url>
 </urlset>

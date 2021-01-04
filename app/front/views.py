@@ -35,6 +35,7 @@ def index():
     env_dump = ""
 
     return render_template("front/index.html", v={
+        "is_index": 1, 
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "env_dump": env_dump,
