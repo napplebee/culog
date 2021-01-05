@@ -802,4 +802,48 @@
                hreflang="ru"
                href="http://cookwith.love/ru/other/basic_baking_ingredients_leaveners"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/side_dishes/roasted_brussel_sprouts</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/side_dishes/roasted_brussel_sprouts"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/side_dishes/roasted_brussel_sprouts"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/salmon-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/salmon-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/salmon-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/salmon-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/salmon-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/salmon-salad"/>
+  </url>
 </urlset>
