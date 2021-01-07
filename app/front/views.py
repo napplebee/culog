@@ -39,6 +39,7 @@ def index():
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "env_dump": env_dump,
+        "current_url": request.url_root,
         "posts": posts,
         "recent_posts": recent_posts
     })
