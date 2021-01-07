@@ -39,7 +39,7 @@ def index():
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "env_dump": env_dump,
-        "current_url": request.url_root,
+        "current_url": request.base_url,
         "posts": posts,
         "recent_posts": recent_posts
     })
@@ -66,7 +66,7 @@ def detail(lang_override, post_url):
         "current_lang": current_lang,
         "meta_language": Language.meta_lang[current_lang],
         "post": post,
-        "current_url": request.url_root,
+        "current_url": request.base_url,
         "recent_posts": recent_posts
     })
 
