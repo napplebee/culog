@@ -66,6 +66,7 @@ def detail(lang_override, post_url):
         "current_lang": current_lang,
         "meta_language": Language.meta_lang[current_lang],
         "post": post,
+        "current_url": request.url_root,
         "recent_posts": recent_posts
     })
 
