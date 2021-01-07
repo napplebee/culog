@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<title>{% block title %}Cook with love{% endblock %}</title>
+		<!-- Meta description for main page - SEO -->
 		{% if v.is_index %}
 			{% if v.current_lang == "ru" %}
 			<meta property="og:title" content="CookWithLove: семейные рецепты">
@@ -21,7 +22,8 @@
 			<meta property="og:url" content="http://cookwith.love/">
 			<meta property="og:image" content="http://cookwith.love/static/front/logo.jpg">
 		{% endif %}
-		<!-- "{{ v.current_url }}" -->
+		<!-- Canonical for Yandex - SEO -->
+		<link rel="canonical" href="{{ v.current_url }}"/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="fb:app_id" content="522001701315044">
