@@ -868,4 +868,26 @@
                hreflang="ru"
                href="http://cookwith.love/ru/snacks/lightly_salted_pickled_cucumbers"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/breakfast/apple_pancakes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/apple_pancakes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/apple_pancakes"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/breakfast/apple_pancakes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/apple_pancakes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/apple_pancakes"/>
+  </url>
 </urlset>
