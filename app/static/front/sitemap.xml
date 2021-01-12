@@ -890,4 +890,26 @@
                hreflang="ru"
                href="http://cookwith.love/ru/breakfast/apple_pancakes"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/raisin_scones</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/raisin_scones"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/raisin_scones"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/raisin_scones</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/raisin_scones"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/raisin_scones"/>
+  </url>
 </urlset>
