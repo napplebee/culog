@@ -14,6 +14,7 @@ from flask.ext.security import roles_required
 from app.domain.blog_posts import BlogPost
 from app.data.front.post import Post
 from configs import Config as cfg
+from app.common.phrases import PHRASES
 
 
 @front_bp.route("/")
@@ -21,7 +22,7 @@ def index():
     current_lang, lang_fallback = langService.get_user_settings(request)
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
     # .limit(10)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_rootfind("/", 8)], current_lang)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
     posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
 
     recent_posts = posts[:2]
@@ -124,8 +125,16 @@ def data():
 @front_bp.route("/recipe")
 def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
-    posts = Post.query.filter(Post.lang == current_lang)\
+
+    _ = Post.query.filter(Post.lang == current_lang)\
         .order_by(Post.published_at.desc(), Post.id.asc()).all()
+    idx = 0
+    posts = []
+    while idx < 14:
+        idx += 1
+        for i in _:
+            posts.append(i)
+
     # number of columns on landing page
     N_ROW = 3
     n = len(posts)
@@ -145,14 +154,82 @@ def nw_index():
     while len(tail) > 0:
         post_refs[i % N_ROW].append(tail.pop())
         i += 1
-
-    return render_template("front/recipe/index.html", v={
+    #TODO: replace with /
+    links = {lang: "/recipe" for lang in cfg.SUPPORTED_LANGS}
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    return render_template("front/post/index.html", v={
+        "links": links,
+        "lang_dic": lang_dic,
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "posts_left": posts_left,
         "posts_center": posts_center,
-        "posts_right": posts_right
+        "posts_right": posts_right,
+        "phrases": PHRASES[current_lang],
     })
 
+
+@front_bp.route("/recipe/<string:lang_override>/<path:post_url>")
+def nw_detail(lang_override, post_url):
+    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    posts = Post.query.filter(Post.url == post_url).all()
+    post = None
+    for p in posts:
+        if p.lang == current_lang:
+            post = p
+            break
+
+    if post is None:
+        # TODO: raise 404
+        raise ValueError("Not found")
+
+    available_translations = [_.lang for _ in posts]
+
+    links = {lang: url_for(".nw_detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
+
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    filtered_lang_dic = {}
+    for lang in lang_dic.keys():
+        if lang in available_translations:
+            filtered_lang_dic[lang] = lang_dic[lang]
+
+    html = render_template("front/post/detail.html", v={
+        "lang_dic": filtered_lang_dic,
+        "links": links,
+        "current_lang": current_lang,
+        "post": post,
+        "phrases": PHRASES[current_lang],
+        "meta_language": Language.meta_lang[current_lang],
+    })
+    response = current_app.make_response(html)
+    response.set_cookie('lang', value=current_lang)
+    return response
+
+    # current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+    # base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+    # db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
+    # post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
+    #
+    # db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
+    # recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    # links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
+    # lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    # filtered_lang_dic = {}
+    # for lang in lang_dic.keys():
+    #     if post.is_translated_for(lang):
+    #         filtered_lang_dic[lang] = lang_dic[lang]
+    # html = render_template("front/blogpost.html", v={
+    #     "lang_dic": filtered_lang_dic, # переключалка языков
+    #     "links": links, # переключалка языков
+    #     "current_lang": current_lang, # текущий язык, использ в нескол местах
+    #     "meta_language": Language.meta_lang[current_lang], # meta tags
+    #     "post": post,
+    #     "recent_posts": recent_posts
+    # })
+    #
+    # response = current_app.make_response(html)
+    # response.set_cookie('lang', value=current_lang)
+    # return response
 
 #endregion

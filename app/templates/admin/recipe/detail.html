@@ -11,6 +11,14 @@
   </button>
 </div>
 {% endif %}
+{% if v.rendered %}
+<div class="row alert warning text-center" role="alert">
+  Your post has been successfully cooked from the recipe.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 <form action="{{ v.action }}" class="form-horizontal" method="POST">
     <div class="row">
         <div class="col-sm col-md main">
