@@ -66,7 +66,7 @@
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
               </div>
-              <a href="{{ p.url }}">
+              <a href="{{ v.current_lang }}/{{ p.url }}">
                 <h4 class="card-title">
                   {{ p.title }} {{ p.id }}
                 </h4>
@@ -75,7 +75,7 @@
                 </h6>
               </a>
             </header>
-            <a href="{{ p.url }}">
+            <a href="{{ v.current_lang }}/{{ p.url }}">
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
             </a>
             <div class="card-body">
@@ -100,7 +100,7 @@
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
               </div>
-              <a href="{{ p.url }}">
+              <a href="{{ v.current_lang }}/{{ p.url }}">
                 <h4 class="card-title">
                   {{ p.title }} {{ p.id }}
                 </h4>
@@ -109,7 +109,7 @@
                 </h6>
               </a>
             </header>
-            <a href="{{ p.url }}">
+            <a href="{{ v.current_lang }}/{{ p.url }}">
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
             </a>
             <div class="card-body">
@@ -129,21 +129,21 @@
 {# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
 {#<!--                </a>-->#}
-                in
+                @
 {#<!--                <a href="page-category.html">-->#}
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
               </div>
-              <a href="{{ p.url }}">
+              <a href="{{ v.current_lang }}/{{ p.url }}">
                 <h4 class="card-title">
-                  {{ p.title }} {{ p.id }}
+                  {{ p.title }}
                 </h4>
                 <h6 class="card-title">
                   {{ p.sub_title }}
                 </h6>
               </a>
             </header>
-            <a href="{{ p.url }}">
+            <a href="{{ v.current_lang }}/{{ p.url }}">
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
             </a>
             <div class="card-body">
@@ -238,7 +238,7 @@
     <div class="container">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="/about">{{ v.phrases.about }}</a>
         </li>
 <!--        <li class="nav-item">-->
 <!--          <a class="nav-link" href="page-contact.html">Contact</a>-->
@@ -246,7 +246,7 @@
       </ul>
       <div class="copy">
         &copy; CookwithLove 2020<br />
-        All rights reserved
+        {{ v.phrases.reserved_rights }}
       </div>
     </div>
   </footer>

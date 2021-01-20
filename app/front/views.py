@@ -194,11 +194,18 @@ def nw_detail(lang_override, post_url):
         if lang in available_translations:
             filtered_lang_dic[lang] = lang_dic[lang]
 
+    recent_posts = [] # TODO
+    might_like_posts = [] # TODO
+
+    categories = ["Breakfast", "Lunch", "Desserts", "Articles", "Dinner", "Drinks"] # TODO
     html = render_template("front/post/detail.html", v={
         "lang_dic": filtered_lang_dic,
         "links": links,
         "current_lang": current_lang,
         "post": post,
+        "recent_posts": recent_posts,
+        "might_like_posts": might_like_posts,
+        "categories": categories,
         "phrases": PHRASES[current_lang],
         "meta_language": Language.meta_lang[current_lang],
     })
