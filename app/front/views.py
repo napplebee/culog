@@ -14,6 +14,7 @@ from flask.ext.security import roles_required
 from app.domain.blog_posts import BlogPost
 from app.data.front.post import Post
 from configs import Config as cfg
+from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 
 
@@ -44,7 +45,7 @@ def detail(lang_override, post_url):
 
     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
+    links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cnst.SUPPORTED_LANGS}
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     filtered_lang_dic = {}
     for lang in lang_dic.keys():
@@ -155,7 +156,7 @@ def nw_index():
         post_refs[i % N_ROW].append(tail.pop())
         i += 1
     #TODO: replace with /
-    links = {lang: "/recipe" for lang in cfg.SUPPORTED_LANGS}
+    links = {lang: "/recipe" for lang in cnst.SUPPORTED_LANGS}
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     return render_template("front/post/index.html", v={
         "links": links,
@@ -186,7 +187,7 @@ def nw_detail(lang_override, post_url):
 
     available_translations = [_.lang for _ in posts]
 
-    links = {lang: url_for(".nw_detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
+    links = {lang: url_for(".nw_detail", lang_override=lang, post_url=post_url) for lang in cnst.SUPPORTED_LANGS}
 
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     filtered_lang_dic = {}

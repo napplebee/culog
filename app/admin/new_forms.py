@@ -4,7 +4,7 @@ from wtforms import StringField, SubmitField,\
     HiddenField, DateField, FieldList, FormField, FloatField
 
 from app.common.facebook import OG_TYPES
-from configs import Config as cfg
+from app.common.constants import Constants as cnst
 
 
 class IngredientForm(Form):
@@ -12,7 +12,7 @@ class IngredientForm(Form):
     name = StringField("Ingredient&nbsp;name:")
     amount_value = StringField("Amount:")
     amount_type = SelectField("Amount&nbsp;type:", choices=[
-        (_, _) for _ in cfg.AMOUNT_TYPES
+        (_, _) for _ in cnst.AMOUNT_TYPES
     ])
 
     note = StringField("Note:")

@@ -3,6 +3,7 @@
 from bin.data import db
 from bin.data.blog_post import BlogPost
 from configs import Config as cfg
+from app.common.constants import Constants as cnst
 import requests as r
 import traceback
 import json
@@ -29,7 +30,7 @@ def run():
         log["old_shares"] = post.fb_likes
         total_shares = 0
         try:
-            for lng in cfg.SUPPORTED_LANGS:
+            for lng in cnst.SUPPORTED_LANGS:
                 url = "{0}/{1}/{2}".format(cfg.BASE_EXTERNAL_URI, lng, post.url)
                 fb_request_url = "https://graph.facebook.com/v2.8/?id={0}&access_token={1}".format(url, token)
                 response = r.get(fb_request_url)
@@ -51,7 +52,7 @@ def run():
         report.append(log)
 
     # send_report(json.dumps(report, indent=3, sort_keys=True))
-    print report
+    print(report)
     db.commit()
 
 

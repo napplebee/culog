@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
+from app.common.constants import Constants as cnst
+
 import datetime as dt
 
 
@@ -34,62 +36,40 @@ class Post(db.Model):
     recipe_id = db.Column(db.Integer)
 
     @staticmethod
-    def cook_from(recipe):
+    def cook_from(recipe, langs):
         posts = Post.query.filter(Post.id == recipe.id).all()
+        result = {}
 
-        en_post = None
-        def add_en_to_session(_): db.session.merge(_)
-        ru_post = None
-        def add_ru_to_session(_): db.session.merge(_)
+        for lang in langs:
+            _post = None
+            def add_to_session(_): db.session.merge(_)
+            for p in posts:
+                if p.lang == lang:
+                    _post = p
+                    break
+            # Idiot-proof
+            # by design: if all posts were found, then all langs must be present.
+            # Hence, "_post is None" must be raised as error
+            if len(posts) == len(cnst.SUPPORTED_LANGS) and _post is None:
+                raise ValueError("All posts for recipe (%s) were found but there is no post for '%s' language" % (
+                    recipe.id, lang
+                ))
 
-        for p in posts:
-            if p.lang == "en":
-                en_post = p
-            elif p.lang == "ru":
-                ru_post = p
-            else:
-                raise ValueError("Unknown language '%s' of post %s" % (p.lang, p.id))
+            if _post is None:
+                _post = Post()
+                def add_to_session(_): db.session.add(_)
 
-        if en_post is None:
-            en_post = Post()
-            def add_en_to_session(_): db.session.add(_)
-        if ru_post is None:
-            ru_post = Post()
-            def add_en_to_session(_): db.session.add(_)
+            header_field = "recipe_header_%s" % lang
+            if not hasattr(recipe, header_field):
+                raise ValueError("Recipe (%s) doesn't have '%s' attribute" % (recipe.id, header_field))
 
-        def __cook(_post, _lang, _header, _recipe):
-            _post.lang = _lang
-            _post.url = Post.__makeup_url(_lang, _recipe.url)
-            _post.recipe_id = _recipe.id
-
-            _post.title = _header.title
-            _post.sub_title = _header.sub_title
-
-            _post.recipe_yield = _header.recipe_yield
-            _post.recipe_cuisine = _header.recipe_cuisine
-            _post.recipe_category = _header.recipe_category
-
-            _post.published_at = _recipe.published_at
-            _post.updated_at = dt.datetime.utcnow()
-
-            _post.fb_og_title = _recipe.fb_og_title
-            _post.fb_og_description = _recipe.fb_og_description
-            _post.fb_og_image = _recipe.fb_og_image
-            _post.meta_keywords = _header.meta_keywords
-            _post.meta_description = _header.meta_description
-            _post.cut = _header.cut
-            _post.render(_recipe)
-            return _post
-
-        en_post = __cook(en_post, "en", recipe.recipe_header_en, recipe)
-        ru_post = __cook(ru_post, "ru", recipe.recipe_header_ru, recipe)
-
-        add_en_to_session(en_post)
-        add_ru_to_session(ru_post)
+            _post.__cook(lang, getattr(recipe, header_field), recipe)
+            add_to_session(_post)
+            result[lang] = _post
 
         db.session.commit()
 
-        return en_post.id, ru_post.id
+        return result
 
     @staticmethod
     def __makeup_url(lang, url):
@@ -98,6 +78,29 @@ class Post(db.Model):
         if not url.endswith("/"):
             url = "%s/" % url
         return "%s%s" % (lang, url)
+
+    def __cook(self, _lang, _header, _recipe):
+        self.lang = _lang
+        self.url = Post.__makeup_url(_lang, _recipe.url)
+        self.recipe_id = _recipe.id
+
+        self.title = _header.title
+        self.sub_title = _header.sub_title
+
+        self.recipe_yield = _header.recipe_yield
+        self.recipe_cuisine = _header.recipe_cuisine
+        self.recipe_category = _header.recipe_category
+
+        self.published_at = _recipe.published_at
+        self.updated_at = dt.datetime.utcnow()
+
+        self.fb_og_title = _recipe.fb_og_title
+        self.fb_og_description = _recipe.fb_og_description
+        self.fb_og_image = _recipe.fb_og_image
+        self.meta_keywords = _header.meta_keywords
+        self.meta_description = _header.meta_description
+        self.cut = _header.cut
+        self.render(_recipe)
 
     def render(self, recipe):
         import jinja2

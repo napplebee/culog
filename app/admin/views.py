@@ -8,7 +8,7 @@ from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from flask import render_template, request, url_for, redirect
 from app.services.language_service import langService
-from configs import Config as cfg
+from app.common.constants import Constants as cnst
 
 from app.admin.forms import BlogPostForm
 from app.admin import new_forms as nf
@@ -39,8 +39,9 @@ def blog_post_list():
     ]
     return render_template("admin/blog/list.html", v={
         "posts": posts,
-        "supported_langs": cfg.SUPPORTED_LANGS
+        "supported_langs": cnst.SUPPORTED_LANGS
         })
+
 
 @admin.route("/blog/new", methods=["POST", "GET"])
 @login_required
@@ -58,6 +59,7 @@ def blog_post_new():
         "f": f,
         "action": ""
     })
+
 
 @admin.route("/blog/update/<int:post_id>", methods=["POST", "GET"])
 @login_required
@@ -81,6 +83,7 @@ def blog_post_update(post_id):
             "saved": 1 if "saved" in request.args else 0
         })
 
+
 @login_required
 @roles_required("root")
 @admin.route("/post_preview/<string:lang_override>/<int:post_id>")
@@ -92,6 +95,7 @@ def blog_post_preview(lang_override, post_id):
     return render_template("admin/blog/preview.html", v={
         "post": post
     })
+
 
 @login_required
 @roles_required("root")
@@ -105,6 +109,7 @@ def blog_list_preview(lang_override):
         "posts": posts
     })
 
+
 @login_required
 @roles_required("root")
 @admin.route("/test/create", methods=["GET"])
@@ -115,6 +120,7 @@ def fck():
 
 #region cookwithlove 2.0
 
+
 @login_required
 @roles_required("root")
 @admin.route("/recipe/all", methods=["GET", ])
@@ -123,8 +129,9 @@ def recipe_all():
     recipes = Recipe.query.order_by(Recipe.updated_at.desc(), Recipe.created_at.desc()).all()
     return render_template("admin/recipe/list.html", v={
         "recipes": recipes,
-        "supported_langs": cfg.SUPPORTED_LANGS
+        "supported_langs": cnst.SUPPORTED_LANGS
     })
+
 
 @login_required
 @roles_required("root")
@@ -166,17 +173,33 @@ def recipe_update(recipe_id):
         })
 
 
-@admin.route("/recipe/render/<int:recipe_id>", methods=["POST"])
+@admin.route("/recipe/render/<int:recipe_id>/<string:lang>", methods=["POST"])
 @login_required
 @roles_required("root")
-def recipe_render(recipe_id):
-    if request.method != "POST":
-        return redirect("/admin/recipe/update/{0}".format(recipe_id))
+def recipe_render(recipe_id, lang):
+    if lang == cnst.ALL_LANG:
+        langs = [cnst.RU_LANG, cnst.EN_LANG, ]
+    elif lang == cnst.RU_LANG:
+        langs = [cnst.RU_LANG, ]
+    elif lang == cnst.EN_LANG:
+        langs = [cnst.EN_LANG, ]
+    else:
+        raise ValueError("unknown lang code")
 
     recipe = Recipe.query.get(recipe_id)
-    Post.cook_from(recipe).save()
+    r = Post.cook_from(recipe, langs)
+    result = []
+    for k, v in r.items():
+        result.append({"recipe_id": v, 'lang': k})
+    import json
+    return json.dumps(result)
 
-    return redirect("/admin/recipe/update/{0}?rendered".format(recipe_id))
+
+@admin.route("/recipe/visibility/<int:recipe_id>", methods=["POST"])
+@login_required
+@roles_required("root")
+def recipe_visibility():
+    pass
 
 
 @admin.route("/recipe/preview-list/<string:lang>", methods=["GET"])

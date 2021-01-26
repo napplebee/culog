@@ -1,4 +1,3 @@
-
 var initIngrButtons = function(prefix) {
     $("button[id^='"+prefix+"IngrTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");

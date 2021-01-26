@@ -4,6 +4,7 @@ import datetime as dt
 from app.data.blog_posts import BlogPostHeader
 from app.data.translations import Translation
 from configs import Config as cfg
+from app.common.constants import Constants as cnst
 import duration as dr
 
 from app.core import db
@@ -109,7 +110,7 @@ class BlogPost(object):
 
         for field in BlogPost.MULTI_LANG_FIELDS:
             value = {}
-            for lang in cfg.SUPPORTED_LANGS:
+            for lang in cnst.SUPPORTED_LANGS:
                 value[lang] = getattr(form, "{}_{}".format(lang, field)).data
 
             if len(value) > 0:
@@ -234,7 +235,7 @@ class BlogPost(object):
         header.prep_time = self.prep_time
 
         for field in BlogPost.MULTI_LANG_FIELDS:
-            for lang in cfg.SUPPORTED_LANGS:
+            for lang in cnst.SUPPORTED_LANGS:
                 t = Translation()
                 t.name = field
                 t.lang = lang
@@ -282,7 +283,7 @@ class BlogPost(object):
         # now it's time to handle "new" translatable fields
         for tr_name in possible_translations:
             multilang_value = getattr(self, tr_name)
-            for lang in cfg.SUPPORTED_LANGS:
+            for lang in cnst.SUPPORTED_LANGS:
                 t = Translation()
                 t.name = tr_name
                 t.lang = lang
@@ -292,7 +293,7 @@ class BlogPost(object):
         db.session.commit()
 
     def __getattr__(self, item):
-        for lang in cfg.SUPPORTED_LANGS:
+        for lang in cnst.SUPPORTED_LANGS:
             if item.startswith(lang):
                 field_name = item[len(lang)+1:]
                 if field_name in self.MULTI_LANG_FIELDS:

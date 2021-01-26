@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
-from configs import Config as cfg
+from app.common.constants import Constants as cnst
 
 
 class IngredientRu(db.Model):
@@ -12,7 +12,7 @@ class IngredientRu(db.Model):
     name = db.Column(db.String)
     amount_value = db.Column(db.String)
     # enum
-    amount_type = db.Column(db.Enum(*cfg.AMOUNT_TYPES, name="amount_type", native_enum=False))
+    amount_type = db.Column(db.Enum(*cnst.AMOUNT_TYPES, name="amount_type", native_enum=False))
 
     note = db.Column(db.String)
     optional = db.Column(db.Boolean) # boolean

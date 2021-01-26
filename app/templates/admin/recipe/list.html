@@ -6,6 +6,12 @@
 <div class="row">
 <div class="col-sm-12 col-md-12 main">
           <h1 class="page-header">Recipes</h1>
+          <div id="actionResult" class="row alert alert-success text-center hidden" role="alert">
+            <span id="actionResultMsg">Your changes were successfully saved.</span>
+            <button type="button" class="close" onclick="$('#actionResult').addClass('hidden').removeClass('show');">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div class="row placeholders">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group me-2" role="group" aria-label="First group">
@@ -19,12 +25,12 @@
 
           </div>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped" style="margin-bottom:200px;">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Preview</th>
+                  <th>Menu</th>
                   <th>Published</th>
                   <th>Created</th>
                   <th>Updated</th>
@@ -37,9 +43,30 @@
                   <td>{{ item.id }}</td>
                   <td><a href="{{ url_for('.recipe_update', recipe_id=item.id) }}">{{ item.name }}</a></td>
                   <td>
-                {% for lang in v.supported_langs %}
-                  <a href="{{ url_for('.single_recipe_preview', lang=lang, recipe_id=item.id) }}" target="_blank">{{ lang }}</a>
-                {% endfor %}
+
+<!-- Single button -->
+<div class="btn-group" id="dd-menu-{{ item.id }}">
+  <button type="button" id="dd-btn-{{ item.id }}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ...
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="{{ url_for('.single_recipe_preview', lang='ru', recipe_id=item.id) }}" target="_blank">Preview 🇷🇺</a></li>
+    <li><a href="{{ url_for('.single_recipe_preview', lang='en', recipe_id=item.id) }}" target="_blank">Preview 🇺🇸</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a id="generate_ru_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇷🇺</a></li>
+    <li><a id="generate_en_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇺🇸</a></li>
+    <li><a id="generate_all_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate all</a></li>
+    <li role="separator" class="divider"></li>
+    {% if item.visible %}
+    <li><a id="make_visible_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Make visible</a></li>
+    {% else %}
+    <li><a id="make_invisible_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Make invisible</a></li>
+    {% endif %}
+  </ul>
+</div>
+<!--                {% for lang in v.supported_langs %}-->
+<!--                  <a href="" target="_blank">{{ lang }}</a>-->
+<!--                {% endfor %}-->
                   </td>
                   <td>{{ item.published_at.strftime('%Y-%m-%d %H:%M') }}</td>
                   <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
