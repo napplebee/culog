@@ -1,0 +1,30 @@
+<h1>{{ v.h.title }}</h1>
+<h3>{{ v.h.sub_title }}</h3>
+<p>FB likes: {{ v.r.fb_likes }}</p>
+<p>Cook time: {{ v.r.cook_time }}</p>
+<p>Prep time: {{ v.r.prep_time }}</p>
+
+<p>Total fats: {{ v.r.total_fats }}</p>
+<p>Total carbs: {{ v.r.total_carbs }}</p>
+<p>Total proteins: {{ v.r.total_proteins }}</p>
+
+
+<p>
+    {{ v.h.text }}
+</p>
+
+
+{% for iType in v.h.ingredients_type %}
+<p>
+    {{ iType.name }} : {{ iType.type }}<br/>
+    <p>{{ iType.image }}</p>
+    {% for ingr in iType.ingredients %}
+        <p>{{ ingr.name }} -- {{ ingr.amount_value }} {{ ingr.amount_type }}</p>
+        <p>{{ ingr.note }}</p>
+        {% if ingr.optional %}
+            <small>It's an optional ingredient</small>
+        {% endif %}
+    {% endfor %}
+</p>
+<hr/>
+{% endfor %}

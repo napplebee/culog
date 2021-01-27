@@ -37,12 +37,15 @@ class Post(db.Model):
 
     @staticmethod
     def cook_from(recipe, langs):
-        posts = Post.query.filter(Post.id == recipe.id).all()
+        posts = Post.query.filter(Post.recipe_id == recipe.id).all()
         result = {}
 
         for lang in langs:
             _post = None
-            def add_to_session(_): db.session.merge(_)
+
+            def add_to_session(_):
+                db.session.merge(_)
+
             for p in posts:
                 if p.lang == lang:
                     _post = p
@@ -57,7 +60,9 @@ class Post(db.Model):
 
             if _post is None:
                 _post = Post()
-                def add_to_session(_): db.session.add(_)
+
+                def add_to_session(_):
+                    db.session.add(_)
 
             header_field = "recipe_header_%s" % lang
             if not hasattr(recipe, header_field):
@@ -94,32 +99,24 @@ class Post(db.Model):
         self.published_at = _recipe.published_at
         self.updated_at = dt.datetime.utcnow()
 
-        self.fb_og_title = _recipe.fb_og_title
-        self.fb_og_description = _recipe.fb_og_description
+        self.fb_og_title = _header.fb_og_title
+        self.fb_og_description = _header.fb_og_description
         self.fb_og_image = _recipe.fb_og_image
         self.meta_keywords = _header.meta_keywords
         self.meta_description = _header.meta_description
         self.cut = _header.cut
-        self.render(_recipe)
+        self.render(_recipe, _header, _lang)
 
-    def render(self, recipe):
+    def render(self, recipe, head, lang):
         import jinja2
         from configs import basedir
         import os
 
-        head = None
-        if self.lang == "en":
-            head = recipe.recipe_header_en
-        elif self.lang == "ru":
-            head = recipe.recipe_header_ru
-        else:
-            raise ValueError("Unknown language in render for recipe %s" % recipe.id)
-
         templateLoader = jinja2.FileSystemLoader(
-            searchpath=os.path.join(basedir, "templates")
+            searchpath=os.path.join(basedir, "app", "templates")
         )
         templateEnv = jinja2.Environment(loader=templateLoader)
-        template = templateEnv.get_template("admin/recipe/render.html")
+        template = templateEnv.get_template("admin/recipe/render_%s.html" % lang)
         _text = template.render(v={
             "r": recipe,
             "h": head

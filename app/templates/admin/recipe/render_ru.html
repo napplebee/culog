@@ -1,0 +1,30 @@
+<h1>{{ v.h.title }}</h1>
+<h3>{{ v.h.sub_title }}</h3>
+<p>FB лайки: {{ v.r.fb_likes }}</p>
+<p>Время приготовления: {{ v.r.cook_time }}</p>
+<p>Время подготовки: {{ v.r.prep_time }}</p>
+
+<p>Жиры: {{ v.r.total_fats }}</p>
+<p>Углеводы: {{ v.r.total_carbs }}</p>
+<p>Протеины: {{ v.r.total_proteins }}</p>
+
+
+<p>
+    {{ v.h.text }}
+</p>
+
+
+{% for iType in v.h.ingredients_type %}
+<p>
+    {{ iType.name }} : {{ iType.type }}<br/>
+    <p>{{ iType.image }}</p>
+    {% for ingr in iType.ingredients %}
+        <p>{{ ingr.name }} -- {{ ingr.amount_value }} {{ ingr.amount_type }}</p>
+        <p>{{ ingr.note }}</p>
+        {% if ingr.optional %}
+            <small>Этот ингрединет опционален</small>
+        {% endif %}
+    {% endfor %}
+</p>
+<hr/>
+{% endfor %}

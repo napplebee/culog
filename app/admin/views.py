@@ -190,7 +190,7 @@ def recipe_render(recipe_id, lang):
     r = Post.cook_from(recipe, langs)
     result = []
     for k, v in r.items():
-        result.append({"recipe_id": v, 'lang': k})
+        result.append({"recipe_id": v.id, 'lang': k})
     import json
     return json.dumps(result)
 

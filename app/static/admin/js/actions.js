@@ -1,16 +1,5 @@
-var generatePost = function(recipe_id, lang){
-    console.log(recipe_id, lang);
-    $.ajax({
-        url: "/admin/recipe/render/" + recipe_id + "/" + lang,
-        method: "POST",
-        success: function(data){
-            console.log(data);
-        }
-    });
-};
-
-var visible = function(recipe_id, visibility){
-    console.log(recipe_id, visibility);
+var visible = function(recipe_id, visibility, message){
+    console.log(recipe_id, visibility, message);
 };
 
 var closeMenu = function(recipe_id){
@@ -21,8 +10,18 @@ var closeMenu = function(recipe_id){
 var showResultMessage = function(msg){
     $("#actionResultMsg").text(msg)
     $("#actionResult").addClass("show").removeClass("hidden");
-
 }
+
+var generatePost = function(recipe_id, lang, message){
+    console.log(recipe_id, lang);
+    $.ajax({
+        url: "/admin/recipe/render/" + recipe_id + "/" + lang,
+        method: "POST",
+        success: function(data){
+            showResultMessage(message)
+        }
+    });
+};
 
 $(document).ready(function(){
     var RU_LANG = "ru";
@@ -32,38 +31,34 @@ $(document).ready(function(){
     $("[id^='generate_ru_']").click(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
-        generatePost(recipe_id, RU_LANG);
-        showResultMessage("Russian post was created");
+        generatePost(recipe_id, RU_LANG, "Russian post was created");
         return false;
     });
     //generate en
     $("a[id^='generate_en_']").click(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
-        generatePost(recipe_id, EN_LANG);
-        showResultMessage("English post was created");
+        generatePost(recipe_id, EN_LANG, "English post was created");
         return false;
     });
     //generate both
     $("a[id^='generate_all_']").click(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
-        generatePost(recipe_id, ALL_LANG);
-        showResultMessage("Russian & English posts were created");
+        generatePost(recipe_id, ALL_LANG, "Russian & English posts were created");
+        showResultMessage();
         return false;
     });
     $("a[id^='make_visible_']").click(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
-        visible(recipe_id, true);
-        showResultMessage("Recipe is visible now");
+        visible(recipe_id, true, "Recipe is visible now");
         return false;
     });
     $("a[id^='make_invisible_']").click(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
-        visible(recipe_id, false);
-        showResultMessage("Recipe is invisible now");
+        visible(recipe_id, false, "Recipe is invisible now");
         return false;
     });
 });
