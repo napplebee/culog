@@ -15,6 +15,8 @@ from app.admin import new_forms as nf
 from app.data.admin.recipe import Recipe
 from app.data.front.post import Post
 
+import json
+
 
 @admin.route("/")
 @login_required
@@ -116,7 +118,7 @@ def blog_list_preview(lang_override):
 def fck():
     from app.core import db
     db.create_all()
-    print("Ok")
+    return "Ok"
 
 #region cookwithlove 2.0
 
@@ -191,15 +193,25 @@ def recipe_render(recipe_id, lang):
     result = []
     for k, v in r.items():
         result.append({"recipe_id": v.id, 'lang': k})
-    import json
     return json.dumps(result)
 
 
-@admin.route("/recipe/visibility/<int:recipe_id>", methods=["POST"])
+@admin.route("/recipe/visibility", methods=["POST"])
 @login_required
 @roles_required("root")
 def recipe_visibility():
-    pass
+    try:
+        recipe_id = request.form["recipe_id"]
+        lang = request.form["lang"]
+        visibility = request.form["visibility"].upper() == "TRUE"
+
+        message = "%s post for recipe (%s) is %s now" % (
+            lang.upper(), recipe_id, "visible" if visibility else "invisible")
+    except Exception as error:
+        message = error
+
+    result = {"message": message}
+    return json.dumps(result)
 
 
 @admin.route("/recipe/preview-list/<string:lang>", methods=["GET"])

@@ -1,5 +1,14 @@
-var visible = function(recipe_id, visibility, message){
-    console.log(recipe_id, visibility, message);
+var visible = function(recipe_id, visibility, lang){
+    console.log(recipe_id, visibility, lang);
+    $.ajax({
+        url: "/admin/recipe/visibility",
+        method: "POST",
+        dataType: "json",
+        data: { recipe_id: recipe_id, lang: lang, visibility: visibility },
+        success: function(data){
+            showResultMessage(data.message)
+        }
+    });
 };
 
 var closeMenu = function(recipe_id){
@@ -49,16 +58,22 @@ $(document).ready(function(){
         showResultMessage();
         return false;
     });
-    $("a[id^='make_visible_']").click(function(){
+    $("button[id^='visible_']").click(function(event){
+        event.preventDefault();
+        //clicking on 'visible' makes it invisible
         var recipe_id = $(this).attr('data-r-id');
-        closeMenu(recipe_id);
-        visible(recipe_id, true, "Recipe is visible now");
-        return false;
+        var lang = $(this).attr('data-lang');
+        visible(recipe_id, false, lang);
+        $(this).removeClass('show').addClass('hidden');
+        $("#invisible_" + lang + "_" + recipe_id).removeClass('hidden').addClass('show')
     });
-    $("a[id^='make_invisible_']").click(function(){
+    $("button[id^='invisible_']").click(function(event){
+        event.preventDefault();
+        //clicking on 'invisible' makes it visible
         var recipe_id = $(this).attr('data-r-id');
-        closeMenu(recipe_id);
-        visible(recipe_id, false, "Recipe is invisible now");
-        return false;
+        var lang = $(this).attr('data-lang');
+        visible(recipe_id, true, lang);
+        $(this).removeClass('show').addClass('hidden');
+        $("#visible_" + lang + "_" + recipe_id).removeClass('hidden').addClass('show')
     });
 });

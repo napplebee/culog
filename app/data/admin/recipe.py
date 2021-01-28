@@ -15,10 +15,10 @@ class Recipe(db.Model):
     url = db.Column(db.String)
 
     created_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
-    published_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
 
-    visible = db.Column(db.Boolean)
+    visible_ru = db.Column(db.Boolean, default=False)
+    visible_en = db.Column(db.Boolean, default=False)
 
     fb_likes = db.Column(db.Integer)
     fb_og_type = db.Column(db.String)
@@ -50,8 +50,6 @@ class Recipe(db.Model):
 
         self.name = form.name.data
         self.url = form.url.data
-        self.published_at = form.published_at.data
-        self.visible = form.visible.data
 
         self.fb_likes = form.fb_likes.data
         self.fb_og_type = form.fb_og_type.data
@@ -83,9 +81,6 @@ class Recipe(db.Model):
 
         recipe.name = form.name.data
         recipe.url = form.url.data
-        recipe.published_at = form.published_at.data
-
-        recipe.visible = form.visible.data
 
         recipe.fb_likes = form.fb_likes.data
         recipe.fb_og_type = form.fb_og_type.data

@@ -12,6 +12,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, )
     url = db.Column(db.String)
     lang = db.Column(db.String)
+    visible = db.Column(db.Boolean, default=False)
 
     title = db.Column(db.String)
     sub_title = db.Column(db.String)

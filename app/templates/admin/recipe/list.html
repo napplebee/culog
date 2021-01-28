@@ -31,10 +31,10 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Menu</th>
-                  <th>Published</th>
                   <th>Created</th>
                   <th>Updated</th>
-                  <th>Visibility</th>
+                  <th>Visible 🇷🇺</th>
+                  <th>Visible 🇺🇸</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,35 +43,49 @@
                   <td>{{ item.id }}</td>
                   <td><a href="{{ url_for('.recipe_update', recipe_id=item.id) }}">{{ item.name }}</a></td>
                   <td>
-
-<!-- Single button -->
-<div class="btn-group" id="dd-menu-{{ item.id }}">
-  <button type="button" id="dd-btn-{{ item.id }}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    ...
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="{{ url_for('.single_recipe_preview', lang='ru', recipe_id=item.id) }}" target="_blank">Preview 🇷🇺</a></li>
-    <li><a href="{{ url_for('.single_recipe_preview', lang='en', recipe_id=item.id) }}" target="_blank">Preview 🇺🇸</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a id="generate_ru_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇷🇺</a></li>
-    <li><a id="generate_en_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇺🇸</a></li>
-    <li><a id="generate_all_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate all</a></li>
-    <li role="separator" class="divider"></li>
-    {% if item.visible %}
-    <li><a id="make_visible_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Make visible</a></li>
-    {% else %}
-    <li><a id="make_invisible_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Make invisible</a></li>
-    {% endif %}
-  </ul>
-</div>
-<!--                {% for lang in v.supported_langs %}-->
-<!--                  <a href="" target="_blank">{{ lang }}</a>-->
-<!--                {% endfor %}-->
+                    <div class="btn-group" id="dd-menu-{{ item.id }}">
+                      <button type="button" id="dd-btn-{{ item.id }}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('.single_recipe_preview', lang='ru', recipe_id=item.id) }}" target="_blank">Preview 🇷🇺</a></li>
+                        <li><a href="{{ url_for('.single_recipe_preview', lang='en', recipe_id=item.id) }}" target="_blank">Preview 🇺🇸</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="generate_ru_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇷🇺</a></li>
+                        <li><a id="generate_en_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇺🇸</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="generate_all_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate all</a></li>
+                      </ul>
+                    </div>
                   </td>
-                  <td>{{ item.published_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                  <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                  <td>{{ item.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                  <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
+                  <td>
+                      {% if item.created_at %}
+                      {{ item.created_at.strftime('%Y-%m-%d %H:%M') }}
+                      {% endif %}
+                  </td>
+                  <td>
+                      {% if item.updated_at %}
+                      {{ item.updated_at.strftime('%Y-%m-%d %H:%M') }}
+                      {% endif %}
+                  </td>
+
+                  <td>
+                      <button id="visible_ru_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="ru" type="button" class="btn btn-default btn-xs {% if item.visible_ru %}show{% else %}hidden{% endif %}">
+                          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      </button>
+                      <button id="invisible_ru_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="ru" type="button" class="btn btn-default btn-xs {% if not item.visible_ru %}show{% else %}hidden{% endif %}">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      </button>
+                  </td>
+                  <td>
+                      <button id="visible_en_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="en" type="button" class="btn btn-default btn-xs {% if item.visible_en %}show{% else %}hidden{% endif %}">
+                          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      </button>
+                      <button id="invisible_en_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="en" type="button" class="btn btn-default btn-xs {% if not item.visible_en %}show{% else %}hidden{% endif %}">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      </button>
+                  </td>
+
                 </tr>
               {% endfor %}
               </tbody>
