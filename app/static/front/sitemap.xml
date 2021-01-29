@@ -934,4 +934,26 @@
                hreflang="ru"
                href="http://cookwith.love/ru/baking/moist_lemon_cake"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/lemon_cake_roll</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_cake_roll"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lemon_cake_roll"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/lemon_cake_roll</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_cake_roll"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lemon_cake_roll"/>
+  </url>
 </urlset>
