@@ -1,5 +1,4 @@
 var visible = function(recipe_id, visibility, lang){
-    console.log(recipe_id, visibility, lang);
     $.ajax({
         url: "/admin/recipe/visibility",
         method: "POST",
@@ -22,7 +21,6 @@ var showResultMessage = function(msg){
 }
 
 var generatePost = function(recipe_id, lang, message){
-    console.log(recipe_id, lang);
     $.ajax({
         url: "/admin/recipe/render/" + recipe_id + "/" + lang,
         method: "POST",
@@ -37,26 +35,26 @@ $(document).ready(function(){
     var EN_LANG = "en";
     var ALL_LANG = "all";
     //generate ru
-    $("[id^='generate_ru_']").click(function(){
+    $("[id^='generate_ru_']").click(function(event){
+        event.preventDefault();
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
         generatePost(recipe_id, RU_LANG, "Russian post was created");
-        return false;
     });
     //generate en
-    $("a[id^='generate_en_']").click(function(){
+    $("a[id^='generate_en_']").click(function(event){
+        event.preventDefault();
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
         generatePost(recipe_id, EN_LANG, "English post was created");
         return false;
     });
     //generate both
-    $("a[id^='generate_all_']").click(function(){
+    $("a[id^='generate_all_']").click(function(event){
+        event.preventDefault();
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
         generatePost(recipe_id, ALL_LANG, "Russian & English posts were created");
-        showResultMessage();
-        return false;
     });
     $("button[id^='visible_']").click(function(event){
         event.preventDefault();

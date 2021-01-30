@@ -15,6 +15,7 @@ class Recipe(db.Model):
     url = db.Column(db.String)
 
     created_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
+    published_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
     visible_ru = db.Column(db.Boolean, default=False)
@@ -62,6 +63,7 @@ class Recipe(db.Model):
         self.total_carbs = form.total_carbs.data
         self.total_proteins = form.total_proteins.data
 
+        self.published_at = form.published_at.data
         self.updated_at = dt.datetime.utcnow()
 
         self.recipe_header_en.merge_with_form(form.recipe_header_en.form)

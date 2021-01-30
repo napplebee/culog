@@ -124,3 +124,11 @@ class Post(db.Model):
         })
 
         self.text = _text
+
+    def make_visible(self):
+        self.visible = True
+        db.session.commit()
+
+    def make_invisible(self):
+        self.visible = False
+        db.session.commit()

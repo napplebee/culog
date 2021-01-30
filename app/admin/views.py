@@ -201,9 +201,14 @@ def recipe_render(recipe_id, lang):
 @roles_required("root")
 def recipe_visibility():
     try:
-        recipe_id = request.form["recipe_id"]
+        recipe_id = int(request.form["recipe_id"])
         lang = request.form["lang"]
         visibility = request.form["visibility"].upper() == "TRUE"
+        p = Post.query.filter(Post.recipe_id == recipe_id, Post.lang == lang).one()
+        if visibility:
+            p.make_visible()
+        else:
+            p.make_invisible()
 
         message = "%s post for recipe (%s) is %s now" % (
             lang.upper(), recipe_id, "visible" if visibility else "invisible")

@@ -53,6 +53,7 @@ class RecipeForm(Form):
 
     name = StringField("Name")
     url = StringField("URL:")
+    published_at = DateField("Published:")
 
     fb_likes = StringField("FB likes:")
     fb_og_type = SelectField("FB og_type:", choices=[(t, t) for t in OG_TYPES])
