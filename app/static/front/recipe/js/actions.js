@@ -13,7 +13,7 @@ var loadMore = function(){
     var rows = $("div#indexContainer > div.row");
     console.log(rows.length);
     $.ajax({
-        url: "/recipe/more/" + rows.length,
+        url: "/more/" + rows.length,
         method: "POST",
         dataType: "json",
         success: function(data){
