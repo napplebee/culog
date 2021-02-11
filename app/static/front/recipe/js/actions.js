@@ -18,6 +18,14 @@ var loadMore = function(){
         dataType: "json",
         success: function(data){
             $("div#indexContainer").append(data.payload)
+            var my_locale = "";
+            var my_lang = Cookies.get('lang');
+            if(my_lang == "ru"){
+              my_locale = "ru";
+            } else if(my_lang == "ru"){
+              my_locale = "en_US";
+            }
+            document.timeago.render(document.querySelectorAll('.timeago'), my_locale)
         }
     });
 }
