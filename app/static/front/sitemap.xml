@@ -1,7 +1,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
-    http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+          http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+          http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://cookwith.love/</loc>
@@ -10,14 +11,22 @@
     <loc>http://cookwith.love/contact/</loc>
   </url>
   <url>
-    <loc>http://cookwith.love/en/baking/rose_apple_pie</loc>
+    <loc>http://cookwith.love/en/baking/cottage_cheese_apple_pie</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_apple_pie"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
-               href="http://cookwith.love/ru/baking/rose_apple_pie"/>
+               href="http://cookwith.love/ru/baking/cottage_cheese_apple_pie"/>
   </url>
   <url>
-    <loc>http://cookwith.love/en/baking/cottage_cheese_apple_pie</loc>
+    <loc>http://cookwith.love/ru/baking/cottage_cheese_apple_pie</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_apple_pie"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -27,11 +36,41 @@
     <loc>http://cookwith.love/en/baking/cottage_cheese_casserole_with_apples_and_cashew</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_casserole_with_apples_and_cashew"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/cottage_cheese_casserole_with_apples_and_cashew"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/cottage_cheese_casserole_with_apples_and_cashew</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_casserole_with_apples_and_cashew"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/cottage_cheese_casserole_with_apples_and_cashew"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/apple_cake_sharlotka</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/apple_cake_sharlotka"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/apple_cake_sharlotka"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/apple_cake_sharlotka</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/apple_cake_sharlotka"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -41,11 +80,41 @@
     <loc>http://cookwith.love/en/baking/sweet_rough_puff_pastry_dough</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/sweet_rough_puff_pastry_dough"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/sweet_rough_puff_pastry_dough"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/sweet_rough_puff_pastry_dough</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/sweet_rough_puff_pastry_dough"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/sweet_rough_puff_pastry_dough"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/article/fats_and_oils</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/fats_and_oils"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/fats_and_oils"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/article/fats_and_oils</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/fats_and_oils"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -55,11 +124,41 @@
     <loc>http://cookwith.love/en/baking/cottage_cheese_cookies</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_cookies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/cottage_cheese_cookies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/cottage_cheese_cookies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/cottage_cheese_cookies"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/cottage_cheese_cookies"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/grated_apple_pie</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/grated_apple_pie"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/grated_apple_pie"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/grated_apple_pie</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/grated_apple_pie"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -69,11 +168,41 @@
     <loc>http://cookwith.love/en/baking/chocolate_muffins</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/chocolate_muffins"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/chocolate_muffins"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/chocolate_muffins</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/chocolate_muffins"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/chocolate_muffins"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/basic_cookie_dough</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/basic_cookie_dough"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/basic_cookie_dough"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/basic_cookie_dough</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/basic_cookie_dough"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -83,11 +212,41 @@
     <loc>http://cookwith.love/en/baking/pate_sucree_dough</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pate_sucree_dough"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/pate_sucree_dough"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/pate_sucree_dough</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pate_sucree_dough"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/pate_sucree_dough"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/lemon_muffins</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_muffins"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lemon_muffins"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/lemon_muffins</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_muffins"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -97,11 +256,41 @@
     <loc>http://cookwith.love/en/baking/coffee_pecan_cookies</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/coffee_pecan_cookies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/coffee_pecan_cookies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/coffee_pecan_cookies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/coffee_pecan_cookies"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/coffee_pecan_cookies"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/appetizer/mediterranean_salmon_gravlax</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/appetizer/mediterranean_salmon_gravlax"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/appetizer/mediterranean_salmon_gravlax"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/appetizer/mediterranean_salmon_gravlax</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/appetizer/mediterranean_salmon_gravlax"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -111,11 +300,41 @@
     <loc>http://cookwith.love/en/appetizer/star_anise_salmon_gravlax</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/appetizer/star_anise_salmon_gravlax"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/appetizer/star_anise_salmon_gravlax"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/appetizer/star_anise_salmon_gravlax</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/appetizer/star_anise_salmon_gravlax"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/appetizer/star_anise_salmon_gravlax"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/article/how_to_identify_quality_fish</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/how_to_identify_quality_fish"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/how_to_identify_quality_fish"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/article/how_to_identify_quality_fish</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/how_to_identify_quality_fish"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -125,11 +344,41 @@
     <loc>http://cookwith.love/en/other/fruit_paste</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/fruit_paste"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/fruit_paste"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/other/fruit_paste</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/fruit_paste"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/other/fruit_paste"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/other/cream_cheese_like_philly</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/cream_cheese_like_philly"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/cream_cheese_like_philly"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/other/cream_cheese_like_philly</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/cream_cheese_like_philly"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -139,11 +388,41 @@
     <loc>http://cookwith.love/en/other/mascarpone</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/mascarpone"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/mascarpone"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/other/mascarpone</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/mascarpone"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/other/mascarpone"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/chocolate_chips_cookies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/chocolate_chips_cookies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/chocolate_chips_cookies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/chocolate_chips_cookies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/chocolate_chips_cookies"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -153,11 +432,41 @@
     <loc>http://cookwith.love/en/baking/apple_muffins</loc>
       <xhtml:link 
                rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/apple_muffins"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/apple_muffins"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/apple_muffins</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/apple_muffins"/>
+      <xhtml:link 
+               rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/apple_muffins"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/blondies_with_white_chocolate</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/blondies_with_white_chocolate"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/blondies_with_white_chocolate"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/blondies_with_white_chocolate</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/blondies_with_white_chocolate"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
@@ -167,169 +476,12 @@
     <loc>http://cookwith.love/en/baking/english_christmas_cake</loc>
       <xhtml:link 
                rel="alternate"
-               hreflang="ru"
-               href="http://cookwith.love/ru/baking/english_christmas_cake"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/en/baking/coffee_chocolate_chips_cookies</loc>
+               hreflang="en"
+               href="http://cookwith.love/en/baking/english_christmas_cake"/>
       <xhtml:link 
                rel="alternate"
                hreflang="ru"
-               href="http://cookwith.love/ru/baking/coffee_chocolate_chips_cookies"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/rose_apple_pie</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/rose_apple_pie"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/cottage_cheese_apple_pie</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/cottage_cheese_apple_pie"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/cottage_cheese_casserole_with_apples_and_cashew</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/cottage_cheese_casserole_with_apples_and_cashew"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/apple_cake_sharlotka</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/apple_cake_sharlotka"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/sweet_rough_puff_pastry_dough</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/sweet_rough_puff_pastry_dough"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/article/fats_and_oils</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/article/fats_and_oils"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/cottage_cheese_cookies</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/cottage_cheese_cookies"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/grated_apple_pie</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/grated_apple_pie"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/chocolate_muffins</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/chocolate_muffins"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/basic_cookie_dough</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/basic_cookie_dough"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/pate_sucree_dough</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/pate_sucree_dough"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/lemon_muffins</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/lemon_muffins"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/coffee_pecan_cookies</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/coffee_pecan_cookies"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/appetizer/mediterranean_salmon_gravlax</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/appetizer/mediterranean_salmon_gravlax"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/appetizer/star_anise_salmon_gravlax</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/appetizer/star_anise_salmon_gravlax"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/article/how_to_identify_quality_fish</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/article/how_to_identify_quality_fish"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/other/fruit_paste</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/other/fruit_paste"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/other/cream_cheese_like_philly</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/other/cream_cheese_like_philly"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/other/mascarpone</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/other/mascarpone"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/chocolate_chips_cookies</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/chocolate_chips_cookies"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/apple_muffins</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/apple_muffins"/>
-  </url>
-  <url>
-    <loc>http://cookwith.love/ru/baking/blondies_with_white_chocolate</loc>
-      <xhtml:link 
-               rel="alternate"
-               hreflang="en"
-               href="http://cookwith.love/en/baking/blondies_with_white_chocolate"/>
+               href="http://cookwith.love/ru/baking/english_christmas_cake"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/baking/english_christmas_cake</loc>
@@ -337,6 +489,21 @@
                rel="alternate"
                hreflang="en"
                href="http://cookwith.love/en/baking/english_christmas_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/english_christmas_cake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/coffee_chocolate_chips_cookies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/coffee_chocolate_chips_cookies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/coffee_chocolate_chips_cookies"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/baking/coffee_chocolate_chips_cookies</loc>
@@ -344,5 +511,449 @@
                rel="alternate"
                hreflang="en"
                href="http://cookwith.love/en/baking/coffee_chocolate_chips_cookies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/coffee_chocolate_chips_cookies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/caramel_brownies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/caramel_brownies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/caramel_brownies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/caramel_brownies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/caramel_brownies"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/caramel_brownies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/mushroom-and-prune-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/mushroom-and-prune-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/mushroom-and-prune-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/mushroom-and-prune-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/mushroom-and-prune-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/mushroom-and-prune-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/mimosa-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/mimosa-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/mimosa-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/mimosa-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/mimosa-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/mimosa-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/article/salad_dressing_and_vinaigrette</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/salad_dressing_and_vinaigrette"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/salad_dressing_and_vinaigrette"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/article/salad_dressing_and_vinaigrette</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/salad_dressing_and_vinaigrette"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/salad_dressing_and_vinaigrette"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/grape_cheese_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/grape_cheese_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/grape_cheese_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/grape_cheese_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/grape_cheese_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/grape_cheese_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/pumpkin_cheesecake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pumpkin_cheesecake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/pumpkin_cheesecake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/pumpkin_cheesecake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pumpkin_cheesecake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/pumpkin_cheesecake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/article/flour_basics</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/flour_basics"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/flour_basics"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/article/flour_basics</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/article/flour_basics"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/article/flour_basics"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/lamingtons</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lamingtons"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lamingtons"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/lamingtons</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lamingtons"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lamingtons"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/raspberry_avocado_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/raspberry_avocado_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/raspberry_avocado_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/raspberry_avocado_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/raspberry_avocado_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/raspberry_avocado_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/blueberry_mozzarella_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/blueberry_mozzarella_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/blueberry_mozzarella_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/blueberry_mozzarella_salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/blueberry_mozzarella_salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/blueberry_mozzarella_salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/main/herb_crusted_pork_tenderloin</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/main/herb_crusted_pork_tenderloin"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/main/herb_crusted_pork_tenderloin"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/main/herb_crusted_pork_tenderloin</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/main/herb_crusted_pork_tenderloin"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/main/herb_crusted_pork_tenderloin"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/sauerkraut</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/sauerkraut"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/sauerkraut"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/sauerkraut</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/sauerkraut"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/sauerkraut"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/other/basic_baking_ingredients_leaveners</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/basic_baking_ingredients_leaveners"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/basic_baking_ingredients_leaveners"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/other/basic_baking_ingredients_leaveners</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/other/basic_baking_ingredients_leaveners"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/other/basic_baking_ingredients_leaveners"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/side_dishes/roasted_brussel_sprouts</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/side_dishes/roasted_brussel_sprouts"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/side_dishes/roasted_brussel_sprouts"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/side_dishes/roasted_brussel_sprouts"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/salads/salmon-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/salmon-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/salmon-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/salads/salmon-salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/salads/salmon-salad"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/salads/salmon-salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/snacks/lightly_salted_pickled_cucumbers</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/snacks/lightly_salted_pickled_cucumbers"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/snacks/lightly_salted_pickled_cucumbers"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/snacks/lightly_salted_pickled_cucumbers</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/snacks/lightly_salted_pickled_cucumbers"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/snacks/lightly_salted_pickled_cucumbers"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/breakfast/apple_pancakes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/apple_pancakes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/apple_pancakes"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/breakfast/apple_pancakes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/apple_pancakes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/apple_pancakes"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/raisin_scones</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/raisin_scones"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/raisin_scones"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/raisin_scones</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/raisin_scones"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/raisin_scones"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/lemon_cake_roll</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_cake_roll"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lemon_cake_roll"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/lemon_cake_roll</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/lemon_cake_roll"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/lemon_cake_roll"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/moist_lemon_cake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/moist_lemon_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/moist_lemon_cake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/moist_lemon_cake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/moist_lemon_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/moist_lemon_cake"/>
   </url>
 </urlset>
