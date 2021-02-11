@@ -17,6 +17,8 @@ from configs import Config as cfg
 from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 
+import json
+
 
 @front_bp.route("/")
 def index():
@@ -34,6 +36,62 @@ def index():
         "posts": posts,
         "recent_posts": recent_posts
     })
+
+
+@front_bp.route("/migrate")
+def migrate():
+    if True:
+        pass
+    else:
+        for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
+
+            db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
+            # .limit(10)
+            base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+            posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
+                     post.is_translated_for(current_lang)]
+
+            for oldPost in posts:
+                newPost = Post()
+                newPost.url = Post.makeup_url(oldPost.url)
+                newPost.lang = current_lang
+                newPost.visible = oldPost.visible
+
+                newPost.title = oldPost.get_title()
+                newPost.sub_title = oldPost.get_sub_title()
+
+                newPost.recipe_yield = oldPost.get_recipe_yield()
+                newPost.recipe_cuisine = oldPost.get_recipe_cuisine()
+                newPost.recipe_category = oldPost.get_recipe_category()
+
+                newPost.published_at = oldPost.published_at
+                newPost.updated_at = oldPost.updated_at
+
+                newPost.fb_likes = oldPost.fb_likes
+                newPost.fb_og_image = oldPost.og_image
+                newPost.fb_og_title = oldPost.get_og_title()
+                newPost.fb_og_description = oldPost.get_og_description()
+
+                newPost.meta_keywords = oldPost.get_keywords()
+                newPost.meta_description = oldPost.get_description()
+
+                newPost.cook_time = oldPost.cook_time
+                newPost.prep_time = oldPost.prep_time
+
+                newPost.total_fats = None
+                newPost.total_carbs = None
+                newPost.total_proteins = None
+
+                newPost.recipe_id = -1
+
+                newPost.cut = oldPost.get_cut()
+                newPost.text = oldPost.get_text()
+
+                db.session.add(newPost)
+
+            db.session.commit()
+
+    return "OK"
 
 
 @front_bp.route("/<string:lang_override>/<path:post_url>")
@@ -81,6 +139,7 @@ def contact():
         "recent_posts": posts
     })
 
+
 @front_bp.route("/cookie-policy/")
 def cookiepolicy():
     current_lang, lang_fallback = langService.get_user_settings(request)
@@ -101,6 +160,7 @@ def cookiepolicy():
 @front_bp.route("/sitemap.xml")
 def sitemap():
     return send_from_directory(os.path.join(cfg.APP_BASE_DIR, "static", "front"), "sitemap.xml")
+
 
 @front_bp.route("/robots.txt")
 def robots():
@@ -127,20 +187,17 @@ def data():
 def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
 
-    _ = Post.query.filter(Post.lang == current_lang)\
-        .order_by(Post.published_at.desc(), Post.id.asc()).all()
-    idx = 0
-    posts = []
-    while idx < 14:
-        idx += 1
-        for i in _:
-            posts.append(i)
+    posts = Post.query.filter(Post.lang == current_lang)\
+        .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     # number of columns on landing page
-    N_ROW = 3
     n = len(posts)
-    head = posts[:-(n % N_ROW)]
-    tail = posts[-(n % N_ROW):]
+    has_next_item = n > cnst.ITEM_PER_PAGE
+    if has_next_item:
+        posts = posts[:-1]
+        n = n - 1
+    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
     posts_left = []
     posts_center = []
     posts_right = []
@@ -153,12 +210,14 @@ def nw_index():
 
     i = 0
     while len(tail) > 0:
-        post_refs[i % N_ROW].append(tail.pop())
+        post_refs[i % cnst.COLUMNS_ON_LANDING].append(tail.pop())
         i += 1
+
     #TODO: replace with /
     links = {lang: "/recipe" for lang in cnst.SUPPORTED_LANGS}
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     return render_template("front/post/index.html", v={
+        "prefix": "/recipe",
         "links": links,
         "lang_dic": lang_dic,
         "meta_language": Language.meta_lang[current_lang],
@@ -167,14 +226,77 @@ def nw_index():
         "posts_center": posts_center,
         "posts_right": posts_right,
         "phrases": PHRASES[current_lang],
+        "has_next_item": has_next_item
     })
+
+
+@front_bp.route("/recipe/more/<int:page>", methods=["POST",])
+def nw_index_more(page):
+    current_lang, lang_fallback = langService.get_user_settings(request)
+
+    posts = Post.query.filter(Post.lang == current_lang) \
+        .order_by(Post.published_at.desc(), Post.id.desc()).offset(page*cnst.ITEM_PER_PAGE).limit(cnst.ITEM_PER_PAGE + 1).all()
+
+    # number of columns on landing page
+    n = len(posts)
+    has_next_item = n > cnst.ITEM_PER_PAGE
+    if has_next_item:
+        posts = posts[:-1]
+        n = n - 1
+    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    posts_left = []
+    posts_center = []
+    posts_right = []
+    post_refs = [posts_left, posts_center, posts_right]
+
+    while len(head) > 0:
+        posts_left.append(head.pop())
+        posts_center.append(head.pop())
+        posts_right.append(head.pop())
+
+    i = 0
+    while len(tail) > 0:
+        post_refs[i % cnst.COLUMNS_ON_LANDING].append(tail.pop())
+        i += 1
+
+    # TODO: replace with /
+    links = {lang: "/recipe" for lang in cnst.SUPPORTED_LANGS}
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+
+    html = render_template("front/post/recipe_more.html", v={
+        "prefix": "/recipe",
+        "links": links,
+        "lang_dic": lang_dic,
+        "meta_language": Language.meta_lang[current_lang],
+        "current_lang": current_lang,
+        "posts_left": posts_left,
+        "posts_center": posts_center,
+        "posts_right": posts_right,
+        "phrases": PHRASES[current_lang],
+
+    })
+    result = {
+        "payload": html,
+        "has_next_item": has_next_item
+    }
+    return json.dumps(result)
+    # response = current_app.make_response(html)
+    # return response
+
+
+@front_bp.route("/recipe/<string:lang_override>/category/<string:category>")
+def nw_category(lang_override, category):
+    pass
 
 
 @front_bp.route("/recipe/<string:lang_override>/<path:post_url>")
 def nw_detail(lang_override, post_url):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    posts = Post.query.filter(Post.url == post_url).all()
+    url = Post.makeup_url(post_url)
+    posts = Post.query.filter(Post.url == url).all()
+
     post = None
     for p in posts:
         if p.lang == current_lang:
@@ -195,10 +317,14 @@ def nw_detail(lang_override, post_url):
         if lang in available_translations:
             filtered_lang_dic[lang] = lang_dic[lang]
 
-    recent_posts = [] # TODO
     might_like_posts = [] # TODO
+    recent_posts = Post.query.filter(Post.lang == current_lang).\
+        order_by(Post.published_at.desc(), Post.id.asc()).limit(3).all()
 
-    categories = ["Breakfast", "Lunch", "Desserts", "Articles", "Dinner", "Drinks"] # TODO
+    categories = [
+        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c, *_ in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all()
+    ]
+
     html = render_template("front/post/detail.html", v={
         "lang_dic": filtered_lang_dic,
         "links": links,
@@ -214,30 +340,5 @@ def nw_detail(lang_override, post_url):
     response.set_cookie('lang', value=current_lang)
     return response
 
-    # current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-    # base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    # db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
-    # post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
-    #
-    # db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-    # recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    # links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cfg.SUPPORTED_LANGS}
-    # lang_dic = {u"ru": u"Русский", u"en": u"English"}
-    # filtered_lang_dic = {}
-    # for lang in lang_dic.keys():
-    #     if post.is_translated_for(lang):
-    #         filtered_lang_dic[lang] = lang_dic[lang]
-    # html = render_template("front/blogpost.html", v={
-    #     "lang_dic": filtered_lang_dic, # переключалка языков
-    #     "links": links, # переключалка языков
-    #     "current_lang": current_lang, # текущий язык, использ в нескол местах
-    #     "meta_language": Language.meta_lang[current_lang], # meta tags
-    #     "post": post,
-    #     "recent_posts": recent_posts
-    # })
-    #
-    # response = current_app.make_response(html)
-    # response.set_cookie('lang', value=current_lang)
-    # return response
 
 #endregion

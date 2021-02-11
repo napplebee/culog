@@ -102,7 +102,7 @@
               <div class="card-body">
                 <h4 class="card-title">{{ v.phrases.categories }}</h4>
                 {% for c in v.categories %}
-                <a class="btn btn-light btn-sm mb-1" href="#todo">{{ c }}</a>
+                <a class="btn btn-light btn-sm mb-1" href="{{ c[1] }}">{{ c[0] }}</a>
                 {% endfor %}
               </div>
             </div><!-- /.card -->
@@ -229,6 +229,6 @@
 
   <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
   <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-  <script src="{{ url_for('static', filename = 'front/recipe/js/lang_switch.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
 </body>
 </html>

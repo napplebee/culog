@@ -21,7 +21,7 @@ class Recipe(db.Model):
     visible_ru = db.Column(db.Boolean, default=False)
     visible_en = db.Column(db.Boolean, default=False)
 
-    fb_likes = db.Column(db.Integer)
+    # fb_likes = db.Column(db.Integer)
     fb_og_type = db.Column(db.String)
     fb_og_image = db.Column(db.String)
 

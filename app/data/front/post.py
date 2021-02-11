@@ -24,12 +24,20 @@ class Post(db.Model):
     published_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
+    fb_likes = db.Column(db.Integer, default=0)
     fb_og_image = db.Column(db.String)
     fb_og_title = db.Column(db.String)
     fb_og_description = db.Column(db.String)
 
     meta_keywords = db.Column(db.String)
     meta_description = db.Column(db.String)
+
+    cook_time = db.Column(db.String)
+    prep_time = db.Column(db.String)
+
+    total_fats = db.Column(db.Numeric)
+    total_carbs = db.Column(db.Numeric)
+    total_proteins = db.Column(db.Numeric)
 
     cut = db.Column(db.Text)
     text = db.Column(db.Text)
@@ -78,16 +86,16 @@ class Post(db.Model):
         return result
 
     @staticmethod
-    def __makeup_url(lang, url):
+    def makeup_url(url):
         if not url.startswith("/"):
             url = "/%s" % url
         if not url.endswith("/"):
             url = "%s/" % url
-        return "%s%s" % (lang, url)
+        return url
 
     def __cook(self, _lang, _header, _recipe):
         self.lang = _lang
-        self.url = Post.__makeup_url(_lang, _recipe.url)
+        self.url = Post.makeup_url(_recipe.url)
         self.recipe_id = _recipe.id
 
         self.title = _header.title
@@ -97,14 +105,23 @@ class Post(db.Model):
         self.recipe_cuisine = _header.recipe_cuisine
         self.recipe_category = _header.recipe_category
 
+        self.cook_time = _recipe.cook_time
+        self.prep_time = _recipe.prep_time
+
+        self.total_fats = _recipe.total_fats
+        self.total_carbs = _recipe.total_carbs
+        self.total_proteins = _recipe.total_proteins
+
         self.published_at = _recipe.published_at
         self.updated_at = dt.datetime.utcnow()
 
         self.fb_og_title = _header.fb_og_title
         self.fb_og_description = _header.fb_og_description
         self.fb_og_image = _recipe.fb_og_image
+
         self.meta_keywords = _header.meta_keywords
         self.meta_description = _header.meta_description
+
         self.cut = _header.cut
         self.render(_recipe, _header, _lang)
 

@@ -49,7 +49,7 @@
 
   <main class="main pt-4">
 
-    <div class="container">
+    <div class="container" id="indexContainer">
 
       <div class="row">
         {# posts_left #}
@@ -61,12 +61,14 @@
 {# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
 {#<!--                </a>-->#}
-                in
+                {% if p.recipe_category %}
+                @
 {#<!--                <a href="page-category.html">-->#}
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
+                {% endif %}
               </div>
-              <a href="{{ v.current_lang }}/{{ p.url }}">
+              <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
                 <h4 class="card-title">
                   {{ p.title }} {{ p.id }}
                 </h4>
@@ -75,12 +77,14 @@
                 </h6>
               </a>
             </header>
-            <a href="{{ v.current_lang }}/{{ p.url }}">
+              {% if p.fb_og_image %}
+              <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
             </a>
-            <div class="card-body">
+              {% endif %}
+              <div class="card-body">
               <p class="card-text">
-                {{ p.cut }}
+                {{ p.cut | safe }}
               </p>
             </div>
           </article>
@@ -95,12 +99,14 @@
 {# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
 {#<!--                </a>-->#}
-                in
+                {% if p.recipe_category %}
+                @
 {#<!--                <a href="page-category.html">-->#}
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
+                {% endif %}
               </div>
-              <a href="{{ v.current_lang }}/{{ p.url }}">
+              <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
                 <h4 class="card-title">
                   {{ p.title }} {{ p.id }}
                 </h4>
@@ -109,12 +115,16 @@
                 </h6>
               </a>
             </header>
-            <a href="{{ v.current_lang }}/{{ p.url }}">
+              {% if p.fb_og_image %}
+            <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
+
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+
             </a>
+              {% endif %}
             <div class="card-body">
               <p class="card-text">
-                {{ p.cut }}
+                {{ p.cut | safe }}
               </p>
             </div>
           </article>
@@ -129,32 +139,38 @@
 {# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
 {#<!--                </a>-->#}
+                {% if p.recipe_category %}
                 @
 {#<!--                <a href="page-category.html">-->#}
                 {{ p.recipe_category }}
 {#<!--                </a>-->#}
+                {% endif %}
               </div>
-              <a href="{{ v.current_lang }}/{{ p.url }}">
+              <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
                 <h4 class="card-title">
-                  {{ p.title }}
+                  {{ p.title }} {{ p.id }}
                 </h4>
                 <h6 class="card-title">
                   {{ p.sub_title }}
                 </h6>
               </a>
             </header>
-            <a href="{{ v.current_lang }}/{{ p.url }}">
+              {% if p.fb_og_image %}
+            <a href="{{ v.prefix }}/{{ p.lang }}{{ p.url }}">
               <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
             </a>
-            <div class="card-body">
+              {% endif %}
+              <div class="card-body">
               <p class="card-text">
-                {{ p.cut }}
+                {{ p.cut | safe }}
               </p>
-            </div>
+              </div>
           </article>
           {% endfor %}
         </div>
+
       </div>
+
     </div>
 
   </main>
@@ -164,14 +180,35 @@
       <div class="text-center">
         <div class="row">
           <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ml-auto mr-auto">
-            <div class="input-group mb-3 mt-3">
-              <input type="text" class="form-control" placeholder="Email address" aria-label="Email address">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Subscribe</button>
-              </span>
+{#<!--            <div class="input-group mb-3 mt-3">-->
+<!--              <input type="text" class="form-control" placeholder="Email address" aria-label="Email address">-->
+<!--              <span class="input-group-btn">-->
+<!--                <button class="btn btn-secondary" type="button">Subscribe</button>-->
+<!--              </span>-->
+<!--            </div>-->#}
+            <div class="d-flex justify-content-center mt-3 mb-3">
+{#<!--              <ul class="pagination">-->
+<!--              <li class="page-item disabled">-->
+<!--                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
+<!--              </li>-->
+<!--              <li class="page-item active" aria-current="page">-->
+<!--                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>-->
+<!--              </li>-->
+<!--              <li class="page-item">-->
+<!--                <a class="page-link" href="#">Next</a>-->
+<!--              </li>-->
+<!--            </ul>-->#}
+
+                <button class="btn btn-dark" id="loadMore">
+                    {{ v.phrases.load_more }}
+                </button>
             </div>
           </div>
         </div>
+
+          <!-- 2 -->
+
+          <!-- 2 -->
       </div>
     </div>
   </div>
@@ -253,7 +290,7 @@
 
 <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/lang_switch.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
 
 </body>
 </html>

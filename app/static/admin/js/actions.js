@@ -40,6 +40,7 @@ $(document).ready(function(){
         var recipe_id = $(this).attr('data-r-id');
         closeMenu(recipe_id);
         generatePost(recipe_id, RU_LANG, "Russian post was created");
+        return false;
     });
     //generate en
     $("a[id^='generate_en_']").click(function(event){
