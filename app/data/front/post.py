@@ -149,3 +149,6 @@ class Post(db.Model):
     def make_invisible(self):
         self.visible = False
         db.session.commit()
+
+    def get_categories(self):
+        return [_.strip() for _ in self.recipe_category.split(",") if _ != ""]

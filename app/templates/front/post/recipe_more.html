@@ -5,14 +5,12 @@
           <article class="card mb-4">
             <header class="card-header">
               <div class="card-meta">
-{# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-{#<!--                </a>-->#}
                 {% if p.recipe_category %}
                 @
-{#<!--                <a href="page-category.html">-->#}
-                {{ p.recipe_category }}
-{#<!--                </a>-->#}
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                {% endfor %}
                 {% endif %}
               </div>
               <a href="/{{ p.lang }}{{ p.url }}">
@@ -43,14 +41,12 @@
           <article class="card mb-4">
             <header class="card-header">
               <div class="card-meta">
-{# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-{#<!--                </a>-->#}
                 {% if p.recipe_category %}
                 @
-{#<!--                <a href="page-category.html">-->#}
-                {{ p.recipe_category }}
-{#<!--                </a>-->#}
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                {% endfor %}
                 {% endif %}
               </div>
               <a href="/{{ p.lang }}{{ p.url }}">
@@ -83,14 +79,12 @@
           <article class="card mb-4">
             <header class="card-header">
               <div class="card-meta">
-{# <!--                <a href="#">--> #}
                   <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-{#<!--                </a>-->#}
                 {% if p.recipe_category %}
                 @
-{#<!--                <a href="page-category.html">-->#}
-                {{ p.recipe_category }}
-{#<!--                </a>-->#}
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                {% endfor %}
                 {% endif %}
               </div>
               <a href="/{{ p.lang }}{{ p.url }}">

@@ -260,9 +260,56 @@ def nw_category(lang_override, category):
     })
 
 
-@front_bp.route("/<string:lang_override>/category/<string:category>/more")
-def nw_category_more(lang_override, category):
-    return "%s -- %s" % (lang_override, category)
+@front_bp.route("/more/<string:lang_override>/category/<string:category>/<int:page>", methods=["POST",])
+def nw_category_more(lang_override, category, page):
+    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+
+    search = "%{}%".format(category)
+    posts = Post.query.filter(Post.lang == current_lang, Post.recipe_category.like(search)) \
+        .order_by(Post.published_at.desc(), Post.id.desc()).offset(page*cnst.ITEM_PER_PAGE).limit(cnst.ITEM_PER_PAGE + 1).all()
+
+    # number of columns on landing page
+    n = len(posts)
+    has_next_item = n > cnst.ITEM_PER_PAGE
+    if has_next_item:
+        posts = posts[:-1]
+        n = n - 1
+    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    posts_left = []
+    posts_center = []
+    posts_right = []
+    post_refs = [posts_left, posts_center, posts_right]
+
+    while len(head) > 0:
+        posts_left.append(head.pop())
+        posts_center.append(head.pop())
+        posts_right.append(head.pop())
+
+    i = 0
+    while len(tail) > 0:
+        post_refs[i % cnst.COLUMNS_ON_LANDING].append(tail.pop())
+        i += 1
+
+    # TODO: replace with /
+    links = {lang: "/" for lang in cnst.SUPPORTED_LANGS}
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    html = render_template("front/post/recipe_more.html", v={
+        "links": links,
+        "lang_dic": lang_dic,
+        "meta_language": Language.meta_lang[current_lang],
+        "current_lang": current_lang,
+        "posts_left": posts_left,
+        "posts_center": posts_center,
+        "posts_right": posts_right,
+        "phrases": PHRASES[current_lang],
+
+    })
+    result = {
+        "payload": html,
+        "has_next_item": has_next_item
+    }
+    return json.dumps(result)
 
 
 @front_bp.route("/<string:lang_override>/<path:post_url>")
@@ -327,6 +374,19 @@ def nw_detail(lang_override, post_url):
     response.set_cookie('lang', value=current_lang)
     return response
 
+
+@front_bp.route("/<string:lang_override>/about")
+def about(lang_override):
+    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+    lang_dic = {u"ru": u"Русский", u"en": u"English"}
+    links = {lang: url_for(".about", lang_override=lang) for lang in cnst.SUPPORTED_LANGS}
+    return render_template("front/about.%s.html" % current_lang, v={
+        "links": links,
+        "lang_dic": lang_dic,
+        "meta_language": Language.meta_lang[current_lang],
+        "current_lang": current_lang,
+        "phrases": PHRASES[current_lang],
+    })
 
 #endregion
 

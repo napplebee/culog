@@ -11,9 +11,11 @@ function switch_lang(v,loc)
 
 var loadMore = function(){
     var rows = $("div#indexContainer > div.row");
-    console.log(rows.length);
+    var location = window.location.href.replace(window.location.origin, "");
+    if(!location.endsWith("/"))
+        location = location + "/"
     $.ajax({
-        url: "/more/" + rows.length,
+        url:  "/more" + location + rows.length,
         method: "POST",
         dataType: "json",
         success: function(data){
@@ -26,6 +28,9 @@ var loadMore = function(){
               my_locale = "en_US";
             }
             document.timeago.render(document.querySelectorAll('.timeago'), my_locale)
+            if(!data.has_next_item){
+                $("#loadMore").addClass("invisible")
+            }
         }
     });
 }

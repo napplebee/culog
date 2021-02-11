@@ -6,8 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Bootstrap 4 Magazine/Blog Theme">
     <meta name="author" content="Kate CookWithLove">
-    <title>{% block title %}Cook with love{% endblock %}</title>
+    <title>Обо мне</title>
     <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
+    <style>
+        #content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+	#indexContainer a {
+	text-decoration: underline;
+	color: #212529;
+	}
+@media screen and (min-width: 1201px) {
+    #content {
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+}
+
+@media screen and (min-width: 1001px){
+    div.circular {
+        float: left;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
+        -webkit-border-radius: 150px;
+        -moz-border-radius: 150px;
+        background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+
+
+@media screen and (max-width: 1000px){
+    div.circular {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+        background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+    </style>
 </head>
 <body>
 
@@ -24,11 +71,19 @@
             <li class="nav-item">
               <a class="nav-link" href="/">{{ v.phrases.recipes }}</a>
             </li>
-            {% for lng in v.lang_dic %}
+            {#{% for lng in v.lang_dic %}
                 {% if lng == v.current_lang %}
                   <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="#"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}#}
+
+              {% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
                 {% endif %}
             {% endfor %}
           </ul>
@@ -38,8 +93,8 @@
 
         <div class="collapse navbar-collapse order-4 order-md-4" id="navbar-right">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
+            <li class="nav-item active">
+              <a class="nav-link">{{ v.phrases.about }}</a>
             </li>
           </ul>
         </div>
@@ -51,116 +106,19 @@
 
     <div class="container" id="indexContainer">
 
-      <div class="row">
-        {# posts_left #}
-        <div class="col-md-4">
-          {% for p in v.posts_left %}
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
-                @
-                  {% for _ in p.get_categories() %}
-                  <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                  {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-              <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
-              {% endif %}
-              <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-        {# posts_center #}
-        <div class="col-md-4">
-          {% for p in v.posts_center %}
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
-                @
-                {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
+      <div class="row d-flex justify-content-center">
+        <div class="circular"></div>
 
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-
-            </a>
-              {% endif %}
-            <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-        {# posts_right #}
-        <div class="col-md-4">
-          {% for p in v.posts_right %}
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
-                @
-                {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
-              {% endif %}
-              <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-              </div>
-          </article>
-          {% endfor %}
+        <div style="margin-left:15px;margin-top:15px;float:right;">
+                Я очень люблю свою семью, готовить вкусняшки для них и вместе с ними, спорт, IT и моего <a href="https://www.instagram.com/chrisjackrussell/" target="_blank">волосатого поросенка</a>.
+            Если вы не можете готовить с любовью, попросите кого-нибудь сделать это для вас!<br>
+            Если вы окончательно запутались с каким-нибудь рецептом - пишите <a name="#">kate [at] cookwith [dot] love</a>. А также присылайте мне семейные или просто любимые рецепты, я с радостью размещу их на страницах этого блога :)
+            <br><br>
+            И не забудьте подписаться на меня в <a href="https://www.facebook.com/cookwith.1ove/" target="_blank">facebook</a>,
+            <a href="https://www.instagram.com/cookwith.love/" target="_blank">instagram</a> и
+            <a href="https://vk.com/cookwith.love" target="_blank">вконтакте</a>,
+            и читать кулинарные заметки в <a href="https://t.me/cookwith_love" target="_blank">телеграм канале</a>!<br>
+            <h4 style="color:#444;float:right; padding-right:10px">Kate CookWithLove</h4>
         </div>
 
       </div>
@@ -249,9 +207,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
         </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="page-contact.html">Contact</a>-->
-<!--        </li>-->
       </ul>
       <div class="copy">
         &copy; CookwithLove 2020<br />

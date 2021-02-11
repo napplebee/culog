@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse order-4 order-md-4" id="navbar-right">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/about">{{ v.phrases.about }}</a>
+              <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
             </li>
           </ul>
         </div>
@@ -82,11 +82,16 @@
                 <div class="row mb-3">
                 <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
                   <h4 class="h6">{{ p.title }}</h4>
+                  {% if p.fb_og_image %}
                   <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+                  {% endif %}
                 </a>
                   <span class="mt-2 mb-1">
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
-                 @ {{ p.recipe_category }}
+                 @
+                 {% for _ in p.get_categories() %}
+                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                 {% endfor %}
                   </span>
                 </div>
                 {% endfor %}
@@ -115,7 +120,10 @@
                 </a>
                 <span class="mt-2 mb-1">
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
-                @ {{ p.recipe_category }}
+                @
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %}
                 </span>
                 </div>
                 {% endfor %}
