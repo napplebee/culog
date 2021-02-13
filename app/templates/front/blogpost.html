@@ -9,7 +9,6 @@
         }, function(response){});
     }
 </script>
-<script src="https://www.yummly.com/js/widget.js?general"></script>
 
 <!-- Google search https://developers.google.com/search/docs/data-types/recipe -->
 <!-- Google search https://developers.google.com/search/docs/data-types/article -->
@@ -118,7 +117,6 @@
         <span class="date"><span class="month">{{ v.post.published_at.strftime('%b') }}</span> <span class="day">{{ v.post.published_at.day }}</span><span class="year">, {{ v.post.published_at.year }}</span></span>
         <ul class="stats">
             <li><a href="#" onclick="share('{{ v.post.get_url() }}'); return false;" class="icon fa-facebook">{{ v.post.fb_likes|default("∞", true) }}</a></li>
-            <li class="yum"><a href="https://www.yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a></li>
             <li class="yum"><script type="text/javascript">document.write(VK.Share.button('{{ v.post.get_url() }}',{type: "round", text: "Share"}));</script><li>
         </ul>
     </div>
