@@ -152,3 +152,32 @@ class Post(db.Model):
 
     def get_categories(self):
         return [_.strip() for _ in self.recipe_category.split(",") if _ != ""]
+
+    def hotfix(self, form):
+        if self.id != int(form.id.data):
+            raise ValueError("Wrong id %s - %s", self.id, form.id.data)
+
+        self.url = form.url.data
+        self.lang = form.lang.data
+        self.visible = form.visible.data
+        self.title = form.title.data
+        self.sub_title = form.sub_title.data
+        self.recipe_yield = form.recipe_yield.data
+        self.recipe_cuisine = form.recipe_cuisine.data
+        self.recipe_category = form.recipe_category.data
+        self.published_at = form.published_at.data
+        self.fb_likes = int(form.fb_likes.data)
+        self.fb_og_image = form.fb_og_image.data
+        self.fb_og_title = form.fb_og_image.data
+        self.fb_og_description = form.fb_og_description.data
+        self.meta_keywords = form.meta_keywords.data
+        self.meta_description = form.meta_description.data
+        self.cook_time = form.cook_time.data
+        self.prep_time = form.prep_time.data
+        self.total_fats = float(form.total_fats.data if len(form.total_fats.data) > 0 else 0)
+        self.total_carbs = float(form.total_carbs.data if form.total_carbs.data != "" else 0)
+        self.total_proteins = float(form.total_proteins.data if form.total_proteins.data != "" else 0)
+        self.cut = form.cut.data
+        self.text = form.text.data
+
+        db.session.commit()

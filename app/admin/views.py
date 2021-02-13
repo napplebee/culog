@@ -10,8 +10,8 @@ from flask import render_template, request, url_for, redirect
 from app.services.language_service import langService
 from app.common.constants import Constants as cnst
 
-from app.admin.forms import BlogPostForm
-from app.admin import new_forms as nf
+from app.admin.forms import PostForm
+from app.admin import forms as nf
 from app.data.admin.recipe import Recipe
 from app.data.front.post import Post
 
@@ -25,100 +25,103 @@ def index():
     return render_template("admin/base.html")
 
 
-@admin.route("/blog/all")
+@admin.route("/post/all")
 @login_required
 @roles_required("root")
-def blog_post_list():
-    headers = BlogPostHeader.query.order_by(BlogPostHeader.updated_at.desc(), BlogPostHeader.created_at.desc()).all()
+def post_list():
     posts = [
         {
-            "id": h.id,
-            "name": h.name,
-            "created_at": h.created_at.strftime('%d.%m.%y %H:%M') if h.created_at else "", # move strftime call to template filter
-            "updated_at": h.updated_at.strftime('%d.%m.%y %H:%M') if h.updated_at else "",
-            "visible": h.visible
-        } for h in headers
+            "id": p.id,
+            "title": p.title,
+            "recipe_id" : p.recipe_id,
+            "lang": p.lang,
+            "published_at": p.published_at.strftime('%d.%m.%y %H:%M') if p.published_at else "",
+            "updated_at": p.updated_at.strftime('%d.%m.%y %H:%M') if p.updated_at else "",
+            "visible": p.visible
+        } for p in Post.query.order_by(Post.updated_at.desc(), Post.id.desc()).all()
     ]
-    return render_template("admin/blog/list.html", v={
+    return render_template("admin/post/list.html", v={
         "posts": posts,
         "supported_langs": cnst.SUPPORTED_LANGS
         })
 
 
-@admin.route("/blog/new", methods=["POST", "GET"])
-@login_required
-@roles_required("root")
-def blog_post_new():
-    f = BlogPostForm()
-    # if request.method == "POST" and f.validate():
-    if request.method == "POST":
-        post = BlogPost.populate_from_ui(f)
-        post_id = post.save()
-        return redirect("/admin/blog/update/{0}?saved".format(post_id))
-    title = "Create new post"
-    return render_template("admin/blog/detail.html", v={
-        "title": title,
-        "f": f,
-        "action": ""
-    })
+# @admin.route("/blog/new", methods=["POST", "GET"])
+# @login_required
+# @roles_required("root")
+# def blog_post_new():
+#     f = BlogPostForm()
+#     # if request.method == "POST" and f.validate():
+#     if request.method == "POST":
+#         post = BlogPost.populate_from_ui(f)
+#         post_id = post.save()
+#         return redirect("/admin/blog/update/{0}?saved".format(post_id))
+#     title = "Create new post"
+#     return render_template("admin/blog/detail.html", v={
+#         "title": title,
+#         "f": f,
+#         "action": ""
+#     })
 
 
-@admin.route("/blog/update/<int:post_id>", methods=["POST", "GET"])
+@admin.route("/post/update/<int:post_id>", methods=["POST", "GET"])
 @login_required
 @roles_required("root")
-def blog_post_update(post_id):
+def post_update(post_id):
     if request.method == "POST":
-        f = BlogPostForm()
-        post = BlogPost.populate_from_ui(f)
-        post.update()
-        return redirect("/admin/blog/update/{0}?saved".format(post_id))
+        f = PostForm()
+        post = Post.query.get(post_id)
+        post.hotfix(f)
+        # post = Post.populate_from_ui(f)
+        # post.update()
+        return redirect("/admin/post/update/{0}?saved".format(post_id))
         # return redirect(url_for('.blog_post_list'))
     else:
-        post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
-        title = u"Update {0}".format(post.name)
-        f = BlogPostForm(obj=post)
+        post = Post.query.get(post_id)
+        # post = BlogPost.populate_from_db(BlogPostHeader.query.get(post_id))
+        f = PostForm(obj=post)
 
-        return render_template("admin/blog/detail.html", v={
-            "title": title,
+        return render_template("admin/post/update.html", v={
+            "title": post.title,
             "f": f,
             "action": "",
             "saved": 1 if "saved" in request.args else 0
         })
 
 
-@login_required
-@roles_required("root")
-@admin.route("/post_preview/<string:lang_override>/<int:post_id>")
-def blog_post_preview(lang_override, post_id):
-    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-    base_url = "{0}/{1}".format(lang_override, request.url_root[:request.url_root.find("/", 8)])
-    db_data = BlogPostHeader.query.get(post_id)
-    post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
-    return render_template("admin/blog/preview.html", v={
-        "post": post
-    })
+# @login_required
+# @roles_required("root")
+# @admin.route("/post_preview/<string:lang_override>/<int:post_id>")
+# def blog_post_preview(lang_override, post_id):
+#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+#     base_url = "{0}/{1}".format(lang_override, request.url_root[:request.url_root.find("/", 8)])
+#     db_data = BlogPostHeader.query.get(post_id)
+#     post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
+#     return render_template("admin/blog/preview.html", v={
+#         "post": post
+#     })
 
 
-@login_required
-@roles_required("root")
-@admin.route("/post_list_preview/<string:lang_override>")
-def blog_list_preview(lang_override):
-    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-    db_data = BlogPostHeader.query.filter().order_by(BlogPostHeader.created_at.desc())
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    return render_template("admin/blog/list_preview.html", v={
-        "posts": posts
-    })
+# @login_required
+# @roles_required("root")
+# @admin.route("/post_list_preview/<string:lang_override>")
+# def blog_list_preview(lang_override):
+#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+#     db_data = BlogPostHeader.query.filter().order_by(BlogPostHeader.created_at.desc())
+#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+#     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+#     return render_template("admin/blog/list_preview.html", v={
+#         "posts": posts
+#     })
 
 
 @login_required
 @roles_required("root")
 @admin.route("/test/create", methods=["GET"])
 def fck():
+    return "Ok"
     from app.core import db
     db.create_all()
-    return "Ok"
 
 #region cookwithlove 2.0
 
