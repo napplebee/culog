@@ -956,4 +956,48 @@
                hreflang="ru"
                href="http://cookwith.love/ru/baking/moist_lemon_cake"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/honey_cake/loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/honey_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/honey_cake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/honey_cake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/honey_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/honey_cake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/pistachio_raspberry_cake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pistachio_raspberry_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/pistachio_raspberry_cake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/pistachio_raspberry_cake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/pistachio_raspberry_cake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/pistachio_raspberry_cake"/>
+  </url>
 </urlset>
