@@ -2,7 +2,7 @@
 
 from app.core import db
 from app.common.constants import Constants as cnst
-
+from app.common.phrases import PHRASES
 import datetime as dt
 
 
@@ -21,7 +21,7 @@ class Post(db.Model):
     recipe_cuisine = db.Column(db.String)
     recipe_category = db.Column(db.String)
 
-    published_at = db.Column(db.DateTime)
+    published_at = db.Column(db.DateTime, default=dt.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
 
     fb_likes = db.Column(db.Integer, default=0)
@@ -89,8 +89,8 @@ class Post(db.Model):
     def makeup_url(url):
         if not url.startswith("/"):
             url = "/%s" % url
-        if not url.endswith("/"):
-            url = "%s/" % url
+        if url.endswith("/"):
+            url = url[:-1]
         return url
 
     def __cook(self, _lang, _header, _recipe):
@@ -137,7 +137,8 @@ class Post(db.Model):
         template = templateEnv.get_template("admin/recipe/render_%s.html" % lang)
         _text = template.render(v={
             "r": recipe,
-            "h": head
+            "h": head,
+            "ph": PHRASES[lang]
         })
 
         self.text = _text
@@ -157,7 +158,7 @@ class Post(db.Model):
         if self.id != int(form.id.data):
             raise ValueError("Wrong id %s - %s", self.id, form.id.data)
 
-        self.url = form.url.data
+        self.url = Post.makeup_url(form.url.data)
         self.lang = form.lang.data
         self.visible = form.visible.data
         self.title = form.title.data

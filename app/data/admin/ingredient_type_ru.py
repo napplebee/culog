@@ -56,8 +56,8 @@ class IngredientTypeRu(db.Model):
         if form.id.data.isdigit():
             ingr_type.id = form.id.data
         ingr_type.name = form.name.data
-        ingr_type.type = form.name.data
-        ingr_type.image = form.name.data
+        ingr_type.type = form.type.data
+        ingr_type.image = form.image.data
 
         for ingr in form.ingredients.entries:
             ingr_ru = IngredientRu.populate_from_form(

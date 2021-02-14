@@ -21,69 +21,69 @@ import json
 import random
 
 
-@front_bp.route("/old/")
-def index():
-    current_lang, lang_fallback = langService.get_user_settings(request)
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
-    # .limit(10)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
-
-    recent_posts = posts[:2]
-
-    return render_template("front/index.html", v={
-        "meta_language": Language.meta_lang[current_lang],
-        "current_lang": current_lang,
-        "posts": posts,
-        "recent_posts": recent_posts
-    })
-
-
-
-@front_bp.route("/old/<string:lang_override>/<path:post_url>")
-def detail(lang_override, post_url):
-    current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
-    post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
-
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-    recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cnst.SUPPORTED_LANGS}
-    lang_dic = {u"ru": u"Русский", u"en": u"English"}
-    filtered_lang_dic = {}
-    for lang in lang_dic.keys():
-        if post.is_translated_for(lang):
-            filtered_lang_dic[lang] = lang_dic[lang]
-    html = render_template("front/blogpost.html", v={
-        "lang_dic": filtered_lang_dic,
-        "links": links,
-        "current_lang": current_lang,
-        "meta_language": Language.meta_lang[current_lang],
-        "post": post,
-        "recent_posts": recent_posts
-    })
-
-    response = current_app.make_response(html)
-    response.set_cookie('lang', value=current_lang)
-    return response
-
-
-@front_bp.route("/contact/")
-def contact():
-    current_lang, lang_fallback = langService.get_user_settings(request)
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-    if current_lang == "ru":
-        tpl = "front/contact.ru.html"
-    else:
-        tpl = "front/contact.en.html"
-    return render_template(tpl, v={
-        "current_lang": current_lang,
-        "meta_language": Language.meta_lang[current_lang],
-        "recent_posts": posts
-    })
+# @front_bp.route("/old/")
+# def index():
+#     current_lang, lang_fallback = langService.get_user_settings(request)
+#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
+#     # .limit(10)
+#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+#     posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
+#
+#     recent_posts = posts[:2]
+#
+#     return render_template("front/index.html", v={
+#         "meta_language": Language.meta_lang[current_lang],
+#         "current_lang": current_lang,
+#         "posts": posts,
+#         "recent_posts": recent_posts
+#     })
+#
+#
+#
+# @front_bp.route("/old/<string:lang_override>/<path:post_url>")
+# def detail(lang_override, post_url):
+#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
+#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+#     db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
+#     post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
+#
+#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
+#     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+#     links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cnst.SUPPORTED_LANGS}
+#     lang_dic = {u"ru": u"Русский", u"en": u"English"}
+#     filtered_lang_dic = {}
+#     for lang in lang_dic.keys():
+#         if post.is_translated_for(lang):
+#             filtered_lang_dic[lang] = lang_dic[lang]
+#     html = render_template("front/blogpost.html", v={
+#         "lang_dic": filtered_lang_dic,
+#         "links": links,
+#         "current_lang": current_lang,
+#         "meta_language": Language.meta_lang[current_lang],
+#         "post": post,
+#         "recent_posts": recent_posts
+#     })
+#
+#     response = current_app.make_response(html)
+#     response.set_cookie('lang', value=current_lang)
+#     return response
+#
+#
+# @front_bp.route("/contact/")
+# def contact():
+#     current_lang, lang_fallback = langService.get_user_settings(request)
+#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
+#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+#     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+#     if current_lang == "ru":
+#         tpl = "front/contact.ru.html"
+#     else:
+#         tpl = "front/contact.en.html"
+#     return render_template(tpl, v={
+#         "current_lang": current_lang,
+#         "meta_language": Language.meta_lang[current_lang],
+#         "recent_posts": posts
+#     })
 
 
 @front_bp.route("/cookie-policy/")
@@ -341,9 +341,9 @@ def nw_detail(lang_override, post_url):
     category = post.recipe_category.split(",")[0]
 
     search = "%{}%".format(category)
-    might_like_posts = set(Post.query.filter(Post.recipe_category.like(search)).limit(12).all())
+    might_like_posts = set(Post.query.filter(Post.id != post.id, Post.fb_og_image != '', Post.recipe_category.like(search)).limit(12).all())
 
-    recent_posts = Post.query.filter(Post.lang == current_lang).\
+    recent_posts = Post.query.filter(Post.id != post.id, Post.lang == current_lang, Post.fb_og_image != '').\
         order_by(Post.published_at.desc(), Post.id.asc()).limit(6).all()
 
     might_like_posts = might_like_posts - set(recent_posts)
@@ -389,62 +389,6 @@ def about(lang_override):
     })
 
 #endregion
-
-
-@front_bp.route("/migrate")
-def migrate():
-    if True:
-        pass
-    else:
-        for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
-
-            db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
-            # .limit(10)
-            base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-            posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
-                     post.is_translated_for(current_lang)]
-
-            for oldPost in posts:
-                newPost = Post()
-                newPost.url = Post.makeup_url(oldPost.url)
-                newPost.lang = current_lang
-                newPost.visible = oldPost.visible
-
-                newPost.title = oldPost.get_title()
-                newPost.sub_title = oldPost.get_sub_title()
-
-                newPost.recipe_yield = oldPost.get_recipe_yield()
-                newPost.recipe_cuisine = oldPost.get_recipe_cuisine()
-                newPost.recipe_category = oldPost.get_recipe_category()
-
-                newPost.published_at = oldPost.published_at
-                newPost.updated_at = oldPost.updated_at
-
-                newPost.fb_likes = oldPost.fb_likes
-                newPost.fb_og_image = oldPost.og_image
-                newPost.fb_og_title = oldPost.get_og_title()
-                newPost.fb_og_description = oldPost.get_og_description()
-
-                newPost.meta_keywords = oldPost.get_keywords()
-                newPost.meta_description = oldPost.get_description()
-
-                newPost.cook_time = oldPost.cook_time
-                newPost.prep_time = oldPost.prep_time
-
-                newPost.total_fats = None
-                newPost.total_carbs = None
-                newPost.total_proteins = None
-
-                newPost.recipe_id = -1
-
-                newPost.cut = oldPost.get_cut()
-                newPost.text = oldPost.get_text()
-
-                db.session.add(newPost)
-
-            db.session.commit()
-
-    return "OK"
 
 
 @login_required

@@ -1,22 +1,25 @@
 <h1>{{ v.h.title }}</h1>
 <h3>{{ v.h.sub_title }}</h3>
-
 <p>
     {{ v.h.text }}
 </p>
-
-
+<h3>Ингредиенты:</h3>
 {% for iType in v.h.ingredients_type %}
-<p>
-    {{ iType.name }} : {{ iType.type }}<br/>
-    <p>{{ iType.image }}</p>
-    {% for ingr in iType.ingredients %}
-        <p>{{ ingr.name }} -- {{ ingr.amount_value }} {{ ingr.amount_type }}</p>
-        <p>{{ ingr.note }}</p>
-        {% if ingr.optional %}
-            <small>Этот ингрединет опционален</small>
+<h4>{{ iType.name }}:</h4>
+{% if iType.ingredients|length > 0 %}
+<ul class="ingredients">
+{% for ingr in iType.ingredients %}
+    <li>{% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
+        {% if ingr.note %}
+        <br>
+        <i>{{ ingr.note }}</i>
         {% endif %}
-    {% endfor %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if iType.image %}
+<img class="steps" src="{{ iType.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt=" | Cook With ❤">
+{% endif %}
 </p>
-<hr/>
 {% endfor %}

@@ -10,6 +10,7 @@ from flask import render_template, request, url_for, redirect
 from app.services.language_service import langService
 from app.common.constants import Constants as cnst
 
+from app import db
 from app.admin.forms import PostForm
 from app.admin import forms as nf
 from app.data.admin.recipe import Recipe
@@ -123,7 +124,66 @@ def fck():
     from app.core import db
     db.create_all()
 
-#region cookwithlove 2.0
+
+@admin.route("/migrate")
+def migrate():
+    if not True:
+        pass
+    else:
+        for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
+
+            db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(
+                BlogPostHeader.published_at.desc())
+            # .limit(10)
+            base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+            posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
+                     post.is_translated_for(current_lang)]
+
+            for oldPost in posts:
+                newPost = Post()
+                newPost.url = Post.makeup_url(oldPost.url)
+                newPost.lang = current_lang
+                newPost.visible = oldPost.visible
+
+                newPost.title = oldPost.get_title()
+                newPost.sub_title = oldPost.get_sub_title()
+
+                newPost.recipe_yield = oldPost.get_recipe_yield()
+                newPost.recipe_cuisine = oldPost.get_recipe_cuisine()
+                newPost.recipe_category = oldPost.get_recipe_category()
+
+                if oldPost.published_at is not None:
+                    newPost.published_at = oldPost.published_at
+                else:
+                    newPost.published_at = dt.datetime.utcnow()
+
+                newPost.updated_at = oldPost.updated_at
+
+                newPost.fb_likes = oldPost.fb_likes
+                newPost.fb_og_image = oldPost.og_image
+                newPost.fb_og_title = oldPost.get_og_title()
+                newPost.fb_og_description = oldPost.get_og_description()
+
+                newPost.meta_keywords = oldPost.get_keywords()
+                newPost.meta_description = oldPost.get_description()
+
+                newPost.cook_time = oldPost.cook_time
+                newPost.prep_time = oldPost.prep_time
+
+                newPost.total_fats = None
+                newPost.total_carbs = None
+                newPost.total_proteins = None
+
+                newPost.recipe_id = -1
+
+                newPost.cut = oldPost.get_cut()
+                newPost.text = oldPost.get_text()
+
+                db.session.add(newPost)
+
+            db.session.commit()
+
+    return "OK"
 
 
 @login_required
@@ -234,5 +294,3 @@ def recipe_list_preview(lang):
 @roles_required("root")
 def single_recipe_preview(recipe_id, lang):
     pass
-
-#endregion cookwithlove 2.0
