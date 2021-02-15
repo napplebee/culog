@@ -45,6 +45,21 @@ class PostForm(Form):
     submit = SubmitField()
 
 
+class ProcessStepForm(Form):
+    id = HiddenField()
+    description = StringField("Description:")
+    note = TextAreaField("Note:")
+    image = StringField("Image:")
+
+
+class ProcessTypeForm(Form):
+    id = HiddenField()
+    name = StringField("Name:")
+    note = TextAreaField("Note:")
+
+    steps = FieldList(FormField(ProcessStepForm), "Steps", min_entries=1)
+
+
 class IngredientForm(Form):
     id = HiddenField()
     name = StringField("Ingredient&nbsp;name:")
@@ -84,6 +99,7 @@ class RecipeHeaderForm(Form):
     text = TextAreaField("Text:")
 
     ingredients_type = FieldList(FormField(IngredientTypeForm), "Ingredient types:", min_entries=1)
+    process_type = FieldList(FormField(ProcessTypeForm), "Process types:", min_entries=1)
 
 
 class RecipeForm(Form):

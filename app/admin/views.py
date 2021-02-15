@@ -120,14 +120,15 @@ def post_update(post_id):
 @roles_required("root")
 @admin.route("/test/create", methods=["GET"])
 def fck():
-    return "Ok"
+    # return "Ok"
     from app.core import db
     db.create_all()
+    return "Ok"
 
 
 @admin.route("/migrate")
 def migrate():
-    if not True:
+    if True:
         pass
     else:
         for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:

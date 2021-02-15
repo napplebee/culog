@@ -2,6 +2,7 @@
 
 from app.core import db
 from app.data.admin.ingredient_type_ru import IngredientTypeRu
+from app.data.admin.process_type_ru import ProcessTypeRu
 
 
 class RecipeHeaderRu(db.Model):
@@ -28,6 +29,7 @@ class RecipeHeaderRu(db.Model):
     # rename to ingredients_type so it will match
     # the field's name from the form class
     ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")
+    process_type = db.relationship("ProcessTypeRu", backref="process_type_ru", lazy="select")
 
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
@@ -69,6 +71,26 @@ class RecipeHeaderRu(db.Model):
         for ing_type_form in new_ing_types:
             ingredient_type_ru = IngredientTypeRu.populate_from_form(ing_type_form)
             self.ingredients_type.append(ingredient_type_ru)
+
+        id2process_types = {}
+        new_process_types = []
+        for st in form.process_type.entries:
+            if st.form.id.data.isdigit():
+                id2process_types[int(st.form.id.data)] = st.form
+            else:
+                new_process_types.append(st.form)
+
+        for processType in self.process_type:
+            if processType.id in id2process_types:
+                # then updating
+                proc_type_form = id2process_types[processType.id]
+                processType.merge_with_form(proc_type_form)
+            else:
+                db.session.delete(processType)
+
+        for proc_type_form in new_process_types:
+            proc_type_ru = ProcessTypeRu.populate_from_form(proc_type_form)
+            self.process_type.append(proc_type_ru)
 
         return self
 

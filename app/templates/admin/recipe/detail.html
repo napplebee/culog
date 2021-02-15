@@ -139,6 +139,7 @@
                 <div class="col-sm-2">{{ v.f.recipe_header_en.text.label(class="control-label") }}</div>
                 <div class="col-sm-10">{{ v.f.recipe_header_en.text(class="form-control") }}</div>
             </div>
+
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <h3>Ingredient Types</h3>
@@ -222,6 +223,77 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h3>Process Types</h3>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10" id="enProcTypeContainer">
+                    {% for _ in v.f.recipe_header_en.form.process_type.entries %}
+                    {% set procTypeForm = _.form %}
+                    <div class="container-fluid border-top" id="enProcType-{{ loop.index0 }}">
+                        <hr/>
+                        {{ procTypeForm.id }}
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group">
+                                    <button class="btn btn-success" id="enProcTypeCp-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Copy</button>
+                                    <button class="btn btn-secondary" id="enProcTypeRm-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.name.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.name(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.note.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.note(class="form-control", rows=5) }}</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h4>Steps</h4>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10" id="enProcStepContainer-{{ loop.index0 }}">
+                                {% set outerIndex = loop.index0 %}
+                                {% for __ in procTypeForm.steps.entries %}
+                                {% set procStepForm = __.form %}
+                                <div class="container-fluid" id="enProcStep-{{ outerIndex }}-{{ loop.index0 }}">
+                                    <hr/>
+                                    {{ procStepForm.id }}
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-sm btn-success" type="button" id="enProcStepCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
+                                            <button class="btn btn-sm btn-secondary" type="button" id="enProcStepRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.description.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.description(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.note.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.note(class="form-control", rows=5) }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.image.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.image(class="form-control") }}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
             {# === END of ENGLISH GROUP OF FIELDS === #}
         </div>
     </div>
@@ -271,9 +343,7 @@
                 <div class="col-sm-10">{{ v.f.recipe_header_ru.meta_description(class="form-control") }}</div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-2">{{ v.f.recipe_header_ru.fb_og_title.label(class="control-label")
-                    }}
-                </div>
+                <div class="col-sm-2">{{ v.f.recipe_header_ru.fb_og_title.label(class="control-label")}}</div>
                 <div class="col-sm-10">{{ v.f.recipe_header_ru.fb_og_title(class="form-control") }}</div>
             </div>
             <div class="row form-group">
@@ -367,6 +437,73 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <h3>Process Types</h3>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10" id="ruProcTypeContainer">
+                    {% for _ in v.f.recipe_header_ru.form.process_type.entries %}
+                    {% set procTypeForm = _.form %}
+                    <div class="container-fluid border-top" id="ruProcType-{{ loop.index0 }}">
+                        <hr/>
+                        {{ procTypeForm.id }}
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group">
+                                    <button class="btn btn-success" id="ruProcTypeCp-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Copy</button>
+                                    <button class="btn btn-secondary" id="ruProcTypeRm-{{ loop.index0 }}" data-idx="{{ loop.index0 }}" type="button">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.name.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.name(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.note.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.note(class="form-control") }}</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <h4>Steps</h4>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-offset-2 col-sm-10" id="ruProcStepContainer-{{ loop.index0 }}">
+                                {% set outerIndex = loop.index0 %}
+                                {% for __ in procTypeForm.steps.entries %}
+                                {% set procStepForm = __.form %}
+                                <div class="container-fluid" id="ruProcStep-{{ outerIndex }}-{{ loop.index0 }}">
+                                    <hr/>
+                                    {{ procStepForm.id }}
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-sm btn-success" type="button" id="ruProcStepCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
+                                            <button class="btn btn-sm btn-secondary" type="button" id="ruProcStepRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.description.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.description(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.note.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.note(class="form-control") }}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
             {# === END of RUSSIAN GROUP OF FIELDS === #}
         </div>
     </div>

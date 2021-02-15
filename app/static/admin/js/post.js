@@ -1,4 +1,5 @@
 var initIngrButtons = function(prefix) {
+    // ------------ Ingredients ---------
     $("button[id^='"+prefix+"IngrTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var newIngrType = $("#"+prefix+"IngrType-" + idx).clone(true);
@@ -142,8 +143,6 @@ var initIngrButtons = function(prefix) {
             obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
         });
 
-        //newIngr.find("select").val("etc");
-
         $("#"+prefix+"IngContainer-" + outerIdx).append(newIngr);
         return false;
     });
@@ -151,6 +150,159 @@ var initIngrButtons = function(prefix) {
         var idx = $(this).attr('data-idx');
         var outerIdx = $(this).attr("data-outer");
         $("#"+prefix+"Ing-" + outerIdx + "-" + idx).remove();
+    });
+
+    // ------------ Process ------------
+    $("button[id^='"+prefix+"ProcTypeCp']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        var newProcType = $("#"+prefix+"ProcType-" + idx).clone(true);
+
+        var nextIdx = -1;
+        $("div#"+prefix+"ProcTypeContainer > div").each(function(){
+            var curIdx = parseInt($(this).attr("id").split("-")[1]);
+            nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
+        })
+        nextIdx = nextIdx + 1;
+
+        newProcType.attr('id', prefix+"ProcType-" + nextIdx);
+
+        var _ = function(x){
+            x.each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+/g, "-"+nextIdx));
+                obj.attr('data-idx', nextIdx);
+            });
+        }
+        _(newProcType.find("button[id^='"+prefix+"ProcTypeCp-']"));
+        _(newProcType.find("button[id^='"+prefix+"ProcTypeRm-']"));
+
+        newProcType.find("div[id^='"+prefix+"ProcStepContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g,"-" + nextIdx));
+        });
+
+        newProcType.find("button[id^='"+prefix+"ProcStepCp-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                obj.attr('data-outer', nextIdx);
+            });
+        newProcType.find("button[id^='"+prefix+"ProcStepRm-']").each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-/g, "-" + nextIdx + "-"));
+                $(this).attr('data-outer', nextIdx);
+            });
+        newProcType.find("div[id^='"+prefix+"ProcStepContainer-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            obj.attr('id', id.replace(/-\d+/g, "-" + nextIdx));
+        });
+        newProcType.find("div[id^='"+prefix+"ProcStep-" + idx + "-']").each(function(){
+            var obj = $(this);
+            var id = obj.attr('id');
+            var r = new RegExp(prefix+"ProcStep-\\d+-", 'g')
+            obj.attr("id", id.replace(r, prefix+"ProcStep-" + nextIdx + "-"))
+        });
+
+
+        newProcType.find("label")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('for');
+            if(!val) return;
+            obj.attr('for', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+        });
+
+        newProcType.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+            obj.val("");
+        });
+        newProcType.find("select")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+        });
+        $("#"+prefix+"ProcTypeContainer").append(newProcType);
+        return false;
+    });
+    $("button[id^='"+prefix+"ProcTypeRm']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        $("#"+prefix+"ProcType-" + idx).remove();
+        return false;
+    });
+
+    $("button[id^='"+prefix+"ProcStepCp']").on('click', function(){
+        var idx = $(this).attr("data-idx");
+        var outerIdx = $(this).attr("data-outer");
+        var newProcStep = $("#"+prefix+"ProcStep-" + outerIdx + "-" + idx).clone(true);
+
+        var nextIdx = -1;
+
+        $("div#"+prefix+"ProcStepContainer-" + outerIdx + "> div").each(function(){
+            var curIdx = parseInt($(this).attr("id").split("-")[2]);
+            nextIdx = curIdx > nextIdx ? curIdx : nextIdx;
+        });
+
+        nextIdx = nextIdx + 1;
+
+        newProcStep.attr("id", ""+prefix+"ProcStep-" + outerIdx + "-" + nextIdx);
+
+        var _ = function(x){
+            x.each(function(){
+                var obj = $(this);
+                var id = obj.attr('id');
+                obj.attr('id', id.replace(/-\d+-\d+/g, "-" + outerIdx + "-" + nextIdx));
+                obj.attr('data-outer', outerIdx);
+                obj.attr('data-idx', nextIdx);
+            });
+        };
+
+        _(newProcStep.find("button[id^='"+prefix+"ProcStepCp-']"));
+        _(newProcStep.find("button[id^='"+prefix+"ProcStepRm-']"));
+
+        newProcStep.find("label").each(function(){
+            var obj = $(this);
+            var val = obj.attr('for');
+            if (!val) return;
+            obj.attr('for', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+        });
+
+        newProcStep.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+            obj.val("");
+        });
+        newProcStep.find("select")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+        });
+
+        $("#"+prefix+"ProcStepContainer-" + outerIdx).append(newProcStep);
+        return false;
+    });
+    $("button[id^='"+prefix+"ProcStepRm']").on('click', function(){
+        var idx = $(this).attr('data-idx');
+        var outerIdx = $(this).attr("data-outer");
+        $("#"+prefix+"ProcStep-" + outerIdx + "-" + idx).remove();
     });
 };
 

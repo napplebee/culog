@@ -169,7 +169,7 @@ class Post(db.Model):
         self.published_at = form.published_at.data
         self.fb_likes = int(form.fb_likes.data)
         self.fb_og_image = form.fb_og_image.data
-        self.fb_og_title = form.fb_og_image.data
+        self.fb_og_title = form.fb_og_title.data
         self.fb_og_description = form.fb_og_description.data
         self.meta_keywords = form.meta_keywords.data
         self.meta_description = form.meta_description.data

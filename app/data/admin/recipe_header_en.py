@@ -3,6 +3,7 @@
 import datetime as dt
 from app.core import db
 from app.data.admin.ingredient_type_en import IngredientTypeEn
+from app.data.admin.process_type_en import ProcessTypeEn
 
 
 class RecipeHeaderEn(db.Model):
@@ -28,6 +29,7 @@ class RecipeHeaderEn(db.Model):
 
     recipe_id = db.Column(db.Integer, db.ForeignKey('ng_recipe.id'), nullable=False)
     ingredients_type = db.relationship("IngredientTypeEn", backref="recipe_header_en", lazy="select")
+    process_type = db.relationship("ProcessTypeEn", backref="process_type_en", lazy="select")
 
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
@@ -52,11 +54,11 @@ class RecipeHeaderEn(db.Model):
 
         id2ing_types = {}
         new_ing_types = []
-        for it in form.ingredients_type.entries:
-            if it.form.id.data.isdigit():
-                id2ing_types[int(it.form.id.data)] = it.form
+        for st in form.ingredients_type.entries:
+            if st.form.id.data.isdigit():
+                id2ing_types[int(st.form.id.data)] = st.form
             else:
-                new_ing_types.append(it.form)
+                new_ing_types.append(st.form)
 
         for ingrType in self.ingredients_type:
             if ingrType.id in id2ing_types:
@@ -69,6 +71,26 @@ class RecipeHeaderEn(db.Model):
         for ing_type_form in new_ing_types:
             ingredient_type_en = IngredientTypeEn.populate_from_form(ing_type_form)
             self.ingredients_type.append(ingredient_type_en)
+
+        id2process_types = {}
+        new_process_types = []
+        for st in form.process_type.entries:
+            if st.form.id.data.isdigit():
+                id2process_types[int(st.form.id.data)] = st.form
+            else:
+                new_process_types.append(st.form)
+
+        for processType in self.process_type:
+            if processType.id in id2process_types:
+                # then updating
+                proc_type_form = id2process_types[processType.id]
+                processType.merge_with_form(proc_type_form)
+            else:
+                db.session.delete(processType)
+
+        for proc_type_form in new_process_types:
+            proc_type_en = ProcessTypeEn.populate_from_form(proc_type_form)
+            self.process_type.append(proc_type_en)
 
         return self
 
@@ -95,9 +117,14 @@ class RecipeHeaderEn(db.Model):
         head.text = form.text.data
 
         for ingr_type in form.ingredients_type.entries:
-            ingredient_type_en = IngredientTypeEn.populate_from_form(
-                ingr_type.form)
+            ingredient_type_en = IngredientTypeEn.populate_from_form(ingr_type.form)
             head.ingredients_type.append(ingredient_type_en)
+
+        for proc_type in form.process_type.entries:
+            process_type_en = ProcessTypeEn.populate_from_form(proc_type.form)
+            head.process_type.append(process_type_en)
+
+        # process_type
 
         return head
 
