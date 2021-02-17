@@ -16,6 +16,12 @@ class IngredientTypeEn(db.Model):
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_en.id'), nullable=False)
     ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
 
+    def delete(self):
+        for ing in self.ingredients:
+            db.session.delete(ing)
+
+        db.session.delete(self)
+
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
             raise ValueError("Can't update existing ingredient type based on form data with no ingredient_type.Id")

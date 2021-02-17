@@ -48,6 +48,12 @@ class ProcessTypeRu(db.Model):
 
         return self
 
+    def delete(self):
+        for step in self.steps:
+            db.session.delete(step)
+
+        db.session.delete(self)
+
     @staticmethod
     def populate_from_form(form):
         proc_type = ProcessTypeRu()

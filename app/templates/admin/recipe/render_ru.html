@@ -23,3 +23,26 @@
 {% endif %}
 </p>
 {% endfor %}
+
+<h3>Процесс</h3>
+{% for pType in v.h.process_type %}
+<h4>{{ pType.name }}</h4>
+{% if pType.note %}
+<br>
+    В приготовлении это тесто очень похоже на <a href="http://cookwith.love/ru/baking/pate_sucree_dough" target="_black">сладкое песочное тесто</a>. В этой статье вы найдете еще больше информации об особенностях работы с таким тестом.
+<br>
+{% endif %}
+{% if pType.steps|length > 0 %}
+<ul class="preparation">
+{% for pStep in pType.steps %}
+
+<li>{{ pStep.description }}
+    {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
+</li>
+{% if pStep.image %}
+<img class="steps" src="{{ pStep.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="Медовый торт | Cook With ❤">
+{% endif %}
+</ul>
+{% endfor %}
+{% endif %}
+{% endfor %}

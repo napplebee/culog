@@ -66,7 +66,8 @@ class RecipeHeaderRu(db.Model):
                 ingr_type_form = id2ing_types[ingrType.id]
                 ingrType.merge_with_form(ingr_type_form)
             else:
-                db.session.delete(ingrType)
+                # db.session.delete(ingrType)
+                ingrType.delete()
 
         for ing_type_form in new_ing_types:
             ingredient_type_ru = IngredientTypeRu.populate_from_form(ing_type_form)
@@ -86,7 +87,8 @@ class RecipeHeaderRu(db.Model):
                 proc_type_form = id2process_types[processType.id]
                 processType.merge_with_form(proc_type_form)
             else:
-                db.session.delete(processType)
+                # db.session.delete(processType)
+                processType.delete()
 
         for proc_type_form in new_process_types:
             proc_type_ru = ProcessTypeRu.populate_from_form(proc_type_form)

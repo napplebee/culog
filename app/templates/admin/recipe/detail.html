@@ -278,14 +278,14 @@
                                         <div class="col-sm-10">{{ procStepForm.description(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-sm-2">{{ procStepForm.note.label(class="control-label") }}</div>
-                                        <div class="col-sm-10">{{ procStepForm.note(class="form-control", rows=5) }}</div>
-                                    </div>
-                                    <div class="row form-group">
                                         <div class="col-sm-2">{{ procStepForm.image.label(class="control-label") }}</div>
                                         <div class="col-sm-10">{{ procStepForm.image(class="form-control") }}</div>
                                     </div>
-                                </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.note.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.note(class="form-control", rows=5) }}</div>
+                                    </div>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -490,6 +490,10 @@
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ procStepForm.description.label(class="control-label") }}</div>
                                         <div class="col-sm-10">{{ procStepForm.description(class="form-control") }}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.image.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.image(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ procStepForm.note.label(class="control-label") }}</div>

@@ -16,6 +16,12 @@ class ProcessTypeEn(db.Model):
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_en.id'), nullable=False)
     steps = db.relationship("ProcessStepEn", backref="process_type_en", lazy="select")
 
+    def delete(self):
+        for step in self.steps:
+            db.session.delete(step)
+
+        db.session.delete(self)
+
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
             raise ValueError("Can't update existing process type based on form data with no process_type.Id")
