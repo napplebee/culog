@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Bootstrap 4 Magazine/Blog Theme">
-    <meta name="author" content="Kate CookWithLove">
     <title>{% block title %}Cook with love{% endblock %}</title>
-    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
+    <meta name = "keywords" content = "cook with love, cooking, recipes, baking, homecooking, yummy" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="fb:app_id" content="522001701315044">
+    <meta name="author" content="Kate CookWithLove">
+    <meta name="language" content="{{ v.meta_language }}">
+    <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
+    <meta name="yandex-verification" content="e529d26046fe7d2e" />
+    <!-- VK sharing -->
+    <script type="text/javascript" src="https://vk.com/js/api/share.js?95" charset="windows-1251"></script>
     <!--Start Cookie Script-->
     <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
     <!--End Cookie Script-->
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
 </head>
-<body>
 
+<body>
   <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
       <div class="container">
@@ -27,6 +36,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">{{ v.phrases.recipes }}</a>
             </li>
+
             {% for lng in v.lang_dic %}
                 {% if lng == v.current_lang %}
                   <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
@@ -52,120 +62,90 @@
 
   <main class="main pt-4">
 
-    <div class="container" id="indexContainer">
-
+    <div class="container">
       <div class="row">
-        {# posts_left #}
-        <div class="col-md-4">
-          {% for p in v.posts_left %}
+        <div class="col-md-9">
+
           <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
-                @
-                  {% for _ in p.get_categories() %}
-                  <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                  {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-              <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
-              {% endif %}
-              <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-            </div>
-          </article>
-          {% endfor %}
+            <h2 style="color:#444;">Политика использования файлов cookie</h2>
+            <br/>
+            <p>
+            Некоторые страницы этого сайта используют куки-файлы для сохраненных настроек, например, выбранного языка.
+            <br>
+            Включение и использование куки-файлов необходимо для корректной работы сайта.
+            <br>
+            Вы можете заблокировать или удалить куки-файлы, это приведет к тому, что часть функционала сайта может перестать работать.
+            <br>
+            Все информация, хранящаяся в куки-файлах, не используется для определения вашей личности.
+            </p>
+          </article><!-- /.card -->
+
         </div>
-        {# posts_center #}
-        <div class="col-md-4">
-          {% for p in v.posts_center %}
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
+        <div class="col-md-3 ml-auto">
+{#
+          <aside class="sidebar">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.recent_recipes }}</h4>
+                {% for p in v.recent_posts %}
+                <div class="row mb-3">
+                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
+                  <h4 class="h6">{{ p.title }}</h4>
+                  {% if p.fb_og_image %}
+                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+                  {% endif %}
+                </a>
+                  <span class="mt-2 mb-1">
+                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
+                 @
+                 {% for _ in p.get_categories() %}
+                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                 {% endfor %}
+                  </span>
+                </div>
+                {% endfor %}
+              </div>
+            </div><!-- /.card -->
+          </aside>
+#}
+          <aside class="sidebar sidebar-sticky">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.categories }}</h4>
+                {% for c in v.categories %}
+                <a class="btn btn-light btn-sm mb-1" href="{{ c[1] }}">{{ c[0] }}</a>
+                {% endfor %}
+              </div>
+            </div><!-- /.card -->
+              {#
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.you_may_like }}</h4>
+
+                {% for p in v.might_like_posts %}
+                <div class="row mb-3">
+                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
+                  <h4 class="h6">{{ p.title }}</h4>
+                  {% if p.fb_og_image %}
+                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+                  {% endif %}
+                </a>
+                <span class="mt-2 mb-1">
+                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
                 @
                 {% for _ in p.get_categories() %}
                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
-
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-
-            </a>
-              {% endif %}
-            <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-        {# posts_right #}
-        <div class="col-md-4">
-          {% for p in v.posts_right %}
-          <article class="card mb-4">
-            <header class="card-header">
-              <div class="card-meta">
-                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
-                {% if p.recipe_category %}
-                @
-                {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                </span>
+                </div>
                 {% endfor %}
-                {% endif %}
-              </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
-                <h4 class="card-title">
-                  {{ p.title }}
-                </h4>
-                <h6 class="card-title">
-                  {{ p.sub_title }}
-                </h6>
-              </a>
-            </header>
-              {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
-              {% endif %}
-              <div class="card-body">
-              <p class="card-text">
-                {{ p.cut | safe }}
-              </p>
-              </div>
-          </article>
-          {% endfor %}
-        </div>
 
+              </div>
+            </div><!-- /.card -->
+              #}
+          </aside>
+
+        </div>
       </div>
 
     </div>
@@ -177,10 +157,7 @@
       <div class="text-center">
         <div class="row">
           <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ml-auto mr-auto">
-            <div class="d-flex justify-content-center mt-3 mb-3">
-                <button class="btn btn-dark{% if not v.has_next_item %} invisible{% endif %}" id="loadMore">
-                    {{ v.phrases.load_more }}
-                </button>
+            <div class="input-group mb-3 mt-3">
             </div>
           </div>
         </div>
@@ -252,9 +229,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
         </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="page-contact.html">Contact</a>-->
-<!--        </li>-->
       </ul>
       <div class="copy">
         &copy; CookwithLove 2021<br />
@@ -263,9 +237,8 @@
     </div>
   </footer>
 
-<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
-
+  <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
 </body>
 </html>

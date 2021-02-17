@@ -21,85 +21,31 @@ import json
 import random
 
 
-# @front_bp.route("/old/")
-# def index():
-#     current_lang, lang_fallback = langService.get_user_settings(request)
-#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.published_at.desc())
-#     # .limit(10)
-#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-#     posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if post.is_translated_for(current_lang)]
-#
-#     recent_posts = posts[:2]
-#
-#     return render_template("front/index.html", v={
-#         "meta_language": Language.meta_lang[current_lang],
-#         "current_lang": current_lang,
-#         "posts": posts,
-#         "recent_posts": recent_posts
-#     })
-#
-#
-#
-# @front_bp.route("/old/<string:lang_override>/<path:post_url>")
-# def detail(lang_override, post_url):
-#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-#     db_data = BlogPostHeader.query.filter(BlogPostHeader.url == post_url).one()
-#     post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
-#
-#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-#     recent_posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-#     links = {lang: url_for(".detail", lang_override=lang, post_url=post_url) for lang in cnst.SUPPORTED_LANGS}
-#     lang_dic = {u"ru": u"Русский", u"en": u"English"}
-#     filtered_lang_dic = {}
-#     for lang in lang_dic.keys():
-#         if post.is_translated_for(lang):
-#             filtered_lang_dic[lang] = lang_dic[lang]
-#     html = render_template("front/blogpost.html", v={
-#         "lang_dic": filtered_lang_dic,
-#         "links": links,
-#         "current_lang": current_lang,
-#         "meta_language": Language.meta_lang[current_lang],
-#         "post": post,
-#         "recent_posts": recent_posts
-#     })
-#
-#     response = current_app.make_response(html)
-#     response.set_cookie('lang', value=current_lang)
-#     return response
-#
-#
-# @front_bp.route("/contact/")
-# def contact():
-#     current_lang, lang_fallback = langService.get_user_settings(request)
-#     db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-#     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-#     if current_lang == "ru":
-#         tpl = "front/contact.ru.html"
-#     else:
-#         tpl = "front/contact.en.html"
-#     return render_template(tpl, v={
-#         "current_lang": current_lang,
-#         "meta_language": Language.meta_lang[current_lang],
-#         "recent_posts": posts
-#     })
-
-
 @front_bp.route("/cookie-policy/")
 def cookiepolicy():
     current_lang, lang_fallback = langService.get_user_settings(request)
-    db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(BlogPostHeader.created_at.desc()).limit(2)
-    base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-    posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
+    uniq_category = []
+    for c, *_ in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c.split(",") if _.strip() != "")
+    categories = [
+        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+    ]
+    recent_posts = Post.query.filter(Post.lang == current_lang, Post.fb_og_image != ''). \
+        order_by(Post.published_at.desc(), Post.id.asc()).limit(6).all()
+
     if current_lang == "ru":
-        tpl = "front/cookie-policy.ru.html"
+        tpl = "front/post/cookie-policy.ru.html"
     else:
-        tpl = "front/cookie-policy.en.html"
+        tpl = "front/post/cookie-policy.en.html"
     return render_template(tpl, v={
         "current_lang": current_lang,
         "meta_language": Language.meta_lang[current_lang],
-        "recent_posts": posts
+        "phrases": PHRASES[current_lang],
+        "lang_dic": {u"ru": u"Русский", u"en": u"English"},
+        "categories": categories,
+        "links": {lang: url_for(".cookiepolicy") for lang in cnst.SUPPORTED_LANGS},
+        "recent_posts": recent_posts[0:3],
+        "might_like_posts": recent_posts[-3:]
     })
 
 
@@ -112,8 +58,6 @@ def sitemap():
 def robots():
     return send_from_directory(os.path.join(cfg.APP_BASE_DIR, "static", "front"), "robots.txt")
 
-
-#region #### THE NEW WAY ####
 
 @front_bp.route("/")
 def nw_index():
@@ -291,7 +235,6 @@ def nw_category_more(lang_override, category, page):
         post_refs[i % cnst.COLUMNS_ON_LANDING].append(tail.pop())
         i += 1
 
-    # TODO: replace with /
     links = {lang: "/" for lang in cnst.SUPPORTED_LANGS}
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     html = render_template("front/post/recipe_more.html", v={
@@ -325,7 +268,6 @@ def nw_detail(lang_override, post_url):
             break
 
     if post is None:
-        # TODO: raise 404
         raise ValueError("Not found")
 
     available_translations = [_.lang for _ in posts]
