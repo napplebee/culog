@@ -35,6 +35,12 @@ class Recipe(db.Model):
     recipe_header_ru = db.relationship("RecipeHeaderRu", uselist=False, backref="recipe", lazy="select")
     recipe_header_en = db.relationship("RecipeHeaderEn", uselist=False, backref="recipe", lazy="select")
 
+    def make_visible(self, lang):
+        setattr(self, "visible_%s" % lang, True)
+
+    def make_invisible(self, lang):
+        setattr(self, "visible_%s" % lang, False)
+
     def save(self):
         db.session.add(self)
         db.session.commit()

@@ -153,11 +153,14 @@ def recipe_visibility():
         recipe_id = int(request.form["recipe_id"])
         lang = request.form["lang"]
         visibility = request.form["visibility"].upper() == "TRUE"
+        recipe = Recipe.query.get(recipe_id)
         p = Post.query.filter(Post.recipe_id == recipe_id, Post.lang == lang).one()
         if visibility:
             p.make_visible()
+            recipe.make_visible(lang)
         else:
             p.make_invisible()
+            recipe.make_invisible(lang)
 
         message = "%s post for recipe (%s) is %s now" % (
             lang.upper(), recipe_id, "visible" if visibility else "invisible")
