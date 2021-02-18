@@ -4,6 +4,10 @@ from app.core import db
 from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 import datetime as dt
+import duration as dr
+from urllib.parse import urljoin
+
+from configs import Config
 
 
 class Post(db.Model):
@@ -190,3 +194,25 @@ class Post(db.Model):
 
     def get_fb_og_image_alt(self):
         return self.title
+
+    def get_cook_time_iso(self):
+        if self.cook_time is None or self.cook_time == "":
+            return ""
+        return dr.to_iso8601(str(self.cook_time), strict=False)
+
+    def get_prep_time_iso(self):
+        if self.prep_time is None or self.prep_time == "":
+            return ""
+        return dr.to_iso8601(str(self.prep_time), strict=False)
+
+    def get_total_time_iso(self):
+        if (self.cook_time is None and self.prep_time is None) or \
+                (self.cook_time == "" and self.prep_time == ""):
+            return ""
+        cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"), strict=False)
+        prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"), strict=False)
+        return dr.to_iso8601(cook_delta + prep_delta, strict=False)
+
+    def get_fb_og_image_canonical(self):
+        return urljoin(Config.BASE_EXTERNAL_URI, self.fb_og_image)
+
