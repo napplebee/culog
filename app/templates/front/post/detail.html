@@ -80,7 +80,7 @@
                 <h4 class="card-title">{{ v.phrases.recent_recipes }}</h4>
                 {% for p in v.recent_posts %}
                 <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
+                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
                   <h4 class="h6">{{ p.title }}</h4>
                   {% if p.fb_og_image %}
                   <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
@@ -90,7 +90,7 @@
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
                  @
                  {% for _ in p.get_categories() %}
-                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                  {% endfor %}
                   </span>
                 </div>
@@ -114,7 +114,7 @@
 
                 {% for p in v.might_like_posts %}
                 <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
+                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
                   <h4 class="h6">{{ p.title }}</h4>
                   {% if p.fb_og_image %}
                   <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
@@ -124,7 +124,7 @@
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
                 </span>
                 </div>

@@ -9,11 +9,11 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
                 <h4 class="card-title">
                   {{ p.title }}
                 </h4>
@@ -23,9 +23,7 @@
               </a>
             </header>
               {% if p.fb_og_image %}
-              <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
+              <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
               {% endif %}
               <div class="card-body">
               <p class="card-text">
@@ -45,11 +43,11 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
                 <h4 class="card-title">
                   {{ p.title }}
                 </h4>
@@ -59,11 +57,7 @@
               </a>
             </header>
               {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
-
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-
-            </a>
+            <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
               {% endif %}
             <div class="card-body">
               <p class="card-text">
@@ -83,11 +77,11 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>
-              <a href="/{{ p.lang }}{{ p.url }}">
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
                 <h4 class="card-title">
                   {{ p.title }}
                 </h4>
@@ -97,9 +91,7 @@
               </a>
             </header>
               {% if p.fb_og_image %}
-            <a href="/{{ p.lang }}{{ p.url }}">
-              <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
-            </a>
+            <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
               {% endif %}
               <div class="card-body">
               <p class="card-text">

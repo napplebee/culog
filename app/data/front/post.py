@@ -112,7 +112,7 @@ class Post(db.Model):
         self.total_carbs = _recipe.total_carbs
         self.total_proteins = _recipe.total_proteins
 
-        self.published_at = _recipe.published_at
+        self.published_at = _recipe.published_at if _recipe.published_at is not None else dt.datetime.utcnow()
         self.updated_at = dt.datetime.utcnow()
 
         self.fb_og_title = _header.fb_og_title

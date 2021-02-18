@@ -1,48 +1,47 @@
 <h1>{{ v.h.title }}</h1>
-<h3>{{ v.h.sub_title }}</h3>
+<p style="font-style: italic; font-weight:bold">{{ v.h.sub_title }}</p>
 <p>
     {{ v.h.text }}
 </p>
-<h3>Ингредиенты:</h3>
+<h2>Ингредиенты:</h2>
 {% for iType in v.h.ingredients_type %}
-<h4>{{ iType.name }}:</h4>
-{% if iType.ingredients|length > 0 %}
-<ul class="ingredients">
-{% for ingr in iType.ingredients %}
-    <li>{% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
-        {% if ingr.note %}
-        <br>
-        <i>{{ ingr.note }}</i>
-        {% endif %}
-    </li>
-{% endfor %}
-</ul>
-{% endif %}
-{% if iType.image %}
-<img class="steps" src="{{ iType.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt=" | Cook With ❤">
-{% endif %}
+    <h3>{{ iType.name }}:</h3>
+    {% if iType.ingredients|length > 0 %}
+    <ul class="ingredients">
+        {% for ingr in iType.ingredients %}
+        <li>{% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
+            {% if ingr.note %}
+            <br>
+            <i>{{ ingr.note }}</i>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if iType.image %}
+    <img class="steps" src="{{ iType.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt=" | Cook With ❤">
+    {% endif %}
 </p>
 {% endfor %}
 
-<h3>Процесс</h3>
+<h2>Процесс</h2>
 {% for pType in v.h.process_type %}
-<h4>{{ pType.name }}</h4>
-{% if pType.note %}
-<br>
-    В приготовлении это тесто очень похоже на <a href="http://cookwith.love/ru/baking/pate_sucree_dough" target="_black">сладкое песочное тесто</a>. В этой статье вы найдете еще больше информации об особенностях работы с таким тестом.
-<br>
-{% endif %}
-{% if pType.steps|length > 0 %}
-<ul class="preparation">
-{% for pStep in pType.steps %}
-
-<li>{{ pStep.description }}
-    {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
-</li>
-{% if pStep.image %}
-<img class="steps" src="{{ pStep.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="Медовый торт | Cook With ❤">
-{% endif %}
-</ul>
-{% endfor %}
-{% endif %}
+    <h3>{{ pType.name }}</h3>
+    {% if pType.note %}
+        <br>
+        {{ pType.note }}
+        <br>
+    {% endif %}
+    {% if pType.steps|length > 0 %}
+        <ul class="preparation">
+        {% for pStep in pType.steps %}
+            <li>{{ pStep.description }}
+                {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
+            </li>
+            {% if pStep.image %}
+            <img class="steps" src="{{ pStep.image }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="Медовый торт | Cook With ❤">
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
 {% endfor %}
