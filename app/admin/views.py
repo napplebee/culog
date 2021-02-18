@@ -7,7 +7,6 @@ from . import admin
 from flask.ext.login import login_required
 from flask.ext.security import roles_required
 from flask import render_template, request, url_for, redirect
-from app.services.language_service import langService
 from app.common.constants import Constants as cnst
 
 from app import db
@@ -15,6 +14,7 @@ from app.admin.forms import PostForm
 from app.admin import forms as nf
 from app.data.admin.recipe import Recipe
 from app.data.front.post import Post
+from app.common.phrases import PHRASES
 
 import json
 
@@ -47,24 +47,6 @@ def post_list():
         })
 
 
-# @admin.route("/blog/new", methods=["POST", "GET"])
-# @login_required
-# @roles_required("root")
-# def blog_post_new():
-#     f = BlogPostForm()
-#     # if request.method == "POST" and f.validate():
-#     if request.method == "POST":
-#         post = BlogPost.populate_from_ui(f)
-#         post_id = post.save()
-#         return redirect("/admin/blog/update/{0}?saved".format(post_id))
-#     title = "Create new post"
-#     return render_template("admin/blog/detail.html", v={
-#         "title": title,
-#         "f": f,
-#         "action": ""
-#     })
-
-
 @admin.route("/post/update/<int:post_id>", methods=["POST", "GET"])
 @login_required
 @roles_required("root")
@@ -88,103 +70,6 @@ def post_update(post_id):
             "action": "",
             "saved": 1 if "saved" in request.args else 0
         })
-
-
-# @login_required
-# @roles_required("root")
-# @admin.route("/post_preview/<string:lang_override>/<int:post_id>")
-# def blog_post_preview(lang_override, post_id):
-#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-#     base_url = "{0}/{1}".format(lang_override, request.url_root[:request.url_root.find("/", 8)])
-#     db_data = BlogPostHeader.query.get(post_id)
-#     post = BlogPost.populate_from_db(db_data, lang_fallback, base_url)
-#     return render_template("admin/blog/preview.html", v={
-#         "post": post
-#     })
-
-
-# @login_required
-# @roles_required("root")
-# @admin.route("/post_list_preview/<string:lang_override>")
-# def blog_list_preview(lang_override):
-#     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
-#     db_data = BlogPostHeader.query.filter().order_by(BlogPostHeader.created_at.desc())
-#     base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-#     posts = [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data]
-#     return render_template("admin/blog/list_preview.html", v={
-#         "posts": posts
-#     })
-
-
-@login_required
-@roles_required("root")
-@admin.route("/test/create", methods=["GET"])
-def fck():
-    # return "Ok"
-    from app.core import db
-    db.create_all()
-    return "Ok"
-
-
-@admin.route("/migrate")
-def migrate():
-    if True:
-        pass
-    else:
-        for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
-
-            db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(
-                BlogPostHeader.published_at.desc())
-            # .limit(10)
-            base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
-            posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
-                     post.is_translated_for(current_lang)]
-
-            for oldPost in posts:
-                newPost = Post()
-                newPost.url = Post.makeup_url(oldPost.url)
-                newPost.lang = current_lang
-                newPost.visible = oldPost.visible
-
-                newPost.title = oldPost.get_title()
-                newPost.sub_title = oldPost.get_sub_title()
-
-                newPost.recipe_yield = oldPost.get_recipe_yield()
-                newPost.recipe_cuisine = oldPost.get_recipe_cuisine()
-                newPost.recipe_category = oldPost.get_recipe_category()
-
-                if oldPost.published_at is not None:
-                    newPost.published_at = oldPost.published_at
-                else:
-                    newPost.published_at = dt.datetime.utcnow()
-
-                newPost.updated_at = oldPost.updated_at
-
-                newPost.fb_likes = oldPost.fb_likes
-                newPost.fb_og_image = oldPost.og_image
-                newPost.fb_og_title = oldPost.get_og_title()
-                newPost.fb_og_description = oldPost.get_og_description()
-
-                newPost.meta_keywords = oldPost.get_keywords()
-                newPost.meta_description = oldPost.get_description()
-
-                newPost.cook_time = oldPost.cook_time
-                newPost.prep_time = oldPost.prep_time
-
-                newPost.total_fats = None
-                newPost.total_carbs = None
-                newPost.total_proteins = None
-
-                newPost.recipe_id = -1
-
-                newPost.cut = oldPost.get_cut()
-                newPost.text = oldPost.get_text()
-
-                db.session.add(newPost)
-
-            db.session.commit()
-
-    return "OK"
 
 
 @login_required
@@ -294,4 +179,100 @@ def recipe_list_preview(lang):
 @login_required
 @roles_required("root")
 def single_recipe_preview(recipe_id, lang):
-    pass
+
+    render_template("front/post/detail.html", v={
+        "lang_dic": filtered_lang_dic,
+        "links": links,
+        "current_lang": lang,
+        "post": post,
+        "recent_posts": [],
+        "might_like_posts": [],
+        "categories": [],
+        "phrases": PHRASES[lang],
+        "meta_language": Language.meta_lang[current_lang],
+    })
+
+
+@login_required
+@roles_required("root")
+@admin.route("/data")
+def data():
+    return
+    db.drop_all()
+    db.create_all()
+    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+    from flask_security.utils import encrypt_password
+    role = user_datastore.create_role(name="root", description="Site administrator")
+    db.session.commit()
+    return "OK"
+
+
+@login_required
+@roles_required("root")
+@admin.route("/test/create", methods=["GET"])
+def fck():
+    # return "Ok"
+    from app.core import db
+    db.create_all()
+    return "Ok"
+
+
+@admin.route("/migrate")
+def migrate():
+    if True:
+        pass
+    else:
+        for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
+
+            db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(
+                BlogPostHeader.published_at.desc())
+            # .limit(10)
+            base_url = "{0}/{1}".format(request.url_root[:request.url_root.find("/", 8)], current_lang)
+            posts = [post for post in [BlogPost.populate_from_db(d, lang_fallback, base_url) for d in db_data] if
+                     post.is_translated_for(current_lang)]
+
+            for oldPost in posts:
+                newPost = Post()
+                newPost.url = Post.makeup_url(oldPost.url)
+                newPost.lang = current_lang
+                newPost.visible = oldPost.visible
+
+                newPost.title = oldPost.get_title()
+                newPost.sub_title = oldPost.get_sub_title()
+
+                newPost.recipe_yield = oldPost.get_recipe_yield()
+                newPost.recipe_cuisine = oldPost.get_recipe_cuisine()
+                newPost.recipe_category = oldPost.get_recipe_category()
+
+                if oldPost.published_at is not None:
+                    newPost.published_at = oldPost.published_at
+                else:
+                    newPost.published_at = dt.datetime.utcnow()
+
+                newPost.updated_at = oldPost.updated_at
+
+                newPost.fb_likes = oldPost.fb_likes
+                newPost.fb_og_image = oldPost.og_image
+                newPost.fb_og_title = oldPost.get_og_title()
+                newPost.fb_og_description = oldPost.get_og_description()
+
+                newPost.meta_keywords = oldPost.get_keywords()
+                newPost.meta_description = oldPost.get_description()
+
+                newPost.cook_time = oldPost.cook_time
+                newPost.prep_time = oldPost.prep_time
+
+                newPost.total_fats = None
+                newPost.total_carbs = None
+                newPost.total_proteins = None
+
+                newPost.recipe_id = -1
+
+                newPost.cut = oldPost.get_cut()
+                newPost.text = oldPost.get_text()
+
+                db.session.add(newPost)
+
+            db.session.commit()
+
+    return "OK"

@@ -63,7 +63,7 @@ def robots():
 def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
 
-    posts = Post.query.filter(Post.lang == current_lang)\
+    posts = Post.query.filter(Post.lang == current_lang, Post.visible == True)\
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     # number of columns on landing page
@@ -109,7 +109,7 @@ def nw_index():
 def nw_index_more(page):
     current_lang, lang_fallback = langService.get_user_settings(request)
 
-    posts = Post.query.filter(Post.lang == current_lang) \
+    posts = Post.query.filter(Post.lang == current_lang, Post.visible == True) \
         .order_by(Post.published_at.desc(), Post.id.desc()).offset(page*cnst.ITEM_PER_PAGE).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     # number of columns on landing page
@@ -162,7 +162,7 @@ def nw_category(lang_override, category):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
 
     search = "%{}%".format(category)
-    posts = Post.query.filter(Post.lang == current_lang, Post.recipe_category.like(search)) \
+    posts = Post.query.filter(Post.lang == current_lang, Post.visible == True, Post.recipe_category.like(search)) \
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     # number of columns on landing page
@@ -209,7 +209,7 @@ def nw_category_more(lang_override, category, page):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
 
     search = "%{}%".format(category)
-    posts = Post.query.filter(Post.lang == current_lang, Post.recipe_category.like(search)) \
+    posts = Post.query.filter(Post.lang == current_lang, Post.visible == True, Post.recipe_category.like(search)) \
         .order_by(Post.published_at.desc(), Post.id.desc()).offset(page*cnst.ITEM_PER_PAGE).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     # number of columns on landing page
@@ -259,7 +259,7 @@ def nw_category_more(lang_override, category, page):
 def nw_detail(lang_override, post_url):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
     url = Post.makeup_url(post_url)
-    posts = Post.query.filter(Post.url == url).all()
+    posts = Post.query.filter(Post.url == url, Post.visible == True).all()
 
     post = None
     for p in posts:
@@ -283,9 +283,9 @@ def nw_detail(lang_override, post_url):
     category = post.recipe_category.split(",")[0]
 
     search = "%{}%".format(category)
-    might_like_posts = set(Post.query.filter(Post.id != post.id, Post.fb_og_image != '', Post.recipe_category.like(search)).limit(12).all())
+    might_like_posts = set(Post.query.filter(Post.id != post.id, Post.visible == True, Post.fb_og_image != '', Post.recipe_category.like(search)).limit(12).all())
 
-    recent_posts = Post.query.filter(Post.id != post.id, Post.lang == current_lang, Post.fb_og_image != '').\
+    recent_posts = Post.query.filter(Post.id != post.id, Post.visible == True, Post.lang == current_lang, Post.fb_og_image != '').\
         order_by(Post.published_at.desc(), Post.id.asc()).limit(6).all()
 
     might_like_posts = might_like_posts - set(recent_posts)
@@ -295,7 +295,7 @@ def nw_detail(lang_override, post_url):
         might_like_posts = recent_posts[-3:]
 
     uniq_category = []
-    for c, *_ in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+    for c, *_ in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c.split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
@@ -331,17 +331,3 @@ def about(lang_override):
     })
 
 #endregion
-
-
-@login_required
-@roles_required("root")
-@front_bp.route("/data")
-def data():
-    return
-    db.drop_all()
-    db.create_all()
-    user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    from flask_security.utils import encrypt_password
-    role = user_datastore.create_role(name="root", description="Site administrator")
-    db.session.commit()
-    return "OK"

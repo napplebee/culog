@@ -63,6 +63,15 @@ var initIngrButtons = function(prefix) {
             obj.attr('for', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
         });
 
+        newIngrType.find("textarea")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients_type-\d+/g, "ingredients_type-" + nextIdx));
+            obj.val("");
+        });
         newIngrType.find("input")
         .each(function(){
             var obj = $(this);
@@ -126,6 +135,15 @@ var initIngrButtons = function(prefix) {
         });
 
         newIngr.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/ingredients-\d+/g, "ingredients-" + nextIdx));
+            obj.val("");
+        });
+        newIngr.find("textarea")
         .each(function(){
             var obj = $(this);
             var val = obj.attr('id');
@@ -225,6 +243,15 @@ var initIngrButtons = function(prefix) {
             obj.attr('name', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
             obj.val("");
         });
+        newProcType.find("textarea")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/process_type-\d+/g, "process_type-" + nextIdx));
+            obj.val("");
+        });
         newProcType.find("select")
         .each(function(){
             var obj = $(this);
@@ -279,6 +306,15 @@ var initIngrButtons = function(prefix) {
         });
 
         newProcStep.find("input")
+        .each(function(){
+            var obj = $(this);
+            var val = obj.attr('id');
+            obj.attr('id', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+            val = obj.attr('name');
+            obj.attr('name', val.replace(/steps-\d+/g, "steps-" + nextIdx));
+            obj.val("");
+        });
+        newProcStep.find("textarea")
         .each(function(){
             var obj = $(this);
             var val = obj.attr('id');

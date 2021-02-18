@@ -29,7 +29,7 @@ class PostForm(Form):
     fb_og_description = StringField("FB og_description:")
 
     meta_keywords = StringField("Meta keywords:")
-    meta_description = StringField("Meta description:")
+    meta_description = TextAreaField("Meta description:")
 
     cook_time = StringField("Cook time:")
     prep_time = StringField("Prep time:")
@@ -92,7 +92,7 @@ class RecipeHeaderForm(Form):
 
     cut = TextAreaField("Cut:")
     meta_keywords = StringField("Keywords (meta):")
-    meta_description = StringField("Description (meta):")
+    meta_description = TextAreaField("Description (meta):")
 
     fb_og_title = StringField("FB og_title:")
     fb_og_description = TextAreaField("FB og_description:")
