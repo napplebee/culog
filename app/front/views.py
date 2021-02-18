@@ -7,11 +7,6 @@ from app.data.blog_posts import BlogPostHeader
 from app.domain.language import Language
 from app.services.language_service import langService
 from . import front as front_bp
-from flask.ext.security import SQLAlchemyUserDatastore
-from app import db, User, Role
-from flask.ext.login import login_required
-from flask.ext.security import roles_required
-from app.domain.blog_posts import BlogPost
 from app.data.front.post import Post
 from configs import Config as cfg
 from app.common.constants import Constants as cnst

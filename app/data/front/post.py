@@ -134,7 +134,7 @@ class Post(db.Model):
             searchpath=os.path.join(basedir, "app", "templates")
         )
         templateEnv = jinja2.Environment(loader=templateLoader)
-        template = templateEnv.get_template("admin/recipe/render_%s.html" % lang)
+        template = templateEnv.get_template("admin/recipe/render.html")
         _text = template.render(v={
             "r": recipe,
             "h": head,
