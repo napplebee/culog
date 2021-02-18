@@ -13,6 +13,7 @@ class PostForm(Form):
     url = StringField("URL:")
     lang = StringField("Language:")
     visible = BooleanField("Visible?")
+    is_article = BooleanField("Is article?")
 
     title = StringField("Title:")
     sub_title = StringField("Sub title:")

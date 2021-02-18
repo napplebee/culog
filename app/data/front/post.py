@@ -42,6 +42,7 @@ class Post(db.Model):
     cut = db.Column(db.Text)
     text = db.Column(db.Text)
 
+    is_article = db.Column(db.Boolean, default=False)
     recipe_id = db.Column(db.Integer)
 
     @staticmethod
@@ -161,6 +162,7 @@ class Post(db.Model):
         self.url = Post.makeup_url(form.url.data)
         self.lang = form.lang.data
         self.visible = form.visible.data
+        self.is_article = form.is_article.data
         self.title = form.title.data
         self.sub_title = form.sub_title.data
         self.recipe_yield = form.recipe_yield.data
