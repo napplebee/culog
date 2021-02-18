@@ -52,7 +52,7 @@ class Recipe(db.Model):
         self.name = form.name.data
         self.url = form.url.data
 
-        self.fb_likes = form.fb_likes.data
+        # self.fb_likes = form.fb_likes.data
         self.fb_og_type = form.fb_og_type.data
         self.fb_og_image = form.fb_og_image.data
 

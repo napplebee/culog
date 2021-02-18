@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime as dt
 from app.core import db
 from app.data.admin.ingredient_type_en import IngredientTypeEn
 from app.data.admin.process_type_en import ProcessTypeEn
@@ -57,7 +56,7 @@ class RecipeHeaderEn(db.Model):
         for st in form.ingredients_type.entries:
             if st.form.id.data.isdigit():
                 id2ing_types[int(st.form.id.data)] = st.form
-            else:
+            elif not st.form.empty():
                 new_ing_types.append(st.form)
 
         for ingrType in self.ingredients_type:
@@ -66,7 +65,6 @@ class RecipeHeaderEn(db.Model):
                 ingr_type_form = id2ing_types[ingrType.id]
                 ingrType.merge_with_form(ingr_type_form)
             else:
-                # db.session.delete(ingrType)
                 ingrType.delete()
 
         for ing_type_form in new_ing_types:
@@ -78,7 +76,7 @@ class RecipeHeaderEn(db.Model):
         for st in form.process_type.entries:
             if st.form.id.data.isdigit():
                 id2process_types[int(st.form.id.data)] = st.form
-            else:
+            elif not st.form.empty():
                 new_process_types.append(st.form)
 
         for processType in self.process_type:

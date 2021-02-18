@@ -16,6 +16,12 @@ class ProcessTypeRu(db.Model):
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_ru.id'), nullable=False)
     steps = db.relationship("ProcessStepRu", backref="process_type_ru", lazy="select")
 
+    def delete(self):
+        for step in self.steps:
+            db.session.delete(step)
+
+        db.session.delete(self)
+
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
             raise ValueError("Can't update existing process type based on form data with no process_type.Id")
@@ -30,7 +36,7 @@ class ProcessTypeRu(db.Model):
         for step in form.steps.entries:
             if step.form.id.data.isdigit():
                 id2steps[int(step.form.id.data)] = step.form
-            else:
+            elif not step.form.empty():
                 new_steps.append(step.form)
 
         for step in self.steps:
@@ -47,12 +53,6 @@ class ProcessTypeRu(db.Model):
             self.steps.append(step_ru)
 
         return self
-
-    def delete(self):
-        for step in self.steps:
-            db.session.delete(step)
-
-        db.session.delete(self)
 
     @staticmethod
     def populate_from_form(form):

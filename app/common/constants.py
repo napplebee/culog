@@ -5,7 +5,7 @@ class Constants:
     EN_LANG = "en"
     ALL_LANG = "all"
     SUPPORTED_LANGS = ("ru", "en",)
-    AMOUNT_TYPES = ("gr", "ml", "item", "tsp", "tbsp", "cup")
+    AMOUNT_TYPES = ("gr", "ml", "item", "tsp", "tbsp", "cup", "kg", "liter")
     ITEM_PER_PAGE = 6
     COLUMNS_ON_LANDING = 3
 

@@ -41,7 +41,6 @@ class PostForm(Form):
     cut = TextAreaField("Cut:")
     text = TextAreaField("Text:")
 
-    ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### #####
     submit = SubmitField()
 
 
@@ -51,6 +50,9 @@ class ProcessStepForm(Form):
     note = TextAreaField("Note:")
     image = StringField("Image:")
 
+    def empty(self):
+        return self.id.data == "" and self.description.data == "" and self.note.data == "" and self.image.data == ""
+
 
 class ProcessTypeForm(Form):
     id = HiddenField()
@@ -58,6 +60,9 @@ class ProcessTypeForm(Form):
     note = TextAreaField("Note:")
 
     steps = FieldList(FormField(ProcessStepForm), "Steps", min_entries=1)
+
+    def empty(self):
+        return self.id.data == "" and self.name.data == "" and self.note.data == ""
 
 
 class IngredientForm(Form):
@@ -71,6 +76,9 @@ class IngredientForm(Form):
     note = StringField("Note:")
     optional = BooleanField("Optional?")
 
+    def empty(self):
+        return self.id.data == "" and self.name.data == "" and self.amount_value.data == "" and self.note.data == ""
+
 
 class IngredientTypeForm(Form):
     id = HiddenField()
@@ -79,6 +87,9 @@ class IngredientTypeForm(Form):
     image = StringField("Image:")
 
     ingredients = FieldList(FormField(IngredientForm), "Ingredients", min_entries=1)
+
+    def empty(self):
+        return self.id.data == "" and self.name.data == "" and self.type.data == "" and self.image.data == ""
 
 
 class RecipeHeaderForm(Form):

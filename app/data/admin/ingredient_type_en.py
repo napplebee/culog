@@ -37,7 +37,7 @@ class IngredientTypeEn(db.Model):
         for ingr in form.ingredients.entries:
             if ingr.form.id.data.isdigit():
                 id2ingrs[int(ingr.form.id.data)] = ingr.form
-            else:
+            elif not ingr.form.empty():
                 new_ingrs.append(ingr.form)
 
         for ingr in self.ingredients:

@@ -36,7 +36,7 @@ class ProcessTypeEn(db.Model):
         for step in form.steps.entries:
             if step.form.id.data.isdigit():
                 id2steps[int(step.form.id.data)] = step.form
-            else:
+            elif not step.form.empty():
                 new_steps.append(step.form)
 
         for step in self.steps:

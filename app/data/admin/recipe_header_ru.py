@@ -57,7 +57,7 @@ class RecipeHeaderRu(db.Model):
         for it in form.ingredients_type.entries:
             if it.form.id.data.isdigit():
                 id2ing_types[int(it.form.id.data)] = it.form
-            else:
+            elif not it.form.empty():
                 new_ing_types.append(it.form)
 
         for ingrType in self.ingredients_type:
@@ -66,7 +66,6 @@ class RecipeHeaderRu(db.Model):
                 ingr_type_form = id2ing_types[ingrType.id]
                 ingrType.merge_with_form(ingr_type_form)
             else:
-                # db.session.delete(ingrType)
                 ingrType.delete()
 
         for ing_type_form in new_ing_types:
@@ -78,7 +77,7 @@ class RecipeHeaderRu(db.Model):
         for st in form.process_type.entries:
             if st.form.id.data.isdigit():
                 id2process_types[int(st.form.id.data)] = st.form
-            else:
+            elif not st.form.empty():
                 new_process_types.append(st.form)
 
         for processType in self.process_type:
@@ -87,7 +86,6 @@ class RecipeHeaderRu(db.Model):
                 proc_type_form = id2process_types[processType.id]
                 processType.merge_with_form(proc_type_form)
             else:
-                # db.session.delete(processType)
                 processType.delete()
 
         for proc_type_form in new_process_types:
@@ -119,8 +117,7 @@ class RecipeHeaderRu(db.Model):
         head.text = form.text.data
 
         for ingr_type in form.ingredients_type.entries:
-            ingredient_type_ru = IngredientTypeRu.populate_from_form(
-                ingr_type.form)
+            ingredient_type_ru = IngredientTypeRu.populate_from_form(ingr_type.form)
             head.ingredients_type.append(ingredient_type_ru)
 
         return head
