@@ -9,7 +9,6 @@
         }, function(response){});
     }
 </script>
-<!-- <script src="https://www.yummly.com/js/widget.js?general"></script> -->
 {% endblock %}
 {% block styles_to_override %}
 <style>
@@ -44,7 +43,6 @@
 								<span class="date"><span class="month">{{ p.published_at.strftime('%b') }}</span> <span class="day">{{ p.published_at.day }}</span><span class="year">, {{ p.published_at.year }}</span></span>
 								<ul class="stats">
 									<li><a href="#" onclick="share('{{ p.get_url() }}'); return false;" class="icon fa-facebook">{{ p.fb_likes|default("∞", true) }}</a></li>
-									<!-- <li class="yum"><a href="https://www.yummly.com" class="YUMMLY-YUM-BUTTON">Yum</a></li> -->
 									<li class="yum"><script type="text/javascript">document.write(VK.Share.button('{{ p.get_url() }}',{type: "round", text: "Share"}));</script><li>
 									{#
 									<li><a href="#" class="icon fa-comment">16</a></li>
