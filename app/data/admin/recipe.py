@@ -35,9 +35,6 @@ class Recipe(db.Model):
     recipe_header_ru = db.relationship("RecipeHeaderRu", uselist=False, backref="recipe", lazy="select")
     recipe_header_en = db.relationship("RecipeHeaderEn", uselist=False, backref="recipe", lazy="select")
 
-    def __init__(self):
-        pass
-
     def save(self):
         db.session.add(self)
         db.session.commit()

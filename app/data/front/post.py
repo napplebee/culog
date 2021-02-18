@@ -182,3 +182,9 @@ class Post(db.Model):
         self.text = form.text.data
 
         db.session.commit()
+
+    def get_fb_og_image_src(self):
+        return self.fb_og_image.split("|")[0].strip()
+
+    def get_fb_og_image_alt(self):
+        return self.title

@@ -15,6 +15,15 @@ class ProcessStepEn(db.Model):
 
     process_type_id = db.Column(db.Integer, db.ForeignKey('ng_process_type_en.id'), nullable=False)
 
+    def get_image_src(self):
+        return self.image.split("|")[0].strip()
+
+    def get_image_alt(self, default):
+        try:
+            return self.image.split("|")[1].strip()
+        except IndexError:
+            return default
+
     def merge_with_form(self, form):
         if not form.id.data.isdigit():
             raise ValueError("Can't update existing process step based on form data with no processStep .Id")

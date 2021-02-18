@@ -80,10 +80,10 @@
                 <h4 class="card-title">{{ v.phrases.recent_recipes }}</h4>
                 {% for p in v.recent_posts %}
                 <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
+                <a href="/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
                   <h4 class="h6">{{ p.title }}</h4>
                   {% if p.fb_og_image %}
-                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+                  <img class="card-img" src="{{ p.get_fb_og_image_src() }}" alt="{{ p.get_fb_og_image_alt() }}" />
                   {% endif %}
                 </a>
                   <span class="mt-2 mb-1">
@@ -114,10 +114,10 @@
 
                 {% for p in v.might_like_posts %}
                 <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
+                <a href="/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
                   <h4 class="h6">{{ p.title }}</h4>
                   {% if p.fb_og_image %}
-                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" />
+                  <img class="card-img" src="{{ p.get_fb_og_image_src() }}" alt="{{ p.get_fb_og_image_alt() }}" />
                   {% endif %}
                 </a>
                 <span class="mt-2 mb-1">

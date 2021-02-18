@@ -16,6 +16,15 @@ class IngredientTypeEn(db.Model):
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_en.id'), nullable=False)
     ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
 
+    def get_image_src(self):
+        return self.image.split("|")[0].strip()
+
+    def get_image_alt(self, default):
+        try:
+            return self.image.split("|")[1].strip()
+        except IndexError:
+            return default
+
     def delete(self):
         for ing in self.ingredients:
             db.session.delete(ing)
