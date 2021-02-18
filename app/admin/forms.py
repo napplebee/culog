@@ -73,7 +73,7 @@ class IngredientForm(Form):
         (_, _) for _ in cnst.AMOUNT_TYPES
     ])
 
-    note = StringField("Note:")
+    note = TextAreaField("Note:")
     optional = BooleanField("Optional?")
 
     def empty(self):
