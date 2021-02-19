@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     BASE_EXTERNAL_URI = "http://cookwith.love"
+    LOGO_PATH = "/static/front/logo.jpg"
     SUPPORTED_LANGS = ("ru", "en",)
     APP_BASE_DIR = os.path.join(basedir, "app")
 

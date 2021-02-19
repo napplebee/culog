@@ -17,11 +17,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ request.base_url }}" />
-    {% if v.post.get_fb_og_image_canonical()|length %}
     <meta property="og:image" content="{{ v.post.get_fb_og_image_canonical() }}" />
-    {% else %}
-    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
-    {% endif %}
     <meta property="og:title" content="{{ v.post.fb_og_title }}" />
     <meta property="og:description" content="{{ v.post.fb_og_description }}" />
 
