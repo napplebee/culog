@@ -129,7 +129,6 @@ def nw_index_more(page):
         post_refs[i % cnst.COLUMNS_ON_LANDING].append(tail.pop())
         i += 1
 
-    # TODO: replace with /
     links = {lang: "/" for lang in cnst.SUPPORTED_LANGS}
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
 

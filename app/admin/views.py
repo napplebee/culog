@@ -222,9 +222,19 @@ def fck():
 
 @admin.route("/migrate")
 def migrate():
-    if True:
+    if not True:
         pass
     else:
+        from jinja2 import Template
+        tmpl_str = """
+                <h1>{{ title }}</h1>
+                <p style="font-style: italic; font-weight:bold">{{ sub_title }}</p>
+                <p>
+                    {{ text }}
+                </p>
+                """
+        template = Template(tmpl_str)
+
         for current_lang, lang_fallback in [("en", ["en"]), ("ru", ["ru", "en"]), ]:
 
             db_data = BlogPostHeader.query.filter(BlogPostHeader.visible).order_by(
@@ -272,7 +282,7 @@ def migrate():
                 newPost.recipe_id = -1
 
                 newPost.cut = oldPost.get_cut()
-                newPost.text = oldPost.get_text()
+                newPost.text = template.render(title=oldPost.get_title(), sub_title=oldPost.get_sub_title(), text=oldPost.get_text())
 
                 db.session.add(newPost)
 
