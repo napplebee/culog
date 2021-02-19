@@ -214,5 +214,8 @@ class Post(db.Model):
         return dr.to_iso8601(cook_delta + prep_delta, strict=False)
 
     def get_fb_og_image_canonical(self):
-        return urljoin(Config.BASE_EXTERNAL_URI, self.fb_og_image)
+        fb_og_image = Config.LOGO_PATH
+        if self.fb_og_image is not None and self.fb_og_image != "":
+            fb_og_image = self.fb_og_image
+        return urljoin(Config.BASE_EXTERNAL_URI, fb_og_image)
 
