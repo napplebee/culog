@@ -12,9 +12,10 @@ class IngredientTypeEn(db.Model):
     name = db.Column(db.String)
     type = db.Column(db.String)
     image = db.Column(db.String)
+    pos = db.Column(db.Integer)
 
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_en.id'), nullable=False)
-    ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select")
+    ingredients = db.relationship("IngredientEn", backref="ingr_type_en", lazy="select", order_by="IngredientEn.pos")
 
     def get_image_src(self):
         return self.image.split("|")[0].strip()
@@ -40,6 +41,7 @@ class IngredientTypeEn(db.Model):
         self.name = form.name.data
         self.type = form.type.data
         self.image = form.image.data
+        self.pos = int(form.pos.data)
 
         id2ingrs = {}
         new_ingrs = []
@@ -73,6 +75,7 @@ class IngredientTypeEn(db.Model):
         ingr_type.name = form.name.data
         ingr_type.type = form.type.data
         ingr_type.image = form.image.data
+        ingr_type.pos = int(form.pos.data)
 
         for ingr in form.ingredients.entries:
             ingr_en = IngredientEn.populate_from_form(

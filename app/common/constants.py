@@ -6,6 +6,6 @@ class Constants:
     ALL_LANG = "all"
     SUPPORTED_LANGS = ("ru", "en",)
     AMOUNT_TYPES = ("gr", "ml", "item", "tsp", "tbsp", "cup", "kg", "liter")
-    ITEM_PER_PAGE = 6
+    ITEM_PER_PAGE = 12
     COLUMNS_ON_LANDING = 3
 

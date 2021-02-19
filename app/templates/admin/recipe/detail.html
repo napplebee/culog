@@ -11,14 +11,14 @@
   </button>
 </div>
 {% endif %}
-{% if v.rendered %}
+{# % if v.rendered %}
 <div class="row alert warning text-center" role="alert">
   Your post has been successfully cooked from the recipe.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-{% endif %}
+{% endif % #}
 <form action="{{ v.action }}" class="form-horizontal" method="POST">
     <div class="row">
         <div class="col-sm col-md main">
@@ -161,6 +161,10 @@
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.pos.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.pos(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col-sm-2">{{ ingrTypeForm.name.label(class="control-label") }}</div>
                             <div class="col-sm-10">{{ ingrTypeForm.name(class="form-control") }}</div>
                         </div>
@@ -192,6 +196,10 @@
                                             <button class="btn btn-sm btn-success" type="button" id="enIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
                                             <button class="btn btn-sm btn-secondary" type="button" id="enIngrRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
                                         </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.pos.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ ingrForm.pos(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ ingrForm.name.label(class="control-label") }}</div>
@@ -245,6 +253,10 @@
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.pos.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.pos(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col-sm-2">{{ procTypeForm.name.label(class="control-label") }}</div>
                             <div class="col-sm-10">{{ procTypeForm.name(class="form-control") }}</div>
                         </div>
@@ -272,6 +284,10 @@
                                             <button class="btn btn-sm btn-success" type="button" id="enProcStepCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
                                             <button class="btn btn-sm btn-secondary" type="button" id="enProcStepRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
                                         </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.pos.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.pos(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ procStepForm.description.label(class="control-label") }}</div>
@@ -375,6 +391,10 @@
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-sm-2">{{ ingrTypeForm.pos.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ ingrTypeForm.pos(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col-sm-2">{{ ingrTypeForm.name.label(class="control-label") }}</div>
                             <div class="col-sm-10">{{ ingrTypeForm.name(class="form-control") }}</div>
                         </div>
@@ -406,6 +426,10 @@
                                             <button class="btn btn-sm btn-success" type="button" id="ruIngrCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
                                             <button class="btn btn-sm btn-secondary" type="button" id="ruIngrRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
                                         </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ ingrForm.pos.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ ingrForm.pos(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ ingrForm.name.label(class="control-label") }}</div>
@@ -459,6 +483,10 @@
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-sm-2">{{ procTypeForm.pos.label(class="control-label") }}</div>
+                            <div class="col-sm-10">{{ procTypeForm.pos(class="form-control") }}</div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col-sm-2">{{ procTypeForm.name.label(class="control-label") }}</div>
                             <div class="col-sm-10">{{ procTypeForm.name(class="form-control") }}</div>
                         </div>
@@ -486,6 +514,10 @@
                                             <button class="btn btn-sm btn-success" type="button" id="ruProcStepCp-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Copy</button>
                                             <button class="btn btn-sm btn-secondary" type="button" id="ruProcStepRm-{{ outerIndex }}-{{ loop.index0 }}" data-outer="{{ outerIndex }}" data-idx="{{ loop.index0 }}">Remove</button>
                                         </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">{{ procStepForm.pos.label(class="control-label") }}</div>
+                                        <div class="col-sm-10">{{ procStepForm.pos(class="form-control") }}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-2">{{ procStepForm.description.label(class="control-label") }}</div>

@@ -92,9 +92,9 @@ def recipe_new():
     form = nf.RecipeForm()
 
     if request.method == "POST":
-        post = Recipe.populate_from_ui(form)
-        post_id = post.save()
-        return redirect("/admin/recipe/update/{0}?saved".format(post_id))
+        recipe = Recipe.populate_from_ui(form)
+        recipe_id = recipe.save()
+        return redirect("/admin/recipe/update/{0}?saved".format(recipe_id))
 
     return render_template("admin/recipe/detail.html", v={
         "f": form,
@@ -120,8 +120,7 @@ def recipe_update(recipe_id):
             "title": title,
             "f": form,
             "action": "",
-            "saved": 1 if "saved" in request.args else 0,
-            "rendered": 1 if "rendered" in request.args else 0
+            "saved": 1 if "saved" in request.args else 0
         })
 
 
@@ -183,18 +182,18 @@ def recipe_list_preview(lang):
 @login_required
 @roles_required("root")
 def single_recipe_preview(recipe_id, lang):
-
-    render_template("front/post/detail.html", v={
-        "lang_dic": filtered_lang_dic,
-        "links": links,
-        "current_lang": lang,
-        "post": post,
-        "recent_posts": [],
-        "might_like_posts": [],
-        "categories": [],
-        "phrases": PHRASES[lang],
-        "meta_language": Language.meta_lang[current_lang],
-    })
+    pass
+    # render_template("front/post/detail.html", v={
+    #     "lang_dic": filtered_lang_dic,
+    #     "links": links,
+    #     "current_lang": lang,
+    #     "post": post,
+    #     "recent_posts": [],
+    #     "might_like_posts": [],
+    #     "categories": [],
+    #     "phrases": PHRASES[lang],
+    #     "meta_language": Language.meta_lang[current_lang],
+    # })
 
 
 @login_required

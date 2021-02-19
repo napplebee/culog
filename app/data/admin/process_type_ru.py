@@ -12,9 +12,10 @@ class ProcessTypeRu(db.Model):
 
     name = db.Column(db.String)
     note = db.Column(db.String)
+    pos = db.Column(db.Integer)
 
     recipe_header_en_id = db.Column(db.Integer, db.ForeignKey('ng_recipe_header_ru.id'), nullable=False)
-    steps = db.relationship("ProcessStepRu", backref="process_type_ru", lazy="select")
+    steps = db.relationship("ProcessStepRu", backref="process_type_ru", lazy="select", order_by="ProcessStepRu.pos")
 
     def delete(self):
         for step in self.steps:
@@ -30,6 +31,7 @@ class ProcessTypeRu(db.Model):
 
         self.name = form.name.data
         self.note = form.note.data
+        self.pos = int(form.pos.data)
 
         id2steps = {}
         new_steps = []
@@ -63,6 +65,7 @@ class ProcessTypeRu(db.Model):
 
         proc_type.name = form.name.data
         proc_type.note = form.note.data
+        proc_type.pos = int(form.pos.data)
 
         for st in form.steps.entries:
             step = ProcessStepRu.populate_from_form(st.form)

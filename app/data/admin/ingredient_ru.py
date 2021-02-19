@@ -15,7 +15,8 @@ class IngredientRu(db.Model):
     amount_type = db.Column(db.Enum(*cnst.AMOUNT_TYPES, name="amount_type", native_enum=False))
 
     note = db.Column(db.String)
-    optional = db.Column(db.Boolean) # boolean
+    optional = db.Column(db.Boolean)
+    pos = db.Column(db.Integer)
 
     ingr_type_id = db.Column(db.Integer, db.ForeignKey('ng_ingr_type_ru.id'), nullable=False)
 
@@ -30,6 +31,7 @@ class IngredientRu(db.Model):
         self.amount_type = form.amount_type.data
         self.note = form.note.data
         self.optional = form.optional.data
+        self.pos = int(form.pos.data)
 
         return self
 
@@ -44,6 +46,7 @@ class IngredientRu(db.Model):
         ingr.amount_type = form.amount_type.data
         ingr.note = form.note.data
         ingr.optional = form.optional.data
+        ingr.pos = int(form.pos.data)
 
         return ingr
 

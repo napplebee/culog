@@ -12,6 +12,7 @@ class ProcessStepEn(db.Model):
     description = db.Column(db.String)
     image = db.Column(db.String)
     note = db.Column(db.String)
+    pos = db.Column(db.Integer)
 
     process_type_id = db.Column(db.Integer, db.ForeignKey('ng_process_type_en.id'), nullable=False)
 
@@ -33,6 +34,7 @@ class ProcessStepEn(db.Model):
         self.description = form.description.data
         self.image = form.image.data
         self.note = form.note.data
+        self.pos = int(form.pos.data)
 
         return self
 
@@ -46,5 +48,6 @@ class ProcessStepEn(db.Model):
         st.description = form.description.data
         st.image = form.image.data
         st.note = form.note.data
+        st.pos = int(form.pos.data)
 
         return st

@@ -28,8 +28,10 @@ class RecipeHeaderRu(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey('ng_recipe.id'), nullable=False)
     # rename to ingredients_type so it will match
     # the field's name from the form class
-    ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select")
-    process_type = db.relationship("ProcessTypeRu", backref="process_type_ru", lazy="select")
+    ingredients_type = db.relationship("IngredientTypeRu", backref="recipe_header_ru", lazy="select",
+                                       order_by="IngredientTypeRu.pos")
+    process_type = db.relationship("ProcessTypeRu", backref="process_type_ru", lazy="select",
+                                   order_by="ProcessTypeRu.pos")
 
     def merge_with_form(self, form):
         if not form.id.data.isdigit():

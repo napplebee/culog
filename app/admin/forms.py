@@ -1,7 +1,7 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField,\
     SelectField, BooleanField, TextAreaField,\
-    HiddenField, DateField, FieldList, FormField, FloatField
+    HiddenField, DateField, FieldList, FormField, FloatField, IntegerField
 
 from app.common.facebook import OG_TYPES
 from app.common.constants import Constants as cnst
@@ -50,6 +50,7 @@ class ProcessStepForm(Form):
     description = StringField("Description:")
     note = TextAreaField("Note:")
     image = StringField("Image:")
+    pos = IntegerField("Position:", default=0)
 
     def empty(self):
         return self.id.data == "" and self.description.data == "" and self.note.data == "" and self.image.data == ""
@@ -59,6 +60,7 @@ class ProcessTypeForm(Form):
     id = HiddenField()
     name = StringField("Name:")
     note = TextAreaField("Note:")
+    pos = IntegerField("Position:", default=0)
 
     steps = FieldList(FormField(ProcessStepForm), "Steps", min_entries=1)
 
@@ -76,6 +78,7 @@ class IngredientForm(Form):
 
     note = TextAreaField("Note:")
     optional = BooleanField("Optional?")
+    pos = IntegerField("Position:", default=0)
 
     def empty(self):
         return self.id.data == "" and self.name.data == "" and self.amount_value.data == "" and self.note.data == ""
@@ -86,6 +89,7 @@ class IngredientTypeForm(Form):
     name = StringField("Name:")
     type = StringField("Type:")
     image = StringField("Image:")
+    pos = IntegerField("Position:", default=0)
 
     ingredients = FieldList(FormField(IngredientForm), "Ingredients", min_entries=1)
 
