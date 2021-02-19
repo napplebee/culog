@@ -11,9 +11,18 @@
     <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
     <meta name="yandex-verification" content="bf87104ed493675a" />
     <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
-    <meta name="keywords" content="???" />
-    <meta name="description" content="???" />
+
     <title>Обо мне | Cook With Love</title>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg) }}" />
+
+    <meta property="og:title" content="Обо мне | Cook With Love" />
+    <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+    <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
+    <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+
     <link rel="canonical" href="{{ request.base_url }}"/>
     <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
     <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
