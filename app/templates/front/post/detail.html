@@ -12,10 +12,18 @@
     <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
     <meta name="keywords" content="{{ v.post.meta_keywords }}" />
     <meta name="description" content="{{ v.post.meta_description }}" />
+
     <title>{{ v.post.title }}</title>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
+    <meta property="og:title" content="{{ v.post.fb_og_title }}" />
+    <meta property="og:description" content="{{ v.post.fb_og_description }}" />
+
     <link rel="canonical" href="{{ request.base_url }}"/>
-    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
-    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
     <!--Start Cookie Script-->
     <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
     <!--End Cookie Script-->

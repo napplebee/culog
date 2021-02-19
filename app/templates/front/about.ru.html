@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <meta name="author" content="Kate CookWithLove" />
     <meta name="language" content="{{ v.current_lang }}" />
@@ -15,17 +15,20 @@
     <title>Обо мне | Cook With Love</title>
 
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="{{ request.base_url }}">
-    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg) }}" />
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
 
     <meta property="og:title" content="Обо мне | Cook With Love" />
     <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
     <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
     <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
 
-    <link rel="canonical" href="{{ request.base_url }}"/>
-    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
-    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
+    <link rel="canonical" href="{{ request.base_url }}" />
+    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
+    <!--Start Cookie Script-->
+    <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
+    <!--End Cookie Script-->
     <style>
         #content {
 		position: relative;

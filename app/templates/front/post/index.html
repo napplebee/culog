@@ -7,24 +7,28 @@
     <meta name="author" content="Kate CookWithLove" />
     <meta name="language" content="{{ v.current_lang }}" />
     <meta property="fb:app_id" content="522001701315044" />
+
     <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
     <meta name="yandex-verification" content="bf87104ed493675a" />
     <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="{{ request.base_url }}">
-    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg) }}" />
+
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
+
     {% if v.current_lang == "ru" %}
+    <title>Cook With Love: семейные рецепты</title>
     <meta property="og:title" content="Cook With Love: семейные рецепты" />
     <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
     <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
     <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
     {% else %}
+    <title>Cook With Love: food blog</title>
     <meta property="og:title" content="Cook With Love: food blog" />
     <meta property="og:description" content="Each and every recipe has a story behind it. I'm collecting family recipes that are full love and warm memories. Do you have one?" />
     <meta name="keywords" content="food blog, easy recipes, home cooking, cooking, recipes, baking, dessert recipes, homecooking, yummy, cook with love" />
     <meta name="description" content="Each and every recipe has a story behind it. I'm collecting family recipes that are full love and warm memories. Do you have one?" />
     {% endif %}
-    <title>Cook With Love</title>
     <link rel="canonical" href="{{ request.base_url }}"/>
     <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
     <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
