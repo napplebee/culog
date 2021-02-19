@@ -17,7 +17,11 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ request.base_url }}" />
+    {% if v.post.get_fb_og_image_canonical()|length %}
+    <meta property="og:image" content="{{ v.post.get_fb_og_image_canonical() }}" />
+    {% else %}
     <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
+    {% endif %}
     <meta property="og:title" content="{{ v.post.fb_og_title }}" />
     <meta property="og:description" content="{{ v.post.fb_og_description }}" />
 
@@ -232,6 +236,14 @@
 <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
 <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+<!-- Yandex.Metrika counter -->
+<noscript><div>
+<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+</div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
 <script type="application/ld+json">
     {
         "@context": "https://schema.org/",
