@@ -63,3 +63,6 @@ target/
 
 # Mac files
 .DS_Store
+
+# Env local
+env.local

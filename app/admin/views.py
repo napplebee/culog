@@ -15,6 +15,7 @@ from app.admin import forms as nf
 from app.data.admin.recipe import Recipe
 from app.data.front.post import Post
 from app.common.phrases import PHRASES
+from configs import Config
 
 import json
 
