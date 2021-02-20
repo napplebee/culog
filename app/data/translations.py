@@ -2,7 +2,7 @@
 
 from app.core import db
 import datetime
-from configs import Config as cfg
+from app.common.constants import Constants as cnst
 
 
 class Translation(db.Model):
@@ -11,7 +11,7 @@ class Translation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     value = db.Column(db.Text)
-    lang = db.Column(db.Enum(*cfg.SUPPORTED_LANGS, name="langs", native_enum=False))
+    lang = db.Column(db.Enum(*cnst.SUPPORTED_LANGS, name="langs", native_enum=False))
 
     post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
 

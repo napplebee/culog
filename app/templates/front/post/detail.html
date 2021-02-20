@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="author" content="Kate CookWithLove" />
+    <meta name="language" content="{{ v.current_lang }}" />
+    <meta property="fb:app_id" content="522001701315044" />
+    <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
+    <meta name="yandex-verification" content="bf87104ed493675a" />
+    <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
+    <meta name="keywords" content="{{ v.post.meta_keywords }}" />
+    <meta name="description" content="{{ v.post.meta_description }}" />
+
+    <title>{{ v.post.title }}</title>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ v.post.get_fb_og_image_canonical() }}" />
+    <meta property="og:title" content="{{ v.post.fb_og_title }}" />
+    <meta property="og:description" content="{{ v.post.fb_og_description }}" />
+
+    <link rel="canonical" href="{{ request.base_url }}"/>
+    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
+    <!--Start Cookie Script-->
+    <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
+    <!--End Cookie Script-->
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
+      <div class="container">
+
+        <a class="order-md-1 mr-1 pt-1 pb-1" href="/">
+          <img style="height:55px;" src="{{ url_for('static', filename = 'front/logo.png') }}">
+        </a>
+
+        <button class="navbar-toggler order-2 order-md-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-left navbar-right" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3 order-md-3 pl-1" id="navbar-left">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">{{ v.phrases.recipes }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse order-4 order-md-4 pl-1" id="navbar-right">
+          <ul class="navbar-nav ml-auto">
+            {#{% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}#}
+              {% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main pt-4">
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-9">
+
+          <article class="card mb-4">
+            <div class="addthis_inline_share_toolbox d-flex justify-content-end mb-2"></div>
+            {{ v.post.text | safe }}
+            <div class="addthis_inline_share_toolbox d-flex justify-content-end mt-2"></div>
+          </article><!-- /.card -->
+
+        </div>
+        <div class="col-md-3 ml-auto">
+
+          <aside class="sidebar">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.recent_recipes }}</h4>
+                {% for p in v.recent_posts %}
+                <div class="row mb-3">
+                <a href="/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
+                  <h4 class="h6">{{ p.title }}</h4>
+                  {% if p.fb_og_image %}
+                  <img class="card-img" src="{{ p.get_fb_og_image_src() }}" alt="{{ p.get_fb_og_image_alt() }}" />
+                  {% endif %}
+                </a>
+                  <span class="mt-2 mb-1">
+                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
+                 @
+                 {% for _ in p.get_categories() %}
+                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                 {% endfor %}
+                  </span>
+                </div>
+                {% endfor %}
+              </div>
+            </div><!-- /.card -->
+          </aside>
+
+          <aside class="sidebar sidebar-sticky">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.categories }}</h4>
+                {% for c in v.categories %}
+                <a class="btn btn-light btn-sm mb-1" href="{{ c[1] }}">{{ c[0] }}</a>
+                {% endfor %}
+              </div>
+            </div><!-- /.card -->
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="card-title">{{ v.phrases.you_may_like }}</h4>
+
+                {% for p in v.might_like_posts %}
+                <div class="row mb-3">
+                <a href="/{{ v.current_lang }}{{ p.url }}" class="d-inline-block no-underline">
+                  <h4 class="h6">{{ p.title }}</h4>
+                  {% if p.fb_og_image %}
+                  <img class="card-img" src="{{ p.get_fb_og_image_src() }}" alt="{{ p.get_fb_og_image_alt() }}" />
+                  {% endif %}
+                </a>
+                <span class="mt-2 mb-1">
+                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
+                @
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %}
+                </span>
+                </div>
+                {% endfor %}
+
+              </div>
+            </div><!-- /.card -->
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="site-pagination">
+    <div class="container">
+      <div class="text-center">
+        <div class="row">
+          <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ml-auto mr-auto">
+            <div class="input-group mb-3 mt-3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-instagram">
+    <div class="action">
+      <a class="btn btn-light" href="https://www.instagram.com/cookwith.love/" target="_blank">
+        cookwith.love @ Instagram
+      </a>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-6">
+        <div class="row no-gutters">
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/1.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/2.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/3.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/4.jpg') }}" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row no-gutters">
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/5.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/6.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/7.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/8.jpg') }}" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer bg-darkest">
+    <div class="container">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
+        </li>
+      </ul>
+      <div class="copy">
+        &copy; CookwithLove 2021<br />
+        {{ v.phrases.reserved_rights }}
+      </div>
+    </div>
+  </footer>
+<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+<!-- Yandex.Metrika counter -->
+<noscript><div>
+<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+</div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        {% if v.post.is_article %}
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ request.base_url }}"
+        },
+        "headline": "{{ v.post.fb_og_title }}",
+        "publisher": {
+          "@type": "Organization",
+          "name": "CookWithLove",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "http://cookwith.love/static/front/logo.jpg"
+          }
+        },
+        {% else %}
+          {% if v.post.get_cook_time_iso()|length %}
+        "cookTime": "{{ v.post.get_cook_time_iso() }}",
+        "prepTime": "{{ v.post.get_prep_time_iso() }}",
+        "totalTime": "{{ v.post.get_total_time_iso() }}",
+          {% endif %}
+          {% if v.post.recipe_yield|length %}
+        "recipeYield": "{{ v.post.recipe_yield }}",
+          {% endif %}
+          {% if v.post.recipe_category|length %}
+        "recipeCategory": "{{ v.post.recipe_category }}",
+          {% endif %}
+          {% if v.post.recipe_cuisine|length %}
+        "recipeCuisine": "{{ v.post.recipe_cuisine }}",
+          {% endif %}
+        "@type": "Recipe",
+        "name": "{{ v.post.fb_og_title }}",
+        "keywords": "{{ v.post.meta_keywords }}",
+        {% endif %}
+        "dateModified": "{{ v.post.updated_at.isoformat() }}",
+        "datePublished": "{{ v.post.published_at.isoformat() }}",
+        "author": {
+            "@type": "Person",
+            "name": "Kate CookWithLove"
+        },
+        "description": "{{ v.post.meta_description }}",
+        "image": [
+            "{{ v.post.get_fb_og_image_canonical() }}"
+        ]
+    }
+</script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-571e12d8e754a813"></script>
+</body>
+</html>

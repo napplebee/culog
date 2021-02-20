@@ -1,0 +1,52 @@
+<h1>{{ v.h.title }}</h1>
+<p style="font-style: italic; font-weight:bold">{{ v.h.sub_title }}</p>
+<p>
+    {{ v.h.text }}
+</p>
+
+<h2>{{ v.ph.ingredients }}</h2>
+{% for iType in v.h.ingredients_type %}
+    <h3>{{ iType.name }}:</h3>
+    {% if iType.ingredients|length > 1 %}
+    <ul class="ingredients">
+        {% for ingr in iType.ingredients %}
+        <li>{% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
+            {% if ingr.note %}
+            <br>
+            <i>{{ ingr.note }}</i>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% elif iType.ingredients|length == 1 %}
+    <p>{{ iType.ingredients[0].name }}</p> {# кет сказала что выводить только .name #}
+    {% endif %}
+    {% if iType.image %}
+    <img class="steps" src="{{ iType.get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ iType.get_image_alt(v.h.title) }}">
+    {% endif %}
+</p>
+{% endfor %}
+
+<h2>{{ v.ph.process }}</h2>
+{% for pType in v.h.process_type %}
+    <h3>{{ pType.name }}</h3>
+    {% if pType.note %}
+        <br>
+        {{ pType.note }}
+        <br>
+    {% endif %}
+    {% if pType.steps|length > 1 %}
+        <ul class="preparation">
+        {% for pStep in pType.steps %}
+            <li>{{ pStep.description }}
+                {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
+            </li>
+            {% if pStep.image %}
+            <img class="steps" src="{{ pStep.get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ pStep.get_image_alt(v.h.title) }}">
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% elif pType.steps|length == 1 %}
+    <p>{{ pType.steps[0].description }}</p>
+    {% endif %}
+{% endfor %}

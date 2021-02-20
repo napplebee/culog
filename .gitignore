@@ -1,11 +1,13 @@
 env.local
 # Byte-compiled / optimized / DLL files
+env.local
 __pycache__/
 *.py[cod]
 .idea
 *.swp
 # C extensions
 *.so
+*.DS_Store
 
 # Distribution / packaging
 .Python
@@ -61,3 +63,6 @@ target/
 
 # Mac files
 .DS_Store
+
+# Env local
+env.local

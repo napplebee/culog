@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12 col-md-12 main">
+          <h1 class="page-header">Posts</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Recipe</th>
+                  <th>Lang</th>
+                  <th>Updated</th>
+                  <th>Published</th>
+                  <th>Visibility</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in v.posts %}
+                <tr>
+                  <td>{{ item.id }}</td>
+                  <td><a href="{{ url_for('.post_update', post_id=item.id) }}">{{ item.title }}</a></td>
+                  <td>
+                    {% if item.recipe_id != -1 %}
+                    <a href="{{ url_for('.recipe_update', recipe_id=item.recipe_id) }}">recipe</a>
+                    {% endif %}
+                  </td>
+                  <td>{% if item.lang == "ru" %}🇷🇺{% else %}🇺🇸{% endif %}</td>
+                  <td>{{ item.updated_at }}</td>
+                  <td>{{ item.published_at }}</td>
+                  <td>{% if item.visible %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+</div>
+{% endblock %}

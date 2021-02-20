@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" content="Kate CookWithLove" />
+    <meta name="language" content="{{ v.current_lang }}" />
+    <meta property="fb:app_id" content="522001701315044" />
+    <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
+    <meta name="yandex-verification" content="bf87104ed493675a" />
+    <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
+
+    <title>Обо мне | Cook With Love</title>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
+
+    <meta property="og:title" content="Обо мне | Cook With Love" />
+    <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+    <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
+    <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+
+    <link rel="canonical" href="{{ request.base_url }}" />
+    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
+    <!--Start Cookie Script-->
+    <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
+    <!--End Cookie Script-->
+    <style>
+        #content {
+		position: relative;
+		background-image: url("/static/front/images/bg02.png");
+	}
+	#indexContainer a {
+	text-decoration: underline;
+	color: #212529;
+	}
+@media screen and (min-width: 1201px) {
+    #content {
+				padding: 3em 5em 8em 5em;
+				margin-left: 14.5em;
+			}
+}
+
+@media screen and (min-width: 1001px){
+    div.circular {
+        float: left;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
+        -webkit-border-radius: 150px;
+        -moz-border-radius: 150px;
+        background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+
+
+@media screen and (max-width: 1000px){
+    div.circular {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        -webkit-border-radius: 75px;
+        -moz-border-radius: 75px;
+        background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+}
+    </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
+      <div class="container">
+
+        <a class="order-md-1 mr-1 pt-1 pb-1" href="/">
+          <img style="height:55px;" src="{{ url_for('static', filename = 'front/logo.png') }}">
+        </a>
+
+        <button class="navbar-toggler order-2 order-md-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-left navbar-right" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3 order-md-3 pl-1" id="navbar-left">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">{{ v.phrases.recipes }}</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link">{{ v.phrases.about }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse order-4 order-md-4 pl-1" id="navbar-right">
+          <ul class="navbar-nav ml-auto">
+            {#{% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}#}
+              {% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main pt-4">
+
+    <div class="container" id="indexContainer">
+
+      <div class="row d-flex justify-content-center">
+        <div class="circular"></div>
+
+        <div style="margin:15px;float:right;">
+            Я очень люблю свою семью, готовить вкусняшки для них и вместе с ними.
+            Если у вас не получается готовить с любовью, просто поделитесь моими рецептами с близкими, уверена, они поймут намек!
+            <br><br>
+            Присылайте мне семейные или просто любимые рецепты на почту <a name="#">kate [at] cookwith [dot] love</a>, и я с радостью размещу их на страницах своего блога :)
+            <br><br>
+            И не забудьте подписаться на меня в <a href="https://www.facebook.com/cookwith.1ove/" target="_blank">facebook</a>,
+            <a href="https://www.instagram.com/icenaoko/" target="_blank">instagram</a> и
+            <a href="https://vk.com/cookwith.love" target="_blank">вконтакте</a>,
+            а читать кулинарные заметки можно в <a href="https://t.me/cookwith_love" target="_blank">телеграм канале</a>!<br>
+            <h4 style="color:#444; float:right; padding-right:10px; padding-top:5px;">Катя CookWithLove</h4>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="site-pagination">
+    <div class="container">
+      <div class="text-center">
+        <div class="row">
+          <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ml-auto mr-auto">
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <button class="btn btn-dark{% if not v.has_next_item %} invisible{% endif %}" id="loadMore">
+                    {{ v.phrases.load_more }}
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-instagram">
+    <div class="action">
+      <a class="btn btn-light" href="https://www.instagram.com/cookwith.love/" target="_blank">
+        cookwith.love @ Instagram
+      </a>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-6">
+        <div class="row no-gutters">
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/1.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/2.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/3.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/4.jpg') }}" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row no-gutters">
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/5.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/6.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/7.jpg') }}" alt="" />
+            </a>
+          </div>
+          <div class="col-3">
+            <a class="photo" href="#">
+              <img class="img-fluid" src="{{ url_for('static', filename = 'front/recipe/images/instagram/8.jpg') }}" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer bg-darkest">
+    <div class="container">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
+        </li>
+      </ul>
+      <div class="copy">
+        &copy; CookwithLove 2021<br />
+        {{ v.phrases.reserved_rights }}
+      </div>
+    </div>
+  </footer>
+
+<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+<!-- Yandex.Metrika counter -->
+<noscript><div>
+<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+</div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>

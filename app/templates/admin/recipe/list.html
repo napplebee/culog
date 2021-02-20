@@ -1,0 +1,96 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12 col-md-12 main">
+          <h1 class="page-header">Recipes</h1>
+          <div id="actionResult" class="row alert alert-success text-center hidden" role="alert">
+            <span id="actionResultMsg">Your changes were successfully saved.</span>
+            <button type="button" class="close" onclick="$('#actionResult').addClass('hidden').removeClass('show');">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="row placeholders">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <a class="btn btn-success" href="{{ url_for('.recipe_new') }}" role="button">New recipe</a>
+              </div>
+              <div class="btn-group me-2" role="group" aria-label="Second group">
+                <a class="btn btn-default" target="_blank" href="{{ url_for('.recipe_list_preview', lang='ru') }}" role="button">Preview 🇷🇺</a>
+                <a class="btn btn-default" target="_blank" href="{{ url_for('.recipe_list_preview', lang='en') }}" role="button">Preview 🇺🇸</a>
+              </div>
+            </div>
+
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped" style="margin-bottom:200px;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Menu</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Visible 🇷🇺</th>
+                  <th>Visible 🇺🇸</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in v.recipes %}
+                <tr>
+                  <td>{{ item.id }}</td>
+                  <td><a href="{{ url_for('.recipe_update', recipe_id=item.id) }}">{{ item.name }}</a></td>
+                  <td>
+                    <div class="btn-group" id="dd-menu-{{ item.id }}">
+                      <button type="button" id="dd-btn-{{ item.id }}" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('.single_recipe_preview', lang='ru', recipe_id=item.id) }}" target="_blank">Preview 🇷🇺</a></li>
+                        <li><a href="{{ url_for('.single_recipe_preview', lang='en', recipe_id=item.id) }}" target="_blank">Preview 🇺🇸</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="generate_ru_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇷🇺</a></li>
+                        <li><a id="generate_en_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate 🇺🇸</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="generate_all_{{ item.id }}" data-r-id="{{ item.id }}" href="#">Generate all</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                      {% if item.created_at %}
+                      {{ item.created_at.strftime('%Y-%m-%d %H:%M') }}
+                      {% endif %}
+                  </td>
+                  <td>
+                      {% if item.updated_at %}
+                      {{ item.updated_at.strftime('%Y-%m-%d %H:%M') }}
+                      {% endif %}
+                  </td>
+
+                  <td>
+                      <button id="visible_ru_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="ru" type="button" class="btn btn-default btn-xs {% if item.visible_ru %}show{% else %}hidden{% endif %}">
+                          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      </button>
+                      <button id="invisible_ru_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="ru" type="button" class="btn btn-default btn-xs {% if not item.visible_ru %}show{% else %}hidden{% endif %}">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      </button>
+                  </td>
+                  <td>
+                      <button id="visible_en_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="en" type="button" class="btn btn-default btn-xs {% if item.visible_en %}show{% else %}hidden{% endif %}">
+                          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      </button>
+                      <button id="invisible_en_{{ item.id }}" data-r-id="{{ item.id }}" data-lang="en" type="button" class="btn btn-default btn-xs {% if not item.visible_en %}show{% else %}hidden{% endif %}">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      </button>
+                  </td>
+
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+</div>
+{% endblock %}

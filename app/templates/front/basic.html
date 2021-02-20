@@ -11,7 +11,7 @@
 		{% if v.is_index %}
 			{% if v.current_lang == "ru" %}
 			<meta property="og:title" content="CookWithLove: семейные рецепты">
-			<meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
+			<meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка рецепты, cook with love" />
 			<meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою? Пишите на почту kate@cookwith.love.">
 			{% elif v.current_lang == "en" %}
 			<meta property="og:title" content="CookWithLove: food blog">
@@ -24,11 +24,12 @@
 		{% endif %}
 		<!-- Canonical for Yandex - SEO -->
 		<link rel="canonical" href="{{ v.current_url }}"/>
+    	<link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="fb:app_id" content="522001701315044">
-        	<meta name="author" content="Kate CookWithLove">
-        	<meta name="language" content="{{ v.meta_language }}">
+		<meta name="author" content="Kate CookWithLove">
+		<meta name="language" content="{{ v.meta_language }}">
 		<meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
 		<meta name="yandex-verification" content="bf87104ed493675a" />
 		<meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980"/>
@@ -40,8 +41,7 @@
         {% block meta %}{% endblock %}
 		<!--[if lte IE 8]><script src="{{ url_for('static', filename = 'front/js/ie/html5shiv.js') }}"></script><![endif]-->
 		{% block main_css %}<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />{% endblock %}
-		<!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/ie8.css') }}" /><![endif]-->
-        <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
+		<!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/ie8.css') }}" /><![endif]
 		{% block styles_to_override %}{% endblock %}
 	</head>
 	<body>
@@ -116,7 +116,6 @@
                             {% if v.current_lang == "ru" %}
                             	<li class="current"><a>Русский</a></li>
                             	<li><a href="#" onclick="l('en', false); return false;">English</a></li>
-{#	                            <li><a href="#" onclick="l('sv', false); return false;">Svenska</a></li>#}
                             {% endif %}
 
                             {% endblock %}

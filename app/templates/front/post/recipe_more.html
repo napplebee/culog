@@ -1,0 +1,104 @@
+<div class="row">
+        {# posts_left #}
+        <div class="col-md-4">
+          {% for p in v.posts_left %}
+          <article class="card mb-4">
+            <header class="card-header">
+              <div class="card-meta">
+                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
+                {% if p.recipe_category %}
+                @
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
+                <h4 class="card-title">
+                  {{ p.title }}
+                </h4>
+                <h6 class="card-title">
+                  {{ p.sub_title }}
+                </h6>
+              </a>
+            </header>
+              {% if p.fb_og_image %}
+              <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
+              {% endif %}
+              <div class="card-body">
+              <p class="card-text">
+                {{ p.cut | safe }}
+              </p>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {# posts_center #}
+        <div class="col-md-4">
+          {% for p in v.posts_center %}
+          <article class="card mb-4">
+            <header class="card-header">
+              <div class="card-meta">
+                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
+                {% if p.recipe_category %}
+                @
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
+                <h4 class="card-title">
+                  {{ p.title }}
+                </h4>
+                <h6 class="card-title">
+                  {{ p.sub_title }}
+                </h6>
+              </a>
+            </header>
+              {% if p.fb_og_image %}
+            <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
+              {% endif %}
+            <div class="card-body">
+              <p class="card-text">
+                {{ p.cut | safe }}
+              </p>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {# posts_right #}
+        <div class="col-md-4">
+          {% for p in v.posts_right %}
+          <article class="card mb-4">
+            <header class="card-header">
+              <div class="card-meta">
+                  <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d') }}</time>
+                {% if p.recipe_category %}
+                @
+                {% for _ in p.get_categories() %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                {% endfor %}
+                {% endif %}
+              </div>
+              <a href="/{{ p.lang }}{{ p.url }}" class="no-underline">
+                <h4 class="card-title">
+                  {{ p.title }}
+                </h4>
+                <h6 class="card-title">
+                  {{ p.sub_title }}
+                </h6>
+              </a>
+            </header>
+              {% if p.fb_og_image %}
+            <a href="/{{ p.lang }}{{ p.url }}"><img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" /></a>
+              {% endif %}
+              <div class="card-body">
+              <p class="card-text">
+                {{ p.cut | safe }}
+              </p>
+              </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
