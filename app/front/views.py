@@ -154,7 +154,7 @@ def nw_index_more(page):
 def nw_category(lang_override, category):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
 
-    search = "%{}%".format(category)
+    search = "%%%s%%" % category
     posts = Post.query.filter(Post.lang == current_lang, Post.visible == True, Post.recipe_category.like(search)) \
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
@@ -201,7 +201,7 @@ def nw_category(lang_override, category):
 def nw_category_more(lang_override, category, page):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
 
-    search = "%{}%".format(category)
+    search = "%%%s%%" % category
     posts = Post.query.filter(Post.lang == current_lang, Post.visible == True, Post.recipe_category.like(search)) \
         .order_by(Post.published_at.desc(), Post.id.desc()).offset(page*cnst.ITEM_PER_PAGE).limit(cnst.ITEM_PER_PAGE + 1).all()
 
@@ -275,7 +275,7 @@ def nw_detail(lang_override, post_url):
 
     category = post.recipe_category.split(",")[0]
 
-    search = "%{}%".format(category)
+    search = "%%%s%%" % category
     might_like_posts = set(Post.query.filter(Post.id != post.id, Post.visible == True, Post.fb_og_image != '', Post.recipe_category.like(search)).limit(12).all())
 
     recent_posts = Post.query.filter(Post.id != post.id, Post.visible == True, Post.lang == current_lang, Post.fb_og_image != '').\
