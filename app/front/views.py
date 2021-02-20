@@ -67,8 +67,8 @@ def nw_index():
     if has_next_item:
         posts = posts[:-1]
         n = n - 1
-    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
-    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    head = [_ for _ in reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [_ for _ in reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
     posts_left = []
     posts_center = []
     posts_right = []
@@ -112,8 +112,8 @@ def nw_index_more(page):
     if has_next_item:
         posts = posts[:-1]
         n = n - 1
-    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
-    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    head = [_ for _ in reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [_ for _ in reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
     posts_left = []
     posts_center = []
     posts_right = []
@@ -164,8 +164,8 @@ def nw_category(lang_override, category):
     if has_next_item:
         posts = posts[:-1]
         n = n - 1
-    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
-    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    head = [_ for _ in reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [_ for _ in reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
     posts_left = []
     posts_center = []
     posts_right = []
@@ -211,8 +211,8 @@ def nw_category_more(lang_override, category, page):
     if has_next_item:
         posts = posts[:-1]
         n = n - 1
-    head = [*reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
-    tail = [*reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
+    head = [_ for _ in reversed(posts[:-(n % cnst.COLUMNS_ON_LANDING)])]
+    tail = [_ for _ in reversed(posts[-(n % cnst.COLUMNS_ON_LANDING):])]
     posts_left = []
     posts_center = []
     posts_right = []
