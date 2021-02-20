@@ -5,7 +5,10 @@ from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 import datetime as dt
 import duration as dr
-from urllib.parse import urljoin
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 from configs import Config
 
