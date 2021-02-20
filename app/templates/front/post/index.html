@@ -41,32 +41,41 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
       <div class="container">
 
-        <button class="navbar-toggler order-2 order-md-1" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-left navbar-right" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="order-md-1 mr-1 pt-1 pb-1" href="/">
+          <img style="height:55px;" src="{{ url_for('static', filename = 'front/logo.png') }}">
+        </a>
+
+        <button class="navbar-toggler order-2 order-md-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-left navbar-right" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse order-3 order-md-2" id="navbar-left">
+        <div class="collapse navbar-collapse order-3 order-md-3 pl-1" id="navbar-left">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">{{ v.phrases.recipes }}</a>
             </li>
-            {% for lng in v.lang_dic %}
-                {% if lng == v.current_lang %}
-                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="#"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
-                {% endif %}
-            {% endfor %}
+            <li class="nav-item active">
+              <a class="nav-link">{{ v.phrases.about }}</a>
+            </li>
           </ul>
         </div>
 
-        <a class="navbar-brand mx-auto order-1 order-md-3" href="/">Cook with 🖤</a>
-
-        <div class="collapse navbar-collapse order-4 order-md-4" id="navbar-right">
+        <div class="collapse navbar-collapse order-4 order-md-4 pl-1" id="navbar-right">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/{{ v.current_lang }}/about">{{ v.phrases.about }}</a>
-            </li>
+            {#{% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}#}
+              {% for lng in v.lang_dic %}
+                {% if lng == v.current_lang %}
+                  <li class="nav-item active"><a class="nav-link">{{ v.lang_dic[lng] }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ v.links[lng] }}"  onclick="switch_lang('{{ lng }}', '{{ v.links[lng] }}'); return false;">{{ v.lang_dic[lng] }}</a></li>
+                {% endif %}
+            {% endfor %}
           </ul>
         </div>
       </div>
