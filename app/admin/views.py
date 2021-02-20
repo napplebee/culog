@@ -12,9 +12,11 @@ from app.common.constants import Constants as cnst
 from app import db
 from app.admin.forms import PostForm
 from app.admin import forms as nf
+from app.domain.language import Language
 from app.data.admin.recipe import Recipe
 from app.data.front.post import Post
 from app.common.phrases import PHRASES
+import datetime as dt
 from configs import Config
 
 import json
@@ -182,18 +184,23 @@ def recipe_list_preview(lang):
 @login_required
 @roles_required("root")
 def single_recipe_preview(recipe_id, lang):
-    pass
-    # render_template("front/post/detail.html", v={
-    #     "lang_dic": filtered_lang_dic,
-    #     "links": links,
-    #     "current_lang": lang,
-    #     "post": post,
-    #     "recent_posts": [],
-    #     "might_like_posts": [],
-    #     "categories": [],
-    #     "phrases": PHRASES[lang],
-    #     "meta_language": Language.meta_lang[current_lang],
-    # })
+    recipe = Recipe.query.get(recipe_id)
+    post = Post()
+    header_field = "recipe_header_%s" % lang
+    post._cook(lang, getattr(recipe, header_field), recipe)
+
+    links = {lang: "#" for lang in cnst.SUPPORTED_LANGS}
+    return render_template("front/post/detail.html", v={
+        "lang_dic": {u"ru": u"Русский", u"en": u"English"},
+        "links": links,
+        "current_lang": lang,
+        "post": post,
+        "recent_posts": [],
+        "might_like_posts": [],
+        "categories": [],
+        "phrases": PHRASES[lang],
+        "meta_language": Language.meta_lang[lang],
+    })
 
 
 @login_required

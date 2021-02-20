@@ -82,7 +82,7 @@ class Post(db.Model):
             if not hasattr(recipe, header_field):
                 raise ValueError("Recipe (%s) doesn't have '%s' attribute" % (recipe.id, header_field))
 
-            _post.__cook(lang, getattr(recipe, header_field), recipe)
+            _post._cook(lang, getattr(recipe, header_field), recipe)
             add_to_session(_post)
             result[lang] = _post
 
@@ -98,7 +98,7 @@ class Post(db.Model):
             url = url[:-1]
         return url
 
-    def __cook(self, _lang, _header, _recipe):
+    def _cook(self, _lang, _header, _recipe):
         self.lang = _lang
         self.url = Post.makeup_url(_recipe.url)
         self.recipe_id = _recipe.id
