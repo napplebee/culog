@@ -1,8 +1,19 @@
 var initIngrButtons = function(prefix) {
-    // ------------ Ingredients ---------
+    // ------------ Ingredient Types ---------
     $("button[id^='"+prefix+"IngrTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var newIngrType = $("#"+prefix+"IngrType-" + idx).clone(true);
+
+        var minIngId = NaN;
+        var existingIngredients = newIngrType.find("div[id^='"+prefix+"Ing-']");
+        existingIngredients.each(function(){
+            var id = parseInt($(this).attr('id').split('-')['2']); //id's format is 'enIng-{ingTypeId}-{ingId}'
+            if(isNaN(minIngId) || id < minIngId) minIngId = id;
+        });
+        existingIngredients.each(function(){
+            var id = parseInt($(this).attr('id').split('-')['2']); //id's format is 'enIng-{ingTypeId}-{ingId}'
+            if(id != minIngId) $(this).remove();
+        });
 
         var nextIdx = -1;
         $("div#"+prefix+"IngTypeContainer > div").each(function(){
@@ -97,7 +108,7 @@ var initIngrButtons = function(prefix) {
         $("#"+prefix+"IngrType-" + idx).remove();
         return false;
     });
-
+    // ------------ Ingredients ---------
     $("button[id^='"+prefix+"IngrCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var outerIdx = $(this).attr("data-outer");
@@ -170,10 +181,21 @@ var initIngrButtons = function(prefix) {
         $("#"+prefix+"Ing-" + outerIdx + "-" + idx).remove();
     });
 
-    // ------------ Process ------------
+    // ------------ Process Types ------------
     $("button[id^='"+prefix+"ProcTypeCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var newProcType = $("#"+prefix+"ProcType-" + idx).clone(true);
+
+        var minStepId = NaN;
+        var existingSteps = newProcType.find("div[id^='"+prefix+"ProcStep-']");
+        existingSteps.each(function(){
+            var id = parseInt($(this).attr('id').split('-')['2']); //id's format is 'enProcStep-{procTypeId}-{procStepId}'
+            if(isNaN(minStepId) || id < minStepId) minStepId = id;
+        });
+        existingSteps.each(function(){
+            var id = parseInt($(this).attr('id').split('-')['2']); //id's format is 'enProcStep-{procTypeId}-{procStepId}'
+            if(id != minStepId) $(this).remove();
+        });
 
         var nextIdx = -1;
         $("div#"+prefix+"ProcTypeContainer > div").each(function(){
@@ -268,7 +290,7 @@ var initIngrButtons = function(prefix) {
         $("#"+prefix+"ProcType-" + idx).remove();
         return false;
     });
-
+    // ------------ Process steps ------------
     $("button[id^='"+prefix+"ProcStepCp']").on('click', function(){
         var idx = $(this).attr("data-idx");
         var outerIdx = $(this).attr("data-outer");
