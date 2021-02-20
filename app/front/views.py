@@ -20,8 +20,8 @@ import random
 def cookiepolicy():
     current_lang, lang_fallback = langService.get_user_settings(request)
     uniq_category = []
-    for c, *_ in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
-        uniq_category.extend(_.strip() for _ in c.split(",") if _.strip() != "")
+    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
     ]
@@ -288,8 +288,8 @@ def nw_detail(lang_override, post_url):
         might_like_posts = recent_posts[-3:]
 
     uniq_category = []
-    for c, *_ in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
-        uniq_category.extend(_.strip() for _ in c.split(",") if _.strip() != "")
+    for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
     ]
