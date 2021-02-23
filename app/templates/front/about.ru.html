@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -29,54 +29,67 @@
     <!--Start Cookie Script-->
     <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
     <!--End Cookie Script-->
+
+    <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74503103-1"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+    <!-- Yandex.Metrika counter -->
+    <noscript>
+      <div>
+        <img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <style>
         #content {
-		position: relative;
-		background-image: url("/static/front/images/bg02.png");
-	}
-	#indexContainer a {
-	text-decoration: underline;
-	color: #212529;
-	}
-@media screen and (min-width: 1201px) {
-    #content {
-				padding: 3em 5em 8em 5em;
-				margin-left: 14.5em;
-			}
-}
-
-@media screen and (min-width: 1001px){
-    div.circular {
-        float: left;
-        width: 300px;
-        height: 300px;
-        border-radius: 150px;
-        -webkit-border-radius: 150px;
-        -moz-border-radius: 150px;
-        background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
-        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    }
-}
-
-
-@media screen and (max-width: 1000px){
-    div.circular {
-        float: left;
-        width: 150px;
-        height: 150px;
-        border-radius: 75px;
-        -webkit-border-radius: 75px;
-        -moz-border-radius: 75px;
-        background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
-        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-        -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    }
-}
+          position: relative;
+          background-image: url("/static/front/images/bg02.png");
+        }
+        #indexContainer a {
+          text-decoration: underline;
+          color: #212529;
+        }
+        @media screen and (min-width: 1201px) {
+          #content {
+            padding: 3em 5em 8em 5em;
+            margin-left: 14.5em;
+          }
+        }
+        @media screen and (min-width: 1001px){
+          div.circular {
+            float: left;
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+            -webkit-border-radius: 150px;
+            -moz-border-radius: 150px;
+            background: url({{ url_for('static', filename = 'front/images/contacts320x320.jpg') }}) no-repeat;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+          }
+        }
+        @media screen and (max-width: 1000px){
+          div.circular {
+            float: left;
+            width: 150px;
+            height: 150px;
+            border-radius: 75px;
+            -webkit-border-radius: 75px;
+            -moz-border-radius: 75px;
+            background: url({{ url_for('static', filename = 'front/images/contacts150x150.jpg') }}) no-repeat;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+          }
+        }
     </style>
-</head>
+  </head>
 <body>
 
   <header>
@@ -237,17 +250,5 @@
       </div>
     </div>
   </footer>
-
-<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
-<!-- Yandex.Metrika counter -->
-<noscript><div>
-<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
-</div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>

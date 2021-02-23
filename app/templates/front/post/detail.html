@@ -27,7 +27,72 @@
     <!--Start Cookie Script-->
     <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
     <!--End Cookie Script-->
-</head>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74503103-1"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+    <!-- Yandex.Metrika counter -->
+    <noscript>
+      <div>
+        <img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org/",
+          {% if v.post.is_article %}
+          "@type": "NewsArticle",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ request.base_url }}"
+          },
+          "headline": "{{ v.post.fb_og_title }}",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CookWithLove",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "http://cookwith.love/static/front/logo.jpg"
+            }
+          },
+          {% else %}
+            {% if v.post.get_cook_time_iso()|length %}
+          "cookTime": "{{ v.post.get_cook_time_iso() }}",
+          "prepTime": "{{ v.post.get_prep_time_iso() }}",
+          "totalTime": "{{ v.post.get_total_time_iso() }}",
+            {% endif %}
+            {% if v.post.recipe_yield|length %}
+          "recipeYield": "{{ v.post.recipe_yield }}",
+            {% endif %}
+            {% if v.post.recipe_category|length %}
+          "recipeCategory": "{{ v.post.recipe_category }}",
+            {% endif %}
+            {% if v.post.recipe_cuisine|length %}
+          "recipeCuisine": "{{ v.post.recipe_cuisine }}",
+            {% endif %}
+          "@type": "Recipe",
+          "name": "{{ v.post.fb_og_title }}",
+          "keywords": "{{ v.post.meta_keywords }}",
+          {% endif %}
+          "dateModified": "{{ v.post.updated_at.isoformat() }}",
+          "datePublished": "{{ v.post.published_at.isoformat() }}",
+          "author": {
+              "@type": "Person",
+              "name": "Kate CookWithLove"
+          },
+          "description": "{{ v.post.meta_description }}",
+          "image": [
+              "{{ v.post.get_fb_og_image_canonical() }}"
+          ]
+      }
+    </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-571e12d8e754a813"></script>
+  </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
@@ -239,67 +304,5 @@
       </div>
     </div>
   </footer>
-<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
-<!-- Yandex.Metrika counter -->
-<noscript><div>
-<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
-</div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org/",
-        {% if v.post.is_article %}
-        "@type": "NewsArticle",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "{{ request.base_url }}"
-        },
-        "headline": "{{ v.post.fb_og_title }}",
-        "publisher": {
-          "@type": "Organization",
-          "name": "CookWithLove",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "http://cookwith.love/static/front/logo.jpg"
-          }
-        },
-        {% else %}
-          {% if v.post.get_cook_time_iso()|length %}
-        "cookTime": "{{ v.post.get_cook_time_iso() }}",
-        "prepTime": "{{ v.post.get_prep_time_iso() }}",
-        "totalTime": "{{ v.post.get_total_time_iso() }}",
-          {% endif %}
-          {% if v.post.recipe_yield|length %}
-        "recipeYield": "{{ v.post.recipe_yield }}",
-          {% endif %}
-          {% if v.post.recipe_category|length %}
-        "recipeCategory": "{{ v.post.recipe_category }}",
-          {% endif %}
-          {% if v.post.recipe_cuisine|length %}
-        "recipeCuisine": "{{ v.post.recipe_cuisine }}",
-          {% endif %}
-        "@type": "Recipe",
-        "name": "{{ v.post.fb_og_title }}",
-        "keywords": "{{ v.post.meta_keywords }}",
-        {% endif %}
-        "dateModified": "{{ v.post.updated_at.isoformat() }}",
-        "datePublished": "{{ v.post.published_at.isoformat() }}",
-        "author": {
-            "@type": "Person",
-            "name": "Kate CookWithLove"
-        },
-        "description": "{{ v.post.meta_description }}",
-        "image": [
-            "{{ v.post.get_fb_og_image_canonical() }}"
-        ]
-    }
-</script>
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-571e12d8e754a813"></script>
 </body>
 </html>

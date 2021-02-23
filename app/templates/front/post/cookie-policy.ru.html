@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      
+    <meta name="author" content="Kate CookWithLove" />
+    <meta name="language" content="{{ v.current_lang }}" />
+    <meta property="fb:app_id" content="522001701315044" />
+    <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
+    <meta name="yandex-verification" content="bf87104ed493675a" />
+    <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
 
-  <meta name="author" content="Kate CookWithLove" />
-  <meta name="language" content="{{ v.current_lang }}" />
-  <meta property="fb:app_id" content="522001701315044" />
-  <meta name="google-site-verification" content="JFPt5yogtMcMbc8vnAL-tW52xKNv-5jjeZpAJ6S9BaA" />
-  <meta name="yandex-verification" content="bf87104ed493675a" />
-  <meta name="p:domain_verify" content="4a6a6e87253bc981a3afcb0120e30980" />
+    <title>Политика использования файлов cookie | Cook With Love</title>
+    <link rel="canonical" href="{{ request.base_url }}"/>
+    <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
 
-  <title>Политика использования файлов cookie | Cook With Love</title>
-  <link rel="canonical" href="{{ request.base_url }}"/>
-  <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
+    <meta property="og:title" content="Политика использования файлов cookie | Cook With Love" />
+    <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+    <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
+    <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
 
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="{{ request.base_url }}" />
-  <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
-  <meta property="og:title" content="Политика использования файлов cookie | Cook With Love" />
-  <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
-  <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
-  <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+    <!--Start Cookie Script-->
+    <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
+    <!--End Cookie Script-->
+    <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
 
-
-  <!--Start Cookie Script-->
-  <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/8dcf4a25cbb374f71de9f2eb5fbcffbd.js"></script>
-  <!--End Cookie Script-->
-  <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet">
-</head>
-
+    <script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74503103-1"></script>
+    <script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
+    <!-- Yandex.Metrika counter -->
+    <noscript>
+      <div>
+        <img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+  </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
@@ -253,17 +266,5 @@
       </div>
     </div>
   </footer>
-
-<script src="{{ url_for('static', filename = 'front/recipe/js/js.cookie.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/app.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/actions.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/ya.js') }}"></script>
-<script src="{{ url_for('static', filename = 'front/recipe/js/gtag.js') }}"></script>
-<!-- Yandex.Metrika counter -->
-<noscript><div>
-<img src="https://mc.yandex.ru/watch/69447489" style="position:absolute; left:-9999px;" alt="" />
-</div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>
