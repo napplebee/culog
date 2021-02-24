@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from flask import render_template, request, url_for, current_app, send_from_directory, redirect
+from flask import render_template, request, url_for, current_app, send_from_directory
 
 from app.data.blog_posts import BlogPostHeader
 from app.domain.language import Language
@@ -14,17 +14,6 @@ from app.common.phrases import PHRASES
 
 import json
 import random
-
-
-@front_bp.before_request
-def before_request():
-    if request.host == "127.0.0.1:5000":
-        return
-    if request.is_secure:
-        return
-
-    url = request.url.replace("http://", "https://", 1)
-    return redirect(url, code=301)
 
 
 @front_bp.route("/cookie-policy/")
