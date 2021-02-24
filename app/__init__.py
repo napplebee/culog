@@ -18,7 +18,11 @@ def create_app(environment_name):
             '\'unsafe-inline\'',
             'cookwith.love',
             'use.typekit.net',
-            'fonts.googleapis.com'
+            'fonts.googleapis.com',
+            'js-agent.newrelic.com',
+            'chs03.cookie-script.com',
+            'mc.yandex.ru',
+            'googletagmanager.com'
         ]
     }
     Talisman(app, content_security_policy=csp)
