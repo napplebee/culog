@@ -2,26 +2,13 @@
 
 from flask import Flask
 from flask.ext.security import SQLAlchemyUserDatastore
-from flask_talisman import Talisman
-
 from app.core import db, security, bootstrap
 from app.data.users import User, Role
 from configs import config
 from app.error_handlers import register_err_handlers
 
-
 def create_app(environment_name):
     app = Flask(__name__)
-    csp = {
-        'default-src': [
-            '\'self\'',
-            '\'unsafe-inline\'',
-            'cookwith.love',
-            'use.typekit.net',
-            'fonts.googleapis.com'
-        ]
-    }
-    Talisman(app, content_security_policy=csp)
     app.config.from_object(config[environment_name])
     register_err_handlers(app)
 
@@ -35,6 +22,5 @@ def create_app(environment_name):
 
     app.register_blueprint(admin_bp)
     app.register_blueprint(front_bp)
-
 
     return app
