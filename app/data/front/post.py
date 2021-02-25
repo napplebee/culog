@@ -25,6 +25,7 @@ class Post(db.Model):
     sub_title = db.Column(db.String)
 
     recipe_yield = db.Column(db.String)
+    recipe_yield_number = db.Column(db.Integer)
     recipe_cuisine = db.Column(db.String)
     recipe_category = db.Column(db.String)
 
@@ -110,6 +111,7 @@ class Post(db.Model):
         self.sub_title = _header.sub_title
 
         self.recipe_yield = _header.recipe_yield
+        self.recipe_yield_number = _header.recipe_yield_number
         self.recipe_cuisine = _header.recipe_cuisine
         self.recipe_category = _header.recipe_category
 
@@ -173,6 +175,7 @@ class Post(db.Model):
         self.title = form.title.data
         self.sub_title = form.sub_title.data
         self.recipe_yield = form.recipe_yield.data
+        self.recipe_yield_number = form.recipe_yield_number.data
         self.recipe_cuisine = form.recipe_cuisine.data
         self.recipe_category = form.recipe_category.data
         self.published_at = form.published_at.data
