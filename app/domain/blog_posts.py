@@ -12,11 +12,11 @@ from app.core import db
 class BlogPost(object):
     MULTI_LANG_FIELDS = [
         "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
-        "recipe_yield", "recipe_category", "recipe_cuisine"
+        "recipe_yield", "recipe_yield_number", "recipe_category", "recipe_cuisine"
     ]
     REQUIRED_TO_BE_TRANSLATED = [
         "title", "sub_title", "keywords", "description", "og_title", "og_description", "blog_cut", "blog_text",
-        # "recipe_yield", "recipe_category", "recipe_cuisine"
+        # "recipe_yield", "recipe_yield_number", "recipe_category", "recipe_cuisine"
     ]
     id = None
     name = None
@@ -48,6 +48,7 @@ class BlogPost(object):
     base_url = None
 
     recipe_yield = None
+    recipe_yield_number = None
     recipe_category = None
     recipe_cuisine = None
 
@@ -87,6 +88,7 @@ class BlogPost(object):
         post.blog_text = {item.lang: item.value for item in blog_header.translations if item.name == "blog_text"}
 
         post.recipe_yield = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_yield"}
+        post.recipe_yield_number = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_yield_number"}
         post.recipe_category = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_category"}
         post.recipe_cuisine = {item.lang: item.value for item in blog_header.translations if item.name == "recipe_cuisine"}
 
@@ -151,6 +153,9 @@ class BlogPost(object):
 
     def get_recipe_yield(self):
         return self.__get_mlang_attr(self.recipe_yield)
+
+    def get_recipe_yield_number(self):
+        return self.__get_mlang_attr(self.recipe_yield_number)
 
     def get_recipe_category(self):
         return self.__get_mlang_attr(self.recipe_category)

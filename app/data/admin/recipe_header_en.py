@@ -14,6 +14,7 @@ class RecipeHeaderEn(db.Model):
     sub_title = db.Column(db.String)
 
     recipe_yield = db.Column(db.String)
+    recipe_yield_number = db.Column(db.Integer)
     recipe_category = db.Column(db.String)
     recipe_cuisine = db.Column(db.String)
 
@@ -42,6 +43,7 @@ class RecipeHeaderEn(db.Model):
         self.sub_title = form.sub_title.data
 
         self.recipe_yield = form.recipe_yield.data
+        self.recipe_yield_number = form.recipe_yield_number.data
         self.recipe_category = form.recipe_category.data
         self.recipe_cuisine = form.recipe_cuisine.data
 
@@ -106,6 +108,7 @@ class RecipeHeaderEn(db.Model):
         head.sub_title = form.sub_title.data
 
         head.recipe_yield = form.recipe_yield.data
+        head.recipe_yield_number = form.recipe_yield_number.data
         head.recipe_category = form.recipe_category.data
         head.recipe_cuisine = form.recipe_cuisine.data
 
