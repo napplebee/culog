@@ -147,6 +147,20 @@
           <article class="card mb-4">
             <div class="addthis_inline_share_toolbox d-flex justify-content-end mb-2"></div>
             {{ v.post.text | safe }}
+            <p class="font-italic font-weight-light text-right small">
+              {% if v.current_lang == 'ru' %}
+              Опубликовано
+              {% else %}
+              Published
+              {% endif %}
+              <time class="timeago" datetime="{{ v.post.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ v.post.published_at.strftime('%Y-%m-%d') }}</time>, 
+              {% if v.current_lang == 'ru' %}
+              обновлено
+              {% else %}
+              updated
+              {% endif %}
+              <time class="timeago" datetime="{{ v.post.updated_at.strftime('%Y-%m-%d %H:%M') }}">{{ v.post.updated_at.strftime('%Y-%m-%d') }}</time>
+            </p>
             <div class="addthis_inline_share_toolbox d-flex justify-content-end mt-2"></div>
           </article><!-- /.card -->
 
