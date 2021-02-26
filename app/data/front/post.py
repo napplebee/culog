@@ -230,17 +230,17 @@ class Post(db.Model):
 
     def get_calories_per_serving(self):
         calories_per_serving = ( self.total_carbs * 4 + self.total_fats * 9 + self.total_proteins * 4 ) / self.recipe_yield_number
-        return round(calories_per_serving, 0)
+        return round(calories_per_serving)
 
     def get_carbs_per_serving(self):
         carbs_per_serving = self.total_carbs / self.recipe_yield_number
-        return round(carbs_per_serving, 0)
+        return round(carbs_per_serving)
 
     def get_fats_per_serving(self):
         fats_per_serving = self.total_fats / self.recipe_yield_number
-        return round(fats_per_serving, 0)
+        return round(fats_per_serving)
 
     def get_proteins_per_serving(self):
         proteins_per_serving = self.total_proteins / self.recipe_yield_number
-        return round(proteins_per_serving, 0)
+        return round(proteins_per_serving)
 
