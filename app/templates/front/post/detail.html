@@ -64,13 +64,27 @@
           "totalTime": "{{ v.post.get_total_time_iso() }}",
             {% endif %}
             {% if v.post.recipe_yield|length %}
-          "recipeYield": "{{ v.post.recipe_yield }}",
+          "recipeYield": [
+            "{{ v.post.recipe_yield_number }}",
+            "{{ v.post.recipe_yield }}"
+          ]
             {% endif %}
             {% if v.post.recipe_category|length %}
           "recipeCategory": "{{ v.post.recipe_category }}",
             {% endif %}
             {% if v.post.recipe_cuisine|length %}
           "recipeCuisine": "{{ v.post.recipe_cuisine }}",
+            {% endif %}
+            {% if v.post.get_calories_per_serving()>0 %}
+          "nutrition": {
+            "@type": "NutritionInformation",
+            "calories": "{{ v.post.get_calories_per_serving() }} {% if v.current_lang == 'ru' %}ккал.{% else %}calories{% endif %}",
+            "carbohydrateContent": "{{ v.post.get_carbs_per_serving() }} {% if v.current_lang == 'ru' %}г.{% else %}grams of carb{% endif %}",
+            "fatContent": "{{ v.post.get_fats_per_serving() }} {% if v.current_lang == 'ru' %}г.{% else %}grams of fat{% endif %}",
+            "proteinContent": "{{ v.post.get_proteins_per_serving() }} {% if v.current_lang == 'ru' %}г.{% else %}grams of protein{% endif %}",
+            "servingSize": "{{ v.post.recipe_serving_size }}"
+          },
+          "resultPhoto": "{{ v.post.get_fb_og_image_canonical() }}",
             {% endif %}
           "@type": "Recipe",
           "name": "{{ v.post.fb_og_title }}",

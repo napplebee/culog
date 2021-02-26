@@ -26,6 +26,7 @@ class Post(db.Model):
 
     recipe_yield = db.Column(db.String)
     recipe_yield_number = db.Column(db.Integer)
+    recipe_serving_size = db.Column(db.String)
     recipe_cuisine = db.Column(db.String)
     recipe_category = db.Column(db.String)
 
@@ -112,6 +113,7 @@ class Post(db.Model):
 
         self.recipe_yield = _header.recipe_yield
         self.recipe_yield_number = _header.recipe_yield_number
+        self.recipe_serving_size = form.recipe_serving_size.data
         self.recipe_cuisine = _header.recipe_cuisine
         self.recipe_category = _header.recipe_category
 
@@ -176,6 +178,7 @@ class Post(db.Model):
         self.sub_title = form.sub_title.data
         self.recipe_yield = form.recipe_yield.data
         self.recipe_yield_number = form.recipe_yield_number.data
+        self.recipe_serving_size = form.recipe_serving_size.data
         self.recipe_cuisine = form.recipe_cuisine.data
         self.recipe_category = form.recipe_category.data
         self.published_at = form.published_at.data
@@ -224,4 +227,20 @@ class Post(db.Model):
         if self.fb_og_image is not None and self.fb_og_image != "":
             fb_og_image = self.fb_og_image
         return urljoin(Config.BASE_EXTERNAL_URI, fb_og_image)
+
+    def get_calories_per_serving(self):
+        calories_per_serving = ( self.total_carbs * 4 + self.total_fats * 9 + self.total_proteins * 4 ) / self.recipe_yield_number
+        return round(calories_per_serving, 0)
+
+    def get_carbs_per_serving(self):
+        carbs_per_serving = self.total_carbs / self.recipe_yield_number
+        return round(carbs_per_serving, 0)
+
+    def get_fats_per_serving(self):
+        fats_per_serving = self.total_fats / self.recipe_yield_number
+        return round(fats_per_serving, 0)
+
+    def get_proteins_per_serving(self):
+        proteins_per_serving = self.total_proteins / self.recipe_yield_number
+        return round(proteins_per_serving, 0)
 
