@@ -84,6 +84,7 @@
             "proteinContent": "{{ v.post.get_proteins_per_serving() }} {% if v.current_lang == 'ru' %}г.{% else %}grams of protein{% endif %}",
             "servingSize": "{{ v.post.recipe_serving_size }}"
           },
+          "resultPhoto": "{{ v.post.get_fb_og_image_canonical() }}",
             {% endif %}
           "@type": "Recipe",
           "name": "{{ v.post.fb_og_title }}",
@@ -98,8 +99,7 @@
           "description": "{{ v.post.meta_description }}",
           "image": [
               "{{ v.post.get_fb_og_image_canonical() }}"
-          ],
-          "resultPhoto": "{{ v.post.get_fb_og_image_canonical() }}"
+          ]
       }
     </script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
