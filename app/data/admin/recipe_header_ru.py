@@ -15,6 +15,7 @@ class RecipeHeaderRu(db.Model):
 
     recipe_yield = db.Column(db.String)
     recipe_yield_number = db.Column(db.Integer)
+    recipe_serving_size = db.Column(db.String)
     recipe_category = db.Column(db.String)
     recipe_cuisine = db.Column(db.String)
 
@@ -45,6 +46,7 @@ class RecipeHeaderRu(db.Model):
 
         self.recipe_yield = form.recipe_yield.data
         self.recipe_yield_number = form.recipe_yield_munber.data
+        self.recipe_serving_size = form.recipe_serving_size.data
         self.recipe_category = form.recipe_category.data
         self.recipe_cuisine = form.recipe_cuisine.data
 
@@ -110,6 +112,7 @@ class RecipeHeaderRu(db.Model):
 
         head.recipe_yield = form.recipe_yield.data
         head.recipe_yield_number = form.recipe_yield_number.data
+        head.recipe_serving_size = form.recipe_serving_size.data
         head.recipe_category = form.recipe_category.data
         head.recipe_cuisine = form.recipe_cuisine.data
 
