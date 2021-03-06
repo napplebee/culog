@@ -108,7 +108,7 @@ class RecipeHeaderForm(Form):
     recipe_yield_number = StringField("Number of servings number:")
     recipe_serving_size = StringField("Recipe serving size:")
     recipe_category = StringField("Recipe category:")
-    recipe_cuisine = StringField("Recipe cuisine:)
+    recipe_cuisine = StringField("Recipe cuisine:")
 
     cut = TextAreaField("Cut:")
     meta_keywords = StringField("Keywords (meta):")
