@@ -46,7 +46,7 @@ class RecipeHeaderRu(db.Model):
 
         self.recipe_yield = form.recipe_yield.data
         if form.recipe_yield_number.data is not None and form.recipe_yield_number.data != "":
-            self.recipe_yield_number = form.recipe_yield_munber.data
+            self.recipe_yield_number = form.recipe_yield_number.data
         else:
             self.recipe_yield_number = 0
         self.recipe_serving_size = form.recipe_serving_size.data
@@ -115,7 +115,7 @@ class RecipeHeaderRu(db.Model):
 
         head.recipe_yield = form.recipe_yield.data
         if form.recipe_yield_number.data is not None and form.recipe_yield_number.data != "":
-            head.recipe_yield_number = form.recipe_yield_munber.data
+            head.recipe_yield_number = form.recipe_yield_number.data
         else:
             head.recipe_yield_number = 0
         head.recipe_serving_size = form.recipe_serving_size.data
