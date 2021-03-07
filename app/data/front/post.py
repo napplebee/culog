@@ -5,6 +5,7 @@ from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 import datetime as dt
 import duration as dr
+from app.common.utils import zero_if_none
 try:
     from urllib.parse import urljoin
 except ImportError:
@@ -113,7 +114,7 @@ class Post(db.Model):
 
         self.recipe_yield = _header.recipe_yield
         self.recipe_yield_number = _header.recipe_yield_number
-        self.recipe_serving_size = form.recipe_serving_size.data
+        self.recipe_serving_size = _header.recipe_serving_size
         self.recipe_cuisine = _header.recipe_cuisine
         self.recipe_category = _header.recipe_category
 
@@ -229,7 +230,11 @@ class Post(db.Model):
         return urljoin(Config.BASE_EXTERNAL_URI, fb_og_image)
 
     def get_calories_per_serving(self):
-        calories_per_serving = ( self.total_carbs * 4 + self.total_fats * 9 + self.total_proteins * 4 ) / self.recipe_yield_number
+        if self.recipe_yield_number == 0:
+            return 0
+        calories_per_serving = (zero_if_none(self.total_carbs) * 4 +
+                                zero_if_none(self.total_fats) * 9 +
+                                zero_if_none(self.total_proteins) * 4) / self.recipe_yield_number
         return int(calories_per_serving)
 
     def get_carbs_per_serving(self):

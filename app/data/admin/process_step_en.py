@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime as dt
+from app.common.utils import zero_if_none
 from app.core import db
 
 
@@ -34,7 +35,7 @@ class ProcessStepEn(db.Model):
         self.description = form.description.data
         self.image = form.image.data
         self.note = form.note.data
-        self.pos = int(form.pos.data)
+        self.pos = int(zero_if_none(form.pos.data))
 
         return self
 
@@ -48,6 +49,6 @@ class ProcessStepEn(db.Model):
         st.description = form.description.data
         st.image = form.image.data
         st.note = form.note.data
-        st.pos = int(form.pos.data)
+        st.pos = int(zero_if_none(form.pos.data))
 
         return st
