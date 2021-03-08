@@ -219,8 +219,8 @@ class Post(db.Model):
         if (self.cook_time is None and self.prep_time is None) or \
                 (self.cook_time == "" and self.prep_time == ""):
             return ""
-        cook_delta = dr.to_timedelta(str(self.cook_time if self.cook_time is not None else "0:0"), strict=False)
-        prep_delta = dr.to_timedelta(str(self.prep_time if self.prep_time is not None else "0:0"), strict=False)
+        cook_delta = dr.to_timedelta(str(self.cook_time if (self.cook_time is not None and self.cook_time != "") else "0:0"), strict=False)
+        prep_delta = dr.to_timedelta(str(self.prep_time if (self.prep_time is not None and self.prep_time != "") else "0:0"), strict=False)
         return dr.to_iso8601(cook_delta + prep_delta, strict=False)
 
     def get_fb_og_image_canonical(self):
