@@ -18,7 +18,9 @@ class PostForm(Form):
     title = StringField("Title:")
     sub_title = StringField("Sub title:")
 
-    recipe_yield = StringField("Recipe yield:")
+    recipe_yield = StringField("Recipe yield text:")
+    recipe_yield_number = StringField("Recipe yield number:")
+    recipe_serving_size = StringField("Recipe serving size:")
     recipe_cuisine = StringField("Recipe cuisine:")
     recipe_category = StringField("Recipe category:")
 
@@ -102,9 +104,11 @@ class RecipeHeaderForm(Form):
     title = StringField("Title:")
     sub_title = StringField("Subtitle:")
 
-    recipe_yield = StringField("Number of servings:")
-    recipe_category = StringField("Recipe category")
-    recipe_cuisine = StringField("Recipe cuisine")
+    recipe_yield = StringField("Number of servings text:")
+    recipe_yield_number = StringField("Number of servings number:")
+    recipe_serving_size = StringField("Recipe serving size:")
+    recipe_category = StringField("Recipe category:")
+    recipe_cuisine = StringField("Recipe cuisine:")
 
     cut = TextAreaField("Cut:")
     meta_keywords = StringField("Keywords (meta):")

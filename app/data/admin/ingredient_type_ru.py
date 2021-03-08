@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
+from app.common.utils import zero_if_none
 from app.data.admin.ingredient_ru import IngredientRu
 
 
@@ -41,7 +42,7 @@ class IngredientTypeRu(db.Model):
         self.name = form.name.data
         self.type = form.type.data
         self.image = form.image.data
-        self.pos = int(form.pos.data)
+        self.pos = int(zero_if_none(form.pos.data))
 
         id2ingrs = {}
         new_ingrs = []
@@ -75,7 +76,7 @@ class IngredientTypeRu(db.Model):
         ingr_type.name = form.name.data
         ingr_type.type = form.type.data
         ingr_type.image = form.image.data
-        ingr_type.pos = int(form.pos.data)
+        ingr_type.pos = int(zero_if_none(form.pos.data))
 
         for ingr in form.ingredients.entries:
             ingr_ru = IngredientRu.populate_from_form(

@@ -2,6 +2,7 @@
 
 import datetime as dt
 from app.core import db
+from app.common.utils import zero_if_none
 from app.data.admin.process_step_ru import ProcessStepRu
 
 
@@ -31,7 +32,7 @@ class ProcessTypeRu(db.Model):
 
         self.name = form.name.data
         self.note = form.note.data
-        self.pos = int(form.pos.data)
+        self.pos = int(zero_if_none(form.pos.data))
 
         id2steps = {}
         new_steps = []
@@ -65,7 +66,7 @@ class ProcessTypeRu(db.Model):
 
         proc_type.name = form.name.data
         proc_type.note = form.note.data
-        proc_type.pos = int(form.pos.data)
+        proc_type.pos = int(zero_if_none(form.pos.data))
 
         for st in form.steps.entries:
             step = ProcessStepRu.populate_from_form(st.form)

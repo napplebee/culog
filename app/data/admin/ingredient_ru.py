@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app.core import db
+from app.common.utils import zero_if_none
 from app.common.constants import Constants as cnst
 
 
@@ -31,7 +32,7 @@ class IngredientRu(db.Model):
         self.amount_type = form.amount_type.data
         self.note = form.note.data
         self.optional = form.optional.data
-        self.pos = int(form.pos.data)
+        self.pos = int(zero_if_none(form.pos.data))
 
         return self
 
@@ -46,7 +47,7 @@ class IngredientRu(db.Model):
         ingr.amount_type = form.amount_type.data
         ingr.note = form.note.data
         ingr.optional = form.optional.data
-        ingr.pos = int(form.pos.data)
+        ingr.pos = int(zero_if_none(form.pos.data))
 
         return ingr
 
