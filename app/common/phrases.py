@@ -31,7 +31,7 @@ class Phrase(object):
 PHRASES = {
     "ru": Phrase(u"Обо мне", u"Рецепты", u"Недавние рецепты", u"Категории", u"Вам может понравится", u"Все права защищены",
          u"Ингредиенты", u"Процесс", u"Показать еще", u"читать дальше",
-         {"gr": "гр.", "ml": "мл.", "item": "", "tsp": "ч.л.", "tbsp": "ст.л.", "cup": "стакана", "kg": "кг.", "liter": "л."}
+         {"gr": "г", "ml": "мл.", "item": "", "tsp": "ч.л.", "tbsp": "ст.л.", "cup": "стакана", "kg": "кг", "liter": "л."}
      ),
     "en": Phrase(u"About", u"Recipes", u"Recent recipes", u"Categories", u"You may like", u"All rights reserved",
         u"Ingredients", u"Process", u"Load more", u"read now",
