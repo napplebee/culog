@@ -134,4 +134,8 @@ class RecipeHeaderRu(db.Model):
             ingredient_type_ru = IngredientTypeRu.populate_from_form(ingr_type.form)
             head.ingredients_type.append(ingredient_type_ru)
 
+        for proc_type in form.process_type.entries:
+            process_type_ru = ProcessTypeRu.populate_from_form(proc_type.form)
+            head.process_type.append(process_type_ru)
+
         return head
