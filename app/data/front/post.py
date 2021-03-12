@@ -151,7 +151,16 @@ class Post(db.Model):
         _text = template.render(v={
             "r": recipe,
             "h": head,
-            "ph": PHRASES[lang]
+            "ph": PHRASES[lang],
+            "lang": lang,
+            "calories_per_serving": self.get_calories_per_serving(),
+            "carbs_per_serving": self.get_carbs_per_serving(),
+            "fats_per_serving": self.get_fats_per_serving(),
+            "proteins_per_serving": self.get_proteins_per_serving(),
+            "total_time": self.get_total_time_iso(),
+            "cook_time_pretty": self.get_time_pretty('cook'),
+            "prep_time_pretty": self.get_time_pretty('prep'),
+            "total_time_pretty": self.get_time_pretty('total')
         })
 
         self.text = _text
@@ -222,6 +231,37 @@ class Post(db.Model):
         cook_delta = dr.to_timedelta(str(self.cook_time if (self.cook_time is not None and self.cook_time != "") else "0:0"), strict=False)
         prep_delta = dr.to_timedelta(str(self.prep_time if (self.prep_time is not None and self.prep_time != "") else "0:0"), strict=False)
         return dr.to_iso8601(cook_delta + prep_delta, strict=False)
+
+    def get_time_pretty(self, time_type):
+        if time_type == 'cook':
+            time_to_convert = self.cook_time
+        elif time_type == 'prep':
+            time_to_convert = self.prep_time
+        else:
+            if (self.cook_time is None and self.prep_time is None) or \
+                (self.cook_time == "" and self.prep_time == ""):
+                return ""
+            cook_delta = dr.to_timedelta(str(self.cook_time if (self.cook_time is not None and self.cook_time != "") else "0:0"), strict=False)
+            prep_delta = dr.to_timedelta(str(self.prep_time if (self.prep_time is not None and self.prep_time != "") else "0:0"), strict=False)
+            total_time_tuple = dr.to_tuple(cook_delta + prep_delta, strict=False)
+            time_to_convert = ":".join(map(str,total_time_tuple))
+        time_description = {
+            "en": ( "d", "h", "min", "sec" ),
+            "ru": ( "д", "ч", "мин", "сек" )
+        }
+        time_array = time_to_convert.split(':')
+        cook_time = ""
+        if (time_array[0] != "00" and time_array[0] != "0"):
+            days = int(time_array[0]) // 24
+            hours = int(time_array[0]) % 24
+            if days > 0:
+                cook_time += str(days) + time_description[self.lang][0] + " "
+            cook_time += str(hours) + time_description[self.lang][1] + " "
+        if (time_array[1] != "00" and time_array[1] != "0"):
+            cook_time += time_array[1] + time_description[self.lang][2] + " "
+        if (time_array[2] != "00" and time_array[2] != "0"):
+            cook_time += time_array[2] + time_description[self.lang][3]
+        return cook_time.lstrip()
 
     def get_fb_og_image_canonical(self):
         fb_og_image = Config.LOGO_PATH
