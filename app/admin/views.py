@@ -181,8 +181,6 @@ def recipe_list_preview(lang):
 
 
 @admin.route("/recipe/preview/<int:recipe_id>/<string:lang>", methods=["POST", "GET"])
-@login_required
-@roles_required("root")
 def single_recipe_preview(recipe_id, lang):
     recipe = Recipe.query.get(recipe_id)
     post = Post()
