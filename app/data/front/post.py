@@ -268,7 +268,7 @@ class Post(db.Model):
             cook_time += str(int(time_array[1])) + " " + time_description[self.lang][2] + " "
         if (time_array[2] != "00" and time_array[2] != "0"):
             cook_time += str(int(time_array[2])) + " " + time_description[self.lang][3]
-        return cook_time.lstrip()
+        return cook_time.strip()
 
     def get_fb_og_image_canonical(self):
         fb_og_image = Config.LOGO_PATH
