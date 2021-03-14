@@ -41,7 +41,8 @@
     {% if iType.ingredients|length > 1 %}
     <ul class="ingredients">
         {% for ingr in iType.ingredients %}
-        <li>{% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
+        <li>{% if ingr.optional %}({{ v.ph.optional }}) {% endif %}
+            {% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
             {% if ingr.note %}
             <br>
             <i>{{ ingr.note }}</i>

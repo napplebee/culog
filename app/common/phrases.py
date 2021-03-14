@@ -23,6 +23,7 @@ class Phrase(object):
     fats = None
     carbs = None
     process = None
+    optional = None
     amount_types = None
 
     def __init__(self, about, recipes, recent_recipes,
@@ -31,6 +32,7 @@ class Phrase(object):
                  preparation_time, cooking_time, total_time,
                  cuisine, category, recipe_yield, published,
                  updated, calories, proteins, fats, carbs,
+                 optional,
                  amount_types):
         self.about = about
         self.recipes = recipes
@@ -54,6 +56,7 @@ class Phrase(object):
         self.proteins = proteins
         self.fats = fats
         self.carbs = carbs
+        self.optional = optional
         self.amount_types = amount_types
 
 
@@ -61,13 +64,13 @@ PHRASES = {
     "ru": Phrase(u"Обо мне", u"Рецепты", u"Недавние рецепты", u"Категории", u"Вам может понравится", u"Все права защищены",
          u"Ингредиенты", u"Процесс", u"Показать еще", u"читать дальше", u"Время подготовки", u"Время приготовления",
          u"Суммарное время", u"Кухня", u"Блюдо", u"Число порций", u"Опубликовано", u"обновлено", u"Калорийность",
-         u"Белки", u"Жиры", u"Углеводы",
+         u"Белки", u"Жиры", u"Углеводы", u"необязательно",
          {"gr": "г", "ml": "мл.", "item": "", "tsp": "ч.л.", "tbsp": "ст.л.", "cup": "стакана", "kg": "кг", "liter": "л."}
      ),
     "en": Phrase(u"About", u"Recipes", u"Recent recipes", u"Categories", u"You may like", u"All rights reserved",
         u"Ingredients", u"Process", u"Load more", u"read now", u"Preparation time", u"Cooking time",
          u"Total time", u"Cuisine", u"Category", u"Recipe yield", u"Published", u"updated", u"Calories",
-         u"Proteins", u"Fats", u"Carbs",
+         u"Proteins", u"Fats", u"Carbs", u"optional",
         {"gr": "g", "ml": "ml", "item": "", "tsp": "tsp", "tbsp": "tbsp", "cup": "cup", "kg": "kg", "liter": "l"}
      )
 }
