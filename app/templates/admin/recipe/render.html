@@ -37,7 +37,7 @@
 
 <h2>{{ v.ph.ingredients }}</h2>
 {% for iType in v.h.ingredients_type %}
-    <h3>{{ iType.name }}</h3>
+    {% if iType.name %}<h3>{{ iType.name }}</h3>{% endif %}
     {% if iType.ingredients|length > 1 %}
     <ul class="ingredients">
         {% for ingr in iType.ingredients %}
@@ -61,7 +61,7 @@
 
 <h2>{{ v.ph.process }}</h2>
 {% for pType in v.h.process_type %}
-    <h3>{{ pType.name }}</h3>
+    {% if pType.name %}<h3>{{ pType.name }}</h3>{% endif %}
     {% if pType.note %}
         <br>
         {{ pType.note }}
