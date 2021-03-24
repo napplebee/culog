@@ -1044,4 +1044,26 @@
                hreflang="ru"
                href="http://cookwith.love/ru/breakfast/sourdough_crepes"/>
   </url>
+  <url>
+    <loc>hhttp://cookwith.love/en/breakfast/fast_fluffy_crepes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/fast_fluffy_crepes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/fast_fluffy_crepes"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/breakfast/fast_fluffy_crepes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/fast_fluffy_crepes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/fast_fluffy_crepes"/>
+  </url>
 </urlset>
