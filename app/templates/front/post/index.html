@@ -93,6 +93,11 @@
         </div>
       </div>
     </nav>
+    <nav class="navbar d-flex justify-content-center">
+      {% for c in v.categories %}
+      <a class="btn btn-light btn-sm mb-1 mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+      {% endfor %}
+    </nav>
   </header>
 
   <main class="main pt-4">

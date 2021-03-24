@@ -88,98 +88,33 @@
         </div>
       </div>
     </nav>
+    <nav class="navbar d-flex justify-content-center">
+      {% for c in v.categories %}
+      <a class="btn btn-light btn-sm mb-1 mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+      {% endfor %}
+    </nav>
   </header>
 
   <main class="main pt-4">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-
-          <article class="card mb-4">
-            <h2 style="color:#444;">Cookie Policy</h2>
-            <br/>
-            <p>
-            A number of our pages use cookies to remember your display preferences, such as selected language.
-            <br>
-            Enabling these cookies is strictly necessary for the website to work as it will provide you with a better browsing experience.
-            <br>
-            You can delete or block these cookies, but if you do that some features of this site may not work as intended.
-            <br>
-            The cookie-related information is not used to identify you personally and the pattern data is fully under our control. These cookies are not used for any purpose other than those described here.
-            </p>
-          </article><!-- /.card -->
-
-        </div>
-        <div class="col-md-3 ml-auto">
-{#
-          <aside class="sidebar">
-            <div class="card mb-2">
-              <div class="card-body">
-                <h4 class="card-title">{{ v.phrases.recent_recipes }}</h4>
-                {% for p in v.recent_posts %}
-                <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
-                  <h4 class="h6">{{ p.title }}</h4>
-                  {% if p.fb_og_image %}
-                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" data-pin-nopin="true" />
-                  {% endif %}
-                </a>
-                  <span class="mt-2 mb-1">
-                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
-                 @
-                 {% for _ in p.get_categories() %}
-                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                 {% endfor %}
-                  </span>
-                </div>
-                {% endfor %}
-              </div>
-            </div><!-- /.card -->
-          </aside>
-#}
-          <aside class="sidebar sidebar-sticky">
-            <div class="card mb-2">
-              <div class="card-body">
-                <h4 class="card-title">{{ v.phrases.categories }}</h4>
-                {% for c in v.categories %}
-                <a class="btn btn-light btn-sm mb-1" href="{{ c[1] }}">{{ c[0] }}</a>
-                {% endfor %}
-              </div>
-            </div><!-- /.card -->
-              {#
-            <div class="card mb-2">
-              <div class="card-body">
-                <h4 class="card-title">{{ v.phrases.you_may_like }}</h4>
-
-                {% for p in v.might_like_posts %}
-                <div class="row mb-3">
-                <a href="{{ v.prefix }}/{{ v.current_lang }}{{ p.url }}" class="d-inline-block">
-                  <h4 class="h6">{{ p.title }}</h4>
-                  {% if p.fb_og_image %}
-                  <img class="card-img" src="{{ p.fb_og_image }}" alt="{{ p.title }}" data-pin-nopin="true" />
-                  {% endif %}
-                </a>
-                <span class="mt-2 mb-1">
-                <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
-                @
-                {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}">{{ _ }}</a>{% if not loop.last %},{% endif %}
-                {% endfor %}
-                </span>
-                </div>
-                {% endfor %}
-
-              </div>
-            </div><!-- /.card -->
-              #}
-          </aside>
-
-        </div>
+    <div class="container" id="indexContainer">
+      <div class="row d-flex justify-content-center">
+        <div style="margin:15px;float:right;">
+          <h2 style="color:#444;">Cookie Policy</h2>
+          <br/>
+          <p>
+          A number of our pages use cookies to remember your display preferences, such as selected language.
+          <br>
+          Enabling these cookies is strictly necessary for the website to work as it will provide you with a better browsing experience.
+          <br>
+          You can delete or block these cookies, but if you do that some features of this site may not work as intended.
+          <br>
+          The cookie-related information is not used to identify you personally and the pattern data is fully under our control.
+          <br>
+          These cookies are not used for any purpose other than those described here.
+          </p>
+        </div><!-- /.card -->
       </div>
-
     </div>
-
   </main>
 
   <div class="site-pagination">
