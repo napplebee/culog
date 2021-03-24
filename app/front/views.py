@@ -58,6 +58,13 @@ def robots():
 def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
 
+    uniq_category = []
+    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
+    categories = [
+        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+    ]
+
     posts = Post.query.filter(Post.lang == current_lang, Post.visible == True)\
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
@@ -95,7 +102,8 @@ def nw_index():
         "posts_center": posts_center,
         "posts_right": posts_right,
         "phrases": PHRASES[current_lang],
-        "has_next_item": has_next_item
+        "has_next_item": has_next_item,
+        "categories": categories
     })
 
 
@@ -158,6 +166,13 @@ def nw_category(lang_override, category):
     posts = Post.query.filter(Post.lang == current_lang, Post.visible == True, Post.recipe_category.like(search)) \
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
+    uniq_category = []
+    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
+    categories = [
+        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+    ]
+
     # number of columns on landing page
     n = len(posts)
     has_next_item = n > cnst.ITEM_PER_PAGE
@@ -193,7 +208,8 @@ def nw_category(lang_override, category):
         "posts_center": posts_center,
         "posts_right": posts_right,
         "phrases": PHRASES[current_lang],
-        "has_next_item": has_next_item
+        "has_next_item": has_next_item,
+        "categories": categories
     })
 
 
@@ -315,12 +331,19 @@ def about(lang_override):
     current_lang, lang_fallback = langService.get_user_settings(request, lang_override)
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     links = {lang: url_for(".about", lang_override=lang) for lang in cnst.SUPPORTED_LANGS}
+    uniq_category = []
+    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+        uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
+    categories = [
+        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+    ]
     return render_template("front/about.%s.html" % current_lang, v={
         "links": links,
         "lang_dic": lang_dic,
         "meta_language": Language.meta_lang[current_lang],
         "current_lang": current_lang,
         "phrases": PHRASES[current_lang],
+        "categories": categories
     })
 
 #endregion
