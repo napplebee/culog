@@ -11,6 +11,7 @@ from app.data.front.post import Post
 from configs import Config as cfg
 from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
+from operator import itemgetter
 
 import json
 import random
@@ -23,8 +24,10 @@ def cookiepolicy():
     for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
-        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+        (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
     ]
+    categories = sorted(categories, key=itemgetter(0))
+
     recent_posts = Post.query.filter(Post.lang == current_lang, Post.fb_og_image != ''). \
         order_by(Post.published_at.desc(), Post.id.asc()).limit(6).all()
 
@@ -62,8 +65,9 @@ def nw_index():
     for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
-        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+        (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
     ]
+    categories = sorted(categories, key=itemgetter(0))
 
     posts = Post.query.filter(Post.lang == current_lang, Post.visible == True)\
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
@@ -170,8 +174,9 @@ def nw_category(lang_override, category):
     for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
-        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+        (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
     ]
+    categories = sorted(categories, key=itemgetter(0))
 
     # number of columns on landing page
     n = len(posts)
@@ -209,7 +214,8 @@ def nw_category(lang_override, category):
         "posts_right": posts_right,
         "phrases": PHRASES[current_lang],
         "has_next_item": has_next_item,
-        "categories": categories
+        "categories": categories,
+        "category": category.replace("_", " ")
     })
 
 
@@ -307,8 +313,9 @@ def nw_detail(lang_override, post_url):
     for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
-        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+        (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
     ]
+    categories = sorted(categories, key=itemgetter(0))
 
     html = render_template("front/post/detail.html", v={
         "lang_dic": filtered_lang_dic,
@@ -335,8 +342,10 @@ def about(lang_override):
     for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
-        (c, url_for(".nw_category", lang_override=current_lang, category=c)) for c in set(uniq_category)
+        (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
     ]
+    categories = sorted(categories, key=itemgetter(0))
+
     return render_template("front/about.%s.html" % current_lang, v={
         "links": links,
         "lang_dic": lang_dic,

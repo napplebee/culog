@@ -93,9 +93,13 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar d-flex justify-content-center">
+    <nav class="navbar d-flex justify-content-center {{ 'pt-1 pb-1' if v.category }}">
       {% for c in v.categories %}
-      <a class="btn btn-light btn-sm mb-1 mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+        {% if c[0] == v.category %}
+          <a class="btn btn-light btn-m mr-1 ml-1 active pt-1 pb-1" href="#">{{ c[0] }}</a>
+        {% else %}
+          <a class="btn btn-light btn-sm mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+        {% endif %}
       {% endfor %}
     </nav>
   </header>
