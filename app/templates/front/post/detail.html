@@ -194,7 +194,7 @@
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
                  @
                  {% for _ in p.get_categories() %}
-                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                 <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                  {% endfor %}
                   </span>
                 </div>
@@ -220,7 +220,7 @@
                 <time class="timeago" datetime="{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}">{{ p.published_at.strftime('%Y-%m-%d %H:%M') }}</time>
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
                 </span>
                 </div>

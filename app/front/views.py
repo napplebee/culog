@@ -21,7 +21,7 @@ import random
 def cookiepolicy():
     current_lang, lang_fallback = langService.get_user_settings(request)
     uniq_category = []
-    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+    for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
@@ -62,7 +62,7 @@ def nw_index():
     current_lang, lang_fallback = langService.get_user_settings(request)
 
     uniq_category = []
-    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+    for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
@@ -171,7 +171,7 @@ def nw_category(lang_override, category):
         .order_by(Post.published_at.desc(), Post.id.desc()).limit(cnst.ITEM_PER_PAGE + 1).all()
 
     uniq_category = []
-    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+    for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)
@@ -339,7 +339,7 @@ def about(lang_override):
     lang_dic = {u"ru": u"Русский", u"en": u"English"}
     links = {lang: url_for(".about", lang_override=lang) for lang in cnst.SUPPORTED_LANGS}
     uniq_category = []
-    for c in Post.query.filter(Post.lang == current_lang).with_entities(Post.recipe_category).all():
+    for c in Post.query.filter(Post.lang == current_lang, Post.visible == True).with_entities(Post.recipe_category).all():
         uniq_category.extend(_.strip() for _ in c[0].split(",") if _.strip() != "")
     categories = [
         (c, url_for(".nw_category", lang_override=current_lang, category=c.replace(" ", "_"))) for c in set(uniq_category)

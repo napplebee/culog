@@ -1066,4 +1066,53 @@
                hreflang="ru"
                href="http://cookwith.love/ru/breakfast/fast_fluffy_crepes"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/гарнир</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/гарнир"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/десерт</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/десерт"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/завтрак</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/завтрак"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/закуска</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/закуска"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/основное_блюдо</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/основное_блюдо"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/салат</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/салат"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/category/сливочный_сыр</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/сливочный_сыр"/>
+  </url>
 </urlset>
