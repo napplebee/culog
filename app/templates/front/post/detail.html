@@ -84,7 +84,6 @@
             "proteinContent": "{{ v.post.get_proteins_per_serving() }} {% if v.current_lang == 'ru' %}г.{% else %}grams of protein{% endif %}",
             "servingSize": "{{ v.post.recipe_serving_size }}"
           },
-          "resultPhoto": "{{ v.post.get_fb_og_image_canonical() }}",
             {% endif %}
           "@type": "Recipe",
           "name": "{{ v.post.fb_og_title }}",
