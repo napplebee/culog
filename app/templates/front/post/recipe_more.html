@@ -9,7 +9,7 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>
@@ -43,7 +43,7 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>
@@ -77,7 +77,7 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>
                 {% endfor %}
                 {% endif %}
               </div>

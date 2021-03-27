@@ -16,19 +16,28 @@
     <meta property="og:url" content="{{ request.base_url }}" />
     <meta property="og:image" content="{{ url_for('static', filename = 'front/logo.jpg') }}" />
 
-    {% if v.current_lang == "ru" %}
-    <title>Cook With Love: семейные рецепты</title>
-    <meta property="og:title" content="Cook With Love: семейные рецепты" />
-    <meta property="og:description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
-    <meta name="keywords" content="фуд блог, домашные рецепты, семейные рецепты, простые рецепты, выпечка, cook with love" />
-    <meta name="description" content="За каждым рецептом стоит история. Я собираю такие истории и делюсь ими в этом блоге. Хотите рассказать свою?" />
+    {% if v.phrases.categories_title[v.category] %}
+      <title>{{ v.phrases.categories_title[v.category] }} | Cook With Love</title>
+      <meta property="og:title" content="{{ v.phrases.categories_title[v.category] }} | Cook With Love" />
     {% else %}
-    <title>Cook With Love: food blog</title>
-    <meta property="og:title" content="Cook With Love: food blog" />
-    <meta property="og:description" content="Each and every recipe has a story behind it. I'm collecting family recipes that are full love and warm memories. Do you have one?" />
-    <meta name="keywords" content="food blog, easy recipes, home cooking, cooking, recipes, baking, dessert recipes, homecooking, yummy, cook with love" />
-    <meta name="description" content="Each and every recipe has a story behind it. I'm collecting family recipes that are full love and warm memories. Do you have one?" />
+      <title>{{ v.phrases.default_title }}</title>
+      <meta property="og:title" content="{{ v.phrases.default_title }}" />
     {% endif %}
+  
+    {% if v.phrases.categories_og_description[v.category] %}
+      <meta property="og:description" content="{{ v.phrases.categories_og_description[v.category] }}" />
+      <meta name="description" content="{{ v.phrases.categories_og_description[v.category] }}" />
+    {% else %}
+      <meta property="og:description" content="{{ v.phrases.default_og_description }}" />
+      <meta name="description" content="{{ v.phrases.default_og_description }}" />
+    {% endif %}
+  
+    {% if v.phrases.categories_keywords[v.category] %}
+      <meta name="keywords" content="{{ v.phrases.categories_keywords[v.category] }}, {{ v.phrases.default_keywords }}" />
+    {% else %}
+      <meta name="keywords" content="{{ v.phrases.default_keywords }}" />
+    {% endif %}
+
     <link rel="canonical" href="{{ request.base_url }}"/>
     <link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon" />
     <link href="{{ url_for('static', filename = 'front/recipe/css/cwl.css') }}" rel="stylesheet" />
@@ -93,16 +102,27 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar d-flex justify-content-center">
+    <nav class="navbar d-flex justify-content-center {{ 'pt-1 pb-1' if v.category }}">
       {% for c in v.categories %}
-      <a class="btn btn-light btn-sm mb-1 mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+        {% if c[0] == v.category %}
+          <a class="btn btn-light btn-m mr-1 ml-1 active pt-1 pb-1" href="#">{{ c[0] }}</a>
+        {% else %}
+          <a class="btn btn-light btn-sm mr-1 ml-1" href="{{ c[1] }}">{{ c[0] }}</a>
+        {% endif %}
       {% endfor %}
     </nav>
   </header>
 
-  <main class="main pt-4">
+  <main class="main">
 
     <div class="container" id="indexContainer">
+
+      {% if v.phrases.categories_description[v.category] %}
+      <div class="row mr-3 ml-3 border-bottom card">
+        <h1>{{ v.phrases.categories_title[v.category] }}</h1>
+        {{ v.phrases.categories_description[v.category]|safe }}
+      </div>
+      {% endif%}
 
       <div class="row">
         {# posts_left #}
@@ -115,7 +135,7 @@
                 {% if p.recipe_category %}
                 @
                   {% for _ in p.get_categories() %}
-                  <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                  <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                   {% endfor %}
                 {% endif %}
               </div>
@@ -149,7 +169,7 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
                 {% endif %}
               </div>
@@ -184,7 +204,7 @@
                 {% if p.recipe_category %}
                 @
                 {% for _ in p.get_categories() %}
-                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
+                <a href="{{ url_for('.nw_category', lang_override=v.current_lang, category=_.replace(' ', '_')) }}" class="no-underline">{{ _ }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
                 {% endif %}
               </div>
