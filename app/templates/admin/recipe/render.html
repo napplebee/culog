@@ -63,9 +63,7 @@
 {% for pType in v.h.process_type %}
     {% if pType.name %}<h3>{{ pType.name }}</h3>{% endif %}
     {% if pType.note %}
-        <br>
-        {{ pType.note }}
-        <br>
+        <p>{{ pType.note }}</p>
     {% endif %}
     {% if pType.steps|length > 1 %}
         <ul class="preparation">
