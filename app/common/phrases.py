@@ -135,10 +135,19 @@ PHRASES = {
          u"Proteins", u"Fats", u"Carbs", u"optional", u"Cook With Love: food blog",
          u"Each and every recipe has a story behind it. I'm collecting family recipes that are full love and warm memories. Do you have one?",
          u"food blog, easy recipes, home cooking, cooking, recipes, baking, dessert recipes, homecooking, yummy recipes, cook with love",
-        {},
-        {},
-        {},
-        {},
+        {"breakfast": "Breakfast recipes",
+         "dinner": "Dinner recipes"
+        },
+        {"breakfast": """<p>Breakfast recipes can be very different, but they all agree on one thing: breakfast is an important meal. Breakfast not only energizes you, but it can also set the mood for the whole day, so you shouldn't forget about taste and appearance. Of course, more often than not, breakfast should be prepared quickly, but sometimes you can spend a little more time and cook something special.</p>
+            <p>In this section, I’ve tried to collect recipes for making breakfasts; they aren’t the most simple ones, but surprisingly tasty. </p>""",
+         "dinner": """<p>Dinners have a special place in most people's lives. Main dishes for dinners can be meat and poultry, vegetarian or vegan - just get creative!</p>
+            <p>When I think about my childhood, I remember the barbecue that I had with my family; I also remember how I first tried Veal Orloff at the birthday of my school friend; I remember how my grandmother cooked chops and my mother fried fish…</p>
+            <p>Meat and fish for the main course can be fried, baked, stewed and even eaten raw, (remember tartare). The main thing is to pay attention to the temperature regime, for example, not all types of meat should be cooked like a rare steak and used for tartare. You will find more about the cooking temperature in <a href="/en/other/cooking_temperatures" target="_blank">this article</a>. 
+            <p>In this section, I will collect my favorite main course recipes. I hope the step-by-step picture recipes will help you prepare the perfect main course.</p>"""},
+        {"breakfast":"Explore loads of delicious breakfast recipes to start your morning off right.",
+         "dinner": "Explore loads of delicious main course recipes for the best dinner parties."},
+        {"breakfast":"breakfast, breakfast recipes, breakfast ideas, breakfast food, morning food, breakfast appliances, easy breakfast recipes, healthy breakfast recipes, quick breakfast recipes, easy healthy breakfasts, savoury breakfast, sweet breakfast",
+         "dinner": "main recipe, main course recipe, dinner recipe, lunch recipe"},
         {"gr": "g", "ml": "ml", "item": "", "tsp": "tsp", "tbsp": "tbsp", "cup": "cup", "kg": "kg", "liter": "l"}
      )
 }
