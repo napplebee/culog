@@ -39,6 +39,7 @@
 {% for iType in v.h.ingredients_type %}
     {% if iType.name %}<h3>{{ iType.name }}</h3>{% endif %}
     {% if iType.ingredients|length > 1 %}
+    {% if iType.type %}<p>{{ iType.type }}</p> {# на самом деле это описание #}{% endif %}
     <ul class="ingredients">
         {% for ingr in iType.ingredients %}
         <li>{% if ingr.optional %}({{ v.ph.optional }}) {% endif %}

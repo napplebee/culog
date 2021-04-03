@@ -89,7 +89,7 @@ class IngredientForm(Form):
 class IngredientTypeForm(Form):
     id = HiddenField()
     name = StringField("Name:")
-    type = StringField("Type:")
+    type = StringField("Description:")
     image = StringField("Image:")
     pos = IntegerField("Position:", default=0)
 
