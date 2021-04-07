@@ -1072,6 +1072,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/гарнир"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/side_dish"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/side_dish</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/гарнир"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/side_dish"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/десерт</loc>
@@ -1079,6 +1094,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/десерт"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/dessert"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/dessert</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/десерт"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/dessert"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/завтрак</loc>
@@ -1086,6 +1116,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/завтрак"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/breakfast"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/breakfast</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/завтрак"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/breakfast"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/закуска</loc>
@@ -1093,6 +1138,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/закуска"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/appetizer"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/appetizer</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/закуска"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/appetizer"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/основное_блюдо</loc>
@@ -1100,6 +1160,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/основное_блюдо"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/dinner"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/dinner</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/основное_блюдо"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/dinner"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/салат</loc>
@@ -1107,6 +1182,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/салат"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/salad"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/salad</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/салат"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/salad"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/category/сливочный_сыр</loc>
@@ -1114,5 +1204,20 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/category/сливочный_сыр"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/cream_cheese"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/category/cream_cheese</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/category/сливочный_сыр"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/category/cream_cheese"/>
   </url>
 </urlset>
