@@ -78,7 +78,10 @@
         {% endfor %}
         </ul>
     {% elif pType.steps|length == 1 %}
-    <p>{{ pType.steps[0].description }}</p>
+        <p>{{ pType.steps[0].description }}</p>
+        {% if pType.steps[0].image %}
+        <img class="steps" src="{{ pType.steps[0].get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ pType.steps[0].get_image_alt(v.h.title) }}">
+        {% endif %}
     {% endif %}
 {% endfor %}
 
