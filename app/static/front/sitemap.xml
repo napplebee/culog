@@ -8,7 +8,26 @@
     <loc>http://cookwith.love/</loc>
   </url>
   <url>
-    <loc>http://cookwith.love/contact/</loc>
+    <loc>http://cookwith.love/en/about</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/about"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/about"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/about</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/about"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/about"/>
   </url>
   <url>
     <loc>http://cookwith.love/en/baking/cottage_cheese_apple_pie</loc>
