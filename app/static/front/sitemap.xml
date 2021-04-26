@@ -1286,4 +1286,18 @@
                hreflang="ru"
                href="http://cookwith.love/ru/breakfast/vegan_banana_pancakes"/>
   </url>
+  <url>
+    <loc>http://cookwith.love/ru/dessert/assorted_sweet_and_savoury_hand_pies</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/dessert/assorted_sweet_and_savoury_hand_pies"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/ru/baking/kulich_easter_bread</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/baking/kulich_easter_bread"/>
+  </url>
 </urlset>
