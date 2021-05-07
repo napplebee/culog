@@ -6,9 +6,11 @@ from app.core import db, security, bootstrap
 from app.data.users import User, Role
 from configs import config
 from app.error_handlers import register_err_handlers
+from flask_minify import minify
 
 def create_app(environment_name):
     app = Flask(__name__)
+    minify(app=app, html=True, js=True, cssless=True)
     app.config.from_object(config[environment_name])
     register_err_handlers(app)
 
