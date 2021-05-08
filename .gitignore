@@ -7,7 +7,6 @@ __pycache__/
 *.swp
 # C extensions
 *.so
-*.DS_Store
 
 # Distribution / packaging
 .Python
@@ -60,9 +59,6 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# Mac files
-.DS_Store
 
 # Env local
 env.local
