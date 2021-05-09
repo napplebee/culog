@@ -20,6 +20,11 @@ class ProcessStepRu(db.Model):
     def get_image_src(self):
         return self.image.split("|")[0].strip()
 
+    def get_small_image_src(self):
+        image_path = self.image.split("|")[0].strip()
+        image_path_length = len(image_path)
+        return image_path[:image_path_length - 4] + "_small.jpg"
+
     def get_image_alt(self, default):
         try:
             return self.image.split("|")[1].strip()
