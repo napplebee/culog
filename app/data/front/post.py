@@ -211,6 +211,11 @@ class Post(db.Model):
     def get_fb_og_image_src(self):
         return self.fb_og_image.split("|")[0].strip()
 
+    def get_small_fb_og_image_src(self):
+        image_path = self.fb_og_image.split("|")[0].strip()
+        image_path_length = len(image_path)
+        return image_path[:image_path_length - 4] + "_small.jpg"
+
     def get_fb_og_image_alt(self):
         return self.title
 

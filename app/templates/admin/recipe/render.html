@@ -55,7 +55,10 @@
     <p>{{ iType.ingredients[0].name }}</p> {# кет сказала что выводить только .name #}
     {% endif %}
     {% if iType.image %}
-    <img class="steps" src="{{ iType.get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ iType.get_image_alt(v.h.title) }}">
+    <img class="steps" src="{{ iType.get_small_image_src() }}"
+        srcset="{{ iType.get_image_src() }} 1000w, {{ iType.get_small_image_src() }} 350w"
+        style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" 
+        alt="{{ iType.get_image_alt(v.h.title) }}">
     {% endif %}
 </p>
 {% endfor %}
@@ -73,14 +76,20 @@
                 {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
             </li>
             {% if pStep.image %}
-            <img class="steps" src="{{ pStep.get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ pStep.get_image_alt(v.h.title) }}">
+            <img class="steps" src="{{ pStep.get_small_image_src() }}"
+                srcset="{{ pStep.get_image_src() }} 1000w, {{ pStep.get_small_image_src() }} 350w"
+                style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;"
+                alt="{{ pStep.get_image_alt(v.h.title) }}">
             {% endif %}
         {% endfor %}
         </ul>
     {% elif pType.steps|length == 1 %}
         <p>{{ pType.steps[0].description }}</p>
         {% if pType.steps[0].image %}
-        <img class="steps" src="{{ pType.steps[0].get_image_src() }}" style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;" alt="{{ pType.steps[0].get_image_alt(v.h.title) }}">
+        <img class="steps" src="{{ pType.steps[0].get_small_image_src() }}"
+            srcset="{{ pType.steps[0].get_image_src() }} 1000w, {{ pType.steps[0].get_small_image_src() }} 350w"
+            style="margin-top:10px;margin-bottom:10px;width:80%; display: block; margin-left: auto; margin-right: auto;"
+            alt="{{ pType.steps[0].get_image_alt(v.h.title) }}">
         {% endif %}
     {% endif %}
 {% endfor %}
