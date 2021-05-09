@@ -10,7 +10,7 @@ from flask_minify import minify
 
 def create_app(environment_name):
     app = Flask(__name__)
-    minify(app=app, html=True, js=True, cssless=True)
+    #minify(app=app, html=True, js=True, cssless=True)
     app.config.from_object(config[environment_name])
     register_err_handlers(app)
 
