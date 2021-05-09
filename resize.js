@@ -31,10 +31,10 @@ async function start() {
                         console.log(`original_path: ${original_file_path};`);
 
                         var sizes = [{
-                                path: small_file_path,
+                                path: big_file_path,
                                 width: 1000
                             },{
-                                path: big_file_path,
+                                path: small_file_path,
                                 width: 350
                             }];
                         await Promise.map(sizes, async (size) => {
