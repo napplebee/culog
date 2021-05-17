@@ -45,8 +45,7 @@
         <li>{% if ingr.optional %}({{ v.ph.optional }}) {% endif %}
             {% if ingr.amount_value %}{{ ingr.amount_value }} {{ v.ph.amount_types[ingr.amount_type] }} {% endif %}{{ ingr.name }}
             {% if ingr.note %}
-            <br>
-            <i>{{ ingr.note }}</i>
+            <span class="border-left ml-0 pl-2 row font-italic">{{ ingr.note }}</span>
             {% endif %}
         </li>
         {% endfor %}
@@ -73,7 +72,9 @@
         <ul class="preparation">
         {% for pStep in pType.steps %}
             <li>{{ pStep.description }}
-                {% if pStep.note %}<br><i>{{ pStep.note }}</i>{% endif %}
+                {% if pStep.note %}
+                <span class="border-left ml-0 pl-2 row font-italic">{{ pStep.note }}</span>
+                {% endif %}
             </li>
             {% if pStep.image %}
             <img class="steps" src="{{ pStep.get_small_image_src() }}"
