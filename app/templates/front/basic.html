@@ -24,7 +24,7 @@
 		{% endif %}
 		<!-- Canonical for Yandex - SEO -->
 		<link rel="canonical" href="{{ v.current_url }}"/>
-    	<link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
+    		<link rel="icon" href="{{ url_for('static', filename = 'front/fav.svg') }}" type="image/x-icon">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="fb:app_id" content="522001701315044">
@@ -43,6 +43,10 @@
 		{% block main_css %}<link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/main.css') }}" />{% endblock %}
 		<!--[if lte IE 8]><link rel="stylesheet" href="{{ url_for('static', filename = 'front/css/ie8.css') }}" /><![endif]
 		{% block styles_to_override %}{% endblock %}
+	    <!-- Google Ad Sense -->
+	    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2526016830020745"
+	     crossorigin="anonymous"></script>
+	    <!-- /Google Ad Sense -->
 	</head>
 	<body>
 		<!-- Yandex.Metrika counter -->
