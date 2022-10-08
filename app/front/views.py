@@ -16,6 +16,10 @@ from operator import itemgetter
 import json
 import random
 
+@front_bp.route("/ads.txt")
+def ads():
+    tpl = "front/ads.txt"
+    return render_template(tpl)
 
 @front_bp.route("/cookie-policy/")
 def cookiepolicy():
