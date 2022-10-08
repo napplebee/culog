@@ -15,7 +15,7 @@ Flask-Minify==0.32
 
 duration==1.1.1
 requests==2.9.1
-Jinja2==2.7.3
+Jinja2==2.11.3
 MarkupSafe==0.23
 dominate==2.1.16
 itsdangerous==0.24
