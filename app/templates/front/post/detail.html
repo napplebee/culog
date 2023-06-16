@@ -101,8 +101,7 @@
           ]
       }
     </script>
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-571e12d8e754a813"></script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=648c88b59c28110012954ddf&product=sticky-share-buttons&source=platform" async="async"></script>
     <!-- Google Ad Sense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2526016830020745" crossorigin="anonymous"></script>
     <!-- /Google Ad Sense -->
@@ -166,7 +165,7 @@
         <div class="col-md-9">
 
           <article class="card mb-4">
-            <div class="addthis_inline_share_toolbox d-flex justify-content-end mb-2"></div>
+            <div class="d-flex justify-content-end mb-2"></div>
             {{ v.post.text | safe }}
             <p class="font-italic font-weight-light text-right">
               {{ v.phrases.published }}
@@ -174,7 +173,7 @@
               {{ v.phrases.updated }}
               <time class="timeago" datetime="{{ v.post.updated_at.strftime('%Y-%m-%d %H:%M') }}">{{ v.post.updated_at.strftime('%Y-%m-%d') }}</time>
             </p>
-            <div class="addthis_inline_share_toolbox d-flex justify-content-end mt-2"></div>
+            <div class="d-flex justify-content-end mt-2"></div>
           </article><!-- /.card -->
           
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2526016830020745"
