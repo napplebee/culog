@@ -1353,6 +1353,17 @@
                href="http://cookwith.love/en/breakfast/basic_crepes"/>
   </url>
   <url>
+    <loc>http://cookwith.love/en/breakfast/basic_crepes</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/breakfast/basic_crepes"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/breakfast/basic_crepes"/>
+  </url>
+  <url>
     <loc>http://cookwith.love/ru/main/salmon_broccoli_quiche</loc>
       <xhtml:link 
                rel="alternate"
