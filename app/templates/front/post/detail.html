@@ -17,6 +17,7 @@
 
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ request.base_url }}" />
+    <meta property="og:site_name" content="Cook With Love" />
     <meta property="og:image" content="{{ v.post.get_fb_og_image_canonical() }}" />
     <meta property="og:title" content="{{ v.post.fb_og_title }}" />
     <meta property="og:description" content="{{ v.post.fb_og_description }}" />
@@ -175,6 +176,9 @@
               {{ v.phrases.updated }}
               <time class="timeago" datetime="{{ v.post.updated_at.strftime('%Y-%m-%d %H:%M') }}">{{ v.post.updated_at.strftime('%Y-%m-%d') }}</time>
             </p>
+            <!-- ShareThis BEGIN -->
+            <div class="sharethis-inline-share-buttons"></div>
+            <!-- ShareThis END -->
             <div class="d-flex justify-content-end mt-2"></div>
           </article><!-- /.card -->
           
@@ -266,9 +270,15 @@
 
   <div class="site-instagram">
     <div class="action">
+      {% if v.current_lang == "en" %}
       <a class="btn btn-light" href="https://www.instagram.com/cookwith.love/" target="_blank">
         cookwith.love @ Instagram
       </a>
+      {% else %}
+      <a class="btn btn-light" href="https://www.instagram.com/icenaoko/" target="_blank">
+        icenaoko @ Instagram
+      </a>
+      {% endif %}
     </div>
     <div class="row no-gutters">
       <div class="col-sm-6">
@@ -329,7 +339,7 @@
         </li>
       </ul>
       <div class="copy">
-        &copy; CookwithLove 2021<br />
+        &copy;2023 Cook With Love<br />
         {{ v.phrases.reserved_rights }}
       </div>
     </div>
