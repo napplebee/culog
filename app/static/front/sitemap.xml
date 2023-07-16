@@ -1340,6 +1340,21 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/baking/caramel_cheesecake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/baking/caramel_cheesecake"/>
+  </url>
+  <url>
+    <loc>http://cookwith.love/en/baking/caramel_cheesecake</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/en/baking/caramel_cheesecake"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/ru/baking/caramel_cheesecake"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/breakfast/basic_crepes</loc>
