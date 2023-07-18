@@ -176,6 +176,7 @@ class Post(db.Model):
     def get_categories(self):
         return [_.strip() for _ in self.recipe_category.split(",") if _ != ""]
 
+
     def hotfix(self, form):
         if self.id != int(form.id.data):
             raise ValueError("Wrong id %s - %s", self.id, form.id.data)

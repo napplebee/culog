@@ -59,6 +59,9 @@
             }
           },
           {% else %}
+          {% if v.ld_json_ingredients %}
+          "recipeIngredient": [ {{ v.ld_json_ingredients|safe }} ],
+          {% endif %}
             {% if v.post.get_cook_time_iso()|length %}
           "cookTime": "{{ v.post.get_cook_time_iso() }}",
           "prepTime": "{{ v.post.get_prep_time_iso() }}",

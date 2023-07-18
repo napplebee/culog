@@ -12,10 +12,16 @@ from configs import Config as cfg
 from app.common.constants import Constants as cnst
 from app.common.phrases import PHRASES
 from operator import itemgetter
+import logging
+
+from app.data.admin.recipe import RecipeHeaderEn, RecipeHeaderRu
+
 
 import json
 import random
 
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s - %(message)s',)
+logger = logging.getLogger(__name__)
 @front_bp.route("/ads.txt")
 def ads():
     tpl = "front/ads.txt"
@@ -321,7 +327,37 @@ def nw_detail(lang_override, post_url):
     ]
     categories = sorted(categories, key=itemgetter(0))
 
+    # dirty hack, gotta be part of cooking the recipe
+    # the whole ld_json thing deserves to be an entity
+    def get_ld_json_ingredients():
+        if post.recipe_id == -1:
+            return []
+        _ = []
+        if not post.is_article:
+            recipe_header = None
+            amount_types = PHRASES[current_lang].amount_types
+            if current_lang == "ru":
+                recipe_header = RecipeHeaderRu.query.filter(RecipeHeaderRu.recipe_id == post.recipe_id).one()
+            elif current_lang == "en":
+                recipe_header = RecipeHeaderEn.query.filter(RecipeHeaderEn.recipe_id == post.recipe_id).one()
+            else:
+                raise ValueError("Unknown language")
+
+            for i_type in recipe_header.ingredients_type:
+                if len(i_type.ingredients) > 0:
+                    for ingr in i_type.ingredients:
+                        amount_str = ""
+                        if ingr.amount_value is not None and ingr.amount_value != "":
+                            amount_str = "{} {}".format(ingr.amount_value, amount_types[ingr.amount_type]).strip()
+                        ingr_str = "{} {}".format(amount_str, ingr.name).lstrip().rstrip(".,")
+                        _.append("\"" + ingr_str.lower() + "\"")
+
+        return _
+
+    ld_json_ingredients = get_ld_json_ingredients()
+
     html = render_template("front/post/detail.html", v={
+        "ld_json_ingredients": ",".join(ld_json_ingredients),
         "lang_dic": filtered_lang_dic,
         "links": links,
         "current_lang": current_lang,
