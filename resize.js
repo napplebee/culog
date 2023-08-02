@@ -24,7 +24,7 @@ async function start() {
                     if (!small_file_exists) {
                         console.log(`[processing ${file}]`);
                         console.log(`Details for ${file}:`);
-                        console.log(`small format? ${is_small_file};`);
+                        console.log(`small? ${is_small_file};`);
                         console.log(`small_exists: ${small_file_exists};`);
                         console.log(`small_path: ${small_file_path};`);
                         console.log(`big_path: ${big_file_path};`);
