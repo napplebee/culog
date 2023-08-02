@@ -63,3 +63,7 @@ target/
 
 # Env local
 env.local
+
+# Resize
+node_modules/
+package-lock.json
