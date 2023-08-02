@@ -1384,6 +1384,20 @@
                rel="alternate"
                hreflang="ru"
                href="http://cookwith.love/ru/main/salmon_broccoli_quiche"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/main/salmon_broccoli_quiche"/>
+  <url>
+    <loc>http://cookwith.love/en/main/salmon_broccoli_quiche</loc>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="http://cookwith.love/en/main/salmon_broccoli_quiche"/>
+      <xhtml:link 
+               rel="alternate"
+               hreflang="ru"
+               href="http://cookwith.love/ru/main/salmon_broccoli_quiche"/>
   </url>
   <url>
     <loc>http://cookwith.love/ru/baking/grandma_zebra_cake</loc>
