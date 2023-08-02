@@ -11,15 +11,12 @@ async function start() {
         if (is_directory) {
             files = fs.readdirSync(`${main_directory}/${folder}`);
             for (const file of files) {
-                is_small_file_old_format = file.indexOf("_small") > -1
-                is_big_file_old_format = file.indexOf("_big") > -1
-                is_small_file_new_format = file.indexOf("-small") > -1
-                is_big_file_new_format = file.indexOf("-big") > -1
+                is_small_file = file.indexOf("_small") > -1
+                is_big_file = file.indexOf("_big") > -1
 
-                if (!(is_small_file_new_format || is_small_file_old_format) && 
-                  !(is_big_file_new_format || is_big_file_old_format)) {
-                    small_file_path = `${main_directory}/${folder}/${file.slice(0, -4)}-small.jpg`
-                    big_file_path = `${main_directory}/${folder}/${file.slice(0, -4)}-big.jpg`
+                if (!is_small_file && !is_big_file) {
+                    small_file_path = `${main_directory}/${folder}/${file.slice(0, -4)}_small.jpg`
+                    big_file_path = `${main_directory}/${folder}/${file.slice(0, -4)}_big.jpg`
                     original_file_path = `${main_directory}/${folder}/${file}`
 
                     small_file_exists = fs.existsSync(small_file_path)
@@ -27,7 +24,7 @@ async function start() {
                     if (!small_file_exists) {
                         console.log(`[processing ${file}]`);
                         console.log(`Details for ${file}:`);
-                        console.log(`small? ${is_small_file};`);
+                        console.log(`small format? ${is_small_file};`);
                         console.log(`small_exists: ${small_file_exists};`);
                         console.log(`small_path: ${small_file_path};`);
                         console.log(`big_path: ${big_file_path};`);
